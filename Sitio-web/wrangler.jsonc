@@ -1,0 +1,12 @@
+{
+  // Configuración de Cloudflare para allpixels.dev
+  // El nombre debe coincidir con el de tu Worker en Cloudflare
+  "name": "all-pixels",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    // Publica todos los archivos del repositorio...
+    "directory": "./",
+    // ...y muestra 404.html cuando una página no existe
+    "not_found_handling": "404-page"
+  }
+}
