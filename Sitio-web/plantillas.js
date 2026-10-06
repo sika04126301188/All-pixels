@@ -35,6 +35,15 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'tirex', nombre: 'Tirex', categoria: 'portafolio', tipo: 'gratis', precio: null,
+    resumen: 'Landing oscura con efecto cristal para estudios de diseño web: tarjeta 3D que sigue al ratón, servicios en bento y proyectos.',
+    descripcion: 'Landing page de una sola página para estudios de diseño y desarrollo web: portada con tarjeta 3D interactiva, cifras, servicios en formato bento, proyectos, proceso en cuatro pasos, opiniones y llamada a la acción. Efecto cristal, modo oscuro y claro, menú para el móvil y animaciones al hacer scroll.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/tirex-1.jpg', 'fotos/tirex-2.jpg', 'fotos/tirex-3.jpg', 'fotos/tirex-movil.jpg'],
+    descarga: 'descargas/portafolio/tirex.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'nacar', nombre: 'Nácar', categoria: 'salud', tipo: 'gratis', precio: null,
     resumen: 'Landing serena para clínicas dentales, con odontograma interactivo, precios publicados y aviso de «abierto ahora».',
     descripcion: 'Landing page de una sola página para clínicas dentales: odontograma interactivo que se ilumina con cada tratamiento, lista de precios con filtros, primera visita paso a paso, equipo, galería de la clínica, horario con aviso de «abierto ahora», formulario de cita y preguntas frecuentes. Incluye modo claro y oscuro.',
