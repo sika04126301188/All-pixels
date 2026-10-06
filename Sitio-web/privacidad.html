@@ -627,6 +627,10 @@
   div.vista-galeria span.marco{flex:none;box-shadow:var(--shadow);}
   div.vista-galeria span.captura{aspect-ratio:4/3;flex:none;}
   div.vista-galeria span.captura img{object-position:50% 0;}
+
+  /* Captura del móvil (archivo terminado en -movil): se muestra entera, como un teléfono */
+  span.captura.movil, span.captura.movil.cargada{background:radial-gradient(circle at 50% 40%, rgba(124,92,255,.16), transparent 70%), var(--surface);}
+  span.captura.movil img{inset:5% auto auto 50%;width:auto;height:90%;aspect-ratio:390/844;transform:translateX(-50%);object-fit:cover;object-position:50% 0;border-radius:22px;box-shadow:0 0 0 5px #1F2230, 0 18px 40px -12px rgba(15,12,41,.45);}
   div.vista-miniaturas{display:flex;gap:8px;align-items:center;}
   div.vista-miniaturas button{width:84px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:2px solid transparent;opacity:.6;background:#fff;padding:0;transition:opacity .15s ease, border-color .15s ease;}
   div.vista-miniaturas button[aria-current="true"]{border-color:var(--violet);opacity:1;}
@@ -1078,13 +1082,13 @@
     <h2 id="destinatarios">4. Con quién los compartimos</h2>
     <p>No vendemos ni cedemos tus datos. Solo los tratan los proveedores que necesitamos para funcionar, con contrato de encargado del tratamiento:</p>
     <ul>
-      <li><b>Alojamiento web:</b> GitHub Pages (GitHub, Inc., EE. UU.), que sirve la web y registra datos técnicos de las visitas</li>
+      <li><b>Alojamiento web y dominio:</b> Cloudflare (Cloudflare, Inc., EE. UU.), que sirve la web, la protege frente a ataques y registra datos técnicos de las visitas</li>
       <li data-si="boletin" hidden><b>Boletín:</b> <span id="proveedor-boletin">el proveedor de correo indicado en el formulario</span>, que guarda tu correo y envía los boletines</li>
       <li data-si="analitica" hidden><b>Estadísticas:</b> GoatCounter, una herramienta de estadísticas sin cookies que no identifica a los visitantes</li>
     </ul>
     <p>Las tipografías de la web están alojadas en nuestro propio sitio, así que cargarlas no envía tus datos a terceros.</p>
     <p>Las ventas aún no están activas<span data-no="boletin">, y el boletín tampoco</span>. Cuando lo estén, añadiremos aquí el proveedor de cada servicio antes de empezar a usarlo.</p>
-    <p>GitHub está en Estados Unidos. Las transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. o en cláusulas contractuales tipo aprobadas por la Comisión Europea.</p>
+    <p>Cloudflare está en Estados Unidos. Las transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. o en cláusulas contractuales tipo aprobadas por la Comisión Europea.</p>
 
     <h2 id="derechos">5. Tus derechos</h2>
     <p>Puedes ejercer en cualquier momento tus derechos de <b>acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad</b>, y retirar tu consentimiento, escribiendo a <a href="mailto:privacidad@allpixels.dev">privacidad@allpixels.dev</a>. Te responderemos en el plazo máximo de un mes.</p>

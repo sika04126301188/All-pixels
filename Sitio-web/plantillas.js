@@ -8,7 +8,7 @@
    Campos de cada plantilla:
    - id            texto corto sin espacios ni tildes (va en la URL)
    - nombre        nombre visible
-   - categoria     bodas | saas | ecommerce | portafolio | panel
+   - categoria     bodas | salud | saas | ecommerce | portafolio | panel
    - tipo          "gratis" o "pro"
    - precio        solo para Pro, por ejemplo "29 €" (null en gratis)
    - resumen       1 frase para la mesa y la ficha
@@ -16,6 +16,7 @@
                    trae de verdad la plantilla (una landing page).
    - pila          tecnologías
    - imagenes      3 capturas de 1280x1600 (la primera es la principal)
+                   + 1 captura del móvil (opcional, va la última)
    - descarga      ruta del .zip: descargas/<categoria>/<id>.zip
                    (o el enlace de compra si es Pro)
    - disponible    true cuando el .zip ya está subido y probado.
@@ -25,6 +26,7 @@
    ========================================================== */
 window.AP_CATEGORIAS = {
   bodas: 'Bodas y eventos',
+  salud: 'Salud y bienestar',
   saas: 'SaaS',
   ecommerce: 'E-commerce',
   portafolio: 'Portafolio',
@@ -32,6 +34,15 @@ window.AP_CATEGORIAS = {
 };
 
 window.AP_PLANTILLAS = [
+  {
+    id: 'nacar', nombre: 'Nácar', categoria: 'salud', tipo: 'gratis', precio: null,
+    resumen: 'Landing serena para clínicas dentales, con odontograma interactivo, precios publicados y aviso de «abierto ahora».',
+    descripcion: 'Landing page de una sola página para clínicas dentales: odontograma interactivo que se ilumina con cada tratamiento, lista de precios con filtros, primera visita paso a paso, equipo, galería de la clínica, horario con aviso de «abierto ahora», formulario de cita y preguntas frecuentes. Incluye modo claro y oscuro.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/nacar-1.jpg', 'fotos/nacar-2.jpg', 'fotos/nacar-3.jpg', 'fotos/nacar-movil.jpg'],
+    descarga: 'descargas/salud/nacar.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
   {
     id: 'redlove', nombre: 'redLove', categoria: 'bodas', tipo: 'gratis', precio: null,
     resumen: 'Landing elegante para agencias de bodas, en tonos vino y marfil, con galería, proceso en cuatro pasos y formulario de contacto.',

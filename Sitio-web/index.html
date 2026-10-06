@@ -628,6 +628,10 @@
   div.vista-galeria span.marco{flex:none;box-shadow:var(--shadow);}
   div.vista-galeria span.captura{aspect-ratio:4/3;flex:none;}
   div.vista-galeria span.captura img{object-position:50% 0;}
+
+  /* Captura del móvil (archivo terminado en -movil): se muestra entera, como un teléfono */
+  span.captura.movil, span.captura.movil.cargada{background:radial-gradient(circle at 50% 40%, rgba(124,92,255,.16), transparent 70%), var(--surface);}
+  span.captura.movil img{inset:5% auto auto 50%;width:auto;height:90%;aspect-ratio:390/844;transform:translateX(-50%);object-fit:cover;object-position:50% 0;border-radius:22px;box-shadow:0 0 0 5px #1F2230, 0 18px 40px -12px rgba(15,12,41,.45);}
   div.vista-miniaturas{display:flex;gap:8px;align-items:center;}
   div.vista-miniaturas button{width:84px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:2px solid transparent;opacity:.6;background:#fff;padding:0;transition:opacity .15s ease, border-color .15s ease;}
   div.vista-miniaturas button[aria-current="true"]{border-color:var(--violet);opacity:1;}
@@ -1312,6 +1316,7 @@
         cont.classList.remove('cargada');
         img.onload = img.onerror = function(){ cont.classList.add('cargada'); };
         img.src = t.imagenes[j];
+        cont.classList.toggle('movil', /-movil\./.test(t.imagenes[j]));
         img.alt = 'Plantilla ' + t.nombre + ', captura ' + (j + 1) + ' de ' + t.imagenes.length;
         if(img.complete && img.naturalWidth) cont.classList.add('cargada');
         $('vista-miniaturas').querySelectorAll('button').forEach(function(b, k){ b.setAttribute('aria-current', String(k === j)); });
