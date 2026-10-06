@@ -35,6 +35,33 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'kinetic', nombre: 'KINETIC', categoria: 'portafolio', tipo: 'gratis', precio: null,
+    resumen: 'Landing oscura para estudios de diseño y desarrollo web, con tarjetas bento en 3D, carrusel de proyectos y brillo que sigue al cursor.',
+    descripcion: 'Landing page de una sola página para estudios de diseño y desarrollo web, agencias digitales y freelancers: portada con suelo de rejilla en perspectiva, tarjetas bento con efecto 3D y luz que sigue al ratón, carrusel de proyectos con caso de estudio desplegable, proceso de trabajo, trayectoria, núcleo 3D en paralaje y formulario de contacto. HTML semántico casi sin clases, imágenes propias incluidas, tipografía e iconos sin servicios externos.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/kinetic-1.jpg', 'fotos/kinetic-2.jpg', 'fotos/kinetic-3.jpg', 'fotos/kinetic-movil.jpg'],
+    descarga: 'descargas/portafolio/kinetic.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'flama', nombre: 'Flama Urbana', categoria: 'ecommerce', tipo: 'gratis', precio: null,
+    resumen: 'Landing oscura para bares y restaurantes de comida callejera, con carta de platos, contador de pedido y aviso de abierto ahora.',
+    descripcion: 'Landing page de una sola página para bares, restaurantes de comida callejera y comida a domicilio: portada con halo de brasa animado, ventajas, pasos para pedir, carta con botón para añadir platos a un contador de pedido, galería, historia del local, opiniones, preguntas frecuentes, horario con aviso «Abierto ahora» y newsletter. Iconos y tipografía incluidos, sin depender de servicios externos.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/flama-1.jpg', 'fotos/flama-2.jpg', 'fotos/flama-3.jpg', 'fotos/flama-movil.jpg'],
+    descarga: 'descargas/ecommerce/flama.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'neo', nombre: 'Neo Óptica', categoria: 'salud', tipo: 'gratis', precio: null,
+    resumen: 'Landing luminosa para ópticas, en azul eléctrico, con forma orgánica animada, servicios en 3D y galería de instalaciones.',
+    descripcion: 'Landing page de una sola página para ópticas y centros de optometría: portada con forma orgánica animada, franja de marcas, servicios con efecto 3D al pasar el ratón, galería de instalaciones, opiniones y formulario de contacto. Menú para el móvil, aparición suave al hacer scroll y tipografía incluida.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/neo-1.jpg', 'fotos/neo-2.jpg', 'fotos/neo-3.jpg', 'fotos/neo-movil.jpg'],
+    descarga: 'descargas/salud/neo.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'natura', nombre: 'Natura Studio', categoria: 'portafolio', tipo: 'gratis', precio: null,
     resumen: 'Landing cálida para estudios de diseño web, en tonos malva y oro, con tarjetas bento en 3D y agenda de citas.',
     descripcion: 'Landing page de una sola página para estudios de diseño y desarrollo web: portada con foto de forma orgánica, cifras y agenda con calendario real, franja de valores, módulos bento con efecto 3D y reflejo de luz al pasar el ratón, contacto con formulario y newsletter en el pie. HTML semántico casi sin clases, CSS en un solo bloque y tipografías incluidas.',
