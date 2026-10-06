@@ -1,0 +1,15 @@
+{
+  // Configuración de Cloudflare para allpixels.dev
+  // Este archivo va en la RAÍZ del repositorio (fuera de Sitio-web)
+  "name": "all-pixels",
+  "compatibility_date": "2026-10-01",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    // Carpeta donde está la web
+    "directory": "Sitio-web",
+    // Muestra 404.html cuando una página no existe
+    "not_found_handling": "404-page"
+  }
+}
