@@ -35,6 +35,24 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'natura', nombre: 'Natura Studio', categoria: 'portafolio', tipo: 'gratis', precio: null,
+    resumen: 'Landing cálida para estudios de diseño web, en tonos malva y oro, con tarjetas bento en 3D y agenda de citas.',
+    descripcion: 'Landing page de una sola página para estudios de diseño y desarrollo web: portada con foto de forma orgánica, cifras y agenda con calendario real, franja de valores, módulos bento con efecto 3D y reflejo de luz al pasar el ratón, contacto con formulario y newsletter en el pie. HTML semántico casi sin clases, CSS en un solo bloque y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/natura-1.jpg', 'fotos/natura-2.jpg', 'fotos/natura-3.jpg', 'fotos/natura-movil.jpg'],
+    descarga: 'descargas/portafolio/natura.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'alma', nombre: 'ALMA Studio', categoria: 'portafolio', tipo: 'gratis', precio: null,
+    resumen: 'Landing serena para estudios de arquitectura e interiorismo, en tonos oliva y lino, con portada en arco y galería bento.',
+    descripcion: 'Landing page de una sola página para estudios de arquitectura, interiorismo y paisajismo: portada con foto en arco y foto flotante, cifras, filosofía de materiales en tres tarjetas, galería de obras en formato bento y formulario de contacto. Menú para el móvil, aparición suave al hacer scroll y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/alma-1.jpg', 'fotos/alma-2.jpg', 'fotos/alma-3.jpg', 'fotos/alma-movil.jpg'],
+    descarga: 'descargas/portafolio/alma.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'tirex', nombre: 'Tirex', categoria: 'portafolio', tipo: 'gratis', precio: null,
     resumen: 'Landing oscura con efecto cristal para estudios de diseño web: tarjeta 3D que sigue al ratón, servicios en bento y proyectos.',
     descripcion: 'Landing page de una sola página para estudios de diseño y desarrollo web: portada con tarjeta 3D interactiva, cifras, servicios en formato bento, proyectos, proceso en cuatro pasos, opiniones y llamada a la acción. Efecto cristal, modo oscuro y claro, menú para el móvil y animaciones al hacer scroll.',
