@@ -21,11 +21,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://allpixels.dev/#org", "name": "All Pixels", "url": "https://allpixels.dev/", "logo": "https://allpixels.dev/iconos/icon-512.png", "slogan": "Cada píxel, listo para lanzar."}, {"@type": "WebSite", "@id": "https://allpixels.dev/#web", "url": "https://allpixels.dev/", "name": "All Pixels", "inLanguage": "es", "publisher": {"@id": "https://allpixels.dev/#org"}}]}</script>
 <!-- /SEO -->
-<link rel="icon" href="iconos/favicon.ico" sizes="32x32">
-<link rel="icon" href="iconos/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="iconos/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/iconos/icon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/iconos/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/iconos/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preload" href="fuentes/sora-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fuentes/sora-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fuentes/manrope-400.woff2" as="font" type="font/woff2" crossorigin>
 <script>
   /* Modo claro por defecto. Solo usa el oscuro si el visitante lo eligió antes
@@ -47,6 +48,10 @@
   @font-face{font-family:"Manrope";src:url("fuentes/manrope-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap;}
   @font-face{font-family:"Manrope";src:url("fuentes/manrope-800.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap;}
   @font-face{font-family:"JetBrains Mono";src:url("fuentes/jetbrains-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap;}
+  /* Fuentes de reserva con métricas ajustadas: el texto ocupa lo mismo antes y después de cargar Sora y Manrope (evita saltos en el móvil) */
+  @font-face{font-family:"Sora Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Arial");font-weight:600 800;size-adjust:109%;ascent-override:89%;descent-override:26.6%;line-gap-override:0%;}
+  @font-face{font-family:"Manrope Fallback";src:local("Arial"),local("ArialMT"),local("Liberation Sans");font-weight:400 500;size-adjust:105%;ascent-override:101.5%;descent-override:28.5%;line-gap-override:0%;}
+  @font-face{font-family:"Manrope Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Arial");font-weight:600 800;size-adjust:101%;ascent-override:105.5%;descent-override:29.7%;line-gap-override:0%;}
   /* ==========================================================
      All Pixels — tokens del Manual de identidad v1.0
      Midnight Ink #0F0C29 · Deep Space #0A0E27 · Lavender Mist #F5F3FF
@@ -63,8 +68,8 @@
     --grad-full:linear-gradient(100deg, var(--coral) 0%, var(--magenta) 45%, var(--violet) 78%, var(--grad-end) 100%);
     --radius:24px;
     --maxw:1180px;
-    --font-title:"Sora", "Manrope", system-ui, sans-serif;
-    --font-body:"Manrope", system-ui, sans-serif;
+    --font-title:"Sora", "Sora Fallback", system-ui, sans-serif;
+    --font-body:"Manrope", "Manrope Fallback", system-ui, sans-serif;
     --font-mono:"JetBrains Mono", ui-monospace, monospace;
   }
   :root,
@@ -265,7 +270,8 @@
   section#hero::before{
     content:"";
     position:absolute;
-    inset:-20% -10% auto auto;
+    top:-9rem;
+    right:-10%;
     width:46rem;
     height:46rem;
     background:radial-gradient(circle, rgba(124,92,255,.18), transparent 65%);
@@ -345,6 +351,7 @@
     box-shadow:inset 0 0 60px rgba(255,255,255,.35);
     background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(124,92,255,.18));
   }
+  div.portal figure picture{display:contents;}
   div.portal figure img{width:100%;height:100%;object-fit:cover;}
   div.portal::before{
     content:"";
@@ -994,7 +1001,10 @@
     </div>
     <div class="portal">
       <figure>
-        <img src="fotos/puerta.jpg" alt="Puerta de cristal abierta hacia un paisaje al atardecer, símbolo de un nuevo mundo de diseño" width="416" height="555" fetchpriority="high">
+        <picture>
+          <source type="image/webp" srcset="fotos/puerta-420.webp 420w, fotos/puerta.webp 632w" sizes="(max-width: 760px) 92vw, 416px">
+          <img src="fotos/puerta.jpg" alt="Puerta de cristal abierta hacia un paisaje al atardecer, símbolo de un nuevo mundo de diseño" width="632" height="842" fetchpriority="high">
+        </picture>
       </figure>
       <span class="pixel" aria-hidden="true"></span>
       <span class="pixel" aria-hidden="true"></span>
@@ -1277,7 +1287,7 @@
         var barra = el('span', { 'class': 'marco-barra', 'aria-hidden': 'true' });
         barra.append(el('i'), el('i'), el('i'), el('em', null, 'allpixels.dev/' + t.id));
         var cap = el('span', { 'class': 'captura' });
-        captura(cap, t.imagenes[0], '', i < 4);
+        captura(cap, t.imagenes[0], '', i < 4 && innerWidth > 760);
         marco.append(barra, cap);
         var pie = el('span', { 'class': 'tesela-pie' });
         var tx = el('span');

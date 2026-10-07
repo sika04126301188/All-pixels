@@ -8,7 +8,7 @@
    Campos de cada plantilla:
    - id            texto corto sin espacios ni tildes (va en la URL)
    - nombre        nombre visible
-   - categoria     bodas | salud | saas | ecommerce | portafolio | panel
+   - categoria     bodas | salud | saas | ecommerce | portafolio | panel | servicios
    - tipo          "gratis" o "pro"
    - precio        solo para Pro, por ejemplo "29 €" (null en gratis)
    - resumen       1 frase para la mesa y la ficha
@@ -30,10 +30,47 @@ window.AP_CATEGORIAS = {
   saas: 'SaaS',
   ecommerce: 'E-commerce',
   portafolio: 'Portafolio',
-  panel: 'Panel de control'
+  panel: 'Panel de control',
+  servicios: 'Servicios locales'
 };
 
 window.AP_PLANTILLAS = [
+  {
+    id: 'electro', nombre: 'Electro Rápido 24h', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing de urgencias para electricistas 24 horas, con titular gigante, reloj de guardia y llamada en un toque.',
+    descripcion: 'Landing page de una sola página para electricistas y servicios técnicos de urgencia: portada con titular escalonado y la hora de guardia en directo, cifras que cuentan al aparecer, lista de urgencias, proceso en tres pasos, técnicos verificados, tira de fotos de trabajos, tabla comparativa, opiniones, llamada final y preguntas frecuentes. Barra de llamada y WhatsApp fija en el móvil. HTML semántico sin clases y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/electro-1.jpg', 'fotos/electro-2.jpg', 'fotos/electro-3.jpg', 'fotos/electro-movil.jpg'],
+    descarga: 'descargas/servicios/electro.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'filax', nombre: 'FILAX', categoria: 'saas', tipo: 'gratis', precio: null,
+    resumen: 'Landing oscura para un CRM o producto SaaS, en naranja y rosa, con maqueta del panel en 3D y precios mensual / anual.',
+    descripcion: 'Landing page de una sola página para software SaaS y CRM: portada con maqueta del panel en 3D que sigue al ratón y tarjetas flotantes, funciones en cuadrícula, métricas que cuentan al aparecer, precios con selector mensual / anual, opiniones de clientes y un pie con horizonte naranja y estrellas. HTML semántico sin clases, menú para el móvil, aparición suave al hacer scroll e imágenes, tipografía e iconos incluidos.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/filax-1.jpg', 'fotos/filax-2.jpg', 'fotos/filax-3.jpg', 'fotos/filax-movil.jpg'],
+    descarga: 'descargas/saas/filax.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'slexiplla', nombre: 'Slexiplla', categoria: 'ecommerce', tipo: 'gratis', precio: null,
+    resumen: 'Tienda oscura de documentos y plantillas descargables, en morado y verde con efecto vidrio, catálogo filtrable y carrito.',
+    descripcion: 'Landing page de una sola página para vender documentos y productos digitales: portada con buscador y tarjeta destacada en 3D, categorías, catálogo con filtro y búsqueda, carrito con panel (añadir, quitar y total), pasos de compra, sección para creadores con panel de ganancias, planes de precios, opiniones, preguntas frecuentes y boletín. HTML semántico sin clases, animaciones ligadas al scroll con CSS e imágenes, tipografías e iconos incluidos.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/slexiplla-1.jpg', 'fotos/slexiplla-2.jpg', 'fotos/slexiplla-3.jpg', 'fotos/slexiplla-movil.jpg'],
+    descarga: 'descargas/ecommerce/slexiplla.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'flysky', nombre: 'FlySky', categoria: 'ecommerce', tipo: 'gratis', precio: null,
+    resumen: 'Landing luminosa para agencias de viajes, con buscador de vuelos, avión animado y destinos ilustrados.',
+    descripcion: 'Landing page de una sola página para agencias de viajes y buscadores de vuelos: portada con avión que despega y nubes en movimiento, buscador con ida y vuelta, intercambio de origen y destino y fechas, destinos con favoritos y botón que rellena el buscador, cifras animadas, pasos con un avión que recorre la ruta, ventajas, opiniones, newsletter, preguntas frecuentes y contacto. HTML semántico casi sin clases, ilustraciones incluidas y tipografía e iconos sin servicios externos.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/flysky-1.jpg', 'fotos/flysky-2.jpg', 'fotos/flysky-3.jpg', 'fotos/flysky-movil.jpg'],
+    descarga: 'descargas/ecommerce/flysky.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
   {
     id: 'kinetic', nombre: 'KINETIC', categoria: 'portafolio', tipo: 'gratis', precio: null,
     resumen: 'Landing oscura para estudios de diseño y desarrollo web, con tarjetas bento en 3D, carrusel de proyectos y brillo que sigue al cursor.',
