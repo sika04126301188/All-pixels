@@ -1,0 +1,110 @@
+================================================================
+ ALL PIXELS — LICENCIA GRATIS
+ Versión 1.0 · Vigente desde el 4 de octubre de 2026
+ https://allpixels.dev/licencias
+================================================================
+
+Esta licencia se aplica a la plantilla, componente o recurso que
+has descargado gratis desde All Pixels (en adelante, "el Recurso").
+Al descargar o usar el Recurso aceptas estas condiciones.
+
+Titular: Sameer Salama, que opera bajo la marca
+All Pixels ("All Pixels", "nosotros").
+Contacto: hola@allpixels.dev
+
+
+1. QUÉ TE PERMITIMOS
+----------------------------------------------------------------
+Te concedemos una licencia gratuita, mundial, no exclusiva,
+perpetua e intransferible para:
+
+  a) Usar el Recurso en proyectos personales y comerciales.
+  b) Usarlo en proyectos propios o para tus clientes.
+  c) Modificarlo, adaptarlo y combinarlo con tu propio código.
+  d) Crear un número ilimitado de Productos Finales.
+
+"Producto Final" significa un sitio web, aplicación o proyecto
+concreto en el que el Recurso forma parte del resultado, y no
+un recurso que otras personas puedan descargar para crear sus
+propios proyectos.
+
+
+2. LA ÚNICA CONDICIÓN: LA ATRIBUCIÓN
+----------------------------------------------------------------
+Cada Producto Final debe mostrar un crédito visible a All Pixels,
+normalmente en el pie de página, con un enlace activo:
+
+  <a href="https://allpixels.dev">Plantilla de All Pixels</a>
+
+Si el Producto Final no permite enlaces (por ejemplo, una app),
+el crédito puede ir en la sección "Acerca de" o "Créditos".
+
+¿Quieres quitar el crédito? Consigue la Licencia Pro.
+
+
+3. QUÉ NO ESTÁ PERMITIDO
+----------------------------------------------------------------
+No puedes:
+
+  a) Vender, revender, sublicenciar, compartir o redistribuir el
+     Recurso, original o modificado, como plantilla, tema, kit
+     de UI, snippet o archivo descargable, ni gratis ni de pago.
+  b) Subirlo a marketplaces, bancos de recursos, repositorios
+     públicos u otros sitios de descarga.
+  c) Incluirlo en constructores web, generadores de plantillas o
+     productos SaaS que permitan a terceros crear o descargar
+     sitios basados en el Recurso.
+  d) Presentarlo como una creación tuya ni quitar los avisos de
+     derechos de autor del código fuente.
+  e) Usarlo en proyectos ilegales, engañosos, difamatorios, de
+     odio o que infrinjan derechos de terceros.
+  f) Usarlo para entrenar modelos de inteligencia artificial o
+     crear conjuntos de datos.
+
+Subir tu Producto Final a un repositorio privado o a tu propio
+servidor está permitido.
+
+
+4. RECURSOS DE TERCEROS
+----------------------------------------------------------------
+Las fotografías, ilustraciones, iconos y tipografías de las capturas
+pueden tener sus propias licencias y NO siempre se incluyen en la
+descarga. Revisa el archivo README de cada Recurso. Eres
+responsable de tener la licencia de los recursos de terceros que
+uses en tu Producto Final.
+
+
+5. PROPIEDAD
+----------------------------------------------------------------
+All Pixels conserva todos los derechos de propiedad intelectual
+sobre el Recurso. Esta licencia te da derecho a usarlo, no la
+propiedad del Recurso. El contenido que tú añadas es tuyo.
+
+
+6. SIN GARANTÍA
+----------------------------------------------------------------
+El Recurso se entrega "tal cual", sin garantías de ningún tipo,
+expresas o implícitas, incluidas las de comerciabilidad o
+idoneidad para un fin concreto. Dentro de lo permitido por la
+ley, All Pixels no será responsable de daños derivados del uso
+del Recurso.
+
+
+7. FIN DE LA LICENCIA
+----------------------------------------------------------------
+Si incumples esta licencia, se termina automáticamente y debes
+dejar de usar el Recurso en los proyectos afectados.
+
+
+8. CAMBIOS Y LEY APLICABLE
+----------------------------------------------------------------
+Podemos actualizar esta licencia para descargas futuras. Los
+Recursos que ya descargaste siguen rigiéndose por la versión
+vigente en el momento de la descarga.
+
+Esta licencia se rige por las leyes de España. Cualquier
+controversia se someterá a los tribunales de Madrid, España,
+salvo que la ley de consumo aplicable disponga otra cosa.
+
+----------------------------------------------------------------
+© 2026 All Pixels · https://allpixels.dev

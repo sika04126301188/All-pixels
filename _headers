@@ -1,0 +1,12 @@
+# Caché del navegador para los archivos estáticos de All Pixels
+/fuentes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/iconos/*
+  Cache-Control: public, max-age=604800
+
+/fotos/*
+  Cache-Control: public, max-age=604800
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
