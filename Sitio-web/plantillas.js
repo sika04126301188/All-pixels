@@ -36,6 +36,24 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'matiz', nombre: 'Estudio Matiz', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing elegante para pintores y decoradores, con titular editorial, antes y después en color y banda de proceso.',
+    descripcion: 'Landing page de una sola página para estudios de pintura y decoración de interiores: portada a sangre con titular escalonado, rejilla de valores con cita, lista editorial de servicios, muestras de antes y después que se amplían al pasar el ratón, tira de ambientes, proceso en cuatro pasos, testimonios y formulario de presupuesto. HTML semántico sin clases y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/matiz-1.jpg', 'fotos/matiz-2.jpg', 'fotos/matiz-3.jpg', 'fotos/matiz-movil.jpg'],
+    descarga: 'descargas/servicios/matiz.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'cepadech', nombre: 'Cepadech', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing para concesionarios de carros nuevos y de segunda mano, con inventario filtrable y simulador de cuota.',
+    descripcion: 'Landing page de una sola página para concesionarios y agencias de carros: portada a pantalla completa, inventario con filtro primera / segunda mano y tarjetas con inclinación 3D, ventajas con cifras animadas, simulador de financiación con cuota en directo, opiniones y formulario que se rellena con el modelo elegido. HTML semántico sin clases y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/cepadech-1.jpg', 'fotos/cepadech-2.jpg', 'fotos/cepadech-3.jpg', 'fotos/cepadech-movil.jpg'],
+    descarga: 'descargas/servicios/cepadech.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'electro', nombre: 'Electro Rápido 24h', categoria: 'servicios', tipo: 'gratis', precio: null,
     resumen: 'Landing de urgencias para electricistas 24 horas, con titular gigante, reloj de guardia y llamada en un toque.',
     descripcion: 'Landing page de una sola página para electricistas y servicios técnicos de urgencia: portada con titular escalonado y la hora de guardia en directo, cifras que cuentan al aparecer, lista de urgencias, proceso en tres pasos, técnicos verificados, tira de fotos de trabajos, tabla comparativa, opiniones, llamada final y preguntas frecuentes. Barra de llamada y WhatsApp fija en el móvil. HTML semántico sin clases y tipografías incluidas.',
