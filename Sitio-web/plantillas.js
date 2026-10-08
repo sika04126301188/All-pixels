@@ -36,6 +36,15 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'lawner', nombre: 'Lawner', categoria: 'salud', tipo: 'gratis', precio: null,
+    resumen: 'Landing oscura para gimnasios 24/7, con programas en bento, horario de clases por días y planes mensual / anual.',
+    descripcion: 'Landing page de una sola página para gimnasios y centros de fitness: portada con aforo del momento, cifras animadas, cinta de disciplinas, programas en rejilla bento, método con vista previa de la app, horario de clases filtrable por día, planes con cambio mensual / anual y formulario de prueba gratis con haz de luz en el pie. HTML semántico sin clases y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/lawner-1.jpg', 'fotos/lawner-2.jpg', 'fotos/lawner-3.jpg', 'fotos/lawner-movil.jpg'],
+    descarga: 'descargas/salud/lawner.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'matiz', nombre: 'Estudio Matiz', categoria: 'servicios', tipo: 'gratis', precio: null,
     resumen: 'Landing elegante para pintores y decoradores, con titular editorial, antes y después en color y banda de proceso.',
     descripcion: 'Landing page de una sola página para estudios de pintura y decoración de interiores: portada a sangre con titular escalonado, rejilla de valores con cita, lista editorial de servicios, muestras de antes y después que se amplían al pasar el ratón, tira de ambientes, proceso en cuatro pasos, testimonios y formulario de presupuesto. HTML semántico sin clases y tipografías incluidas.',
