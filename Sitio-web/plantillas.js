@@ -36,6 +36,24 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'ramogallego', nombre: 'Ramogallego', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing elegante para despachos de abogados, con hero recortado en curvas, áreas con foto que cambia y método en escalera.',
+    descripcion: 'Landing page de una sola página para despachos de abogados: hero con foto recortada en curvas y cifras animadas, cinta de especialidades, despacho con sello giratorio, áreas de práctica en acordeón con foto que cambia, método en cuatro pasos en escalera, carrusel de opiniones, preguntas frecuentes y contacto con panel en diagonal. HTML semántico sin clases y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/ramogallego-1.jpg', 'fotos/ramogallego-2.jpg', 'fotos/ramogallego-3.jpg', 'fotos/ramogallego-movil.jpg'],
+    descarga: 'descargas/servicios/ramogallego.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'ancla', nombre: 'Espacio Ancla', categoria: 'salud', tipo: 'gratis', precio: null,
+    resumen: 'Landing serena para psicólogos y terapeutas, con tarjetas de cristal, ilustraciones fluidas y textos en inglés.',
+    descripcion: 'Landing page de una sola página para consultas de psicología (textos en inglés): portada con tarjeta de cristal y halo que respira, enfoque con pilares, terapia presencial y online, áreas de trabajo, proceso en cuatro pasos con línea animada, preguntas frecuentes, formulario con validación y aviso de crisis en el pie. Incluye las imágenes abstractas y los iconos. HTML semántico sin clases y tipografías incluidas.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/ancla-1.jpg', 'fotos/ancla-2.jpg', 'fotos/ancla-3.jpg', 'fotos/ancla-movil.jpg'],
+    descarga: 'descargas/salud/ancla.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'lawner', nombre: 'Lawner', categoria: 'salud', tipo: 'gratis', precio: null,
     resumen: 'Landing oscura para gimnasios 24/7, con programas en bento, horario de clases por días y planes mensual / anual.',
     descripcion: 'Landing page de una sola página para gimnasios y centros de fitness: portada con aforo del momento, cifras animadas, cinta de disciplinas, programas en rejilla bento, método con vista previa de la app, horario de clases filtrable por día, planes con cambio mensual / anual y formulario de prueba gratis con haz de luz en el pie. HTML semántico sin clases y tipografías incluidas.',
