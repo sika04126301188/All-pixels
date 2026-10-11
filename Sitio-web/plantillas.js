@@ -36,6 +36,15 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'verdeluz', nombre: 'Jardines Verdeluz', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing natural y elegante para jardinería y paisajismo, con deslizadores de antes y después y menú flotante.',
+    descripcion: 'Landing page de una sola página para empresas de jardinería y paisajismo: portada a pantalla completa con menú flotante tipo píldora, servicios numerados con foto fija, ventajas con opinión de clienta sobre foto en arco, proceso en cuatro pasos, proyectos con deslizador de antes y después (también con teclado) y contacto con formulario. Incluye iconos y tipografías. HTML semántico sin clases.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/verdeluz-1.jpg', 'fotos/verdeluz-2.jpg', 'fotos/verdeluz-3.jpg', 'fotos/verdeluz-movil.jpg'],
+    descarga: 'descargas/servicios/verdeluz.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'ramogallego', nombre: 'Ramogallego', categoria: 'servicios', tipo: 'gratis', precio: null,
     resumen: 'Landing elegante para despachos de abogados, con hero recortado en curvas, áreas con foto que cambia y método en escalera.',
     descripcion: 'Landing page de una sola página para despachos de abogados: hero con foto recortada en curvas y cifras animadas, cinta de especialidades, despacho con sello giratorio, áreas de práctica en acordeón con foto que cambia, método en cuatro pasos en escalera, carrusel de opiniones, preguntas frecuentes y contacto con panel en diagonal. HTML semántico sin clases y tipografías incluidas.',
