@@ -1105,6 +1105,12 @@
       if(nav.classList.contains('abierto') && !e.target.closest('header')) cerrarMenu();
     });
     window.addEventListener('pageshow', cerrarMenu);
+    /* Se cierra solo en cuanto el usuario empieza a desplazarse por la página */
+    var scrollAlAbrir = 0;
+    boton.addEventListener('click', function(){ scrollAlAbrir = window.scrollY; });
+    window.addEventListener('scroll', function(){
+      if(nav.classList.contains('abierto') && Math.abs(window.scrollY - scrollAlAbrir) > 30) cerrarMenu();
+    }, {passive:true});
     if(window.matchMedia){
       var anchoEscritorio = window.matchMedia('(min-width: 901px)');
       if(anchoEscritorio.addEventListener) anchoEscritorio.addEventListener('change', cerrarMenu);
