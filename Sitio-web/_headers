@@ -10,3 +10,19 @@
 
 /favicon.ico
   Cache-Control: public, max-age=604800
+
+# Datos y páginas: el navegador siempre comprueba si hay versión nueva
+/plantillas.js
+  Cache-Control: no-cache
+
+/config.js
+  Cache-Control: no-cache
+
+/comun.js
+  Cache-Control: no-cache
+
+/*.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache

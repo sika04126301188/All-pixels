@@ -36,6 +36,24 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'solares', nombre: 'Solares Energía', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing para instaladores de placas solares con reloj solar animado, esquema interactivo y simulador de ahorro tipo app.',
+    descripcion: 'Landing page de una sola página para empresas de energía solar: portada con reloj solar (el cielo, el sol y la producción cambian según la hora), cifras, quiénes somos, servicios en mosaico, esquema de la instalación con puntos interactivos, simulador de ahorro con gráfico de 24 horas que rellena el formulario, planes, proceso sobre el arco del sol, mapa por comunidades, opiniones, preguntas y contacto. Incluye iconos y tipografías. HTML semántico sin clases.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/solares-1.jpg', 'fotos/solares-2.jpg', 'fotos/solares-3.jpg', 'fotos/solares-movil.jpg'],
+    descarga: 'descargas/servicios/solares.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'almanara', nombre: 'Reformas Almanara', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing de estilo plano de arquitecto para reformas de cocinas y baños, con calculadora de presupuesto y antes y después interactivo.',
+    descripcion: 'Landing page de una sola página para empresas de reformas: portada con foto que pasa sola del antes al después, cinta de compromisos, servicios en paneles que se expanden, proceso con línea que se rellena al bajar, mosaico de proyectos con filtro y visor, antes y después «mantén pulsado», calculadora de presupuesto orientativo que rellena el formulario, contadores, opiniones y contacto. Incluye iconos y tipografías. HTML semántico sin clases.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/almanara-1.jpg', 'fotos/almanara-2.jpg', 'fotos/almanara-3.jpg', 'fotos/almanara-movil.jpg'],
+    descarga: 'descargas/servicios/almanara.zip', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'verdeluz', nombre: 'Jardines Verdeluz', categoria: 'servicios', tipo: 'gratis', precio: null,
     resumen: 'Landing natural y elegante para jardinería y paisajismo, con deslizadores de antes y después y menú flotante.',
     descripcion: 'Landing page de una sola página para empresas de jardinería y paisajismo: portada a pantalla completa con menú flotante tipo píldora, servicios numerados con foto fija, ventajas con opinión de clienta sobre foto en arco, proceso en cuatro pasos, proyectos con deslizador de antes y después (también con teclado) y contacto con formulario. Incluye iconos y tipografías. HTML semántico sin clases.',
