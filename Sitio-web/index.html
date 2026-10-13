@@ -656,7 +656,8 @@
   dialog#vista-rapida::backdrop{background:rgba(10,14,39,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
   dialog#vista-rapida[open]{animation:vista-entra .28s cubic-bezier(.2,.8,.2,1);}
   @keyframes vista-entra{from{opacity:0;transform:translateY(16px) scale(.98);}to{opacity:1;transform:none;}}
-  div.vista-cont{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);}
+  div.vista-cont{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);overflow-y:auto;}
+  /* La columna de texto baja con la rueda cuando la pantalla es baja (los botones nunca quedan ocultos) */
   div.vista-galeria{background:var(--surface);padding:22px;display:flex;flex-direction:column;gap:12px;min-height:0;}
   div.vista-galeria span.marco{flex:none;box-shadow:var(--shadow);}
   div.vista-galeria span.captura{aspect-ratio:4/3;flex:none;}
@@ -669,7 +670,7 @@
   div.vista-miniaturas button{width:84px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;border:2px solid transparent;opacity:.6;background:#fff;padding:0;transition:opacity .15s ease, border-color .15s ease;}
   div.vista-miniaturas button[aria-current="true"]{border-color:var(--violet);opacity:1;}
   div.vista-miniaturas img{width:100%;height:100%;object-fit:cover;object-position:50% 0;}
-  div.vista-info{padding:30px 28px 24px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:0;}
+  div.vista-info{padding:30px 28px 24px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;overscroll-behavior:contain;min-height:0;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);}
   div.vista-info p.vista-etq{display:flex;gap:.6rem;align-items:center;}
   div.vista-info p.vista-etq span:first-child{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-text);}
   div.vista-info h3{font-size:clamp(1.7rem, 3vw, 2.3rem);font-weight:800;}
@@ -731,7 +732,7 @@
     @keyframes vista-sube{from{transform:translateY(60px);opacity:.3;}to{transform:none;opacity:1;}}
     div.vista-cont{grid-template-columns:1fr;max-height:92vh;max-height:92dvh;overflow-y:auto;}
     div.vista-galeria{padding:26px 14px 12px;}
-    div.vista-info{padding:16px 18px 22px;overflow:visible;}
+    div.vista-info{padding:16px 18px 22px;overflow:visible;max-height:none;}
     span.vista-asa{display:block;position:absolute;top:8px;left:50%;transform:translateX(-50%);width:44px;height:5px;border-radius:999px;background:var(--line);z-index:3;}
     button.vista-cerrar{top:10px;right:10px;width:36px;height:36px;}
     div.vista-miniaturas button{width:64px;}
