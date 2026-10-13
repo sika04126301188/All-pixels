@@ -682,7 +682,7 @@
   dl.vista-datos dd{margin:.15rem 0 0;font-weight:700;font-size:.92rem;}
   div.vista-acciones{display:grid;gap:.6rem;margin-top:auto;padding-top:4px;}
   div.vista-acciones .boton{justify-content:center;}
-  div.vista-acciones a.secundario{display:inline-flex;justify-content:center;align-items:center;padding:.8rem 1.4rem;border-radius:999px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--ink);}
+  div.vista-acciones a.secundario{display:inline-flex;gap:.4rem;justify-content:center;align-items:center;padding:.8rem 1.4rem;border-radius:999px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--ink);}
   div.vista-acciones a.secundario:hover{text-decoration:none;border-color:var(--violet);}
   div.vista-acciones a.secundario[hidden]{display:none;}
   div.vista-acciones a.enlace-ficha{text-align:center;font-weight:700;font-size:.9rem;}
@@ -1141,7 +1141,7 @@
   <section id="mesa">
     <p class="ojo">La mesa</p>
     <h2>Cada diseño, servido completo</h2>
-    <p class="sub">Landings completas, responsive y listas para lanzar. Toca cualquier diseño para ver sus capturas y descargarlo sin salir de esta página. Los marcados como «Próximamente» están en preparación.</p>
+    <p class="sub">Landings completas, responsive y listas para lanzar. Toca cualquier diseño para ver sus capturas y descargarlo sin salir de esta página.</p>
 
     <div class="mesa-barra" id="categorias">
       <div class="mesa-chips" id="mesa-chips" role="group" aria-label="Filtrar por categoría"></div>
@@ -1180,6 +1180,7 @@
           </dl>
           <div class="vista-acciones">
             <a class="boton" id="vista-descargar" href="#"></a>
+            <a class="secundario" id="vista-vivo" href="#" target="_blank" rel="noopener" hidden>Ver en vivo <span aria-hidden="true">↗</span><span class="visualmente-oculto"> (se abre en una pestaña nueva)</span></a>
             <a class="enlace-ficha" id="vista-ficha" href="#">Ver ficha completa →</a>
           </div>
           <p class="vista-licencia" id="vista-licencia"></p>
@@ -1313,7 +1314,7 @@
   <p><span>© <span id="anio">2026</span> All Pixels. Todos los derechos reservados.</span><span>Hecho por el equipo de All Pixels</span></p>
 </footer>
 
-<script src="plantillas.js?v=20261013"></script>
+<script src="plantillas.js?v=1.1"></script>
 <script>
   (function(){
     /* ---------- Modo claro / oscuro ---------- */
@@ -1372,7 +1373,7 @@
        La mesa: mosaico + vista rápida (datos de plantillas.js)
        ========================================================== */
     (function(){
-      var CATALOGO = window.AP_PLANTILLAS || [];
+      var CATALOGO = (window.AP_PLANTILLAS || []).filter(function(t){ return t.disponible !== false; });
       var CATEGORIAS = window.AP_CATEGORIAS || {};
       var POR_TANDA = 14;              /* diseños que se muestran antes de "Ver más" */
       var PATRON = ['grande', '', '', 'ancho', '', '', '', '', 'ancho', '', '', ''];
@@ -1505,6 +1506,9 @@
           d.textContent = esPro ? 'Comprar licencia Pro' + (t.precio ? ' · ' + t.precio : '') : 'Descargar gratis (.zip)';
           if(esPro) d.removeAttribute('download'); else d.setAttribute('download', '');
         }
+        var vivo = $('vista-vivo');
+        if(disponible(t) && t.demo){ vivo.href = t.demo; vivo.hidden = false; }
+        else { vivo.hidden = true; vivo.removeAttribute('href'); }
         $('vista-ficha').href = ficha(t);
         var lic = $('vista-licencia');
         if(!disponible(t)){ lic.textContent = 'Estamos preparando esta plantilla. Muy pronto podrás descargarla.'; }

@@ -1050,7 +1050,7 @@
   div.botones{display:grid;gap:.7rem;}
   div.botones a[hidden]{display:none;}
   .grande{justify-content:center;padding-block:.95rem;font-size:1rem;}
-  a.secundario{display:inline-flex;align-items:center;justify-content:center;font-weight:700;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:var(--card);padding:.8rem 1.4rem;}
+  a.secundario{display:inline-flex;gap:.4rem;align-items:center;justify-content:center;font-weight:700;border:1px solid var(--line);border-radius:999px;color:var(--ink);background:var(--card);padding:.8rem 1.4rem;}
   a.secundario:hover{text-decoration:none;border-color:var(--violet);}
   p.nota-licencia{font-size:.82rem;color:var(--ink-soft);margin-block:.9rem 1.4rem;text-align:center;}
   dl.tecnica{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:0 0 1.2rem;}
@@ -1157,6 +1157,7 @@
     <p class="precio" id="ficha-precio"></p>
     <div class="botones" id="descargar">
       <a class="boton grande" id="boton-principal" href="#"></a>
+      <a class="secundario" id="boton-vivo" href="#" target="_blank" rel="noopener" hidden>Ver en vivo <span aria-hidden="true">↗</span><span class="visualmente-oculto"> (se abre en una pestaña nueva)</span></a>
     </div>
     <p class="nota-licencia" id="nota-licencia"></p>
     <dl class="tecnica">
@@ -1249,7 +1250,7 @@
   <p><span>© <span id="anio">2026</span> All Pixels. Todos los derechos reservados.</span><span>Hecho por el equipo de All Pixels</span></p>
 </footer>
 
-<script src="plantillas.js?v=20261013"></script>
+<script src="plantillas.js?v=1.1"></script>
 <script>
   /* ---------- Ficha de plantilla: lee ?id= y pinta los datos del catálogo ---------- */
   (function(){
@@ -1332,6 +1333,9 @@
       principal.textContent = 'Descargar gratis (.zip)';
       principal.setAttribute('download', '');
     }
+    /* Demo en vivo (campo demo de plantillas.js) */
+    var vivo = $('boton-vivo');
+    if(listo && t.demo){ vivo.href = t.demo; vivo.hidden = false; }
     var nota = $('nota-licencia');
     if(!listo){ nota.textContent = 'Estamos preparando esta plantilla. Muy pronto podrás descargarla.'; }
     else {
