@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<!--
+  Solares Energía · Plantilla de All Pixels — https://allpixels.dev
+  Instalación de placas solares: reloj solar, esquema interactivo, simulador de ahorro, planes, mapa y contacto.
+  Consulta el README y la LICENCIA incluidos en la descarga.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solares Energía | Instalación de placas solares para casas y negocios</title>
+  <meta name="description" content="Diseñamos, instalamos y mantenemos placas solares para hogares y empresas en toda España. Simula tu ahorro en 30 segundos y pide tu estudio gratuito.">
+  <meta name="theme-color" content="#0E2733">
+  <link rel="preload" href="fuentes/sora-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fuentes/jakarta-400.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* =========================================================
+       0. TIPOGRAFÍAS LOCALES (SIL Open Font License, ver fuentes/)
+       ========================================================= */
+    @font-face { font-family: "Sora"; font-weight: 400; font-display: swap; src: url("fuentes/sora-400.woff2") format("woff2"); }
+    @font-face { font-family: "Sora"; font-weight: 600; font-display: swap; src: url("fuentes/sora-600.woff2") format("woff2"); }
+    @font-face { font-family: "Sora"; font-weight: 700; font-display: swap; src: url("fuentes/sora-700.woff2") format("woff2"); }
+    @font-face { font-family: "Sora"; font-weight: 800; font-display: swap; src: url("fuentes/sora-800.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 400; font-display: swap; src: url("fuentes/jakarta-400.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; font-display: swap; src: url("fuentes/jakarta-500.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 600; font-display: swap; src: url("fuentes/jakarta-600.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 700; font-display: swap; src: url("fuentes/jakarta-700.woff2") format("woff2"); }
+    @font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("fuentes/ibm-plex-mono-500.woff2") format("woff2"); }
+
+    /* =========================================================
+       1. VARIABLES
+       ========================================================= */
+    :root {
+      --noche: #0A1D27;
+      --marino: #0E2733;
+      --marino-2: #133443;
+      --ambar: #E19A34;
+      --ambar-claro: #F4B860;
+      --ambar-texto: #9A5B0C;
+      --verde: #1F7A6C;
+      --verde-texto: #155C51;
+      --menta: #DCEFE9;
+      --niebla: #F3F4F1;
+      --arena: #E9EAE5;
+      --blanco: #FFFFFF;
+      --tinta: #142329;
+      --tinta-suave: #50605F;
+      --linea: #DADCD5;
+      --linea-clara: rgba(234, 241, 239, .14);
+      --claro: #EAF1EF;
+      --claro-suave: #A9BFBE;
+
+      --titulo: "Sora", system-ui, sans-serif;
+      --texto: "Plus Jakarta Sans", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+      --ancho: 1220px;
+      --margen: clamp(1.25rem, 4.5vw, 3rem);
+      --relleno: max(var(--margen), calc((100% - var(--ancho)) / 2));
+      --espacio: clamp(5rem, 9vw, 8rem);
+      --radio: 24px;
+      --sombra: 0 40px 70px -34px rgba(14, 39, 51, .5);
+      --suave: cubic-bezier(.2, .7, .2, 1);
+
+      /* Cielo del hero: lo cambia el reloj solar (JavaScript) */
+      --cielo-arriba: #2F7FC1;
+      --cielo-abajo: #CFE8F5;
+      --sol-x: .5;
+      --sol-y: 1;
+      --luz: 1;
+    }
+
+    /* =========================================================
+       2. BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    a { text-decoration: none; color: var(--verde-texto); }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+
+    body {
+      overflow-x: clip;
+      font-family: var(--texto);
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--tinta);
+      background: var(--niebla);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; width: 100%; height: auto; }
+    ul, ol { list-style: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--ambar); outline-offset: 3px; }
+    ::selection { color: var(--marino); background: var(--ambar-claro); }
+
+    h1, h2, h3 {
+      font-family: var(--titulo);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      text-wrap: balance;
+      color: var(--marino);
+    }
+
+    h1 em, h2 em { font-style: normal; color: var(--ambar-texto); }
+
+    /* Iconos: archivo SVG coloreado dentro de figure */
+    figure:has(> img[src*="iconos/"]) { flex: none; width: 1.1em; height: 1.1em; }
+    img[src*="iconos/"] { height: 100%; object-fit: contain; }
+
+    /* Etiqueta de sección */
+    main > section hgroup p {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: 1rem;
+      font-family: var(--mono);
+      font-size: .74rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--verde-texto);
+    }
+
+    main > section hgroup p::before {
+      content: "";
+      width: .65rem;
+      height: .65rem;
+      border-radius: 50%;
+      background: var(--ambar);
+      box-shadow: 0 0 0 4px rgba(225, 154, 52, .2);
+    }
+
+    main > section h2 { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
+
+    main > section > hgroup + p,
+    main > section > article > hgroup + p {
+      max-width: 36rem;
+      margin-top: 1.1rem;
+      font-size: 1.08rem;
+      color: var(--tinta-suave);
+    }
+
+    main > section:not(:first-of-type):not(:nth-of-type(2)) { padding: var(--espacio) var(--relleno); }
+
+    /* Botón principal (ámbar) */
+    body > header nav > a:last-of-type,
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type,
+    main > section:nth-of-type(6) article > a,
+    main > section:nth-of-type(7) li a,
+    main > section:nth-of-type(11) aside a,
+    main > section:last-of-type form button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      padding: .95rem 1.5rem;
+      border: 0;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: .95rem;
+      white-space: nowrap;
+      color: #241505;
+      background: var(--ambar);
+      transition: background .3s ease, transform .3s var(--suave), box-shadow .3s ease;
+    }
+
+    body > header nav > a:last-of-type:hover,
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type:hover,
+    main > section:nth-of-type(6) article > a:hover,
+    main > section:nth-of-type(7) li a:hover,
+    main > section:nth-of-type(11) aside a:hover,
+    main > section:last-of-type form button:hover {
+      background: var(--ambar-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px -14px rgba(225, 154, 52, .8);
+    }
+
+    /* =========================================================
+       3. CABECERA
+       ========================================================= */
+    body > header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 60;
+      padding: .9rem var(--relleno);
+      transition: background .4s ease, box-shadow .4s ease, padding .4s ease;
+    }
+
+    body > header[data-scroll] {
+      padding-block: .55rem;
+      background: rgba(10, 29, 39, .88);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      backdrop-filter: blur(16px) saturate(1.4);
+      box-shadow: 0 1px 0 var(--linea-clara);
+    }
+
+    body > header nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Logotipo: rayo dentro de un sol */
+    body > header nav > a:first-of-type {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin-right: auto;
+      font-family: var(--titulo);
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      white-space: nowrap;
+      color: var(--blanco);
+    }
+
+    body > header nav > a:first-of-type figure {
+      display: grid;
+      place-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      padding: .5rem;
+      border-radius: 50%;
+      background: conic-gradient(from 200deg, var(--ambar-claro), var(--ambar), var(--verde), var(--ambar-claro));
+    }
+
+    body > header nav ul { display: flex; gap: 1.8rem; }
+
+    body > header nav ul a {
+      position: relative;
+      font-size: .9rem;
+      font-weight: 600;
+      color: rgba(234, 241, 239, .78);
+      transition: color .3s ease;
+    }
+
+    body > header nav ul a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -.5rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ambar);
+      transform: translateX(-50%) scale(0);
+      transition: transform .3s var(--suave);
+    }
+
+    body > header nav ul a:hover,
+    body > header nav ul a[aria-current="true"] { color: var(--blanco); }
+    body > header nav ul a:hover::after,
+    body > header nav ul a[aria-current="true"]::after { transform: translateX(-50%) scale(1); }
+
+    body > header nav > a:last-of-type { padding: .7rem 1.2rem; font-size: .85rem; }
+
+    body > header nav button {
+      position: relative;
+      display: none;
+      width: 2.7rem;
+      height: 2.7rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    body > header nav button span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1.05rem;
+      height: 2px;
+      margin: -1px 0 0 -.52rem;
+      border-radius: 2px;
+      background: var(--blanco);
+      transition: transform .3s ease, opacity .2s ease;
+    }
+
+    body > header nav button span:first-of-type { transform: translateY(-5px); }
+    body > header nav button span:nth-of-type(2) { width: .65rem; background: var(--ambar); transform: translateX(.4rem); }
+    body > header nav button span:last-of-type { transform: translateY(5px); }
+    body > header nav button[aria-expanded="true"] span:first-of-type { transform: rotate(45deg); }
+    body > header nav button[aria-expanded="true"] span:nth-of-type(2) { opacity: 0; }
+    body > header nav button[aria-expanded="true"] span:last-of-type { transform: rotate(-45deg); }
+
+    /* =========================================================
+       4. HERO · reloj solar
+       ========================================================= */
+    main > section:first-of-type {
+      --cielo: linear-gradient(180deg, var(--cielo-arriba), var(--cielo-abajo));
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 2rem 3rem;
+      min-height: max(740px, 100svh);
+      padding: 8rem var(--relleno) 4rem;
+      overflow: hidden;
+      isolation: isolate;
+      color: var(--claro);
+      background: var(--cielo);
+      transition: background .6s linear;
+    }
+
+    /* Velo oscuro detrás del texto: siempre legible, sea la hora que sea */
+    main > section:first-of-type::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(10, 29, 39, .94) 0%, rgba(10, 29, 39, .82) 38%, rgba(10, 29, 39, .15) 70%, transparent 100%),
+        linear-gradient(0deg, rgba(10, 29, 39, .7), transparent 35%);
+    }
+
+    /* El sol recorre su arco según la hora */
+    main > section:first-of-type::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: calc(45% + var(--sol-x) * 50%);
+      top: calc(78% - var(--sol-y) * 62%);
+      width: clamp(6rem, 11vw, 9rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, #FFF6DC 0 30%, #FFD27A 46%, rgba(255, 190, 90, .35) 62%, transparent 72%);
+      box-shadow: 0 0 120px 40px rgba(255, 196, 102, calc(var(--luz) * .45));
+      opacity: calc(.25 + var(--luz) * .75);
+      transform: translate(-50%, -50%);
+      transition: left .6s linear, top .6s linear, opacity .6s linear;
+    }
+
+    main > section:first-of-type article > p:first-of-type {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: 1.4rem;
+      padding: .45rem .95rem .45rem .45rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, .06);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    main > section:first-of-type article > p:first-of-type strong {
+      padding: .2rem .6rem;
+      border-radius: 99px;
+      font-family: var(--mono);
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: #241505;
+      background: var(--ambar-claro);
+    }
+
+    main > section:first-of-type h1 {
+      font-size: clamp(2.8rem, 6.2vw, 5.4rem);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--blanco);
+    }
+
+    main > section:first-of-type h1 em {
+      display: block;
+      background: linear-gradient(90deg, var(--ambar-claro), #FFE3A8 50%, var(--ambar));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    main > section:first-of-type article > p:nth-of-type(2) {
+      max-width: 33rem;
+      margin-top: 1.4rem;
+      font-size: 1.12rem;
+      color: rgba(234, 241, 239, .82);
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.6rem;
+      margin-top: 2rem;
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:last-of-type {
+      font-weight: 600;
+      color: var(--blanco);
+      border-bottom: 1px solid var(--ambar);
+    }
+
+    /* Panel de lectura en directo */
+    main > section:first-of-type form {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr));
+      align-items: center;
+      gap: 1rem 2rem;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: var(--radio);
+      background: rgba(10, 29, 39, .62);
+      -webkit-backdrop-filter: blur(16px) saturate(1.3);
+      backdrop-filter: blur(16px) saturate(1.3);
+    }
+
+    main > section:first-of-type form label {
+      display: grid;
+      gap: .5rem;
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--claro-suave);
+    }
+
+    main > section:first-of-type form label output {
+      font-family: var(--titulo);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--blanco);
+    }
+
+    main > section:first-of-type input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #E36E4C, var(--ambar-claro) 30%, #FFF2C4 50%, var(--ambar-claro) 70%, #6A4C93);
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    main > section:first-of-type input[type="range"]::-webkit-slider-thumb {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 4px solid var(--marino);
+      border-radius: 50%;
+      background: #FFE3A8;
+      box-shadow: 0 0 0 1px var(--ambar-claro), 0 0 18px rgba(255, 210, 122, .9);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    main > section:first-of-type input[type="range"]::-moz-range-thumb {
+      width: 1rem;
+      height: 1rem;
+      border: 4px solid var(--marino);
+      border-radius: 50%;
+      background: #FFE3A8;
+    }
+
+    main > section:first-of-type form dl { display: contents; }
+
+    main > section:first-of-type form dl div { padding-left: 1.2rem; border-left: 1px solid var(--linea-clara); }
+
+    main > section:first-of-type form dt {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--claro-suave);
+    }
+
+    main > section:first-of-type form dd {
+      font-family: var(--titulo);
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--blanco);
+    }
+
+    main > section:first-of-type form dd small { font-size: .8rem; font-weight: 600; color: var(--ambar-claro); }
+
+    /* Escena: tejado con placas en perspectiva isométrica (decorativa) */
+    main > section:first-of-type aside {
+      position: relative;
+      height: clamp(18rem, 36vw, 30rem);
+      perspective: 1600px;
+    }
+
+    main > section:first-of-type aside ul {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .55rem;
+      width: min(30rem, 92%);
+      padding: .9rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2A3E47, #18282F);
+      box-shadow: 0 60px 60px -30px rgba(0, 0, 0, .65), inset 0 0 0 1px rgba(255, 255, 255, .08);
+      transform: translate(-50%, -50%) rotateX(56deg) rotateZ(-36deg);
+      transform-style: preserve-3d;
+    }
+
+    main > section:first-of-type aside li {
+      position: relative;
+      aspect-ratio: 1 / 1.45;
+      border-radius: 4px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(170, 220, 255, .22) 1px, transparent 1px) 0 0 / 100% 16.6%,
+        linear-gradient(90deg, rgba(170, 220, 255, .22) 1px, transparent 1px) 0 0 / 33.3% 100%,
+        linear-gradient(160deg, #2E6FA3, #183E63 60%, #10284A);
+      box-shadow: inset 0 0 0 2px #B9C6CC;
+    }
+
+    /* Reflejo del sol que se desplaza por las placas */
+    main > section:first-of-type aside li::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(115deg, transparent 42%, rgba(255, 244, 214, calc(var(--luz) * .55)) 50%, transparent 58%);
+      transform: translateX(calc((var(--sol-x) - .5) * 70%));
+      transition: transform .6s linear;
+    }
+
+    /* Flujo de energía que sale del tejado */
+    main > section:first-of-type aside::after {
+      /* content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 2px;
+      height: 32%;
+      background: linear-gradient(180deg, transparent, var(--ambar-claro) 30%, var(--ambar-claro) 70%, transparent) 0 0 / 100% 200%;
+      opacity: calc(.2 + var(--luz) * .8);
+      animation: flujo 1.6s linear infinite; */
+    }
+
+    main > section:first-of-type aside::before {
+      /* content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: .9rem;
+      height: .9rem;
+      border-radius: 50%;
+      background: var(--ambar-claro);
+      box-shadow: 0 0 0 6px rgba(244, 184, 96, .25), 0 0 30px rgba(244, 184, 96, calc(var(--luz)));
+      transform: translate(-50%, 50%); */
+    }
+
+    /* =========================================================
+       5. CIFRAS
+       ========================================================= */
+    main > section:nth-of-type(2) {
+      padding: 0 var(--relleno);
+      background: linear-gradient(180deg, var(--noche) 50%, var(--niebla) 50%);
+    }
+
+    main > section:nth-of-type(2) dl {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-radius: var(--radio);
+      overflow: hidden;
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(2) dl div {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: .3rem;
+      padding: 1.8rem 1.6rem;
+    }
+
+    main > section:nth-of-type(2) dl div + div { border-left: 1px solid var(--linea); }
+
+    main > section:nth-of-type(2) dd {
+      font-family: var(--titulo);
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.03em;
+      line-height: 1;
+      color: var(--marino);
+    }
+
+    main > section:nth-of-type(2) dd small { font-size: .5em; color: var(--ambar-texto); }
+    main > section:nth-of-type(2) dt { font-size: .88rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       6. QUIÉNES SOMOS
+       ========================================================= */
+    main > section:nth-of-type(3) {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      align-items: center;
+      gap: clamp(2.5rem, 6vw, 6rem);
+    }
+
+    /* Tarjeta con esquina doblada en ámbar */
+    main > section:nth-of-type(3) > aside {
+      position: relative;
+      padding: clamp(2rem, 4vw, 3rem);
+      border-radius: var(--radio);
+      overflow: hidden;
+      color: var(--claro);
+      background:
+        radial-gradient(60% 70% at 0% 100%, rgba(31, 122, 108, .45), transparent 70%),
+        var(--marino);
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(3) > aside::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 9rem;
+      height: 9rem;
+      background: linear-gradient(135deg, var(--ambar-claro), var(--ambar));
+      clip-path: polygon(100% 0, 100% 100%, 0 0);
+    }
+
+    main > section:nth-of-type(3) > aside > figure {
+      position: absolute;
+      top: 1.3rem;
+      right: 1.3rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    main > section:nth-of-type(3) blockquote {
+      max-width: 22rem;
+      padding-right: 3.5rem;
+      font-family: var(--titulo);
+      font-size: clamp(1.3rem, 2.3vw, 1.7rem);
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+      color: var(--blanco);
+    }
+
+    main > section:nth-of-type(3) > aside dl {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.4rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--linea-clara);
+    }
+
+    main > section:nth-of-type(3) > aside dl div { display: flex; flex-direction: column-reverse; }
+
+    main > section:nth-of-type(3) > aside dd {
+      font-family: var(--mono);
+      font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+      color: var(--ambar-claro);
+    }
+
+    main > section:nth-of-type(3) > aside dt { font-size: .8rem; color: var(--claro-suave); }
+
+    main > section:nth-of-type(3) article > p { margin-top: 1rem; color: var(--tinta-suave); }
+
+    main > section:nth-of-type(3) article ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem 1.6rem;
+      margin-top: 2rem;
+    }
+
+    main > section:nth-of-type(3) article li { display: grid; grid-template-columns: auto 1fr; gap: .2rem .8rem; }
+
+    main > section:nth-of-type(3) article li figure {
+      grid-row: span 2;
+      width: 2.5rem;
+      height: 2.5rem;
+      padding: .65rem;
+      border-radius: 12px;
+      background: var(--menta);
+    }
+
+    main > section:nth-of-type(3) article li h3 { font-family: var(--texto); font-size: 1rem; letter-spacing: 0; }
+    main > section:nth-of-type(3) article li p { font-size: .9rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       7. SERVICIOS · mosaico
+       ========================================================= */
+    main > section:nth-of-type(4) { background: var(--blanco); }
+
+    main > section:nth-of-type(4) ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: minmax(13rem, auto);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    main > section:nth-of-type(4) li {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: .5rem;
+      padding: 1.7rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      overflow: hidden;
+      background: var(--niebla);
+      transition: transform .4s var(--suave), border-color .4s ease, box-shadow .4s ease;
+    }
+
+    main > section:nth-of-type(4) li:hover { transform: translateY(-4px); border-color: var(--verde); box-shadow: var(--sombra); }
+
+    main > section:nth-of-type(4) li figure {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.7rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      padding: .7rem;
+      border-radius: 14px;
+      background: var(--blanco);
+    }
+
+    main > section:nth-of-type(4) li h3 { font-size: 1.2rem; letter-spacing: -.02em; }
+    main > section:nth-of-type(4) li p { font-size: .92rem; color: var(--tinta-suave); }
+
+    /* Servicio destacado: ocupa dos filas y lleva placas dibujadas con CSS */
+    main > section:nth-of-type(4) li:first-of-type {
+      grid-row: span 2;
+      border: 0;
+      color: var(--claro);
+      background:
+        linear-gradient(0deg, var(--marino) 40%, rgba(14, 39, 51, .2) 75%),
+        linear-gradient(rgba(170, 220, 255, .18) 1px, transparent 1px) 0 0 / 100% 2.4rem,
+        linear-gradient(90deg, rgba(170, 220, 255, .18) 1px, transparent 1px) 0 0 / 2.4rem 100%,
+        linear-gradient(160deg, #2E6FA3, #183E63 55%, #10284A);
+    }
+
+    main > section:nth-of-type(4) li:first-of-type h3 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); color: var(--blanco); }
+    main > section:nth-of-type(4) li:first-of-type p { color: var(--claro-suave); }
+    main > section:nth-of-type(4) li:first-of-type figure { background: rgba(244, 184, 96, .16); }
+
+    main > section:nth-of-type(4) li:last-of-type {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 1.2rem;
+      min-height: 0;
+      padding-left: 6rem;
+    }
+
+    main > section:nth-of-type(4) li:last-of-type figure { top: 50%; transform: translateY(-50%); }
+    main > section:nth-of-type(4) li:last-of-type p { flex: 1 1 22rem; }
+
+    /* =========================================================
+       8. INSTALACIÓN · puntos interactivos sobre el esquema
+       ========================================================= */
+    main > section:nth-of-type(5) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      align-items: start;
+      gap: 2rem clamp(2rem, 4vw, 3.5rem);
+    }
+
+    main > section:nth-of-type(5) > hgroup { grid-column: 1 / -1; }
+
+    main > section:nth-of-type(5) > figure {
+      position: relative;
+      padding: 1rem;
+      border-radius: var(--radio);
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(5) > figure > img { border-radius: 14px; }
+
+    main > section:nth-of-type(5) > figure > ol { position: absolute; inset: 1rem 1rem auto; aspect-ratio: 1368 / 768; }
+
+    main > section:nth-of-type(5) > figure > ol button {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      border: 2px solid var(--blanco);
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--blanco);
+      background: var(--marino);
+      box-shadow: 0 8px 18px -6px rgba(14, 39, 51, .6);
+      transform: translate(-50%, -50%);
+      transition: background .3s ease, transform .3s var(--suave);
+    }
+
+    main > section:nth-of-type(5) > figure > ol button::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border: 2px solid var(--ambar);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    main > section:nth-of-type(5) > figure > ol button:hover { transform: translate(-50%, -50%) scale(1.1); }
+    main > section:nth-of-type(5) > figure > ol button[aria-pressed="true"] { color: #241505; background: var(--ambar); }
+    main > section:nth-of-type(5) > figure > ol button[aria-pressed="true"]::before { animation: pulso 1.6s ease-out infinite; }
+
+    /* Posición de cada punto sobre la foto (porcentaje del ancho y alto) */
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(1) button { left: 67.5%; top: 34%; }
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(2) button { left: 43.4%; top: 26.6%; }
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(3) button { left: 62.9%; top: 53.6%; }
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(4) button { left: 67%; top: 62.2%; }
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(5) button { left: 74.3%; top: 67.7%; }
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(6) button { left: 79.5%; top: 46%; }
+    main > section:nth-of-type(5) > figure > ol li:nth-of-type(7) button { left: 89.8%; top: 54%; }
+
+    main > section:nth-of-type(5) > figure figcaption {
+      margin-top: .8rem;
+      font-size: .82rem;
+      color: var(--tinta-suave);
+    }
+
+    /* Lista de componentes */
+    main > section:nth-of-type(5) > ol { counter-reset: pieza; }
+
+    main > section:nth-of-type(5) > ol li {
+      counter-increment: pieza;
+      border-bottom: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(5) > ol button {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      width: 100%;
+      padding: 1rem 0;
+      border: 0;
+      font-family: var(--titulo);
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      color: var(--tinta-suave);
+      background: none;
+      transition: color .3s ease;
+    }
+
+    main > section:nth-of-type(5) > ol button::before {
+      content: counter(pieza);
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 1.9rem;
+      height: 1.9rem;
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--marino);
+      background: var(--arena);
+      transition: background .3s ease, color .3s ease;
+    }
+
+    main > section:nth-of-type(5) > ol button[aria-expanded="true"] { color: var(--marino); }
+    main > section:nth-of-type(5) > ol button[aria-expanded="true"]::before { color: #241505; background: var(--ambar); }
+
+    main > section:nth-of-type(5) > ol p {
+      display: grid;
+      grid-template-rows: 0fr;
+      padding-left: 2.8rem;
+      font-size: .93rem;
+      color: var(--tinta-suave);
+      transition: grid-template-rows .45s var(--suave), padding .45s var(--suave);
+    }
+
+    main > section:nth-of-type(5) > ol p span { overflow: hidden; }
+    main > section:nth-of-type(5) > ol button[aria-expanded="true"] + p { grid-template-rows: 1fr; padding-bottom: 1.1rem; }
+
+    /* =========================================================
+       9. SIMULADOR DE AHORRO · panel tipo app
+       ========================================================= */
+    main > section:nth-of-type(6) {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 2rem clamp(2rem, 5vw, 4.5rem);
+      align-items: start;
+      color: var(--claro);
+      background:
+        radial-gradient(50% 50% at 100% 0%, rgba(225, 154, 52, .16), transparent 70%),
+        radial-gradient(45% 55% at 0% 100%, rgba(31, 122, 108, .3), transparent 70%),
+        var(--noche);
+    }
+
+    main > section:nth-of-type(6) hgroup p { color: var(--ambar-claro); }
+    main > section:nth-of-type(6) h2 { color: var(--blanco); }
+    main > section:nth-of-type(6) h2 em { color: var(--ambar-claro); }
+    main > section:nth-of-type(6) > hgroup + p { color: var(--claro-suave); }
+
+    main > section:nth-of-type(6) form {
+      grid-column: 1;
+      display: grid;
+      gap: 1.6rem;
+      margin-top: 1rem;
+    }
+
+    main > section:nth-of-type(6) form > label,
+    main > section:nth-of-type(6) fieldset {
+      display: grid;
+      gap: .6rem;
+      border: 0;
+      font-family: var(--mono);
+      font-size: .74rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--claro-suave);
+    }
+
+    main > section:nth-of-type(6) form > label output {
+      font-family: var(--titulo);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      text-transform: none;
+      color: var(--blanco);
+    }
+
+    main > section:nth-of-type(6) input[type="range"] {
+      width: 100%;
+      height: 6px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--ambar) var(--relleno-rango, 30%), rgba(234, 241, 239, .16) 0);
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    main > section:nth-of-type(6) input[type="range"]::-webkit-slider-thumb {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 4px solid var(--noche);
+      border-radius: 50%;
+      background: var(--ambar-claro);
+      box-shadow: 0 0 0 1px var(--ambar);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    main > section:nth-of-type(6) input[type="range"]::-moz-range-thumb { width: 1rem; height: 1rem; border: 4px solid var(--noche); border-radius: 50%; background: var(--ambar-claro); }
+
+    main > section:nth-of-type(6) select {
+      padding: .9rem 1rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 12px;
+      font-family: var(--texto);
+      font-size: 1rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--blanco);
+      background: var(--marino-2);
+    }
+
+    main > section:nth-of-type(6) fieldset { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    main > section:nth-of-type(6) legend { margin-bottom: .6rem; }
+
+    main > section:nth-of-type(6) fieldset label {
+      position: relative;
+      padding: .8rem .6rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 12px;
+      font-family: var(--texto);
+      font-size: .88rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-align: center;
+      text-transform: none;
+      color: var(--claro);
+      cursor: pointer;
+      transition: border-color .3s ease, background .3s ease;
+    }
+
+    main > section:nth-of-type(6) fieldset label:has(input:checked) { border-color: var(--ambar); background: rgba(225, 154, 52, .14); }
+    main > section:nth-of-type(6) fieldset label:has(input:focus-visible) { outline: 2px solid var(--ambar); outline-offset: 2px; }
+    main > section:nth-of-type(6) fieldset input { position: absolute; opacity: 0; pointer-events: none; }
+
+    main > section:nth-of-type(6) form > label:last-of-type {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      font-family: var(--texto);
+      font-size: .95rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--claro);
+      cursor: pointer;
+    }
+
+    /* Interruptor de batería */
+    main > section:nth-of-type(6) input[type="checkbox"] {
+      position: relative;
+      flex: none;
+      width: 2.8rem;
+      height: 1.6rem;
+      border-radius: 99px;
+      background: rgba(234, 241, 239, .18);
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      transition: background .3s ease;
+    }
+
+    main > section:nth-of-type(6) input[type="checkbox"]::after {
+      content: "";
+      position: absolute;
+      top: .2rem;
+      left: .2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      background: var(--blanco);
+      transition: transform .3s var(--suave);
+    }
+
+    main > section:nth-of-type(6) input[type="checkbox"]:checked { background: var(--verde); }
+    main > section:nth-of-type(6) input[type="checkbox"]:checked::after { transform: translateX(1.2rem); }
+
+    /* Panel de resultados */
+    main > section:nth-of-type(6) article {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      padding: clamp(1.5rem, 3vw, 2.2rem);
+      border: 1px solid var(--linea-clara);
+      border-radius: 28px;
+      background: linear-gradient(160deg, rgba(19, 52, 67, .95), rgba(10, 29, 39, .95));
+      box-shadow: 0 50px 80px -40px rgba(0, 0, 0, .8);
+    }
+
+    main > section:nth-of-type(6) article h3 {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: .74rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--claro-suave);
+    }
+
+    main > section:nth-of-type(6) article h3 span { color: #7FD8C4; }
+    main > section:nth-of-type(6) article h3 span::before { content: "● "; animation: parpadeo 1.6s ease-in-out infinite; }
+
+    main > section:nth-of-type(6) article > p:first-of-type {
+      margin-top: 1rem;
+      font-family: var(--titulo);
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.04em;
+      line-height: 1;
+      color: var(--blanco);
+    }
+
+    main > section:nth-of-type(6) article > p:first-of-type small {
+      display: block;
+      margin-top: .5rem;
+      font-family: var(--texto);
+      font-size: .9rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      color: var(--claro-suave);
+    }
+
+    main > section:nth-of-type(6) article dl {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .8rem;
+      margin-top: 1.6rem;
+    }
+
+    main > section:nth-of-type(6) article dl div {
+      padding: .9rem;
+      border-radius: 14px;
+      background: rgba(234, 241, 239, .06);
+    }
+
+    main > section:nth-of-type(6) article dt { font-size: .74rem; color: var(--claro-suave); }
+
+    main > section:nth-of-type(6) article dd {
+      font-family: var(--titulo);
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--blanco);
+    }
+
+    /* Gráfico de 24 h: producción solar frente a consumo */
+    main > section:nth-of-type(6) article figure { margin-top: 1.6rem; }
+
+    main > section:nth-of-type(6) article ol {
+      display: grid;
+      grid-template-columns: repeat(24, minmax(0, 1fr));
+      align-items: end;
+      gap: 3px;
+      height: 9rem;
+      padding-bottom: .2rem;
+      border-bottom: 1px solid var(--linea-clara);
+    }
+
+    main > section:nth-of-type(6) article ol li {
+      --p: 0;
+      --c: 0;
+      position: relative;
+      height: 100%;
+    }
+
+    main > section:nth-of-type(6) article ol li::before,
+    main > section:nth-of-type(6) article ol li::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 3px 3px 1px 1px;
+      transition: height .7s var(--suave);
+    }
+
+    main > section:nth-of-type(6) article ol li::before { height: calc(var(--c) * 100%); background: rgba(234, 241, 239, .16); }
+    main > section:nth-of-type(6) article ol li::after { left: 22%; right: 22%; height: calc(var(--p) * 100%); background: linear-gradient(180deg, var(--ambar-claro), var(--ambar)); }
+
+    main > section:nth-of-type(6) article figcaption {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .5rem 1rem;
+      margin-top: .6rem;
+      font-family: var(--mono);
+      font-size: .68rem;
+      color: var(--claro-suave);
+    }
+
+    main > section:nth-of-type(6) article figcaption span:first-of-type::before { content: ""; display: inline-block; width: .6rem; height: .6rem; margin-right: .4rem; border-radius: 2px; background: var(--ambar); }
+    main > section:nth-of-type(6) article figcaption span:nth-of-type(2)::before { content: ""; display: inline-block; width: .6rem; height: .6rem; margin-right: .4rem; border-radius: 2px; background: rgba(234, 241, 239, .3); }
+
+    main > section:nth-of-type(6) article > p:last-of-type {
+      margin-top: 1.2rem;
+      font-size: .76rem;
+      color: var(--claro-suave);
+    }
+
+    main > section:nth-of-type(6) article > a { margin-top: 1.4rem; }
+
+    /* =========================================================
+       10. PLANES
+       ========================================================= */
+    main > section:nth-of-type(7) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    main > section:nth-of-type(7) > ul > li {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio);
+      overflow: hidden;
+      background: var(--blanco);
+      transition: transform .4s var(--suave), box-shadow .4s ease;
+    }
+
+    main > section:nth-of-type(7) > ul > li:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+
+    /* Placa dibujada con CSS en la cabecera de cada plan */
+    main > section:nth-of-type(7) > ul > li > p:first-child {
+      display: grid;
+      place-items: center;
+      height: 11rem;
+      background: var(--arena);
+    }
+
+    main > section:nth-of-type(7) > ul > li > p:first-child::before {
+      content: "";
+      width: 54%;
+      aspect-ratio: 1.7;
+      border: 3px solid #C9CFD2;
+      border-radius: 4px;
+      background:
+        linear-gradient(90deg, transparent calc(50% - 1px), #C9CFD2 calc(50% - 1px) calc(50% + 1px), transparent 0),
+        linear-gradient(rgba(150, 190, 220, .35) 1px, transparent 1px) 0 0 / 100% 16.6%,
+        linear-gradient(90deg, rgba(150, 190, 220, .35) 1px, transparent 1px) 0 0 / 8.33% 100%,
+        linear-gradient(160deg, #24384A, #121D28);
+      box-shadow: 0 18px 26px -14px rgba(0, 0, 0, .45);
+      transition: transform .6s var(--suave);
+    }
+
+    main > section:nth-of-type(7) > ul > li:hover > p:first-child::before { transform: perspective(600px) rotateX(18deg) scale(1.04); }
+
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) > p:first-child::before {
+      border-color: #0B0F12;
+      background:
+        linear-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px) 0 0 / 100% 16.6%,
+        linear-gradient(90deg, rgba(255, 255, 255, .06) 1px, transparent 1px) 0 0 / 8.33% 100%,
+        linear-gradient(160deg, #1A1E22, #050708);
+    }
+
+    main > section:nth-of-type(7) > ul > li:nth-of-type(3) > p:first-child { background: var(--menta); }
+
+    main > section:nth-of-type(7) > ul > li > p:first-child small {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: .3rem .75rem;
+      border-radius: 99px;
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blanco);
+      background: var(--verde);
+    }
+
+    main > section:nth-of-type(7) > ul > li > h3 { margin: 1.6rem 1.6rem 0; font-size: 1.4rem; }
+    main > section:nth-of-type(7) > ul > li > p:nth-of-type(2) { margin: .4rem 1.6rem 0; font-size: .92rem; color: var(--tinta-suave); }
+    main > section:nth-of-type(7) > ul > li > p strong { color: var(--tinta); }
+
+    main > section:nth-of-type(7) > ul > li ul {
+      display: grid;
+      gap: .7rem;
+      margin: 1.4rem 1.6rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(7) > ul > li ul li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .7rem;
+      font-size: .92rem;
+      color: var(--tinta-suave);
+    }
+
+    main > section:nth-of-type(7) > ul > li ul li::before {
+      content: "";
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-top: .15rem;
+      border-radius: 50%;
+      background: var(--menta) url("iconos/check.svg") center / .6rem no-repeat;
+    }
+
+    main > section:nth-of-type(7) > ul > li a { align-self: flex-start; margin: auto 1.6rem 1.6rem; }
+
+    /* Plan destacado */
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) { border-color: var(--marino); background: var(--marino); }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) > p:first-child { background: #0B1F28; }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) h3 { color: var(--blanco); }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) > p:nth-of-type(2),
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) ul li { color: var(--claro-suave); }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) > p strong { color: var(--blanco); }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) ul { border-color: var(--linea-clara); }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) ul li::before { background-color: rgba(225, 154, 52, .18); background-image: url("iconos/check-ambar.svg"); }
+    main > section:nth-of-type(7) > ul > li:nth-of-type(2) > p:first-child small { background: var(--ambar-texto); }
+
+    /* =========================================================
+       11. PROCESO · pasos sobre el arco del sol
+       ========================================================= */
+    main > section:nth-of-type(8) { background: var(--blanco); }
+
+    main > section:nth-of-type(8) ol {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      counter-reset: paso;
+    }
+
+    /* Arco discontinuo que une los pasos */
+    main > section:nth-of-type(8) ol::before {
+      content: "";
+      position: absolute;
+      top: 1.6rem;
+      left: 6%;
+      right: 6%;
+      height: 9rem;
+      border: 2px dashed rgba(225, 154, 52, .6);
+      border-bottom: 0;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    main > section:nth-of-type(8) ol li { position: relative; text-align: center; counter-increment: paso; }
+    main > section:nth-of-type(8) ol li:nth-of-type(1),
+    main > section:nth-of-type(8) ol li:nth-of-type(4) { margin-top: 5rem; }
+
+    main > section:nth-of-type(8) ol li::before {
+      content: counter(paso, decimal-leading-zero);
+      display: grid;
+      place-items: center;
+      width: 3.6rem;
+      height: 3.6rem;
+      margin: 0 auto 1.3rem;
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: .95rem;
+      color: #241505;
+      background: radial-gradient(circle, #FFF2C4, var(--ambar-claro) 60%, var(--ambar));
+      box-shadow: 0 0 0 8px var(--blanco), 0 0 34px rgba(244, 184, 96, .7);
+    }
+
+    main > section:nth-of-type(8) ol h3 { font-size: 1.15rem; letter-spacing: -.02em; }
+    main > section:nth-of-type(8) ol p { max-width: 16rem; margin: .5rem auto 0; font-size: .92rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       12. MAPA
+       ========================================================= */
+    main > section:nth-of-type(9) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr);
+      gap: 2rem clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+
+    main > section:nth-of-type(9) > hgroup,
+    main > section:nth-of-type(9) > hgroup + p { grid-column: 1 / -1; }
+
+    main > section:nth-of-type(9) > figure {
+      position: relative;
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(9) > figure figcaption {
+      position: absolute;
+      left: 1.2rem;
+      top: 1.2rem;
+      display: grid;
+      gap: .1rem;
+      max-width: 15rem;
+      padding: 1rem 1.2rem;
+      border-radius: 18px;
+      font-size: .8rem;
+      color: var(--tinta-suave);
+      background: rgba(255, 255, 255, .86);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 30px -18px rgba(0, 0, 0, .4);
+    }
+
+    main > section:nth-of-type(9) > figure figcaption strong { font-family: var(--titulo); font-size: 1.05rem; color: var(--marino); }
+
+    main > section:nth-of-type(9) > figure figcaption output {
+      font-family: var(--titulo);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: var(--verde-texto);
+    }
+
+    main > section:nth-of-type(9) > figure figcaption meter {
+      width: 100%;
+      height: .5rem;
+      margin-top: .3rem;
+    }
+
+    main > section:nth-of-type(9) > ul {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .1rem 1rem;
+    }
+
+    main > section:nth-of-type(9) > ul button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      width: 100%;
+      padding: .6rem .2rem;
+      border: 0;
+      border-bottom: 1px solid var(--linea);
+      font-weight: 600;
+      font-size: .92rem;
+      text-align: left;
+      color: var(--tinta);
+      background: none;
+      transition: color .3s ease;
+    }
+
+    main > section:nth-of-type(9) > ul button::after {
+      content: "";
+      flex: none;
+      width: .55rem;
+      height: .55rem;
+      border-radius: 50%;
+      background: var(--linea);
+      transition: background .3s ease, box-shadow .3s ease;
+    }
+
+    main > section:nth-of-type(9) > ul button:hover { color: var(--verde-texto); }
+    main > section:nth-of-type(9) > ul button[aria-pressed="true"] { color: var(--verde-texto); }
+    main > section:nth-of-type(9) > ul button[aria-pressed="true"]::after { background: var(--ambar); box-shadow: 0 0 0 4px rgba(225, 154, 52, .25); }
+
+    main > section:nth-of-type(9) > dl {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 3rem;
+    }
+
+    main > section:nth-of-type(9) > dl div { display: flex; flex-direction: column-reverse; }
+
+    main > section:nth-of-type(9) > dl dd {
+      font-family: var(--titulo);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1;
+      color: var(--marino);
+    }
+
+    main > section:nth-of-type(9) > dl dt { font-size: .85rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       13. OPINIONES
+       ========================================================= */
+    main > section:nth-of-type(10) { background: var(--arena); }
+
+    main > section:nth-of-type(10) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    main > section:nth-of-type(10) blockquote {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 2rem 1.8rem;
+      border-radius: var(--radio);
+      background: var(--blanco) url("iconos/comillas.svg") left 1.8rem top 1.8rem / 1.6rem no-repeat;
+      transition: transform .4s var(--suave), box-shadow .4s ease;
+    }
+
+    main > section:nth-of-type(10) blockquote:hover { transform: translateY(-5px); box-shadow: var(--sombra); }
+    main > section:nth-of-type(10) blockquote p { flex: 1; margin-top: 2.6rem; font-size: 1.02rem; color: var(--tinta); }
+
+    main > section:nth-of-type(10) blockquote footer {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-top: 1.6rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--linea);
+      font-size: .85rem;
+      color: var(--tinta-suave);
+    }
+
+    main > section:nth-of-type(10) blockquote footer::before {
+      content: attr(data-iniciales);
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 50%;
+      font-family: var(--titulo);
+      font-weight: 700;
+      color: var(--blanco);
+      background: var(--verde);
+    }
+
+    main > section:nth-of-type(10) li:nth-of-type(2) blockquote footer::before { color: #241505; background: var(--ambar); }
+    main > section:nth-of-type(10) li:nth-of-type(3) blockquote footer::before { background: var(--marino); }
+    main > section:nth-of-type(10) cite { display: block; font-style: normal; font-weight: 700; color: var(--marino); }
+
+    /* =========================================================
+       14. PREGUNTAS FRECUENTES
+       ========================================================= */
+    main > section:nth-of-type(11) {
+      display: grid;
+      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+      gap: 2rem clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    main > section:nth-of-type(11) > hgroup { grid-column: 1; }
+
+    main > section:nth-of-type(11) aside {
+      position: relative;
+      grid-column: 1;
+      padding: 2rem;
+      border-radius: var(--radio);
+      overflow: hidden;
+      background: var(--arena);
+    }
+
+    main > section:nth-of-type(11) aside::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4.5rem;
+      height: 4.5rem;
+      background: var(--verde);
+      clip-path: polygon(100% 0, 100% 100%, 0 0);
+    }
+
+    main > section:nth-of-type(11) aside h3 { font-size: 1.35rem; text-transform: uppercase; }
+    main > section:nth-of-type(11) aside p { margin: .8rem 0 1.4rem; color: var(--tinta-suave); }
+
+    main > section:nth-of-type(11) aside a { color: var(--blanco); background: var(--marino); }
+    main > section:nth-of-type(11) aside a:hover { color: #241505; }
+
+    main > section:nth-of-type(11) > section { grid-column: 2; grid-row: 1 / span 2; }
+
+    main > section:nth-of-type(11) details { border-bottom: 1px solid var(--linea); }
+
+    main > section:nth-of-type(11) summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.3rem 0;
+      font-family: var(--titulo);
+      font-size: 1.05rem;
+      font-weight: 600;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    main > section:nth-of-type(11) summary::-webkit-details-marker { display: none; }
+
+    main > section:nth-of-type(11) summary::after {
+      content: "";
+      flex: none;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--arena) url("iconos/mas.svg") center / .75rem no-repeat;
+      transition: transform .35s var(--suave), background-color .3s ease;
+    }
+
+    main > section:nth-of-type(11) details[open] summary::after { transform: rotate(45deg); background-color: var(--ambar-claro); }
+    main > section:nth-of-type(11) details p { padding-bottom: 1.3rem; max-width: 40rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       15. CONTACTO
+       ========================================================= */
+    main > section:last-of-type {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      color: var(--claro);
+      background:
+        radial-gradient(50% 60% at 0% 0%, rgba(31, 122, 108, .35), transparent 70%),
+        var(--marino);
+    }
+
+    main > section:last-of-type hgroup p { color: var(--ambar-claro); }
+    main > section:last-of-type h2 { color: var(--blanco); }
+    main > section:last-of-type h2 em { color: var(--ambar-claro); }
+    main > section:last-of-type article > p { margin-top: 1.1rem; color: var(--claro-suave); }
+
+    main > section:last-of-type address { margin-top: 2rem; font-style: normal; }
+    main > section:last-of-type address ul { display: grid; gap: 1.1rem; }
+
+    main > section:last-of-type address li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: .82rem;
+      color: var(--claro-suave);
+    }
+
+    main > section:last-of-type address figure {
+      width: 2.6rem;
+      height: 2.6rem;
+      padding: .7rem;
+      border-radius: 12px;
+      background: var(--menta);
+    }
+
+    main > section:last-of-type address strong,
+    main > section:last-of-type address a { display: block; font-size: 1rem; font-weight: 600; color: var(--blanco); overflow-wrap: anywhere; }
+    main > section:last-of-type address a:hover { color: var(--ambar-claro); }
+
+    /* Formulario con esquina verde */
+    main > section:last-of-type form {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.1rem;
+      align-content: start;
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+      border-radius: var(--radio);
+      overflow: hidden;
+      color: var(--tinta);
+      background: var(--niebla);
+    }
+
+    main > section:last-of-type form::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4rem;
+      height: 4rem;
+      background: var(--verde);
+      clip-path: polygon(100% 0, 100% 100%, 0 0);
+    }
+
+    main > section:last-of-type form h3 { grid-column: 1 / -1; font-size: 1.5rem; }
+
+    main > section:last-of-type form > label {
+      display: grid;
+      gap: .4rem;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--tinta-suave);
+    }
+
+    main > section:last-of-type form > label:nth-of-type(n + 5) { grid-column: 1 / -1; }
+
+    main > section:last-of-type input:not([type="checkbox"]),
+    main > section:last-of-type select,
+    main > section:last-of-type textarea {
+      width: 100%;
+      padding: .9rem 1rem;
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      font-family: var(--texto);
+      font-size: .98rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--tinta);
+      background: var(--blanco);
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+
+    main > section:last-of-type textarea { min-height: 7rem; resize: vertical; }
+
+    main > section:last-of-type :is(input, select, textarea):focus {
+      outline: none;
+      border-color: var(--verde);
+      box-shadow: 0 0 0 4px rgba(31, 122, 108, .16);
+    }
+
+    main > section:last-of-type form > label:last-of-type {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-family: var(--texto);
+      font-size: .82rem;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    main > section:last-of-type input[type="checkbox"] { flex: none; width: 1.1rem; height: 1.1rem; margin-top: .1rem; accent-color: var(--verde); }
+    main > section:last-of-type form button { justify-self: start; }
+    main > section:last-of-type output { grid-column: 1 / -1; font-weight: 600; color: var(--verde-texto); }
+
+    /* =========================================================
+       16. PIE
+       ========================================================= */
+    body > footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 2.5rem;
+      padding: 4.5rem var(--relleno) 2rem;
+      color: var(--claro-suave);
+      background: var(--noche);
+    }
+
+    body > footer > p:first-of-type { font-size: .92rem; }
+
+    body > footer > p:first-of-type strong {
+      display: block;
+      margin-bottom: .7rem;
+      font-family: var(--titulo);
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1;
+      color: var(--blanco);
+    }
+
+    body > footer h2 {
+      margin-bottom: 1rem;
+      font-family: var(--mono);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ambar-claro);
+    }
+
+    body > footer ul { display: grid; gap: .55rem; }
+    body > footer address { font-style: normal; }
+    body > footer a { font-size: .92rem; color: var(--claro-suave); transition: color .3s ease; overflow-wrap: anywhere; }
+    body > footer a:hover { color: var(--blanco); }
+
+    body > footer nav:last-of-type ul { display: flex; gap: .6rem; }
+
+    body > footer nav:last-of-type a {
+      display: grid;
+      place-items: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      padding: .75rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 50%;
+      transition: border-color .3s ease, background .3s ease;
+    }
+
+    body > footer nav:last-of-type a:hover { border-color: var(--ambar); background: var(--marino-2); }
+    body > footer nav:last-of-type figure { width: 100%; height: 100%; }
+
+    body > footer > p:last-of-type {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .8rem 2rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--linea-clara);
+      font-size: .82rem;
+    }
+
+    body > footer > p:last-of-type span { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+    body > footer > p:last-of-type a { font-size: .82rem; }
+
+    /* =========================================================
+       17. ACCESOS RÁPIDOS FLOTANTES
+       ========================================================= */
+    body > aside {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      z-index: 50;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(1rem);
+      transition: opacity .4s ease, transform .4s var(--suave), visibility .4s;
+    }
+
+    body:has(> header[data-scroll]) > aside { opacity: 1; visibility: visible; transform: none; }
+
+    body > aside ul { display: grid; justify-items: end; gap: .55rem; }
+
+    body > aside a {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .7rem 1.1rem .7rem .8rem;
+      border-radius: 99px;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--marino);
+      background: var(--ambar-claro);
+      box-shadow: 0 14px 26px -12px rgba(14, 39, 51, .55);
+      transition: transform .3s var(--suave), background .3s ease;
+    }
+
+    body > aside a:hover { transform: translateX(-4px); background: #FFD08A; }
+    body > aside li:last-of-type a { color: var(--blanco); background: #1F7A3E; }
+    body > aside li:last-of-type a:hover { background: #23914A; }
+
+    /* =========================================================
+       18. ANIMACIONES
+       ========================================================= */
+    html[data-js] [data-revelar] { opacity: 0; translate: 0 32px; transition: opacity .9s ease, translate .9s var(--suave); }
+    html[data-js] [data-revelar="visto"] { opacity: 1; translate: 0 0; }
+
+    @keyframes flujo { to { background-position: 0 -200%; } }
+    @keyframes pulso { from { opacity: .9; transform: scale(.9); } to { opacity: 0; transform: scale(1.7); } }
+    @keyframes parpadeo { 50% { opacity: .35; } }
+    @keyframes entrar { from { opacity: 0; translate: 0 26px; } }
+
+    main > section:first-of-type article > * { animation: entrar 1s var(--suave) both; }
+    main > section:first-of-type article > :nth-child(2) { animation-delay: .1s; }
+    main > section:first-of-type article > :nth-child(3) { animation-delay: .2s; }
+    main > section:first-of-type article > :nth-child(4) { animation-delay: .3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      html[data-js] [data-revelar] { opacity: 1; translate: 0 0; }
+    }
+
+    /* =========================================================
+       19. RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1080px) {
+      body > header nav ul { gap: 1.2rem; }
+      main > section:first-of-type form { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      main > section:first-of-type form label { grid-column: 1 / -1; }
+      main > section:first-of-type form dl div:first-of-type { padding-left: 0; border-left: 0; }
+    }
+
+    @media (max-width: 960px) {
+      body > header nav { gap: .8rem; }
+      body > header nav button { display: block; }
+      body > header nav > a:first-of-type { margin-right: 0; }
+      body > header nav > a:last-of-type { margin-left: auto; }
+
+      body > header nav ul {
+        position: absolute;
+        top: calc(100% + .8rem);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: .5rem 1.4rem;
+        border-radius: 18px;
+        background: var(--blanco);
+        box-shadow: var(--sombra);
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 -.5rem;
+        transition: opacity .3s ease, translate .3s ease, visibility .3s;
+      }
+
+      body > header nav:has(button[aria-expanded="true"]) ul { opacity: 1; visibility: visible; translate: 0 0; }
+      body > header nav ul li + li { border-top: 1px solid var(--linea); }
+      body > header nav ul a { display: block; padding: .95rem 0; font-size: 1rem; color: var(--marino); }
+      body > header nav ul a:hover, body > header nav ul a[aria-current="true"] { color: var(--verde-texto); }
+      body > header nav ul a::after { display: none; }
+
+      main > section:first-of-type { grid-template-columns: minmax(0, 1fr); padding-top: 7rem; }
+      main > section:first-of-type::before { background: linear-gradient(180deg, rgba(10, 29, 39, .92) 0%, rgba(10, 29, 39, .8) 45%, rgba(10, 29, 39, .2) 75%, rgba(10, 29, 39, .7)); }
+      main > section:first-of-type::after { left: calc(15% + var(--sol-x) * 70%); top: calc(88% - var(--sol-y) * 30%); }
+      main > section:first-of-type aside { height: 18rem; }
+
+      main > section:nth-of-type(2) dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      main > section:nth-of-type(2) dl div:nth-of-type(3) { border-left: 0; }
+      main > section:nth-of-type(2) dl div:nth-of-type(n + 3) { border-top: 1px solid var(--linea); }
+
+      main > section:nth-of-type(3),
+      main > section:nth-of-type(5),
+      main > section:nth-of-type(6),
+      main > section:nth-of-type(9),
+      main > section:nth-of-type(11),
+      main > section:last-of-type { grid-template-columns: minmax(0, 1fr); }
+
+      main > section:nth-of-type(6) form,
+      main > section:nth-of-type(6) article,
+      main > section:nth-of-type(11) > section,
+      main > section:nth-of-type(11) aside { grid-column: 1; grid-row: auto; }
+
+      main > section:nth-of-type(4) ul,
+      main > section:nth-of-type(7) > ul,
+      main > section:nth-of-type(10) > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  
+      main > section:nth-of-type(7) > ul > li:last-of-type,
+      main > section:nth-of-type(10) > ul > li:last-of-type { grid-column: 1 / -1; }
+
+      main > section:nth-of-type(8) ol { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 3rem; padding-top: 0; }
+      main > section:nth-of-type(8) ol::before { display: none; }
+      main > section:nth-of-type(8) ol li:nth-of-type(n) { margin-top: 0; }
+
+      body > footer { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      body > footer > p:first-of-type { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      body > header nav > a:last-of-type { padding: .6rem .9rem; font-size: .78rem; }
+      body > header nav > a:first-of-type { font-size: 1rem; }
+      main > section:first-of-type form { grid-template-columns: minmax(0, 1fr); padding: 1.1rem; }
+      main > section:first-of-type form dl div { display: flex; align-items: baseline; justify-content: space-between; padding: .4rem 0 0; border-left: 0; border-top: 1px solid var(--linea-clara); }
+      main > section:nth-of-type(2) dl div { padding: 1.3rem 1.1rem; }
+      main > section:nth-of-type(3) article ul,
+      main > section:nth-of-type(4) ul,
+      main > section:nth-of-type(7) > ul,
+      main > section:nth-of-type(10) > ul,
+      main > section:nth-of-type(8) ol { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(4) li:first-of-type { grid-row: auto; min-height: 20rem; }
+      main > section:nth-of-type(4) li:last-of-type { flex-direction: column; align-items: stretch; padding-left: 1.7rem; }
+      main > section:nth-of-type(4) li:last-of-type figure { top: 1.5rem; transform: none; }
+      main > section:nth-of-type(4) li:last-of-type p { flex: none; }
+      main > section:first-of-type aside ul { width: 78%; }
+      main > section:nth-of-type(4) li { min-height: 14rem; }
+      main > section:nth-of-type(3) > aside dl { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(5) > figure { padding: .5rem; }
+      main > section:nth-of-type(5) > figure > ol { inset: .5rem .5rem auto; }
+      main > section:nth-of-type(5) > figure > ol button { width: 1.6rem; height: 1.6rem; font-size: .62rem; border-width: 1.5px; }
+      main > section:nth-of-type(6) fieldset { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(6) article dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      main > section:nth-of-type(6) article ol { gap: 2px; }
+      main > section:nth-of-type(9) > figure figcaption { position: static; max-width: none; border-radius: 0; }
+      main > section:nth-of-type(9) > ul { grid-template-columns: minmax(0, 1fr); }
+      main > section:last-of-type form { grid-template-columns: minmax(0, 1fr); }
+      main > section:last-of-type form > label { grid-column: 1 / -1; }
+      body > footer { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+      body > footer nav:last-of-type, body > footer address { grid-column: 1 / -1; }
+      body > aside a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+      body > aside a { padding: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECERA -->
+  <header>
+    <nav aria-label="Principal">
+      <a href="#inicio" aria-label="Solares Energía, ir al inicio"><figure><img src="iconos/sol.svg" alt=""></figure>Solares Energía</a>
+      <ul id="menu">
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#instalacion">Instalación</a></li>
+        <li><a href="#simulador">Simulador</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#presencia">Presencia</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul>
+      <a href="#contacto">Estudio gratis</a>
+      <button type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. HERO · RELOJ SOLAR -->
+    <section id="inicio" aria-label="Presentación">
+      <article>
+        <p><strong>Nuevo</strong>Estudio de tu tejado gratis en 48 h</p>
+        <h1>Ahorra más con las <em>placas solares</em></h1>
+        <p>Diseñamos, instalamos y mantenemos sistemas fotovoltaicos para hogares y negocios. Menos factura y más independencia energética, con ingeniería certificada.</p>
+        <p>
+          <a href="#contacto">Solicita tu estudio gratis</a>
+          <a href="#simulador">Calcula tu ahorro</a>
+        </p>
+      </article>
+      <aside aria-hidden="true">
+        <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+      </aside>
+      <form aria-label="Reloj solar: mueve la hora y mira lo que produce un tejado típico">
+        <label>Desliza el día
+          <output name="hora">12:00</output>
+          <input type="range" name="reloj" min="6" max="21.5" step="0.25" value="12" aria-label="Hora del día">
+        </label>
+        <dl>
+          <div><dt>Producción ahora</dt><dd><output name="potencia">4,1</output> <small>kW</small></dd></div>
+          <div><dt>Generado hoy</dt><dd><output name="energia">18,6</output> <small>kWh</small></dd></div>
+          <div><dt>Ahorro hoy</dt><dd><output name="ahorro">3,72</output> <small>€</small></dd></div>
+        </dl>
+      </form>
+    </section>
+
+    <!-- 2. CIFRAS -->
+    <section aria-label="Solares Energía en cifras">
+      <dl>
+        <div><dt>años instalando</dt><dd data-contar="12">12</dd></div>
+        <div><dt>sistemas activos</dt><dd data-contar="4300">4.300</dd></div>
+        <div><dt>kWh al mes de media por casa</dt><dd data-contar="1240">1.240</dd></div>
+        <div><dt>rendimiento sobre la potencia nominal</dt><dd data-contar="94" data-sufijo=" %">94 %</dd></div>
+      </dl>
+    </section>
+
+    <!-- 3. QUIÉNES SOMOS -->
+    <section id="quienes">
+      <aside>
+        <figure><img src="iconos/sol.svg" alt=""></figure>
+        <blockquote>«Cada tejado produce energía distinta. Nuestro trabajo es diseñar el sistema exacto para el tuyo.»</blockquote>
+        <dl>
+          <div><dt>años instalando</dt><dd>12+</dd></div>
+          <div><dt>sistemas activos</dt><dd>4.300</dd></div>
+          <div><dt>comunidades</dt><dd>17</dd></div>
+        </dl>
+      </aside>
+      <article>
+        <hgroup>
+          <p>Quiénes somos</p>
+          <h2>Ingeniería solar con <em>acompañamiento real</em></h2>
+        </hgroup>
+        <p>Solares Energía diseña e instala sistemas fotovoltaicos para hogares y negocios. Nuestro equipo de ingenieros certificados evalúa cada tejado de forma individual: orientación, sombras, consumo real y estructura, antes de proponer una sola placa.</p>
+        <p>Trabajamos con equipos de alta eficiencia, garantía extendida y un mantenimiento pensado para que tu inversión siga rindiendo durante décadas.</p>
+        <ul>
+          <li><figure><img src="iconos/rayo.svg" alt=""></figure><h3>Factura más baja</h3><p>Menos dependencia de la red desde el primer mes.</p></li>
+          <li><figure><img src="iconos/escudo-verde.svg" alt=""></figure><h3>Independencia</h3><p>Protege tu presupuesto de las subidas de la luz.</p></li>
+          <li><figure><img src="iconos/revalorizacion.svg" alt=""></figure><h3>Casa que vale más</h3><p>Un sistema certificado revaloriza el inmueble.</p></li>
+          <li><figure><img src="iconos/hoja.svg" alt=""></figure><h3>Impacto medible</h3><p>Cada kWh que generas reduce tu huella de carbono.</p></li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- 4. SERVICIOS -->
+    <section id="servicios">
+      <hgroup>
+        <p>Servicios</p>
+        <h2>Todo el ciclo de tu <em>instalación solar</em></h2>
+      </hgroup>
+      <p>Desde el primer estudio de viabilidad hasta el mantenimiento anual, un único equipo responsable de cada etapa.</p>
+      <ul>
+        <li><figure><img src="iconos/casa-ambar.svg" alt=""></figure><h3>Instalación residencial</h3><p>Sistemas a medida para casas y pisos, optimizados según tu consumo y la orientación de tu tejado.</p></li>
+        <li><figure><img src="iconos/edificio.svg" alt=""></figure><h3>Comercial e industrial</h3><p>Plantas solares para negocios, naves y edificios, pensadas para reducir el coste energético.</p></li>
+        <li><figure><img src="iconos/mantenimiento.svg" alt=""></figure><h3>Mantenimiento y limpieza</h3><p>Revisiones periódicas, limpieza de paneles y monitorización remota del rendimiento.</p></li>
+        <li><figure><img src="iconos/estudio.svg" alt=""></figure><h3>Estudio de viabilidad</h3><p>Análisis técnico gratuito de tu propiedad y proyección de ahorro antes de cualquier compromiso.</p></li>
+        <li><figure><img src="iconos/tramites.svg" alt=""></figure><h3>Trámites y subvenciones</h3><p>Gestionamos permisos, conexión a red y las ayudas disponibles en tu comunidad.</p></li>
+        <li><figure><img src="iconos/garantia.svg" alt=""></figure><h3>Garantía extendida</h3><p>Cobertura de equipos e instalación con seguimiento posventa durante toda la vida útil del sistema.</p></li>
+      </ul>
+    </section>
+
+    <!-- 5. INSTALACIÓN POR DENTRO -->
+    <section id="instalacion">
+      <hgroup>
+        <p>Cómo funciona</p>
+        <h2>Tu instalación, <em>pieza a pieza</em></h2>
+      </hgroup>
+      <figure>
+        <img src="imagenes/instalacion.jpg" alt="Esquema de una vivienda con paneles solares en el tejado, optimizadores, inversores, cuadro eléctrico, contador bidireccional y conexión a la red" width="1368" height="768" loading="lazy">
+        <ol aria-label="Puntos del esquema">
+          <li><button type="button" aria-pressed="true" aria-label="Paneles solares">1</button></li>
+          <li><button type="button" aria-pressed="false" aria-label="Optimizadores">2</button></li>
+          <li><button type="button" aria-pressed="false" aria-label="Inversor solar">3</button></li>
+          <li><button type="button" aria-pressed="false" aria-label="Cuadro y conductor eléctrico">4</button></li>
+          <li><button type="button" aria-pressed="false" aria-label="Contador bidireccional">5</button></li>
+          <li><button type="button" aria-pressed="false" aria-label="Consumo de la casa">6</button></li>
+          <li><button type="button" aria-pressed="false" aria-label="Excedente a la red">7</button></li>
+        </ol>
+        <figcaption>Toca un número del esquema o de la lista para ver qué hace cada pieza.</figcaption>
+      </figure>
+      <ol>
+        <li><button type="button" aria-expanded="true">Paneles solares</button><p><span>Captan la luz del sol y la convierten en corriente continua. Los colocamos en la zona del tejado con más horas de sol y sin sombras.</span></p></li>
+        <li><button type="button" aria-expanded="false">Optimizadores</button><p><span>Van debajo de cada panel y hacen que cada uno rinda al máximo, aunque otro tenga sombra o suciedad.</span></p></li>
+        <li><button type="button" aria-expanded="false">Inversor solar</button><p><span>Convierte la corriente continua de los paneles en corriente alterna, la que usan los enchufes y electrodomésticos de tu casa.</span></p></li>
+        <li><button type="button" aria-expanded="false">Cuadro y conductor eléctrico</button><p><span>Lleva la energía del inversor a la instalación de la vivienda con las protecciones necesarias.</span></p></li>
+        <li><button type="button" aria-expanded="false">Contador bidireccional</button><p><span>Mide la energía que consumes de la red y la que le inyectas. Los excedentes se compensan en tu factura.</span></p></li>
+        <li><button type="button" aria-expanded="false">Consumo de la casa</button><p><span>Lo primero que haces con tu energía es usarla: luces, electrodomésticos, climatización o el coche eléctrico.</span></p></li>
+        <li><button type="button" aria-expanded="false">Excedente a la red</button><p><span>Lo que no consumes sale a la red eléctrica y tu compañía te lo descuenta. Con batería, lo guardas para la noche.</span></p></li>
+      </ol>
+    </section>
+
+    <!-- 6. SIMULADOR DE AHORRO -->
+    <section id="simulador">
+      <hgroup>
+        <p>Simulador</p>
+        <h2>¿Cuánto ahorrarías <em>con el sol?</em></h2>
+      </hgroup>
+      <p>Mueve los controles y mira al momento la instalación que necesitas, lo que ahorras y cómo se reparte tu energía a lo largo del día.</p>
+      <form aria-label="Simulador de ahorro solar">
+        <label>Tu factura de luz al mes
+          <output name="factura-texto">90 €</output>
+          <input type="range" name="factura" min="30" max="400" step="5" value="90">
+        </label>
+        <label>Comunidad autónoma
+          <select name="comunidad">
+            <option value="1650">Andalucía</option>
+            <option value="1500">Aragón</option>
+            <option value="1150">Asturias</option>
+            <option value="1550">Baleares</option>
+            <option value="1750">Canarias</option>
+            <option value="1150">Cantabria</option>
+            <option value="1600">Castilla-La Mancha</option>
+            <option value="1450">Castilla y León</option>
+            <option value="1400">Cataluña</option>
+            <option value="1550">Comunitat Valenciana</option>
+            <option value="1650">Extremadura</option>
+            <option value="1250">Galicia</option>
+            <option value="1550" selected>Madrid</option>
+            <option value="1700">Murcia</option>
+            <option value="1350">Navarra</option>
+            <option value="1150">País Vasco</option>
+            <option value="1400">La Rioja</option>
+          </select>
+        </label>
+        <fieldset>
+          <legend>Orientación del tejado</legend>
+          <label><input type="radio" name="orientacion" value="1" checked>Sur</label>
+          <label><input type="radio" name="orientacion" value="0.88">Este / Oeste</label>
+          <label><input type="radio" name="orientacion" value="0.93">Tejado plano</label>
+        </fieldset>
+        <label><input type="checkbox" name="bateria">Añadir batería para usar el sol de noche</label>
+      </form>
+      <article aria-live="polite">
+        <h3>Tu instalación ideal <span>en directo</span></h3>
+        <p><output name="ahorro-anual">0 €</output><small>de ahorro al año en tu factura (estimación)</small></p>
+        <dl>
+          <div><dt>Potencia</dt><dd><output name="potencia">0</output></dd></div>
+          <div><dt>Paneles</dt><dd><output name="paneles">0</output></dd></div>
+          <div><dt>Se amortiza en</dt><dd><output name="retorno">0</output></dd></div>
+          <div><dt>CO₂ evitado</dt><dd><output name="co2">0</output></dd></div>
+        </dl>
+        <figure>
+          <ol aria-hidden="true">
+            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+          </ol>
+          <figcaption><span>Producción solar</span><span>Consumo de la casa</span><span>00 h — 12 h — 24 h</span></figcaption>
+        </figure>
+        <p>Cálculo orientativo con un precio medio de 0,20 €/kWh. Tu estudio gratuito incluye una simulación con tu consumo real.</p>
+        <a href="#contacto">Quiero mi estudio con estos datos</a>
+      </article>
+    </section>
+
+    <!-- 7. PLANES -->
+    <section id="planes">
+      <hgroup>
+        <p>Planes</p>
+        <h2>Elige la instalación que <em>mejor se adapta</em> a ti</h2>
+      </hgroup>
+      <p>Tres formas de empezar a producir tu propia energía. Todas incluyen estudio, instalación, legalización y monitorización.</p>
+      <ul>
+        <li>
+          <p></p>
+          <h3>Solar Base</h3>
+          <p>Panel monocristalino con <strong>12 años</strong> de garantía.</p>
+          <ul>
+            <li>Producción del 85 % a los 25 años</li>
+            <li>Inversor de red compatible con batería</li>
+            <li>Monitorización en la app incluida</li>
+            <li>Mantenimiento opcional</li>
+          </ul>
+          <a href="#contacto">Pedir presupuesto</a>
+        </li>
+        <li>
+          <p><small>Más elegido</small></p>
+          <h3>Solar Black</h3>
+          <p>Panel <strong>full black</strong> con <strong>25 años</strong> de garantía.</p>
+          <ul>
+            <li>Producción del 90,6 % a los 25 años</li>
+            <li>Microinversores compatibles con batería</li>
+            <li>Monitorización panel a panel</li>
+            <li>Mantenimiento y limpieza incluidos</li>
+          </ul>
+          <a href="#contacto">Pedir presupuesto</a>
+        </li>
+        <li>
+          <p><small>Novedad</small></p>
+          <h3>Solar Plus</h3>
+          <p>Todo incluido con <strong>cuota fija</strong> mensual.</p>
+          <ul>
+            <li>Sin pago inicial</li>
+            <li>Inversor de red o microinversores</li>
+            <li>Monitorización incluida</li>
+            <li>Reparación y mantenimiento cubiertos</li>
+          </ul>
+          <a href="#contacto">Pedir presupuesto</a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 8. PROCESO -->
+    <section id="proceso">
+      <hgroup>
+        <p>Proceso</p>
+        <h2>De la consulta a la energía propia, <em>en 4 pasos</em></h2>
+      </hgroup>
+      <ol>
+        <li><h3>Estudio gratuito</h3><p>Analizamos tu tejado y tu consumo actual, en persona o con imágenes por satélite.</p></li>
+        <li><h3>Diseño a medida</h3><p>Dimensionamos el sistema según orientación, sombras y presupuesto.</p></li>
+        <li><h3>Instalación</h3><p>Nuestro equipo certificado instala paneles, inversor y cableado en 1 a 3 días.</p></li>
+        <li><h3>Puesta en marcha</h3><p>Activamos el sistema, lo legalizamos y seguimos su rendimiento desde la app.</p></li>
+      </ol>
+    </section>
+
+    <!-- 9. PRESENCIA EN ESPAÑA -->
+    <section id="presencia">
+      <hgroup>
+        <p>Presencia en España</p>
+        <h2>Instalamos en <em>toda España</em></h2>
+      </hgroup>
+      <p>Elige tu comunidad para ver cuánta energía produce al año cada kilovatio instalado en tu zona.</p>
+      <figure>
+        <img src="imagenes/mapa-espana.jpg" alt="Mapa en relieve de España por comunidades autónomas, con una placa solar y un aerogenerador" width="1366" height="768" loading="lazy">
+        <figcaption aria-live="polite">
+          <strong>Madrid</strong>
+          <span>Producción por kW instalado</span>
+          <output>1.550 kWh/año</output>
+          <meter min="1000" max="1800" value="1550" aria-label="Producción respecto al máximo de España">1.550</meter>
+        </figcaption>
+      </figure>
+      <ul aria-label="Comunidades autónomas">
+        <li><button type="button" aria-pressed="false" data-produccion="1650">Andalucía</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1500">Aragón</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1150">Asturias</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1550">Baleares</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1750">Canarias</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1150">Cantabria</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1600">Castilla-La Mancha</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1450">Castilla y León</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1400">Cataluña</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1550">C. Valenciana</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1650">Extremadura</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1250">Galicia</button></li>
+        <li><button type="button" aria-pressed="true" data-produccion="1550">Madrid</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1700">Murcia</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1350">Navarra</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1150">País Vasco</button></li>
+        <li><button type="button" aria-pressed="false" data-produccion="1400">La Rioja</button></li>
+      </ul>
+      <dl>
+        <div><dt>ciudades con proyectos</dt><dd data-contar="50">50</dd></div>
+        <div><dt>comunidades autónomas</dt><dd data-contar="17">17</dd></div>
+        <div><dt>instalaciones en todo el país</dt><dd data-contar="1800" data-prefijo="+">+1.800</dd></div>
+      </dl>
+    </section>
+
+    <!-- 10. OPINIONES -->
+    <section id="opiniones">
+      <hgroup>
+        <p>Opiniones</p>
+        <h2>Clientes que <em>ya están ahorrando</em></h2>
+      </hgroup>
+      <ul>
+        <li>
+          <blockquote>
+            <p>Desde la instalación, nuestra factura bajó más de lo que esperábamos. El equipo explicó cada paso sin tecnicismos.</p>
+            <footer data-iniciales="MT"><span><cite>María Torres</cite>Vivienda unifamiliar</span></footer>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <p>Instalaron el sistema en nuestra nave sin detener la actividad ni un solo día. Muy profesionales.</p>
+            <footer data-iniciales="RP"><span><cite>Ricardo Peña</cite>Nave industrial</span></footer>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <p>El estudio de viabilidad fue gratuito y muy detallado. Hoy generamos más energía de la que consumimos.</p>
+            <footer data-iniciales="SR"><span><cite>Sofía Ramírez</cite>Comercio local</span></footer>
+          </blockquote>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 11. PREGUNTAS FRECUENTES -->
+    <section id="preguntas">
+      <hgroup>
+        <p>Preguntas frecuentes</p>
+        <h2>Resolvemos tus dudas <em>antes de empezar</em></h2>
+      </hgroup>
+      <aside>
+        <h3>¿Pagas más luz de la necesaria cada mes?</h3>
+        <p>Revisamos tu consumo y te explicamos qué solución te aporta un ahorro real.</p>
+        <a href="tel:+34900000000">Llamar al 900 000 000</a>
+      </aside>
+      <section aria-label="Preguntas">
+        <details open>
+          <summary>¿Cuánto puedo ahorrar con placas solares?</summary>
+          <p>Depende de tu consumo, la orientación del tejado y el tamaño del sistema. En el estudio gratuito te damos una proyección personalizada; el simulador de esta página te da una primera idea.</p>
+        </details>
+        <details>
+          <summary>¿Cuánto dura la instalación?</summary>
+          <p>Una instalación residencial típica se hace en 1 a 3 días, una vez aprobados el diseño y los permisos.</p>
+        </details>
+        <details>
+          <summary>¿Qué garantía tienen los paneles y los equipos?</summary>
+          <p>Todos los sistemas incluyen garantía de equipos y de instalación, con soporte técnico durante toda su vida útil.</p>
+        </details>
+        <details>
+          <summary>¿Hay financiación o ayudas?</summary>
+          <p>Sí. Ofrecemos financiación y cuota fija mensual, y revisamos contigo las ayudas y bonificaciones de tu comunidad y tu ayuntamiento.</p>
+        </details>
+        <details>
+          <summary>¿Las placas funcionan en días nublados?</summary>
+          <p>Sí, siguen produciendo con luz difusa, aunque menos que en días de sol. El diseño del sistema ya tiene en cuenta esa variación.</p>
+        </details>
+      </section>
+    </section>
+
+    <!-- 12. CONTACTO -->
+    <section id="contacto">
+      <article>
+        <hgroup>
+          <p>Contacto</p>
+          <h2>Pide tu estudio <em>sin coste</em></h2>
+        </hgroup>
+        <p>Cuéntanos qué instalación necesitas y te enviamos una propuesta con tu ahorro estimado en menos de 48 horas.</p>
+        <address>
+          <ul>
+            <li><figure><img src="iconos/telefono-verde.svg" alt=""></figure><span>Teléfono y WhatsApp<a href="tel:+34900000000">900 000 000</a></span></li>
+            <li><figure><img src="iconos/correo.svg" alt=""></figure><span>Correo<a href="mailto:contacto@solaresenergia.com">contacto@solaresenergia.com</a></span></li>
+            <li><figure><img src="iconos/zona.svg" alt=""></figure><span>Cobertura<strong>Las 17 comunidades autónomas</strong></span></li>
+            <li><figure><img src="iconos/horario.svg" alt=""></figure><span>Horario<strong>Lunes a sábado, 9:00–19:00</strong></span></li>
+          </ul>
+        </address>
+      </article>
+      <form>
+        <h3>Cuéntanos qué instalación necesitas</h3>
+        <label>Nombre
+          <input type="text" name="nombre" autocomplete="given-name" placeholder="Tu nombre" required>
+        </label>
+        <label>Apellidos
+          <input type="text" name="apellidos" autocomplete="family-name" placeholder="Tus apellidos">
+        </label>
+        <label>Correo electrónico
+          <input type="email" name="correo" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+        </label>
+        <label>Teléfono
+          <input type="tel" name="telefono" autocomplete="tel" placeholder="600 000 000" required>
+        </label>
+        <label>Localidad
+          <input type="text" name="localidad" autocomplete="address-level2" placeholder="Ej.: Valencia">
+        </label>
+        <label>Tipo de instalación
+          <select name="tipo">
+            <option>Vivienda</option>
+            <option>Comunidad de vecinos</option>
+            <option>Negocio o nave</option>
+            <option>Todavía no lo sé</option>
+          </select>
+        </label>
+        <label>Mensaje
+          <textarea name="mensaje" rows="4" placeholder="Escribe aquí tu mensaje"></textarea>
+        </label>
+        <label><input type="checkbox" name="privacidad" required>Acepto la política de privacidad. Solo usaremos tus datos para responder a tu solicitud.</label>
+        <button type="submit">Solicitar estudio gratuito</button>
+        <output name="aviso" aria-live="polite"></output>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- PIE -->
+  <footer>
+    <p><strong>Solares Energía</strong>Instalación y mantenimiento de placas solares para hogares y negocios en toda España.</p>
+    <nav aria-label="Empresa">
+      <h2>Empresa</h2>
+      <ul>
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="#presencia">Presencia</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#planes">Planes</a></li>
+      </ul>
+    </nav>
+    <address>
+      <h2>Contacto</h2>
+      <ul>
+        <li><a href="tel:+34900000000">900 000 000</a></li>
+        <li><a href="mailto:contacto@solaresenergia.com">contacto@solaresenergia.com</a></li>
+        <li><a href="#contacto">Pedir estudio gratis</a></li>
+      </ul>
+    </address>
+    <nav aria-label="Redes sociales">
+      <h2>Síguenos</h2>
+      <ul>
+        <li><a href="#" aria-label="Instagram"><figure><img src="iconos/instagram.svg" alt=""></figure></a></li>
+        <li><a href="#" aria-label="LinkedIn"><figure><img src="iconos/linkedin.svg" alt=""></figure></a></li>
+        <li><a href="#" aria-label="Facebook"><figure><img src="iconos/facebook.svg" alt=""></figure></a></li>
+      </ul>
+    </nav>
+    <p>
+      <small>© <time datetime="2026">2026</time> Solares Energía · <a href="https://allpixels.dev">Plantilla de All Pixels</a></small>
+      <span><a href="#">Aviso legal</a><a href="#">Privacidad</a><a href="#">Cookies</a></span>
+    </p>
+  </footer>
+
+  <!-- ACCESOS RÁPIDOS -->
+  <aside aria-label="Accesos rápidos">
+    <ul>
+      <li><a href="#contacto"><figure><img src="iconos/presupuesto.svg" alt=""></figure><span>Estudio gratis</span></a></li>
+      <li><a href="#simulador"><figure><img src="iconos/calculadora.svg" alt=""></figure><span>Simulador</span></a></li>
+      <li><a href="https://wa.me/34900000000" aria-label="Escríbenos por WhatsApp"><figure><img src="iconos/whatsapp.svg" alt=""></figure><span>WhatsApp</span></a></li>
+    </ul>
+  </aside>
+
+  <script>
+    document.documentElement.dataset.js = "";
+    const movimientoReducido = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const miles = (n, d = 0) => n.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: true }).replace(/^(\d)(\d{3})(?=,|$)/, "$1.$2");
+
+    /* 1. Cabecera */
+    const cabecera = document.querySelector("body > header");
+    const marcarScroll = () => cabecera.toggleAttribute("data-scroll", scrollY > 40);
+    addEventListener("scroll", marcarScroll, { passive: true });
+    marcarScroll();
+
+    /* 2. Menú móvil: cerrado por defecto; se cierra al tocar fuera, con Esc o al desplazarse */
+    const botonMenu = cabecera.querySelector("button");
+    let scrollAlAbrir = 0;
+    const cambiarMenu = (abrir) => {
+      botonMenu.setAttribute("aria-expanded", String(abrir));
+      botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+      scrollAlAbrir = scrollY;
+    };
+    botonMenu.addEventListener("click", () => cambiarMenu(botonMenu.getAttribute("aria-expanded") !== "true"));
+    cabecera.querySelectorAll("ul a").forEach((enlace) => enlace.addEventListener("click", () => cambiarMenu(false)));
+    document.addEventListener("click", (evento) => { if (!cabecera.contains(evento.target)) cambiarMenu(false); });
+    document.addEventListener("keydown", (evento) => { if (evento.key === "Escape") cambiarMenu(false); });
+    addEventListener("scroll", () => {
+      if (botonMenu.getAttribute("aria-expanded") === "true" && Math.abs(scrollY - scrollAlAbrir) > 30) cambiarMenu(false);
+    }, { passive: true });
+    addEventListener("pageshow", () => cambiarMenu(false));
+
+    /* 3. Enlace activo según la sección visible */
+    const enlacesMenu = [...cabecera.querySelectorAll("ul a")];
+    const vigia = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        enlacesMenu.forEach((enlace) => {
+          if (enlace.hash === "#" + entrada.target.id) enlace.setAttribute("aria-current", "true");
+          else enlace.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll("main > section[id]").forEach((seccion) => vigia.observe(seccion));
+
+    /* 4. Reloj solar del hero: cielo, sol, reflejos y producción según la hora */
+    const hero = document.querySelector("#inicio");
+    const reloj = hero.querySelector("form");
+    const CIELOS = [
+      [6, "#1B2A4A", "#E9875A"], [7.5, "#3B5D8C", "#F6C08A"], [10, "#2F7FC1", "#BFE3F5"],
+      [13, "#2C7BC0", "#E1F2FB"], [16.5, "#3A72AE", "#F4DDB0"], [19, "#3B3F72", "#EE8A5C"],
+      [20.5, "#1C2448", "#B65A5F"], [21.5, "#0E1B30", "#22344F"]
+    ];
+    const hexARgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+    const mezclar = (a, b, t) => "rgb(" + hexARgb(a).map((v, i) => Math.round(v + (hexARgb(b)[i] - v) * t)).join(",") + ")";
+    const potenciaPico = 4.4;
+    const produccion = (h) => Math.max(0, Math.sin(Math.PI * (h - 6.6) / 13.6)) ** 1.25 * potenciaPico;
+    const pintarHora = (h) => {
+      let i = CIELOS.findIndex((c) => c[0] > h);
+      if (i === -1) i = CIELOS.length - 1;
+      if (i === 0) i = 1;
+      const [h0, a0, b0] = CIELOS[i - 1];
+      const [h1, a1, b1] = CIELOS[i];
+      const t = Math.min(Math.max((h - h0) / (h1 - h0), 0), 1);
+      hero.style.setProperty("--cielo-arriba", mezclar(a0, a1, t));
+      hero.style.setProperty("--cielo-abajo", mezclar(b0, b1, t));
+      const avance = (h - 6) / 15.5;
+      const altura = Math.max(Math.sin(Math.PI * avance), 0);
+      hero.style.setProperty("--sol-x", avance.toFixed(3));
+      hero.style.setProperty("--sol-y", altura.toFixed(3));
+      hero.style.setProperty("--luz", Math.min(produccion(h) / potenciaPico + .08, 1).toFixed(3));
+
+      let energia = 0;
+      for (let x = 6; x < h; x += .25) energia += produccion(x) * .25;
+      const horas = Math.floor(h);
+      reloj.elements.hora.value = String(horas).padStart(2, "0") + ":" + String(Math.round((h - horas) * 60)).padStart(2, "0");
+      reloj.elements.potencia.value = miles(produccion(h), 1);
+      reloj.elements.energia.value = miles(energia, 1);
+      reloj.elements.ahorro.value = miles(energia * .2, 2);
+    };
+    const control = reloj.elements.reloj;
+    let animando = !movimientoReducido;
+    control.addEventListener("input", () => { animando = false; pintarHora(Number(control.value)); });
+    reloj.addEventListener("submit", (evento) => evento.preventDefault());
+    pintarHora(Number(control.value));
+    /* Lapso de tiempo automático hasta que la persona toca el control */
+    let horaAuto = 7;
+    setInterval(() => {
+      if (!animando || document.hidden) return;
+      horaAuto = horaAuto >= 21.5 ? 6 : horaAuto + .25;
+      control.value = horaAuto;
+      pintarHora(horaAuto);
+    }, 180);
+
+    /* 5. Instalación: puntos sobre el esquema y lista sincronizados */
+    const instalacion = document.querySelector("#instalacion");
+    const puntos = [...instalacion.querySelectorAll("figure button")];
+    const piezas = [...instalacion.querySelectorAll(":scope > ol button")];
+    const activarPieza = (indice) => {
+      puntos.forEach((punto, i) => punto.setAttribute("aria-pressed", String(i === indice)));
+      piezas.forEach((pieza, i) => pieza.setAttribute("aria-expanded", String(i === indice)));
+    };
+    puntos.forEach((punto, i) => punto.addEventListener("click", () => activarPieza(i)));
+    piezas.forEach((pieza, i) => pieza.addEventListener("click", () => activarPieza(i)));
+
+    /* 6. Simulador de ahorro */
+    const simulador = document.querySelector("#simulador");
+    const datos = simulador.querySelector("form");
+    const panel = simulador.querySelector("article");
+    const barras = [...panel.querySelectorAll("ol li")];
+    const consumoHora = [.35, .3, .28, .28, .3, .38, .55, .75, .7, .55, .5, .52, .6, .62, .55, .5, .55, .7, .9, 1, .95, .85, .65, .45];
+    const animarNumero = (salida, final, formato) => {
+      const inicio = Number(salida.dataset.valor || 0);
+      const t0 = performance.now();
+      const paso = (ahora) => {
+        const p = movimientoReducido ? 1 : Math.min((ahora - t0) / 600, 1);
+        salida.value = formato(inicio + (final - inicio) * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(paso);
+      };
+      salida.dataset.valor = final;
+      requestAnimationFrame(paso);
+    };
+    const simular = () => {
+      const factura = Number(datos.elements.factura.value);
+      const rendimiento = Number(datos.elements.comunidad.value) * Number(datos.querySelector('[name="orientacion"]:checked').value);
+      const bateria = datos.elements.bateria.checked;
+      const consumoAnual = factura * 12 / .2;
+      const kwp = Math.min(Math.max(Math.round(consumoAnual * .7 / rendimiento * 10) / 10, 1.5), 15);
+      const paneles = Math.ceil(kwp / .45);
+      const produccionAnual = kwp * rendimiento;
+      const autoconsumo = Math.min(produccionAnual * (bateria ? .85 : .55), consumoAnual);
+      const ahorro = autoconsumo * .2 + (produccionAnual - autoconsumo) * .06;
+      const coste = kwp * 1300 + (bateria ? 4500 : 0);
+
+      datos.elements["factura-texto"].value = factura + " €";
+      datos.elements.factura.style.setProperty("--relleno-rango", ((factura - 30) / 370) * 100 + "%");
+      animarNumero(panel.querySelector('[name="ahorro-anual"]'), ahorro, (v) => miles(Math.round(v / 10) * 10) + " €");
+      panel.querySelector('[name="potencia"]').value = miles(kwp, 1) + " kWp";
+      panel.querySelector('[name="paneles"]').value = paneles;
+      panel.querySelector('[name="retorno"]').value = miles(coste / ahorro, 1) + " años";
+      panel.querySelector('[name="co2"]').value = miles(produccionAnual * .25 / 1000, 1) + " t/año";
+
+      const picoProduccion = kwp * .78;
+      const picoConsumo = consumoAnual / 365 / 14;
+      const escala = Math.max(picoProduccion, picoConsumo * 1.05);
+      barras.forEach((barra, h) => {
+        barra.style.setProperty("--p", (produccion(h + .5) / potenciaPico * picoProduccion / escala).toFixed(3));
+        barra.style.setProperty("--c", (consumoHora[h] * picoConsumo / escala).toFixed(3));
+      });
+    };
+    datos.addEventListener("input", simular);
+    simular();
+
+    /* El botón del simulador rellena el formulario de contacto */
+    panel.querySelector("a").addEventListener("click", () => {
+      const contacto = document.querySelector("#contacto form");
+      const comunidad = datos.elements.comunidad.selectedOptions[0].textContent;
+      contacto.elements.mensaje.value = "Hola, mi factura de luz es de unos " + datos.elements.factura.value + " € al mes y vivo en " + comunidad + ". El simulador me recomienda " + panel.querySelector('[name="potencia"]').value + (datos.elements.bateria.checked ? " con batería" : "") + ". ¿Me preparáis el estudio?";
+    });
+
+    /* 7. Mapa: producción por comunidad */
+    const presencia = document.querySelector("#presencia");
+    const ficha = presencia.querySelector("figcaption");
+    presencia.querySelectorAll("ul button").forEach((boton) => {
+      boton.addEventListener("click", () => {
+        presencia.querySelectorAll("ul button").forEach((otro) => otro.setAttribute("aria-pressed", String(otro === boton)));
+        const valor = Number(boton.dataset.produccion);
+        ficha.querySelector("strong").textContent = boton.textContent;
+        ficha.querySelector("output").value = miles(valor) + " kWh/año";
+        ficha.querySelector("meter").value = valor;
+        ficha.querySelector("meter").textContent = miles(valor);
+      });
+    });
+
+    /* 8. Contadores */
+    const contadores = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        const dato = entrada.target;
+        const final = Number(dato.dataset.contar);
+        const t0 = performance.now();
+        const paso = (ahora) => {
+          const p = movimientoReducido ? 1 : Math.min((ahora - t0) / 1400, 1);
+          dato.textContent = (dato.dataset.prefijo || "") + miles(Math.round(final * (1 - Math.pow(1 - p, 3)))) + (dato.dataset.sufijo || "");
+          if (p < 1) requestAnimationFrame(paso);
+        };
+        requestAnimationFrame(paso);
+        contadores.unobserve(dato);
+      });
+    }, { threshold: .6 });
+    document.querySelectorAll("[data-contar]").forEach((dato) => contadores.observe(dato));
+
+    /* 9. Aparición al hacer scroll */
+    if (!movimientoReducido) {
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (!entrada.isIntersecting) return;
+          entrada.target.dataset.revelar = "visto";
+          observador.unobserve(entrada.target);
+        });
+      }, { threshold: .12 });
+      document.querySelectorAll("main > section:nth-of-type(n + 3) > *, #servicios li, #planes > ul > li, #proceso li, #opiniones li").forEach((bloque) => {
+        bloque.dataset.revelar = "";
+        observador.observe(bloque);
+      });
+    }
+
+    /* 10. Año actual en el pie */
+    const anio = document.querySelector("body > footer time");
+    anio.textContent = anio.dateTime = new Date().getFullYear();
+
+    /* 11. Formulario de contacto (demo sin servidor) */
+    const formulario = document.querySelector("#contacto form");
+    formulario.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const nombre = formulario.elements.nombre.value.trim();
+      formulario.reset();
+      formulario.elements.aviso.value = "¡Gracias, " + nombre + "! Te enviamos tu estudio en menos de 48 horas.";
+    });
+  </script>
+</body>
+</html>

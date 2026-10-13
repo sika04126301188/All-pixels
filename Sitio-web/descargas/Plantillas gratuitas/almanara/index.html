@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<!--
+  Reformas Almanara · Plantilla de All Pixels — https://allpixels.dev
+  Reformas de cocinas y baños: servicios, proceso, proyectos, antes y después, calculadora y contacto.
+  Consulta el README y la LICENCIA incluidos en la descarga.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reformas Almanara | Reformas integrales de cocinas y baños</title>
+  <meta name="description" content="Reformas integrales llave en mano de cocinas y baños. Presupuesto cerrado, plazos cumplidos y garantía por escrito. Calcula tu reforma en 30 segundos.">
+  <meta name="theme-color" content="#16212F">
+  <link rel="preload" href="fuentes/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="imagenes/despues-2.jpg">
+
+  <style>
+    /* =========================================================
+       0. TIPOGRAFÍAS LOCALES (SIL Open Font License, ver fuentes/)
+       Archivo es variable: peso (100–900) y anchura (62–125 %)
+       ========================================================= */
+    @font-face { font-family: "Archivo"; font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; src: url("fuentes/archivo-variable.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("fuentes/instrument-serif-italic.woff2") format("woff2"); }
+    @font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("fuentes/ibm-plex-mono-500.woff2") format("woff2"); }
+
+    /* =========================================================
+       1. VARIABLES
+       ========================================================= */
+    :root {
+      --noche: #0F1620;
+      --marino: #16212F;
+      --azul: #24344A;
+      --arena: #F1ECE3;
+      --arena-2: #E7DFD0;
+      --papel: #FAF7F1;
+      --laton: #B8823C;
+      --laton-claro: #D3A465;
+      --laton-texto: #85591F;
+      --oliva: #5B6146;
+      --tinta: #22201B;
+      --tinta-suave: #57534A;
+      --linea: rgba(34, 32, 27, .14);
+      --linea-clara: rgba(250, 247, 241, .16);
+      --papel-suave: rgba(250, 247, 241, .74);
+
+      --sans: "Archivo", system-ui, sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+      --ancho: 1240px;
+      --margen: clamp(1.25rem, 4.5vw, 3rem);
+      --relleno: max(var(--margen), calc((100% - var(--ancho)) / 2));
+      --espacio: clamp(5rem, 10vw, 8.5rem);
+      --radio: 22px;
+      --sombra: 0 34px 60px -30px rgba(15, 22, 32, .55);
+      --suave: cubic-bezier(.2, .7, .2, 1);
+
+      /* Cuadrícula de plano: se usa en las secciones oscuras */
+      --plano:
+        linear-gradient(rgba(250, 247, 241, .05) 1px, transparent 1px) 0 0 / 48px 48px,
+        linear-gradient(90deg, rgba(250, 247, 241, .05) 1px, transparent 1px) 0 0 / 48px 48px;
+    }
+
+    /* =========================================================
+       2. BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    a { text-decoration: none; color: var(--laton-texto); }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+
+    body {
+      overflow-x: clip;
+      font-family: var(--sans);
+      font-size: 1.02rem;
+      line-height: 1.6;
+      color: var(--tinta);
+      background: var(--arena);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    ul, ol { list-style: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    fieldset { border: 0; }
+    :focus-visible { outline: 2px solid var(--laton); outline-offset: 3px; }
+    ::selection { color: var(--papel); background: var(--azul); }
+
+    h1, h2, h3 {
+      font-weight: 750;
+      font-stretch: 112%;
+      line-height: 1.02;
+      letter-spacing: -.025em;
+      color: var(--marino);
+    }
+
+    h1 em, h2 em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-stretch: 100%;
+      letter-spacing: -.01em;
+      color: var(--laton-texto);
+    }
+
+    /* Iconos: archivo SVG coloreado dentro de figure */
+    figure:has(> img[src*="iconos/"]) { flex: none; width: 1.1em; height: 1.1em; }
+    img[src*="iconos/"] { object-fit: contain; }
+
+    /* Etiqueta tipo «cota de plano» de cada sección */
+    main > section hgroup p,
+    main > section:first-of-type article > p:first-of-type {
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.1rem;
+      font-family: var(--mono);
+      font-size: .74rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--laton-texto);
+    }
+
+    main > section hgroup p::before,
+    main > section:first-of-type article > p:first-of-type::before {
+      content: "";
+      width: 2.2rem;
+      height: .55rem;
+      border: solid currentColor;
+      border-width: 0 1px;
+      background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+    }
+
+    main > section h2 { font-size: clamp(2.2rem, 5vw, 4rem); }
+
+    main > section:not(:first-of-type):not(:nth-of-type(2)) { padding: var(--espacio) var(--relleno); }
+
+    /* Botón principal y secundario */
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type,
+    main form button[type="submit"],
+    main > section:nth-of-type(7) article a {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      padding: 1rem 1.6rem;
+      border: 0;
+      border-radius: 99px;
+      font-weight: 650;
+      font-size: .95rem;
+      color: var(--marino);
+      background: var(--laton);
+      transition: background .3s ease, transform .3s var(--suave), box-shadow .3s ease;
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type::after,
+    main form button[type="submit"]::after,
+    main > section:nth-of-type(7) article a::after {
+      content: "";
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: var(--marino) url("iconos/flecha-crema.svg") center / .7rem no-repeat;
+      transition: transform .35s var(--suave);
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type:hover,
+    main form button[type="submit"]:hover,
+    main > section:nth-of-type(7) article a:hover {
+      background: var(--laton-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px -16px rgba(184, 130, 60, .9);
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type:hover::after,
+    main form button[type="submit"]:hover::after,
+    main > section:nth-of-type(7) article a:hover::after { transform: translateX(3px) rotate(-35deg); }
+
+    /* =========================================================
+       3. CABECERA
+       ========================================================= */
+    body > header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 60;
+      padding: 1rem var(--relleno);
+      transition: background .4s ease, padding .4s ease, box-shadow .4s ease;
+    }
+
+    body > header[data-scroll] {
+      padding-block: .6rem;
+      background: rgba(250, 247, 241, .92);
+      -webkit-backdrop-filter: blur(14px) saturate(1.4);
+      backdrop-filter: blur(14px) saturate(1.4);
+      box-shadow: 0 1px 0 var(--linea);
+    }
+
+    body > header nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Logotipo: cuadrado de latón con escuadra */
+    body > header nav > a:first-of-type {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin-right: auto;
+      font-weight: 800;
+      font-stretch: 125%;
+      font-size: 1.15rem;
+      letter-spacing: -.02em;
+      line-height: 1;
+      color: var(--papel);
+      transition: color .4s ease;
+    }
+
+    body > header nav > a:first-of-type::before {
+      content: "";
+      width: 1.6rem;
+      height: 1.6rem;
+      border: 2px solid var(--laton);
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      background: linear-gradient(var(--laton), var(--laton)) 5px 5px / 9px 9px no-repeat;
+    }
+
+    body > header nav > a:first-of-type span { display: grid; }
+
+    body > header nav > a:first-of-type small {
+      display: block;
+      margin-top: .25rem;
+      font-family: var(--mono);
+      font-size: .6rem;
+      font-weight: 500;
+      font-stretch: 100%;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--laton-claro);
+    }
+
+    body > header nav ul { display: flex; gap: 1.8rem; }
+
+    body > header nav ul a {
+      position: relative;
+      font-size: .9rem;
+      font-weight: 550;
+      color: var(--papel-suave);
+      transition: color .3s ease;
+    }
+
+    body > header nav ul a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -.4rem;
+      height: 2px;
+      background: var(--laton);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s var(--suave);
+    }
+
+    body > header nav ul a:hover,
+    body > header nav ul a[aria-current="true"] { color: var(--papel); }
+
+    body > header nav ul a:hover::after,
+    body > header nav ul a[aria-current="true"]::after { transform: scaleX(1); }
+
+    body > header nav > a:nth-of-type(2) {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: var(--mono);
+      font-size: .82rem;
+      color: var(--papel);
+      transition: color .4s ease;
+    }
+
+    body > header nav > a:nth-of-type(2) figure {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      padding: .5rem;
+      border-radius: 50%;
+      background: var(--azul);
+    }
+
+    body > header nav > a:last-of-type {
+      padding: .7rem 1.2rem;
+      border-radius: 99px;
+      font-size: .85rem;
+      font-weight: 650;
+      white-space: nowrap;
+      color: var(--marino);
+      background: var(--laton);
+      transition: background .3s ease;
+    }
+
+    body > header nav > a:last-of-type:hover { background: var(--laton-claro); }
+
+    /* Botón de menú (móvil) */
+    body > header nav button {
+      position: relative;
+      display: none;
+      width: 2.8rem;
+      height: 2.8rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    body > header nav button span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1.1rem;
+      height: 2px;
+      margin: -1px 0 0 -.55rem;
+      background: var(--papel);
+      transition: transform .3s ease, opacity .2s ease, background .4s ease;
+    }
+
+    body > header nav button span:first-of-type { transform: translateY(-5px); }
+    body > header nav button span:last-of-type { transform: translateY(5px); }
+    body > header nav button span:nth-of-type(2) { width: .7rem; transform: translateX(.4rem); background: var(--laton); }
+    body > header nav button[aria-expanded="true"] span:first-of-type { transform: rotate(45deg); }
+    body > header nav button[aria-expanded="true"] span:nth-of-type(2) { opacity: 0; }
+    body > header nav button[aria-expanded="true"] span:last-of-type { transform: rotate(-45deg); }
+
+    /* Cabecera clara al hacer scroll */
+    body > header[data-scroll] nav > a:first-of-type,
+    body > header[data-scroll] nav > a:nth-of-type(2) { color: var(--marino); }
+    body > header[data-scroll] nav > a:first-of-type small { color: var(--laton-texto); }
+    body > header[data-scroll] nav ul a { color: var(--tinta-suave); }
+    body > header[data-scroll] nav ul a:hover,
+    body > header[data-scroll] nav ul a[aria-current="true"] { color: var(--marino); }
+    body > header[data-scroll] nav button { border-color: var(--linea); }
+    body > header[data-scroll] nav button span:not(:nth-of-type(2)) { background: var(--marino); }
+
+    /* =========================================================
+       4. HERO · antes y después en bucle
+       ========================================================= */
+    main > section:first-of-type {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+      align-items: center;
+      gap: 3rem clamp(2.5rem, 6vw, 6rem);
+      min-height: max(720px, 100svh);
+      padding: 8.5rem var(--relleno) 5rem;
+      overflow: hidden;
+      color: var(--papel);
+      background:
+        radial-gradient(55% 60% at 85% 30%, rgba(184, 130, 60, .16), transparent 70%),
+        var(--plano),
+        linear-gradient(180deg, var(--noche), var(--azul));
+    }
+
+    main > section:first-of-type article > p:first-of-type { color: var(--laton-claro); }
+
+    main > section:first-of-type h1 {
+      font-size: clamp(2.7rem, 6.4vw, 5.6rem);
+      font-stretch: 118%;
+      line-height: .98;
+      color: var(--papel);
+    }
+
+    main > section:first-of-type h1 em { display: block; color: var(--laton-claro); }
+
+    main > section:first-of-type article > p:nth-of-type(2) {
+      max-width: 34rem;
+      margin-top: 1.6rem;
+      font-size: 1.15rem;
+      color: var(--papel-suave);
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.6rem;
+      margin-top: 2.2rem;
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:last-of-type {
+      font-weight: 600;
+      color: var(--papel);
+      border-bottom: 1px solid var(--laton);
+      transition: color .3s ease;
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:last-of-type:hover { color: var(--laton-claro); }
+
+    main > section:first-of-type article > p:nth-of-type(4) {
+      margin-top: 1.4rem;
+      font-family: var(--mono);
+      font-size: .75rem;
+      letter-spacing: .05em;
+      color: rgba(250, 247, 241, .6);
+    }
+
+    main > section:first-of-type article ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem 1.8rem;
+      margin-top: 2.2rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--linea-clara);
+    }
+
+    main > section:first-of-type article li {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .9rem;
+      color: var(--papel);
+    }
+
+    /* Foto con barrido automático antes → después */
+    main > section:first-of-type > figure {
+      position: relative;
+      grid-row: 1;
+      grid-column: 2;
+      aspect-ratio: 795 / 755;
+      border-radius: var(--radio);
+      outline: 1px dashed rgba(211, 164, 101, .45);
+      outline-offset: 14px;
+      box-shadow: var(--sombra);
+      animation: subir 1.2s .3s var(--suave) both;
+    }
+
+    main > section:first-of-type > figure img {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radio);
+    }
+
+    main > section:first-of-type > figure img:last-of-type {
+      clip-path: inset(0 0 0 0);
+      animation: barrido 10s 1.5s ease-in-out infinite;
+    }
+
+    main > section:first-of-type > figure::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+      width: 2px;
+      background: var(--laton-claro);
+      box-shadow: 0 0 18px rgba(211, 164, 101, .9);
+      opacity: 0;
+      animation: linea 10s 1.5s ease-in-out infinite;
+    }
+
+    main > section:first-of-type > figure[data-vista] img:last-of-type,
+    main > section:first-of-type > figure[data-vista]::before { animation: none; }
+
+    main > section:first-of-type > figure[data-vista] img:last-of-type { transition: clip-path .8s var(--suave); }
+    main > section:first-of-type > figure[data-vista="antes"] img:last-of-type { clip-path: inset(0 0 0 100%); }
+
+    main > section:first-of-type figcaption {
+      position: absolute;
+      inset: auto 1rem 1rem;
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+    }
+
+    main > section:first-of-type figcaption span {
+      padding: .45rem .9rem;
+      border-radius: 99px;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--papel);
+      background: rgba(15, 22, 32, .72);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    main > section:first-of-type figcaption p {
+      display: flex;
+      padding: .25rem;
+      border-radius: 99px;
+      background: rgba(15, 22, 32, .72);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+
+    main > section:first-of-type figcaption button {
+      padding: .45rem 1rem;
+      border: 0;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--papel);
+      background: transparent;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    main > section:first-of-type figcaption button[aria-pressed="true"] { color: var(--marino); background: var(--laton); }
+
+    /* Sellos flotantes sobre la foto */
+    main > section:first-of-type > ul {
+      grid-row: 1;
+      grid-column: 2;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: -1.5rem -1.8rem;
+      pointer-events: none;
+    }
+
+    main > section:first-of-type > ul li {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .8rem 1.1rem;
+      border-radius: 16px;
+      font-size: .8rem;
+      color: var(--tinta-suave);
+      background: var(--papel);
+      box-shadow: 0 18px 34px -14px rgba(0, 0, 0, .45);
+      animation: flotar 5s ease-in-out infinite;
+    }
+
+    main > section:first-of-type > ul li:first-of-type { align-self: flex-start; color: var(--marino); background: var(--laton); }
+    main > section:first-of-type > ul li:last-of-type { align-self: flex-end; animation-delay: -2.5s; }
+
+    main > section:first-of-type > ul li strong {
+      display: block;
+      font-size: 1.05rem;
+      font-stretch: 112%;
+      line-height: 1.1;
+      color: var(--marino);
+    }
+
+    main > section:first-of-type > ul li:first-of-type figure {
+      width: 2.2rem;
+      height: 2.2rem;
+      padding: .55rem;
+      border-radius: 50%;
+      background: var(--marino);
+    }
+
+    main > section:first-of-type > ul li:last-of-type::before {
+      content: "4,9";
+      display: grid;
+      place-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: .85rem;
+      color: var(--papel);
+      background: var(--marino);
+    }
+
+    /* =========================================================
+       5. CINTA DE VALORES
+       ========================================================= */
+    main > section:nth-of-type(2) {
+      display: flex;
+      overflow: hidden;
+      padding: 1.2rem 0;
+      color: var(--marino);
+      background: var(--laton);
+    }
+
+    main > section:nth-of-type(2) ul {
+      display: flex;
+      flex: none;
+      gap: 3rem;
+      padding-right: 3rem;
+      animation: cinta 34s linear infinite;
+    }
+
+    main > section:nth-of-type(2) li {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 750;
+      font-stretch: 125%;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    main > section:nth-of-type(2) li::after {
+      content: "";
+      width: .7rem;
+      height: .7rem;
+      border: 2px solid var(--marino);
+      transform: rotate(45deg);
+    }
+
+    main > section:nth-of-type(2):hover ul { animation-play-state: paused; }
+
+    /* =========================================================
+       6. SERVICIOS · paneles que se expanden
+       ========================================================= */
+    main > section:nth-of-type(3) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+      align-items: end;
+      gap: 1.5rem 4rem;
+    }
+
+    main > section:nth-of-type(3) > p {
+      max-width: 30rem;
+      font-size: 1.08rem;
+      color: var(--tinta-suave);
+    }
+
+    main > section:nth-of-type(3) ol {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 1rem;
+      height: clamp(30rem, 44vw, 36rem);
+      margin-top: 2rem;
+      counter-reset: servicio;
+    }
+
+    main > section:nth-of-type(3) ol > li {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex: 1;
+      min-width: 0;
+      padding: 2rem;
+      border-radius: var(--radio);
+      overflow: hidden;
+      isolation: isolate;
+      color: var(--papel);
+      counter-increment: servicio;
+      transition: flex .7s var(--suave);
+    }
+
+    main > section:nth-of-type(3) ol > li > figure {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    main > section:nth-of-type(3) ol > li > figure img { transition: transform 1.2s var(--suave); }
+
+    main > section:nth-of-type(3) ol > li > figure::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 22, 32, .15) 10%, rgba(15, 22, 32, .92) 85%);
+    }
+
+    main > section:nth-of-type(3) ol > li::before {
+      content: counter(servicio, decimal-leading-zero);
+      position: absolute;
+      top: 1.6rem;
+      left: 2rem;
+      font-family: var(--mono);
+      font-size: .8rem;
+      letter-spacing: .1em;
+      color: var(--laton-claro);
+    }
+
+    main > section:nth-of-type(3) ol h3 {
+      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+      color: var(--papel);
+    }
+
+    main > section:nth-of-type(3) ol > li > p,
+    main > section:nth-of-type(3) ol > li > ul,
+    main > section:nth-of-type(3) ol > li > a {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height .7s var(--suave), opacity .4s ease, margin .5s ease;
+    }
+
+    main > section:nth-of-type(3) ol > li > p { max-width: 30rem; color: var(--papel-suave); }
+
+    main > section:nth-of-type(3) ol > li > ul { display: flex; flex-wrap: wrap; gap: .45rem; }
+
+    main > section:nth-of-type(3) ol > li > ul li {
+      padding: .3rem .75rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 99px;
+      font-size: .78rem;
+      color: var(--papel);
+    }
+
+    main > section:nth-of-type(3) ol > li > a {
+      align-self: flex-start;
+      font-weight: 650;
+      color: var(--laton-claro);
+      border-bottom: 1px solid currentColor;
+    }
+
+    /* Panel abierto: el primero por defecto, o el que se señala */
+    main > section:nth-of-type(3) ol:not(:hover):not(:focus-within) > li:first-of-type,
+    main > section:nth-of-type(3) ol > li:hover,
+    main > section:nth-of-type(3) ol > li:focus-within { flex: 2.6; }
+
+    main > section:nth-of-type(3) ol:not(:hover):not(:focus-within) > li:first-of-type > :is(p, ul, a),
+    main > section:nth-of-type(3) ol > li:hover > :is(p, ul, a),
+    main > section:nth-of-type(3) ol > li:focus-within > :is(p, ul, a) { max-height: 12rem; opacity: 1; margin-top: 1rem; }
+
+    main > section:nth-of-type(3) ol > li:hover > figure img { transform: scale(1.06); }
+
+    /* =========================================================
+       7. PROCESO · línea que se rellena al bajar
+       ========================================================= */
+    main > section:nth-of-type(4) {
+      --progreso: 0;
+      position: relative;
+      padding-bottom: calc(var(--espacio) + 4rem) !important;
+      color: var(--papel);
+      background: var(--plano), var(--marino);
+    }
+
+    main > section:nth-of-type(4)::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px;
+      height: clamp(3rem, 7vw, 6rem);
+      background: url("imagenes/onda.svg") center bottom / 100% 100% no-repeat;
+    }
+
+    main > section:nth-of-type(4) h2 { color: var(--papel); }
+    main > section:nth-of-type(4) h2 em { color: var(--laton-claro); }
+    main > section:nth-of-type(4) hgroup p { color: var(--laton-claro); }
+
+    main > section:nth-of-type(4) > p {
+      max-width: 34rem;
+      margin-top: 1.2rem;
+      font-size: 1.08rem;
+      color: var(--papel-suave);
+    }
+
+    main > section:nth-of-type(4) ol {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2rem;
+      margin-top: 4.5rem;
+      counter-reset: paso;
+    }
+
+    main > section:nth-of-type(4) ol::before,
+    main > section:nth-of-type(4) ol::after {
+      content: "";
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      height: 2px;
+      background: var(--linea-clara);
+    }
+
+    main > section:nth-of-type(4) ol::after {
+      background: var(--laton);
+      transform: scaleX(var(--progreso));
+      transform-origin: left;
+      transition: transform .2s linear;
+    }
+
+    main > section:nth-of-type(4) ol li { position: relative; z-index: 1; counter-increment: paso; }
+
+    main > section:nth-of-type(4) ol li::before {
+      content: counter(paso, decimal-leading-zero);
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1.8rem;
+      border: 2px solid var(--linea-clara);
+      border-radius: 50%;
+      font-family: var(--mono);
+      font-size: .85rem;
+      color: var(--papel-suave);
+      background: var(--marino);
+      transition: border-color .4s ease, color .4s ease, background .4s ease, transform .4s var(--suave);
+    }
+
+    main > section:nth-of-type(4) ol li[data-activo]::before {
+      border-color: var(--laton);
+      color: var(--marino);
+      background: var(--laton);
+      transform: scale(1.08);
+    }
+
+    main > section:nth-of-type(4) ol h3 { font-size: 1.3rem; color: var(--papel); }
+    main > section:nth-of-type(4) ol p { margin-top: .6rem; font-size: .95rem; color: var(--papel-suave); }
+
+    /* =========================================================
+       8. PROYECTOS · mosaico con filtro y visor
+       ========================================================= */
+    main > section:nth-of-type(5) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 1.5rem 3rem;
+    }
+
+    main > section:nth-of-type(5) > ul:first-of-type { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+    main > section:nth-of-type(5) > ul:first-of-type button {
+      padding: .6rem 1.15rem;
+      border: 1px solid var(--linea);
+      border-radius: 99px;
+      font-size: .88rem;
+      font-weight: 550;
+      color: var(--tinta-suave);
+      background: transparent;
+      transition: background .3s ease, color .3s ease, border-color .3s ease;
+    }
+
+    main > section:nth-of-type(5) > ul:first-of-type button:hover { border-color: var(--marino); color: var(--marino); }
+    main > section:nth-of-type(5) > ul:first-of-type button[aria-pressed="true"] { border-color: var(--marino); color: var(--papel); background: var(--marino); }
+
+    main > section:nth-of-type(5) > ul:last-of-type {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: clamp(11rem, 17vw, 15rem);
+      grid-auto-flow: dense;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    main > section:nth-of-type(5) > ul:last-of-type > li:nth-of-type(1),
+    main > section:nth-of-type(5) > ul:last-of-type > li:nth-of-type(6) { grid-column: span 2; grid-row: span 2; }
+    main > section:nth-of-type(5) > ul:last-of-type > li:nth-of-type(2),
+    main > section:nth-of-type(5) > ul:last-of-type > li:nth-of-type(4),
+    main > section:nth-of-type(5) > ul:last-of-type > li:nth-of-type(8) { grid-row: span 2; }
+    main > section:nth-of-type(5) > ul:last-of-type > li:nth-of-type(10) { grid-column: span 2; }
+
+    main > section:nth-of-type(5) > ul:last-of-type[data-filtro] > li { grid-column: auto; grid-row: span 2; }
+    main > section:nth-of-type(5) > ul:last-of-type > li[hidden] { display: none; }
+
+    main > section:nth-of-type(5) > ul:last-of-type figure {
+      position: relative;
+      height: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      animation: aparecer .6s var(--suave) both;
+    }
+
+    main > section:nth-of-type(5) > ul:last-of-type img { transition: transform .9s var(--suave); }
+    main > section:nth-of-type(5) > ul:last-of-type figure:hover img { transform: scale(1.06); }
+
+    main > section:nth-of-type(5) > ul:last-of-type figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 3rem 1.1rem 1rem;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--papel);
+      background: linear-gradient(180deg, transparent, rgba(15, 22, 32, .85));
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .4s ease, transform .4s var(--suave);
+    }
+
+    main > section:nth-of-type(5) > ul:last-of-type figure:hover figcaption,
+    main > section:nth-of-type(5) > ul:last-of-type figure:focus-within figcaption { opacity: 1; transform: none; }
+
+    main > section:nth-of-type(5) > ul:last-of-type figcaption small {
+      display: block;
+      font-family: var(--mono);
+      font-size: .66rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--laton-claro);
+    }
+
+    /* Todo el mosaico es pulsable gracias al botón estirado */
+    main > section:nth-of-type(5) > ul:last-of-type figcaption button {
+      flex: none;
+      width: 2.4rem;
+      height: 2.4rem;
+      border: 0;
+      border-radius: 50%;
+      background: var(--papel) url("iconos/ampliar.svg") center / .9rem no-repeat;
+    }
+
+    main > section:nth-of-type(5) > ul:last-of-type figcaption button::after { content: ""; position: absolute; inset: 0; }
+
+    /* Visor de fotos */
+    main > section:nth-of-type(5) dialog {
+      width: min(1100px, 92vw);
+      max-height: 92vh;
+      margin: auto;
+      padding: 0;
+      border: 0;
+      overflow: visible;
+      color: var(--papel);
+      background: transparent;
+    }
+
+    main > section:nth-of-type(5) dialog::backdrop {
+      background: rgba(15, 22, 32, .9);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    main > section:nth-of-type(5) dialog[open] { animation: aparecer .4s var(--suave); }
+
+    main > section:nth-of-type(5) dialog figure img {
+      max-height: 78vh;
+      border-radius: 14px;
+      object-fit: contain;
+    }
+
+    main > section:nth-of-type(5) dialog figcaption {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: .9rem;
+      font-weight: 600;
+    }
+
+    main > section:nth-of-type(5) dialog figcaption small { font-family: var(--mono); font-weight: 500; color: var(--laton-claro); }
+
+    main > section:nth-of-type(5) dialog button {
+      position: absolute;
+      top: 50%;
+      width: 3rem;
+      height: 3rem;
+      border: 0;
+      border-radius: 50%;
+      background: var(--papel) url("iconos/flecha-izquierda.svg") center / 1rem no-repeat;
+      transform: translateY(-50%);
+      transition: background-color .3s ease;
+    }
+
+    main > section:nth-of-type(5) dialog button:hover { background-color: var(--laton-claro); }
+    main > section:nth-of-type(5) dialog button:first-of-type { left: -1.5rem; }
+    main > section:nth-of-type(5) dialog button:nth-of-type(2) { right: -1.5rem; background-image: url("iconos/flecha.svg"); }
+    main > section:nth-of-type(5) dialog button:last-of-type { top: -1.2rem; right: -1.2rem; transform: none; background-image: url("iconos/cerrar.svg"); }
+
+    /* =========================================================
+       9. TRANSFORMACIONES · mantén pulsado para ver el antes
+       ========================================================= */
+    main > section:nth-of-type(6) { background: var(--papel); }
+
+    main > section:nth-of-type(6) > p {
+      max-width: 36rem;
+      margin-top: 1.2rem;
+      font-size: 1.08rem;
+      color: var(--tinta-suave);
+    }
+
+    main > section:nth-of-type(6) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+      margin-top: 3.5rem;
+    }
+
+    main > section:nth-of-type(6) > ul > li:nth-of-type(2) { transform: translateY(3rem); }
+
+    main > section:nth-of-type(6) figure {
+      --x: 50%;
+      --y: 50%;
+      position: relative;
+      aspect-ratio: 4 / 4.6;
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(6) figure img { position: absolute; inset: 0; }
+
+    main > section:nth-of-type(6) figure img:last-of-type {
+      clip-path: circle(0 at var(--x) var(--y));
+      transition: clip-path .75s var(--suave);
+    }
+
+    main > section:nth-of-type(6) figure[data-vista="antes"] img:last-of-type { clip-path: circle(150% at var(--x) var(--y)); }
+
+    main > section:nth-of-type(6) figure::after {
+      content: "Después";
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: .4rem .85rem;
+      border-radius: 99px;
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--marino);
+      background: var(--laton);
+      transition: background .3s ease, color .3s ease;
+    }
+
+    main > section:nth-of-type(6) figure[data-vista="antes"]::after { content: "Antes"; color: var(--papel); background: var(--marino); }
+
+    main > section:nth-of-type(6) figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 2;
+      padding: 4rem 1.3rem 1.3rem;
+      color: var(--papel);
+      background: linear-gradient(180deg, transparent, rgba(15, 22, 32, .88));
+      transition: opacity .4s ease;
+    }
+
+    main > section:nth-of-type(6) figure[data-vista="antes"] figcaption { opacity: 0; }
+
+    main > section:nth-of-type(6) figcaption h3 { font-size: 1.3rem; color: var(--papel); }
+    main > section:nth-of-type(6) figcaption p { margin-top: .3rem; font-size: .88rem; color: var(--papel-suave); }
+
+    main > section:nth-of-type(6) figcaption button {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 1rem;
+      padding: .6rem 1.1rem .6rem .6rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--papel);
+      background: rgba(250, 247, 241, .08);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    main > section:nth-of-type(6) figcaption button::before {
+      content: "";
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 2px solid var(--laton-claro);
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 4px rgba(15, 22, 32, .8), inset 0 0 0 10px var(--laton-claro);
+      animation: latido 2s ease-in-out infinite;
+    }
+
+    /* El botón cubre toda la foto: se puede mantener pulsada en cualquier punto */
+    main > section:nth-of-type(6) figcaption button::after { content: ""; position: absolute; inset: -100vh 0 0; }
+
+    /* =========================================================
+       10. CALCULADORA
+       ========================================================= */
+    main > section:nth-of-type(7) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: 2.5rem clamp(2.5rem, 5vw, 5rem);
+      align-items: start;
+      color: var(--papel);
+      background:
+        radial-gradient(50% 60% at 100% 100%, rgba(184, 130, 60, .14), transparent 70%),
+        var(--plano),
+        var(--marino);
+    }
+
+    main > section:nth-of-type(7) hgroup { grid-column: 1 / -1; }
+    main > section:nth-of-type(7) hgroup p { color: var(--laton-claro); }
+    main > section:nth-of-type(7) h2 { color: var(--papel); }
+    main > section:nth-of-type(7) h2 em { color: var(--laton-claro); }
+
+    main > section:nth-of-type(7) form { display: grid; gap: 2.2rem; }
+
+    main > section:nth-of-type(7) legend {
+      margin-bottom: 1rem;
+      font-family: var(--mono);
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--laton-claro);
+    }
+
+    main > section:nth-of-type(7) fieldset:is(:first-of-type, :nth-of-type(3)) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; }
+    main > section:nth-of-type(7) fieldset:last-of-type { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+
+    /* Opciones en forma de tarjeta */
+    main > section:nth-of-type(7) fieldset label {
+      position: relative;
+      display: grid;
+      gap: .15rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 14px;
+      font-weight: 650;
+      cursor: pointer;
+      transition: border-color .3s ease, background .3s ease;
+    }
+
+    main > section:nth-of-type(7) fieldset label small { font-size: .8rem; font-weight: 400; color: var(--papel-suave); }
+    main > section:nth-of-type(7) fieldset label:hover { border-color: rgba(211, 164, 101, .6); }
+
+    main > section:nth-of-type(7) fieldset label:has(input:checked) {
+      border-color: var(--laton);
+      background: rgba(184, 130, 60, .14);
+    }
+
+    main > section:nth-of-type(7) fieldset label:has(input:focus-visible) { outline: 2px solid var(--laton); outline-offset: 2px; }
+
+    main > section:nth-of-type(7) fieldset label input[type="radio"],
+    main > section:nth-of-type(7) fieldset label input[type="checkbox"] {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      accent-color: var(--laton);
+    }
+
+    /* Deslizador de metros */
+    main > section:nth-of-type(7) fieldset:nth-of-type(2) label { padding: 1.3rem 1.3rem 1.5rem; cursor: default; }
+
+    main > section:nth-of-type(7) fieldset:nth-of-type(2) output {
+      font-size: 2.4rem;
+      font-weight: 800;
+      font-stretch: 125%;
+      line-height: 1;
+      color: var(--papel);
+    }
+
+    main > section:nth-of-type(7) input[type="range"] {
+      width: 100%;
+      height: 6px;
+      margin-top: 1.2rem;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--laton) var(--relleno-rango, 10%), var(--linea-clara) 0);
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    main > section:nth-of-type(7) input[type="range"]::-webkit-slider-thumb {
+      width: 1.6rem;
+      height: 1.6rem;
+      border: 4px solid var(--marino);
+      border-radius: 50%;
+      background: var(--laton);
+      box-shadow: 0 0 0 1px var(--laton);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    main > section:nth-of-type(7) input[type="range"]::-moz-range-thumb {
+      width: 1.1rem;
+      height: 1.1rem;
+      border: 4px solid var(--marino);
+      border-radius: 50%;
+      background: var(--laton);
+    }
+
+    /* Resultado */
+    main > section:nth-of-type(7) article {
+      position: sticky;
+      top: 6.5rem;
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+      border-radius: var(--radio);
+      color: var(--tinta);
+      background: var(--papel);
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(7) article h3 {
+      font-family: var(--mono);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--laton-texto);
+    }
+
+    main > section:nth-of-type(7) article > p:first-of-type {
+      margin-top: .8rem;
+      font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+      font-weight: 800;
+      font-stretch: 118%;
+      line-height: 1;
+      letter-spacing: -.03em;
+      color: var(--marino);
+    }
+
+    main > section:nth-of-type(7) article > p:first-of-type small {
+      display: block;
+      margin-top: .5rem;
+      font-size: .85rem;
+      font-weight: 500;
+      font-stretch: 100%;
+      letter-spacing: 0;
+      color: var(--tinta-suave);
+    }
+
+    main > section:nth-of-type(7) article dl {
+      display: grid;
+      gap: .9rem;
+      margin: 1.8rem 0;
+      padding: 1.4rem 0;
+      border-block: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(7) article dl div {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .35rem 1rem;
+      font-size: .9rem;
+    }
+
+    main > section:nth-of-type(7) article dt { color: var(--tinta-suave); }
+    main > section:nth-of-type(7) article dd { font-weight: 700; color: var(--marino); }
+
+    /* Barra de reparto del presupuesto */
+    main > section:nth-of-type(7) article dl div:not(:first-of-type)::after {
+      content: "";
+      grid-column: 1 / -1;
+      height: 6px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--laton) var(--parte, 50%), var(--arena-2) 0);
+      transition: background .4s ease;
+    }
+
+    main > section:nth-of-type(7) article > p:nth-of-type(2) {
+      margin-bottom: 1.4rem;
+      font-size: .78rem;
+      color: var(--tinta-suave);
+    }
+
+    /* =========================================================
+       11. NOSOTROS
+       ========================================================= */
+    main > section:nth-of-type(8) {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: clamp(2.5rem, 6vw, 6rem);
+    }
+
+    main > section:nth-of-type(8) > figure {
+      position: relative;
+      aspect-ratio: 4 / 4.4;
+    }
+
+    main > section:nth-of-type(8) > figure img { border-radius: var(--radio); }
+
+    /* Escuadras de plano en las esquinas */
+    main > section:nth-of-type(8) > figure::before,
+    main > section:nth-of-type(8) > figure::after {
+      content: "";
+      position: absolute;
+      width: 3rem;
+      height: 3rem;
+      border: 2px solid var(--laton);
+    }
+
+    main > section:nth-of-type(8) > figure::before { top: -.8rem; left: -.8rem; border-right: 0; border-bottom: 0; }
+    main > section:nth-of-type(8) > figure::after { right: -.8rem; bottom: -.8rem; border-left: 0; border-top: 0; }
+
+    main > section:nth-of-type(8) figcaption {
+      position: absolute;
+      left: 1.2rem;
+      bottom: 1.2rem;
+      padding: .5rem .9rem;
+      border-radius: 99px;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--papel);
+      background: rgba(15, 22, 32, .75);
+    }
+
+    main > section:nth-of-type(8) article > p { margin-top: 1.2rem; max-width: 36rem; color: var(--tinta-suave); }
+
+    main > section:nth-of-type(8) blockquote {
+      margin: 2rem 0;
+      padding-left: 1.4rem;
+      border-left: 3px solid var(--laton);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      line-height: 1.2;
+      color: var(--marino);
+    }
+
+    main > section:nth-of-type(8) dl {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(8) dl div { display: flex; flex-direction: column-reverse; }
+
+    main > section:nth-of-type(8) dd {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      font-stretch: 125%;
+      line-height: 1;
+      color: var(--marino);
+    }
+
+    main > section:nth-of-type(8) dt { margin-top: .4rem; font-size: .85rem; color: var(--tinta-suave); }
+
+    /* =========================================================
+       12. OPINIONES
+       ========================================================= */
+    main > section:nth-of-type(9) { background: var(--arena-2); }
+
+    main > section:nth-of-type(9) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+      margin-top: 3rem;
+    }
+
+    main > section:nth-of-type(9) blockquote {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 2rem 1.8rem;
+      border-radius: var(--radio);
+      background: var(--papel) url("iconos/comillas.svg") right 1.6rem top 1.6rem / 2rem no-repeat;
+      transition: transform .4s var(--suave), box-shadow .4s ease;
+    }
+
+    main > section:nth-of-type(9) blockquote:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+
+    main > section:nth-of-type(9) blockquote p:first-of-type {
+      font-size: 1.05rem;
+      letter-spacing: .2em;
+      color: var(--laton-texto);
+    }
+
+    main > section:nth-of-type(9) blockquote p:last-of-type { flex: 1; margin-top: 1rem; color: var(--tinta); }
+
+    main > section:nth-of-type(9) blockquote footer {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-top: 1.6rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--linea);
+      font-size: .85rem;
+      color: var(--tinta-suave);
+    }
+
+    main > section:nth-of-type(9) blockquote footer::before {
+      content: attr(data-iniciales);
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 50%;
+      font-weight: 700;
+      color: var(--papel);
+      background: var(--azul);
+    }
+
+    main > section:nth-of-type(9) cite { display: block; font-style: normal; font-weight: 700; color: var(--marino); }
+
+    /* =========================================================
+       13. CONTACTO
+       ========================================================= */
+    main > section:last-of-type {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      color: var(--papel);
+      background: var(--plano), var(--marino);
+    }
+
+    main > section:last-of-type hgroup p { color: var(--laton-claro); }
+    main > section:last-of-type h2 { color: var(--papel); }
+    main > section:last-of-type h2 em { color: var(--laton-claro); }
+    main > section:last-of-type article > p { margin-top: 1.2rem; color: var(--papel-suave); }
+
+    main > section:last-of-type address { margin-top: 2.2rem; font-style: normal; }
+    main > section:last-of-type address ul { display: grid; gap: .8rem; }
+
+    main > section:last-of-type address li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 14px;
+      font-size: .82rem;
+      color: var(--papel-suave);
+    }
+
+    main > section:last-of-type address li figure {
+      width: 2.6rem;
+      height: 2.6rem;
+      padding: .7rem;
+      border-radius: 50%;
+      background: rgba(184, 130, 60, .14);
+    }
+
+    main > section:last-of-type address strong,
+    main > section:last-of-type address a { display: block; font-size: 1rem; font-weight: 600; color: var(--papel); overflow-wrap: anywhere; }
+    main > section:last-of-type address a:hover { color: var(--laton-claro); }
+
+    main > section:last-of-type form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.1rem;
+      align-content: start;
+      padding: clamp(1.6rem, 3vw, 2.4rem);
+      border-radius: var(--radio);
+      color: var(--tinta);
+      background: var(--papel);
+    }
+
+    main > section:last-of-type form h3 { grid-column: 1 / -1; font-size: 1.6rem; }
+
+    main > section:last-of-type form > label {
+      display: grid;
+      gap: .4rem;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--tinta-suave);
+    }
+
+    main > section:last-of-type form > label:nth-of-type(n + 3) { grid-column: 1 / -1; }
+
+    main > section:last-of-type input:not([type="checkbox"]),
+    main > section:last-of-type select,
+    main > section:last-of-type textarea {
+      width: 100%;
+      padding: .9rem 1rem;
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      font-size: .98rem;
+      font-weight: 400;
+      color: var(--tinta);
+      background: var(--blanco, #FFFFFF);
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+
+    main > section:last-of-type textarea { min-height: 7rem; resize: vertical; }
+
+    main > section:last-of-type :is(input, select, textarea):focus {
+      outline: none;
+      border-color: var(--azul);
+      box-shadow: 0 0 0 4px rgba(36, 52, 74, .14);
+    }
+
+    main > section:last-of-type form > label:last-of-type {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    main > section:last-of-type input[type="checkbox"] { flex: none; width: 1.1rem; height: 1.1rem; margin-top: .15rem; accent-color: var(--azul); }
+
+    main > section:last-of-type form button { justify-self: start; }
+
+    main > section:last-of-type output {
+      grid-column: 1 / -1;
+      font-weight: 600;
+      color: var(--oliva);
+    }
+
+    /* =========================================================
+       14. PIE DE PÁGINA
+       ========================================================= */
+    body > footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+      gap: 2.5rem;
+      padding: 4.5rem var(--relleno) 2rem;
+      color: var(--papel-suave);
+      background: var(--noche);
+    }
+
+    body > footer > p:first-of-type {
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+
+    body > footer > p:first-of-type strong {
+      display: block;
+      margin-bottom: .6rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      font-stretch: 125%;
+      letter-spacing: -.03em;
+      line-height: 1;
+      color: var(--papel);
+    }
+
+    body > footer h2 {
+      margin-bottom: 1rem;
+      font-family: var(--mono);
+      font-size: .74rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--laton-claro);
+    }
+
+    body > footer ul { display: grid; gap: .55rem; }
+    body > footer address { font-style: normal; }
+
+    body > footer a { font-size: .92rem; color: var(--papel-suave); overflow-wrap: anywhere; transition: color .3s ease; }
+    body > footer a:hover { color: var(--laton-claro); }
+
+    body > footer nav:last-of-type ul { display: flex; gap: .6rem; }
+
+    body > footer nav:last-of-type a {
+      display: grid;
+      place-items: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      padding: .75rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: 50%;
+      transition: background .3s ease, border-color .3s ease;
+    }
+
+    body > footer nav:last-of-type a:hover { border-color: var(--laton); background: var(--azul); }
+    body > footer nav:last-of-type figure { width: 100%; height: 100%; }
+
+    body > footer > p:last-of-type {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: .8rem 2rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--linea-clara);
+      font-size: .82rem;
+    }
+
+    body > footer > p:last-of-type span { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+    body > footer > p:last-of-type a { font-size: .82rem; }
+
+    /* =========================================================
+       15. BOTONES FLOTANTES (aparecen después del hero)
+       ========================================================= */
+    body > aside {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(1rem);
+      transition: opacity .4s ease, transform .4s var(--suave), visibility .4s;
+    }
+
+    body:has(> header[data-scroll]) > aside { opacity: 1; visibility: visible; transform: none; }
+
+    body > aside a {
+      display: grid;
+      place-items: center;
+      width: 3.3rem;
+      height: 3.3rem;
+      padding: .95rem;
+      border-radius: 50%;
+      background: var(--azul);
+      box-shadow: 0 12px 26px -8px rgba(15, 22, 32, .55);
+      transition: transform .3s var(--suave);
+    }
+
+    body > aside a:first-of-type { background: #1F7A3E; }
+    body > aside a:hover { transform: scale(1.08); }
+    body > aside figure { width: 100%; height: 100%; }
+
+    /* =========================================================
+       16. ANIMACIONES
+       ========================================================= */
+    html[data-js] [data-revelar] { opacity: 0; translate: 0 34px; transition: opacity .9s ease, translate .9s var(--suave); }
+    html[data-js] [data-revelar="visto"] { opacity: 1; translate: 0 0; }
+
+    @keyframes subir { from { opacity: 0; translate: 0 30px; } }
+    @keyframes aparecer { from { opacity: 0; transform: scale(.97); } }
+    @keyframes flotar { 50% { translate: 0 -10px; } }
+    @keyframes cinta { to { transform: translateX(-100%); } }
+    @keyframes latido { 50% { box-shadow: inset 0 0 0 6px rgba(15, 22, 32, .8), inset 0 0 0 10px var(--laton-claro); } }
+
+    @keyframes barrido {
+      0%, 12% { clip-path: inset(0 0 0 100%); }
+      40%, 72% { clip-path: inset(0 0 0 0); }
+      100% { clip-path: inset(0 0 0 100%); }
+    }
+
+    @keyframes linea {
+      0%, 12% { left: 100%; opacity: 0; }
+      14% { opacity: 1; }
+      40% { left: 0; opacity: 1; }
+      42%, 72% { left: 0; opacity: 0; }
+      74% { left: 0; opacity: 1; }
+      98% { left: 100%; opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      main > section:first-of-type > figure img:last-of-type { animation: none; }
+      main > section:first-of-type > figure::before { display: none; }
+      html[data-js] [data-revelar] { opacity: 1; translate: 0 0; }
+    }
+
+    /* =========================================================
+       17. RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1100px) {
+      body > header nav > a:nth-of-type(2) { display: none; }
+      body > header nav ul { gap: 1.3rem; }
+    }
+
+    @media (max-width: 960px) {
+      body > header nav { gap: .8rem; }
+      body > header nav button { display: block; }
+      body > header nav > a:last-of-type { margin-left: auto; }
+      body > header nav > a:first-of-type { margin-right: 0; }
+
+      body > header nav ul {
+        position: absolute;
+        top: calc(100% + .8rem);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: .5rem 1.4rem;
+        border-radius: 18px;
+        background: var(--papel);
+        box-shadow: var(--sombra);
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 -.5rem;
+        transition: opacity .3s ease, translate .3s ease, visibility .3s;
+      }
+
+      body > header nav:has(button[aria-expanded="true"]) ul { opacity: 1; visibility: visible; translate: 0 0; }
+      body > header nav ul li + li { border-top: 1px solid var(--linea); }
+      body > header nav ul a,
+      body > header[data-scroll] nav ul a { display: block; padding: .95rem 0; font-size: 1rem; color: var(--marino); }
+      body > header nav ul a::after { display: none; }
+
+      main > section:first-of-type { grid-template-columns: minmax(0, 1fr); padding-top: 7.5rem; }
+      main > section:first-of-type > figure,
+      main > section:first-of-type > ul { grid-row: 2; grid-column: 1; }
+      main > section:first-of-type > ul { margin: -1rem -.6rem; }
+
+      main > section:nth-of-type(3) { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(3) ol { flex-direction: column; height: auto; }
+      main > section:nth-of-type(3) ol > li { min-height: 22rem; }
+      main > section:nth-of-type(3) ol > li > :is(p, ul, a) { max-height: 12rem !important; opacity: 1 !important; margin-top: 1rem !important; }
+
+      main > section:nth-of-type(4) ol { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 3rem; }
+      main > section:nth-of-type(4) ol::before,
+      main > section:nth-of-type(4) ol::after { display: none; }
+
+      main > section:nth-of-type(5) { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(5) > ul:last-of-type { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      main > section:nth-of-type(6) > ul { grid-template-columns: minmax(0, 1fr); max-width: 30rem; margin-inline: auto; }
+      main > section:nth-of-type(6) > ul > li:nth-of-type(2) { transform: none; }
+
+      main > section:nth-of-type(7),
+      main > section:nth-of-type(8),
+      main > section:last-of-type { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(7) article { position: relative; top: auto; }
+
+      main > section:nth-of-type(8) > figure { max-width: 32rem; }
+      main > section:nth-of-type(9) > ul { grid-template-columns: minmax(0, 1fr); }
+
+      body > footer { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      body > footer > p:first-of-type { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      body > header nav > a:last-of-type { padding: .6rem 1rem; font-size: .8rem; }
+      body > header nav > a:first-of-type span { display: grid; }
+
+    body > header nav > a:first-of-type small { display: none; }
+      main > section:first-of-type > figure { outline-offset: 8px; }
+      main > section:first-of-type > ul li { padding: .6rem .8rem; font-size: .72rem; }
+      main > section:first-of-type > ul li:last-of-type { display: none; }
+      main > section:first-of-type figcaption span { display: none; }
+      main > section:first-of-type figcaption { justify-content: center; }
+      main > section:nth-of-type(4) ol { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(5) > ul:last-of-type { grid-template-columns: minmax(0, 1fr); grid-auto-rows: 15rem; }
+      main > section:nth-of-type(5) > ul:last-of-type > li { grid-column: auto !important; grid-row: auto !important; }
+      main > section:nth-of-type(5) > ul:last-of-type figcaption { opacity: 1; transform: none; }
+      main > section:nth-of-type(5) dialog button:first-of-type { left: .5rem; }
+      main > section:nth-of-type(5) dialog button:nth-of-type(2) { right: .5rem; }
+      main > section:nth-of-type(5) dialog button:last-of-type { right: .2rem; top: -3.6rem; }
+      main > section:nth-of-type(7) fieldset:is(:first-of-type, :nth-of-type(3)),
+      main > section:nth-of-type(7) fieldset:last-of-type { grid-template-columns: minmax(0, 1fr); }
+      main > section:nth-of-type(8) dl { grid-template-columns: minmax(0, 1fr); }
+      main > section:last-of-type form { grid-template-columns: minmax(0, 1fr); }
+      main > section:last-of-type form > label { grid-column: 1 / -1; }
+      body > footer { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+      body > footer nav:last-of-type,
+      body > footer address { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECERA -->
+  <header>
+    <nav aria-label="Principal">
+      <a href="#inicio" aria-label="Reformas Almanara, ir al inicio"><span>Almanara<small>Reformas</small></span></a>
+      <ul id="menu">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="tel:+34900000000"><figure><img src="iconos/telefono.svg" alt=""></figure>900 000 000</a>
+      <a href="#contacto">Presupuesto gratis</a>
+      <button type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. HERO -->
+    <section id="inicio" aria-label="Presentación">
+      <article>
+        <p>Reformas de cocinas y baños</p>
+        <h1>Tu cocina o baño soñados, <em>sin dolores de cabeza</em></h1>
+        <p>Reformas integrales llave en mano, de la demolición al último detalle. Un solo equipo, un solo presupuesto y una fecha de entrega que se cumple.</p>
+        <p>
+          <a href="#contacto">Pide tu presupuesto gratuito</a>
+          <a href="#calculadora">Calcula tu reforma</a>
+        </p>
+        <p>Respuesta en menos de 24 h · Sin compromiso · Presupuesto cerrado</p>
+        <ul>
+          <li><figure><img src="iconos/garantia.svg" alt=""></figure>Garantía por escrito</li>
+          <li><figure><img src="iconos/llave.svg" alt=""></figure>Proyecto llave en mano</li>
+          <li><figure><img src="iconos/plazo.svg" alt=""></figure>Plazos cumplidos</li>
+        </ul>
+      </article>
+      <figure>
+        <img src="imagenes/antes-2.jpg" alt="Cocina antes de la reforma: azulejos dañados, sin muebles y con las tuberías a la vista" width="795" height="755">
+        <img src="imagenes/despues-2.jpg" alt="La misma cocina reformada con muebles blancos, frente de madera y hornos integrados en columna" width="795" height="755" fetchpriority="high">
+        <figcaption>
+          <span>Cocina · Chamberí · 4 semanas</span>
+          <p aria-label="Ver la cocina antes o después de la reforma">
+            <button type="button" aria-pressed="false">Antes</button>
+            <button type="button" aria-pressed="false">Después</button>
+          </p>
+        </figcaption>
+      </figure>
+      <ul>
+        <li><figure><img src="iconos/garantia.svg" alt=""></figure><span><strong>Garantía</strong>100 % por escrito</span></li>
+        <li><span><strong>4,9 / 5</strong>en reseñas de clientes</span></li>
+      </ul>
+    </section>
+
+    <!-- 2. CINTA DE VALORES -->
+    <section aria-label="Nuestros compromisos">
+      <ul>
+        <li>Presupuesto cerrado</li>
+        <li>Llave en mano</li>
+        <li>Garantía por escrito</li>
+        <li>Plazos cumplidos</li>
+        <li>Técnicos propios</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Presupuesto cerrado</li>
+        <li>Llave en mano</li>
+        <li>Garantía por escrito</li>
+        <li>Plazos cumplidos</li>
+        <li>Técnicos propios</li>
+      </ul>
+    </section>
+
+    <!-- 3. SERVICIOS -->
+    <section id="servicios">
+      <hgroup>
+        <p>Servicios</p>
+        <h2>Especialistas en <em>transformar</em> tu espacio</h2>
+      </hgroup>
+      <p>Nos ocupamos del proyecto completo: diseño, obra, coordinación y acabados. Tú eliges cómo quieres vivir tu casa; nosotros lo hacemos realidad.</p>
+      <ol>
+        <li>
+          <figure><img src="imagenes/cocina-ventanal.jpg" alt="Cocina en U con muebles sin tiradores en tono piedra y gran ventanal" width="1600" height="1067" loading="lazy"></figure>
+          <h3>Reformas de cocinas</h3>
+          <p>Diseño funcional, distribución óptima, iluminación cálida y acabados que combinan estética y durabilidad.</p>
+          <ul><li>Muebles a medida</li><li>Encimeras</li><li>Iluminación LED</li><li>Electrodomésticos</li></ul>
+          <a href="#contacto">Pedir presupuesto de cocina</a>
+        </li>
+        <li>
+          <figure><img src="imagenes/bano-cristal.jpg" alt="Baño con mampara de cristal fijo, lavabo sobre encimera y grifería negra" width="1100" height="1650" loading="lazy"></figure>
+          <h3>Reformas de baños</h3>
+          <p>Cambio de bañera por plato de ducha, mamparas a medida y grifería actual para un baño práctico y luminoso.</p>
+          <ul><li>Plato de ducha</li><li>Mamparas</li><li>Muebles de lavabo</li><li>Alicatado</li></ul>
+          <a href="#contacto">Pedir presupuesto de baño</a>
+        </li>
+        <li>
+          <figure><img src="imagenes/cocina-isla.jpg" alt="Cocina abierta con isla blanca, columnas de hornos y suelo de madera clara" width="1024" height="1365" loading="lazy"></figure>
+          <h3>Reformas integrales</h3>
+          <p>Gestión completa del proyecto: licencias, fontanería, electricidad y acabados. Tú solo esperas la entrega.</p>
+          <ul><li>Licencias</li><li>Fontanería</li><li>Electricidad</li><li>Suelos y pintura</li></ul>
+          <a href="#contacto">Pedir presupuesto integral</a>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 4. PROCESO -->
+    <section id="proceso">
+      <hgroup>
+        <p>Proceso</p>
+        <h2>Tu reforma en <em>4 sencillos pasos</em></h2>
+      </hgroup>
+      <p>Sin sorpresas ni retrasos: tú decides y nosotros nos encargamos del resto.</p>
+      <ol>
+        <li><h3>Visita gratuita</h3><p>Evaluamos tu espacio, tomamos medidas y escuchamos tus ideas, sin compromiso.</p></li>
+        <li><h3>Presupuesto cerrado</h3><p>Partida a partida, sin costes ocultos ni imprevistos a mitad de obra.</p></li>
+        <li><h3>Ejecución y coordinación</h3><p>Un jefe de obra coordina todos los oficios, de la demolición al último detalle.</p></li>
+        <li><h3>Entrega y limpieza</h3><p>Recibes las llaves con tu espacio limpio y listo para disfrutar.</p></li>
+      </ol>
+    </section>
+
+    <!-- 5. PROYECTOS -->
+    <section id="proyectos">
+      <hgroup>
+        <p>Proyectos</p>
+        <h2>Nuestros <em>trabajos</em></h2>
+      </hgroup>
+      <ul aria-label="Filtrar proyectos">
+        <li><button type="button" aria-pressed="true" data-filtro="todos">Todos</button></li>
+        <li><button type="button" aria-pressed="false" data-filtro="cocina">Cocinas</button></li>
+        <li><button type="button" aria-pressed="false" data-filtro="bano">Baños</button></li>
+        <li><button type="button" aria-pressed="false" data-filtro="integral">Integrales</button></li>
+      </ul>
+      <ul>
+        <li data-categoria="cocina"><figure><img src="imagenes/cocina-blanca.jpg" alt="Cocina en U con muebles blancos sin tiradores, frente gris y columna de hornos" width="1600" height="1200" loading="lazy"><figcaption><span><small>Cocina</small>Chamberí</span><button type="button" aria-label="Ampliar foto: cocina en Chamberí"></button></figcaption></figure></li>
+        <li data-categoria="bano"><figure><img src="imagenes/bano-ducha.jpg" alt="Ducha amplia con mampara corredera, banco de madera y toallero blanco" width="1100" height="1648" loading="lazy"><figcaption><span><small>Baño</small>Retiro</span><button type="button" aria-label="Ampliar foto: baño en Retiro"></button></figcaption></figure></li>
+        <li data-categoria="integral"><figure><img src="imagenes/cocina-madera.jpg" alt="Cocina abierta con isla, taburetes de madera y columnas de roble" width="1000" height="666" loading="lazy"><figcaption><span><small>Integral</small>Salamanca</span><button type="button" aria-label="Ampliar foto: reforma integral en Salamanca"></button></figcaption></figure></li>
+        <li data-categoria="bano"><figure><img src="imagenes/bano-doble.jpg" alt="Baño con doble lavabo blanco, espejo de pared a pared y ducha de obra" width="1100" height="1492" loading="lazy"><figcaption><span><small>Baño</small>Chamartín</span><button type="button" aria-label="Ampliar foto: baño en Chamartín"></button></figcaption></figure></li>
+        <li data-categoria="cocina"><figure><img src="imagenes/cocina-espiga.jpg" alt="Cocina en L color arena con encimera de mármol y suelo de madera en espiga" width="452" height="678" loading="lazy"><figcaption><span><small>Cocina</small>Usera</span><button type="button" aria-label="Ampliar foto: cocina en Usera"></button></figcaption></figure></li>
+        <li data-categoria="integral"><figure><img src="imagenes/cocina-isla.jpg" alt="Cocina abierta con isla blanca, columnas de hornos y suelo de madera clara" width="1024" height="1365" loading="lazy"><figcaption><span><small>Integral</small>Vallecas</span><button type="button" aria-label="Ampliar foto: reforma integral en Vallecas"></button></figcaption></figure></li>
+        <li data-categoria="bano"><figure><img src="imagenes/bano-madera.jpg" alt="Baño con mueble de madera acanalada, lámparas colgantes y ducha de cristal" width="494" height="619" loading="lazy"><figcaption><span><small>Baño</small>Moncloa</span><button type="button" aria-label="Ampliar foto: baño en Moncloa"></button></figcaption></figure></li>
+        <li data-categoria="cocina"><figure><img src="imagenes/cocina-marmol.jpg" alt="Cocina gris con encimera de mármol negro y suelo hidráulico geométrico" width="452" height="678" loading="lazy"><figcaption><span><small>Cocina</small>Lavapiés</span><button type="button" aria-label="Ampliar foto: cocina en Lavapiés"></button></figcaption></figure></li>
+        <li data-categoria="bano"><figure><img src="imagenes/bano-banera.jpg" alt="Baño con bañera exenta, mueble verde agua y grifería negra" width="554" height="554" loading="lazy"><figcaption><span><small>Baño</small>Arganzuela</span><button type="button" aria-label="Ampliar foto: baño en Arganzuela"></button></figcaption></figure></li>
+        <li data-categoria="integral"><figure><img src="imagenes/cocina-ventanal.jpg" alt="Cocina en U con muebles sin tiradores en tono piedra y gran ventanal" width="1600" height="1067" loading="lazy"><figcaption><span><small>Integral</small>Tetuán</span><button type="button" aria-label="Ampliar foto: reforma integral en Tetuán"></button></figcaption></figure></li>
+      </ul>
+      <dialog aria-label="Visor de proyectos">
+        <figure>
+          <img src="imagenes/cocina-blanca.jpg" alt="" width="1600" height="1200">
+          <figcaption><span></span><small></small></figcaption>
+        </figure>
+        <button type="button" aria-label="Foto anterior"></button>
+        <button type="button" aria-label="Foto siguiente"></button>
+        <button type="button" aria-label="Cerrar visor"></button>
+      </dialog>
+    </section>
+
+    <!-- 6. TRANSFORMACIONES -->
+    <section id="transformaciones">
+      <hgroup>
+        <p>Antes y después</p>
+        <h2>Del <em>antes</em> al después</h2>
+      </hgroup>
+      <p>Mantén pulsada cualquier foto para ver cómo era el espacio antes de la reforma. Suelta y vuelve el resultado final.</p>
+      <ul>
+        <li>
+          <figure>
+            <img src="imagenes/despues-1.jpg" alt="Cocina reformada con muebles verde salvia, encimera de madera y suelo laminado" width="680" height="700" loading="lazy">
+            <img src="imagenes/antes-1.jpg" alt="La misma cocina antes: muebles de haya, azulejo con cenefa y suelo de gres" width="683" height="700" decoding="async">
+            <figcaption>
+              <h3>Cocina en verde salvia</h3>
+              <p>Lacado de muebles, encimera y suelo nuevos · 2 semanas</p>
+              <button type="button">Mantén para ver el antes</button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="imagenes/despues-2.jpg" alt="Cocina reformada en blanco con frente de madera y hornos en columna" width="795" height="755" loading="lazy">
+            <img src="imagenes/antes-2.jpg" alt="La misma cocina antes: sin muebles, con azulejos dañados y tuberías a la vista" width="795" height="755" decoding="async">
+            <figcaption>
+              <h3>Cocina desde cero</h3>
+              <p>Instalaciones, muebles y electrodomésticos · 4 semanas</p>
+              <button type="button">Mantén para ver el antes</button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <img src="imagenes/despues-3.jpg" alt="Cocina reformada con muebles blancos, tiradores negros y frente de ladrillo blanco" width="596" height="725" loading="lazy">
+            <img src="imagenes/antes-3.jpg" alt="La misma cocina antes: muebles de madera clara y azulejo beige con cenefa" width="597" height="725" decoding="async">
+            <figcaption>
+              <h3>Cocina luminosa</h3>
+              <p>Frentes, frente de ladrillo y suelo nuevos · 10 días</p>
+              <button type="button">Mantén para ver el antes</button>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 7. CALCULADORA -->
+    <section id="calculadora">
+      <hgroup>
+        <p>Calculadora</p>
+        <h2>Calcula tu reforma <em>en 30 segundos</em></h2>
+      </hgroup>
+      <form aria-label="Calculadora de presupuesto orientativo">
+        <fieldset>
+          <legend>1 · ¿Qué quieres reformar?</legend>
+          <label><input type="radio" name="tipo" value="cocina" data-precio="650" data-minimo="4500" data-semanas="3" checked>Cocina<small>Desde 4.500 €</small></label>
+          <label><input type="radio" name="tipo" value="bano" data-precio="780" data-minimo="3500" data-semanas="2">Baño<small>Desde 3.500 €</small></label>
+          <label><input type="radio" name="tipo" value="integral" data-precio="520" data-minimo="15000" data-semanas="6">Integral<small>Desde 15.000 €</small></label>
+        </fieldset>
+        <fieldset>
+          <legend>2 · Superficie aproximada</legend>
+          <label>Metros cuadrados
+            <output name="metros-texto">10 m²</output>
+            <input type="range" name="metros" min="3" max="150" value="10" step="1">
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>3 · Nivel de acabados</legend>
+          <label><input type="radio" name="acabado" value="esencial" data-factor="1">Esencial<small>Calidad y buen precio</small></label>
+          <label><input type="radio" name="acabado" value="confort" data-factor="1.3" checked>Confort<small>El más elegido</small></label>
+          <label><input type="radio" name="acabado" value="premium" data-factor="1.75">Premium<small>Materiales de alta gama</small></label>
+        </fieldset>
+        <fieldset>
+          <legend>4 · Extras</legend>
+          <label><input type="checkbox" name="extra" value="Electrodomésticos nuevos" data-importe="2800">Electrodomésticos<small>+ 2.800 €</small></label>
+          <label><input type="checkbox" name="extra" value="Instalación eléctrica nueva" data-importe="1900">Electricidad nueva<small>+ 1.900 €</small></label>
+          <label><input type="checkbox" name="extra" value="Suelo nuevo" data-importe="1500">Suelo nuevo<small>+ 1.500 €</small></label>
+          <label><input type="checkbox" name="extra" value="Gestión de licencias" data-importe="450">Licencias<small>+ 450 €</small></label>
+        </fieldset>
+      </form>
+      <article aria-live="polite">
+        <h3>Tu estimación</h3>
+        <p><output name="total">12.400 – 15.600 €</output><small>IVA no incluido</small></p>
+        <dl>
+          <div><dt>Plazo estimado</dt><dd>3 semanas</dd></div>
+          <div><dt>Materiales</dt><dd>45 %</dd></div>
+          <div><dt>Mano de obra</dt><dd>43 %</dd></div>
+          <div><dt>Gestión y licencias</dt><dd>12 %</dd></div>
+        </dl>
+        <p>Precios orientativos. El presupuesto definitivo, cerrado y por escrito, te lo damos después de la visita gratuita.</p>
+        <a href="#contacto">Quiero mi presupuesto cerrado</a>
+      </article>
+    </section>
+
+    <!-- 8. NOSOTROS -->
+    <section id="nosotros">
+      <figure>
+        <img src="imagenes/bano-doble.jpg" alt="Baño reformado con doble lavabo, espejo de pared a pared y ducha de obra con cristal" width="1100" height="1492" loading="lazy">
+        <figcaption>Proyecto · Chamartín · 2025</figcaption>
+      </figure>
+      <article>
+        <hgroup>
+          <p>Nosotros</p>
+          <h2>Detrás de <em>Reformas Almanara</em></h2>
+        </hgroup>
+        <p>Somos un equipo con años de experiencia transformando cocinas, baños y hogares completos. Creemos que una reforma no debería ser sinónimo de estrés: cuidamos cada detalle, desde la selección de materiales hasta la coordinación diaria de la obra.</p>
+        <p>Trabajamos con proveedores de confianza, técnicos propios y un compromiso firme con los plazos acordados.</p>
+        <blockquote>«No vendemos reformas, entregamos tranquilidad.»</blockquote>
+        <dl>
+          <div><dt>años de experiencia</dt><dd data-contar="12" data-sufijo="+">12+</dd></div>
+          <div><dt>proyectos entregados</dt><dd data-contar="300" data-sufijo="+">300+</dd></div>
+          <div><dt>valoración media</dt><dd data-contar="4.9" data-decimales="1">4,9</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <!-- 9. OPINIONES -->
+    <section id="opiniones">
+      <hgroup>
+        <p>Opiniones</p>
+        <h2>Lo que dicen quienes <em>ya confían</em> en nosotros</h2>
+      </hgroup>
+      <ul>
+        <li>
+          <blockquote>
+            <p aria-label="5 de 5 estrellas">★★★★★</p>
+            <p>Cumplieron el plazo exactamente como nos dijeron desde el primer día. El trato fue cercano en todo momento y el resultado superó lo que esperábamos.</p>
+            <footer data-iniciales="MG"><span><cite>María G.</cite>Reforma de cocina</span></footer>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <p aria-label="5 de 5 estrellas">★★★★★</p>
+            <p>Lo que más valoramos fue la transparencia: el presupuesto que nos dieron al inicio fue el mismo que pagamos al final, sin sorpresas.</p>
+            <footer data-iniciales="JR"><span><cite>Javier R.</cite>Reforma integral</span></footer>
+          </blockquote>
+        </li>
+        <li>
+          <blockquote>
+            <p aria-label="5 de 5 estrellas">★★★★★</p>
+            <p>Los acabados son excelentes y se nota el cuidado por el detalle. Siempre estuvieron disponibles para resolver cualquier duda durante la obra.</p>
+            <footer data-iniciales="LM"><span><cite>Laura M.</cite>Reforma de baño</span></footer>
+          </blockquote>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 10. CONTACTO -->
+    <section id="contacto">
+      <article>
+        <hgroup>
+          <p>Contacto</p>
+          <h2>Da el primer paso hacia <em>tu nuevo espacio</em></h2>
+        </hgroup>
+        <p>Déjanos tus datos y te llamamos en menos de 24 horas para concertar la visita gratuita y darte un presupuesto cerrado.</p>
+        <address>
+          <ul>
+            <li><figure><img src="iconos/telefono-laton.svg" alt=""></figure><span>Teléfono<a href="tel:+34900000000">900 000 000</a></span></li>
+            <li><figure><img src="iconos/whatsapp-laton.svg" alt=""></figure><span>WhatsApp<a href="https://wa.me/34600000000">+34 600 000 000</a></span></li>
+            <li><figure><img src="iconos/correo.svg" alt=""></figure><span>Correo<a href="mailto:hola@reformasalmanara.com">hola@reformasalmanara.com</a></span></li>
+            <li><figure><img src="iconos/zona.svg" alt=""></figure><span>Zona de trabajo<strong>Madrid y área metropolitana</strong></span></li>
+          </ul>
+        </address>
+      </article>
+      <form>
+        <h3>Pide tu presupuesto gratuito</h3>
+        <label>Nombre completo
+          <input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre" required>
+        </label>
+        <label>Teléfono
+          <input type="tel" name="telefono" autocomplete="tel" placeholder="600 000 000" required>
+        </label>
+        <label>Correo electrónico
+          <input type="email" name="correo" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+        </label>
+        <label>Tipo de reforma
+          <select name="tipo">
+            <option value="cocina">Cocina</option>
+            <option value="bano">Baño</option>
+            <option value="integral">Reforma integral</option>
+            <option value="otro">Otro</option>
+          </select>
+        </label>
+        <label>Cuéntanos tu proyecto
+          <textarea name="mensaje" rows="4" placeholder="Medidas aproximadas, qué te gustaría cambiar, plazos…"></textarea>
+        </label>
+        <label><input type="checkbox" name="privacidad" required>Acepto la política de privacidad. Tus datos solo se usan para responder a tu solicitud.</label>
+        <button type="submit">Solicitar presupuesto</button>
+        <output name="aviso" aria-live="polite"></output>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p><strong>Almanara</strong>Reformas integrales llave en mano de cocinas y baños en Madrid.</p>
+    <nav aria-label="Secciones">
+      <h2>Navegación</h2>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <address>
+      <h2>Contacto</h2>
+      <ul>
+        <li><a href="tel:+34900000000">900 000 000</a></li>
+        <li><a href="https://wa.me/34600000000">WhatsApp</a></li>
+        <li><a href="mailto:hola@reformasalmanara.com">hola@reformasalmanara.com</a></li>
+      </ul>
+    </address>
+    <nav aria-label="Redes sociales">
+      <h2>Síguenos</h2>
+      <ul>
+        <li><a href="#" aria-label="Instagram"><figure><img src="iconos/instagram.svg" alt=""></figure></a></li>
+        <li><a href="#" aria-label="Facebook"><figure><img src="iconos/facebook.svg" alt=""></figure></a></li>
+      </ul>
+    </nav>
+    <p>
+      <small>© <time datetime="2026">2026</time> Reformas Almanara · <a href="https://allpixels.dev">Plantilla de All Pixels</a></small>
+      <span><a href="#">Privacidad</a><a href="#">Aviso legal</a><a href="#">Cookies</a></span>
+    </p>
+  </footer>
+
+  <!-- BOTONES FLOTANTES -->
+  <aside aria-label="Contacto rápido">
+    <a href="https://wa.me/34600000000" aria-label="Escribir por WhatsApp"><figure><img src="iconos/whatsapp.svg" alt=""></figure></a>
+    <a href="tel:+34900000000" aria-label="Llamar por teléfono"><figure><img src="iconos/telefono.svg" alt=""></figure></a>
+  </aside>
+
+  <script>
+    document.documentElement.dataset.js = "";
+    const movimientoReducido = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const euros = { format: (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".") };
+
+    /* 1. Cabecera: fondo al hacer scroll */
+    const cabecera = document.querySelector("body > header");
+    const marcarScroll = () => cabecera.toggleAttribute("data-scroll", scrollY > 40);
+    addEventListener("scroll", marcarScroll, { passive: true });
+    marcarScroll();
+
+    /* 2. Menú móvil: cerrado por defecto; se cierra al tocar fuera, con Esc o al desplazarse */
+    const botonMenu = cabecera.querySelector("button");
+    let scrollAlAbrir = 0;
+    const cambiarMenu = (abrir) => {
+      botonMenu.setAttribute("aria-expanded", String(abrir));
+      botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+      scrollAlAbrir = scrollY;
+    };
+    botonMenu.addEventListener("click", () => cambiarMenu(botonMenu.getAttribute("aria-expanded") !== "true"));
+    cabecera.querySelectorAll("ul a").forEach((enlace) => enlace.addEventListener("click", () => cambiarMenu(false)));
+    document.addEventListener("click", (evento) => { if (!cabecera.contains(evento.target)) cambiarMenu(false); });
+    document.addEventListener("keydown", (evento) => { if (evento.key === "Escape") cambiarMenu(false); });
+    addEventListener("scroll", () => {
+      if (botonMenu.getAttribute("aria-expanded") === "true" && Math.abs(scrollY - scrollAlAbrir) > 30) cambiarMenu(false);
+    }, { passive: true });
+    addEventListener("pageshow", () => cambiarMenu(false));
+
+    /* 3. Enlace activo según la sección visible */
+    const enlacesMenu = [...cabecera.querySelectorAll("ul a")];
+    const vigia = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        enlacesMenu.forEach((enlace) => {
+          if (enlace.hash === "#" + entrada.target.id) enlace.setAttribute("aria-current", "true");
+          else enlace.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll("main > section[id]").forEach((seccion) => vigia.observe(seccion));
+
+    /* 4. Hero: botones Antes / Después (detienen el barrido automático) */
+    const fotoHero = document.querySelector("main > section:first-of-type > figure");
+    fotoHero.querySelectorAll("button").forEach((boton, indice) => {
+      boton.addEventListener("click", () => {
+        fotoHero.dataset.vista = indice === 0 ? "antes" : "despues";
+        fotoHero.querySelectorAll("button").forEach((otro) => otro.setAttribute("aria-pressed", String(otro === boton)));
+      });
+    });
+
+    /* 5. Proceso: la línea se rellena según avanza el scroll */
+    const proceso = document.querySelector("#proceso");
+    const pasos = [...proceso.querySelectorAll("ol li")];
+    const pintarProceso = () => {
+      const lista = proceso.querySelector("ol").getBoundingClientRect();
+      const avance = Math.min(Math.max((innerHeight * .75 - lista.top) / (lista.height + innerHeight * .25), 0), 1);
+      proceso.style.setProperty("--progreso", avance.toFixed(3));
+      pasos.forEach((paso, i) => paso.toggleAttribute("data-activo", avance >= i / (pasos.length - 1) - .02));
+    };
+    addEventListener("scroll", pintarProceso, { passive: true });
+    pintarProceso();
+
+    /* 6. Proyectos: filtro y visor */
+    const proyectos = document.querySelector("#proyectos");
+    const mosaico = proyectos.querySelector("ul:last-of-type");
+    const fichas = [...mosaico.children];
+    proyectos.querySelectorAll("button[data-filtro]").forEach((boton) => {
+      boton.addEventListener("click", () => {
+        const filtro = boton.dataset.filtro;
+        proyectos.querySelectorAll("button[data-filtro]").forEach((otro) => otro.setAttribute("aria-pressed", String(otro === boton)));
+        mosaico.toggleAttribute("data-filtro", filtro !== "todos");
+        fichas.forEach((ficha) => { ficha.hidden = filtro !== "todos" && ficha.dataset.categoria !== filtro; });
+      });
+    });
+
+    const visor = proyectos.querySelector("dialog");
+    const [anterior, siguiente, cerrar] = visor.querySelectorAll(":scope > button");
+    let actual = 0;
+    const visibles = () => fichas.filter((ficha) => !ficha.hidden);
+    const mostrar = (indice) => {
+      const lista = visibles();
+      actual = (indice + lista.length) % lista.length;
+      const imagen = lista[actual].querySelector("img");
+      const textos = lista[actual].querySelector("figcaption span");
+      visor.querySelector("img").src = imagen.src;
+      visor.querySelector("img").alt = imagen.alt;
+      visor.querySelector("figcaption span").textContent = imagen.alt;
+      visor.querySelector("figcaption small").textContent = textos.querySelector("small").textContent + " · " + textos.lastChild.textContent;
+    };
+    fichas.forEach((ficha) => {
+      ficha.querySelector("button").addEventListener("click", () => {
+        mostrar(visibles().indexOf(ficha));
+        visor.showModal();
+      });
+    });
+    anterior.addEventListener("click", () => mostrar(actual - 1));
+    siguiente.addEventListener("click", () => mostrar(actual + 1));
+    cerrar.addEventListener("click", () => visor.close());
+    visor.addEventListener("click", (evento) => { if (evento.target === visor) visor.close(); });
+    visor.addEventListener("keydown", (evento) => {
+      if (evento.key === "ArrowLeft") mostrar(actual - 1);
+      if (evento.key === "ArrowRight") mostrar(actual + 1);
+    });
+
+    /* 7. Antes y después: mantener pulsado (ratón, dedo o teclado) */
+    document.querySelectorAll("#transformaciones figure").forEach((figura) => {
+      const boton = figura.querySelector("button");
+      const verAntes = (evento) => {
+        if (evento && evento.clientX) {
+          const caja = figura.getBoundingClientRect();
+          figura.style.setProperty("--x", evento.clientX - caja.left + "px");
+          figura.style.setProperty("--y", evento.clientY - caja.top + "px");
+        }
+        figura.dataset.vista = "antes";
+      };
+      const verDespues = () => { delete figura.dataset.vista; };
+      boton.addEventListener("pointerdown", (evento) => { evento.preventDefault(); verAntes(evento); });
+      ["pointerup", "pointerleave", "pointercancel"].forEach((tipo) => boton.addEventListener(tipo, verDespues));
+      boton.addEventListener("keydown", (evento) => {
+        if ((evento.key === " " || evento.key === "Enter") && !evento.repeat) {
+          evento.preventDefault();
+          figura.style.setProperty("--x", "50%");
+          figura.style.setProperty("--y", "50%");
+          verAntes();
+        }
+      });
+      boton.addEventListener("keyup", verDespues);
+      boton.addEventListener("contextmenu", (evento) => evento.preventDefault());
+    });
+
+    /* 8. Calculadora de presupuesto orientativo */
+    const calculadora = document.querySelector("#calculadora form");
+    const resultado = document.querySelector("#calculadora article");
+    const rango = calculadora.elements.metros;
+    let totalMostrado = 0;
+    const animarTotal = (minimo, maximo) => {
+      const inicio = totalMostrado;
+      const t0 = performance.now();
+      const paso = (ahora) => {
+        const p = movimientoReducido ? 1 : Math.min((ahora - t0) / 500, 1);
+        const valor = inicio + (minimo - inicio) * (1 - Math.pow(1 - p, 3));
+        const proporcion = maximo / minimo;
+        resultado.querySelector("output").value = euros.format(Math.round(valor / 100) * 100) + " – " + euros.format(Math.round(valor * proporcion / 100) * 100) + " €";
+        if (p < 1) requestAnimationFrame(paso);
+      };
+      totalMostrado = minimo;
+      requestAnimationFrame(paso);
+    };
+    const calcular = () => {
+      const tipo = calculadora.querySelector('[name="tipo"]:checked');
+      const acabado = calculadora.querySelector('[name="acabado"]:checked');
+      const metros = Number(rango.value);
+      const extras = [...calculadora.querySelectorAll('[name="extra"]:checked')].reduce((suma, extra) => suma + Number(extra.dataset.importe), 0);
+      const base = Math.max(Number(tipo.dataset.precio) * metros, Number(tipo.dataset.minimo)) * Number(acabado.dataset.factor) + extras;
+      const semanas = Math.max(Number(tipo.dataset.semanas), Math.round(Number(tipo.dataset.semanas) + metros / 25));
+      const materiales = acabado.value === "premium" ? 52 : acabado.value === "confort" ? 45 : 40;
+      const gestion = calculadora.querySelector('[value="Gestión de licencias"]').checked || tipo.value === "integral" ? 14 : 10;
+
+      calculadora.elements["metros-texto"].value = metros + " m²";
+      rango.style.setProperty("--relleno-rango", ((metros - rango.min) / (rango.max - rango.min)) * 100 + "%");
+      const datos = resultado.querySelectorAll("dd");
+      datos[0].textContent = semanas + (semanas === 1 ? " semana" : " semanas");
+      datos[1].textContent = materiales + " %";
+      datos[2].textContent = 100 - materiales - gestion + " %";
+      datos[3].textContent = gestion + " %";
+      resultado.querySelectorAll("dl div").forEach((fila, i) => { if (i) fila.style.setProperty("--parte", datos[i].textContent.replace(" %", "%")); });
+      animarTotal(base * .9, base * 1.12);
+    };
+    calculadora.addEventListener("input", calcular);
+    calcular();
+
+    /* El botón de la calculadora rellena el formulario de contacto */
+    resultado.querySelector("a").addEventListener("click", () => {
+      const contacto = document.querySelector("#contacto form");
+      const tipo = calculadora.querySelector('[name="tipo"]:checked');
+      const extras = [...calculadora.querySelectorAll('[name="extra"]:checked')].map((extra) => extra.value);
+      contacto.elements.tipo.value = tipo.value;
+      contacto.elements.mensaje.value = "Reforma de " + tipo.parentElement.firstChild.nextSibling.textContent.trim().toLowerCase() + " de unos " + rango.value + " m², acabado " + calculadora.querySelector('[name="acabado"]:checked').value + (extras.length ? ", con: " + extras.join(", ").toLowerCase() : "") + ". Estimación de la web: " + resultado.querySelector("output").value + ".";
+    });
+
+    /* 9. Contadores de Nosotros */
+    const contadores = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        const dato = entrada.target;
+        const final = Number(dato.dataset.contar);
+        const decimales = Number(dato.dataset.decimales || 0);
+        const t0 = performance.now();
+        const paso = (ahora) => {
+          const p = movimientoReducido ? 1 : Math.min((ahora - t0) / 1400, 1);
+          const valor = final * (1 - Math.pow(1 - p, 3));
+          dato.textContent = valor.toLocaleString("es-ES", { minimumFractionDigits: decimales, maximumFractionDigits: decimales }) + (dato.dataset.sufijo || "");
+          if (p < 1) requestAnimationFrame(paso);
+        };
+        requestAnimationFrame(paso);
+        contadores.unobserve(dato);
+      });
+    }, { threshold: .6 });
+    document.querySelectorAll("[data-contar]").forEach((dato) => contadores.observe(dato));
+
+    /* 10. Aparición al hacer scroll */
+    if (!movimientoReducido) {
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (!entrada.isIntersecting) return;
+          entrada.target.dataset.revelar = "visto";
+          observador.unobserve(entrada.target);
+        });
+      }, { threshold: .12 });
+      document.querySelectorAll("main > section:nth-of-type(n + 3) > :not(dialog), #transformaciones li, #opiniones li, #proceso li").forEach((bloque) => {
+        bloque.dataset.revelar = "";
+        observador.observe(bloque);
+      });
+    }
+
+    /* 11. Año actual en el pie */
+    const anio = document.querySelector("body > footer time");
+    anio.textContent = anio.dateTime = new Date().getFullYear();
+
+    /* 12. Formulario de contacto (demo sin servidor) */
+    const formulario = document.querySelector("#contacto form");
+    formulario.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const nombre = formulario.elements.nombre.value.trim().split(" ")[0];
+      formulario.reset();
+      formulario.elements.aviso.value = "¡Gracias, " + nombre + "! Hemos recibido tu solicitud y te llamaremos en menos de 24 horas.";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electro Rápido 24h — Electricista de urgencia en 60 segundos</title>
+<meta name="description" content="Electricistas de guardia 24 horas, 365 días. Confirmamos un técnico licenciado en 60 segundos y cerramos el precio antes de empezar.">
+<meta name="theme-color" content="#474150">
+<!-- Electro Rápido 24h · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+<!-- Tipografías incluidas en la carpeta fuentes/ (Archivo e IBM Plex Mono), sin depender de Google Fonts -->
+<link rel="preload" href="fuentes/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="imagenes/hero-electricista.jpg" as="image" fetchpriority="high">
+<style>
+  /* =========================================================
+     0. TIPOGRAFÍAS LOCALES
+     ========================================================= */
+  @font-face {
+    font-family: "Archivo";
+    font-style: normal;
+    font-weight: 100 900;
+    font-stretch: 62% 125%;
+    font-display: swap;
+    src: url("fuentes/archivo-variable.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-weight: 400;
+    font-display: swap;
+    src: url("fuentes/ibm-plex-mono-400.woff2") format("woff2");
+  }
+
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-weight: 500;
+    font-display: swap;
+    src: url("fuentes/ibm-plex-mono-500.woff2") format("woff2");
+  }
+
+  /* =========================================================
+     1. VARIABLES
+     ========================================================= */
+  :root {
+    /* Paleta */
+    --tinta: #474150;
+    --nieve: #F5FFF4;
+    --lavanda: #9C99B8;
+    --ambar: #FFBB00;
+
+    /* Derivados de la paleta */
+    --tinta-suave: #635e6d;      /* texto secundario sobre fondo claro */
+    --lavanda-clara: #D6D4E5;    /* texto secundario sobre fondo oscuro */
+    --ambar-claro: #FFCB3D;      /* hover de los botones ámbar */
+    --linea: color-mix(in srgb, var(--tinta) 16%, transparent);
+    --linea-clara: color-mix(in srgb, var(--nieve) 18%, transparent);
+    --velo: color-mix(in srgb, var(--tinta) 82%, transparent);
+    --velo-suave: color-mix(in srgb, var(--tinta) 40%, transparent);
+    --fondo-cabecera: color-mix(in srgb, var(--tinta) 90%, transparent);
+    --fantasma: color-mix(in srgb, var(--lavanda) 22%, transparent);
+
+    /* Tipografía */
+    --fuente: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --fuente-mono: "IBM Plex Mono", ui-monospace, monospace;
+    --estrecho: 74%;
+
+    /* Medidas */
+    --ancho: 1240px;
+    --margen: max(1.25rem, calc((100% - var(--ancho)) / 2));
+    --seccion: clamp(4.5rem, 9vw, 8rem);
+    --alto-cabecera: 4.5rem;
+    --radio-pildora: 999px;
+    --radio-foto: 4px;
+
+    /* Movimiento y sombras */
+    --suave: cubic-bezier(0.22, 1, 0.36, 1);
+    --transicion: 0.3s var(--suave);
+    --sombra-ambar: 0 14px 32px -14px color-mix(in srgb, var(--ambar) 85%, transparent);
+    --sombra-flotante: 0 18px 40px -18px color-mix(in srgb, var(--tinta) 55%, transparent);
+  }
+
+  /* =========================================================
+     2. RESET Y BASE
+     ========================================================= */
+  a {
+    text-decoration: none;
+    color: var(--tinta);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--alto-cabecera);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--fuente);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--tinta);
+    background: var(--nieve);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, p, ul, ol, figure, blockquote, address {
+    margin: 0;
+  }
+
+  ul, ol {
+    padding: 0;
+    list-style: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radio-foto);
+    background: var(--lavanda);
+  }
+
+  figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  h1, h2 {
+    font-weight: 600;
+    font-stretch: var(--estrecho);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  data,
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ambar);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    color: var(--tinta);
+    background: var(--ambar);
+  }
+
+  /* Estructura común de las secciones */
+  main > section {
+    position: relative;
+    padding: var(--seccion) var(--margen);
+  }
+
+  main > section > p:first-child,
+  main > section > header > p:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    font-family: var(--fuente-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+  }
+
+  main > section > p:first-child::before,
+  main > section > header > p:first-child::before {
+    content: "";
+    width: 2rem;
+    height: 2px;
+    background: var(--ambar);
+  }
+
+  main > section > h2,
+  main > section > header > h2 {
+    max-width: 15ch;
+    font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+  }
+
+  main > section > h2 + p,
+  main > section > header > h2 + p {
+    max-width: 46ch;
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    color: var(--tinta-suave);
+  }
+
+  /* Aparición al hacer scroll (la activa el script) */
+  main > section > * {
+    transition: opacity 0.9s var(--suave), transform 0.9s var(--suave);
+  }
+
+  main [data-oculto] {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+
+  /* =========================================================
+     3. BOTONES COMPARTIDOS
+     ========================================================= */
+  /* Ámbar: cabecera, hero y barra móvil */
+  body > header nav li:last-of-type a,
+  main > section:nth-of-type(1) > p:nth-of-type(3) a:first-of-type,
+  body > aside a:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: var(--radio-pildora);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--tinta);
+    background: var(--ambar);
+    transition: background var(--transicion), transform var(--transicion), box-shadow var(--transicion);
+  }
+
+  body > header nav li:last-of-type a:hover,
+  main > section:nth-of-type(1) > p:nth-of-type(3) a:first-of-type:hover,
+  body > aside a:first-of-type:hover {
+    background: var(--ambar-claro);
+    box-shadow: var(--sombra-ambar);
+    transform: translateY(-2px);
+  }
+
+  /* Punto vivo dentro de los botones de llamada */
+  body > header nav li:last-of-type a::before,
+  main > section:nth-of-type(1) > p:nth-of-type(3) a:first-of-type::before,
+  body > aside a:first-of-type::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--tinta);
+    animation: latido 2s ease-out infinite;
+  }
+
+  /* Contorno claro: hero y barra móvil */
+  main > section:nth-of-type(1) > p:nth-of-type(3) a:last-of-type,
+  body > aside a:last-of-type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.6rem;
+    border: 1px solid var(--linea-clara);
+    border-radius: var(--radio-pildora);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--nieve);
+    transition: background var(--transicion), color var(--transicion), border-color var(--transicion);
+  }
+
+  main > section:nth-of-type(1) > p:nth-of-type(3) a:last-of-type:hover,
+  body > aside a:last-of-type:hover {
+    border-color: var(--nieve);
+    color: var(--tinta);
+    background: var(--nieve);
+  }
+
+  /* =========================================================
+     4. CABECERA Y NAVEGACIÓN
+     ========================================================= */
+  body > header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    background: var(--fondo-cabecera);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: background var(--transicion), box-shadow var(--transicion);
+  }
+
+  body[data-scroll="no"] > header {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  body > header nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: var(--alto-cabecera);
+    padding-inline: var(--margen);
+  }
+
+  /* Logotipo (cabecera y pie) */
+  body > header nav > a,
+  body > footer address > a:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-stretch: 85%;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--nieve);
+  }
+
+  body > header nav > a::before,
+  body > footer address > a:first-of-type::before {
+    content: "";
+    width: 1.1rem;
+    height: 1.5rem;
+    background: var(--ambar);
+    clip-path: polygon(62% 0, 8% 58%, 44% 58%, 34% 100%, 92% 38%, 56% 38%);
+  }
+
+  body > header nav > a b,
+  body > footer address > a:first-of-type b {
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radio-pildora);
+    font-size: 0.78em;
+    color: var(--tinta);
+    background: var(--ambar);
+  }
+
+  body > header nav > button {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid var(--linea-clara);
+    border-radius: var(--radio-pildora);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--nieve);
+    background: transparent;
+  }
+
+  body > header nav > button::after {
+    content: "+";
+    font-size: 1.15rem;
+    line-height: 1;
+    transition: transform var(--transicion);
+  }
+
+  body > header nav > button[aria-expanded="true"]::after {
+    transform: rotate(45deg);
+  }
+
+  body > header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+  }
+
+  body > header nav li:not(:last-of-type) a {
+    padding-block: 0.25rem;
+    font-size: 0.92rem;
+    color: var(--nieve);
+    background: linear-gradient(var(--ambar), var(--ambar)) 0 100% / 0 2px no-repeat;
+    transition: background-size var(--transicion);
+  }
+
+  body > header nav li:not(:last-of-type) a:hover,
+  body > header nav li:not(:last-of-type) a[aria-current="true"] {
+    background-size: 100% 2px;
+  }
+
+  body > header nav li:last-of-type a {
+    padding: 0.7rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  /* =========================================================
+     5. HERO
+     ========================================================= */
+  main > section:nth-of-type(1) {
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 24rem);
+    grid-template-rows: 1fr auto auto auto;
+    column-gap: 3rem;
+    min-height: 100svh;
+    padding-top: calc(var(--alto-cabecera) + 2.5rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    overflow: clip;
+    color: var(--nieve);
+  }
+
+  main > section:nth-of-type(1) > figure {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: 0;
+    background: var(--tinta);
+  }
+
+  main > section:nth-of-type(1) > figure img {
+    object-position: 65% center;
+    animation: acercar 2.6s var(--suave) both;
+  }
+
+  main > section:nth-of-type(1) > figure::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, var(--velo-suave) 0%, transparent 30%, var(--velo) 100%),
+      linear-gradient(90deg, var(--velo) 0%, transparent 75%);
+  }
+
+  /* Estado de guardia (con la hora actual) */
+  main > section:nth-of-type(1) > p:nth-of-type(1) {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: start;
+    font-family: var(--fuente-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lavanda-clara);
+  }
+
+  main > section:nth-of-type(1) > p:nth-of-type(1)::before {
+    content: "";
+    display: inline-block;
+    margin-right: 0.7rem;
+    vertical-align: 0.05em;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--ambar);
+    animation: latido 2s ease-out infinite;
+  }
+
+  main > section:nth-of-type(1) > p:nth-of-type(1) time {
+    color: var(--ambar);
+  }
+
+  /* Titular escalonado */
+  main > section:nth-of-type(1) > h1 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: end;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2.75rem, 10.5vw, 9.5rem);
+    font-stretch: 70%;
+    line-height: 0.94;
+    letter-spacing: -0.015em;
+  }
+
+  main > section:nth-of-type(1) > h1 span {
+    display: block;
+    animation: subir 1.1s var(--suave) both;
+  }
+
+  main > section:nth-of-type(1) > h1 span:nth-of-type(2) {
+    padding-left: 14%;
+    animation-delay: 0.12s;
+  }
+
+  main > section:nth-of-type(1) > h1 span:nth-of-type(3) {
+    text-align: right;
+    animation-delay: 0.24s;
+  }
+
+  main > section:nth-of-type(1) > h1 em {
+    font-style: normal;
+    color: var(--ambar);
+  }
+
+  /* Texto, botones y valoración */
+  main > section:nth-of-type(1) > p:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 3;
+    font-size: 1rem;
+    color: var(--lavanda-clara);
+  }
+
+  main > section:nth-of-type(1) > p:nth-of-type(3) {
+    grid-column: 2;
+    grid-row: 4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  main > section:nth-of-type(1) > p:nth-of-type(4) {
+    grid-column: 1;
+    grid-row: 3 / 5;
+    align-self: end;
+    max-width: 24ch;
+    font-family: var(--fuente-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--lavanda-clara);
+  }
+
+  main > section:nth-of-type(1) > p:nth-of-type(4) strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--fuente);
+    font-size: 2.25rem;
+    font-weight: 600;
+    font-stretch: var(--estrecho);
+    line-height: 1;
+    color: var(--nieve);
+  }
+
+  /* =========================================================
+     6. QUIÉNES SOMOS (marca + cifras)
+     ========================================================= */
+  main > section:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "etiqueta etiqueta etiqueta"
+      "titulo   cifra1   cifra2"
+      "texto    cifra1   cifra2"
+      "foto     cifra3   cifra4";
+  }
+
+  main > section:nth-of-type(2) > p:first-child {
+    grid-area: etiqueta;
+    justify-self: start;
+  }
+
+  main > section:nth-of-type(2) > h2 {
+    grid-area: titulo;
+    font-size: clamp(3rem, 7vw, 6rem);
+  }
+
+  main > section:nth-of-type(2) > h2 small {
+    font-size: 0.42em;
+    font-weight: 400;
+    font-stretch: 100%;
+    vertical-align: middle;
+    color: var(--lavanda);
+  }
+
+  main > section:nth-of-type(2) > p:nth-of-type(2) {
+    grid-area: texto;
+    max-width: 36ch;
+    padding-right: 2rem;
+  }
+
+  main > section:nth-of-type(2) > figure {
+    grid-area: foto;
+    align-self: end;
+    aspect-ratio: 4 / 3;
+    margin: 3rem 3rem 0 0;
+  }
+
+  main > section:nth-of-type(2) > article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 16rem;
+    padding: 1.75rem;
+    border-top: 1px solid var(--linea);
+    border-left: 1px solid var(--linea);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(1) { grid-area: cifra1; }
+  main > section:nth-of-type(2) > article:nth-of-type(2) { grid-area: cifra2; }
+  main > section:nth-of-type(2) > article:nth-of-type(3) { grid-area: cifra3; }
+  main > section:nth-of-type(2) > article:nth-of-type(4) { grid-area: cifra4; }
+
+  main > section:nth-of-type(2) > article p {
+    max-width: 22ch;
+    font-size: 0.95rem;
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(2) > article data {
+    align-self: flex-end;
+    font-size: clamp(3.2rem, 6vw, 5.5rem);
+    font-weight: 500;
+    font-stretch: var(--estrecho);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(1) data::before {
+    content: "+";
+    color: var(--lavanda);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(2) data::after {
+    content: "s";
+    font-size: 0.4em;
+    color: var(--lavanda);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(3) data::after {
+    content: "/5";
+    font-size: 0.4em;
+    color: var(--lavanda);
+  }
+
+  /* Celda oscura con la promesa de precio */
+  main > section:nth-of-type(2) > article:nth-of-type(4) {
+    border: 0;
+    border-radius: var(--radio-foto);
+    color: var(--nieve);
+    background: var(--tinta);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(4) p {
+    max-width: 20ch;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: var(--nieve);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(4) a {
+    align-self: flex-start;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ambar);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(4) a span {
+    display: inline-block;
+    transition: transform var(--transicion);
+  }
+
+  main > section:nth-of-type(2) > article:nth-of-type(4) a:hover span {
+    transform: translateX(0.35rem);
+  }
+
+  /* =========================================================
+     7. URGENCIAS
+     ========================================================= */
+  main > section:nth-of-type(3) {
+    isolation: isolate;
+    overflow: clip;
+  }
+
+  main > section:nth-of-type(3)::before {
+    content: "urgencias";
+    position: absolute;
+    top: clamp(2.5rem, 6vw, 4.5rem);
+    right: -0.04em;
+    z-index: -1;
+    font-size: clamp(5rem, 17vw, 16rem);
+    font-weight: 700;
+    font-stretch: 68%;
+    line-height: 1;
+    color: var(--fantasma);
+    pointer-events: none;
+  }
+
+  main > section:nth-of-type(3) > ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 4rem;
+    margin-top: 4rem;
+    counter-reset: aviso;
+  }
+
+  main > section:nth-of-type(3) > ul li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    column-gap: 1rem;
+    align-content: start;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--linea);
+    counter-increment: aviso;
+  }
+
+  main > section:nth-of-type(3) > ul li:nth-last-of-type(-n + 2) {
+    border-bottom: 1px solid var(--linea);
+  }
+
+  main > section:nth-of-type(3) > ul li::before {
+    content: counter(aviso, decimal-leading-zero);
+    grid-row: 1 / 3;
+    padding-top: 0.2rem;
+    font-family: var(--fuente-mono);
+    font-size: 0.82rem;
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(3) > ul h3 {
+    grid-column: 2;
+    transition: transform var(--transicion);
+  }
+
+  main > section:nth-of-type(3) > ul li:hover h3 {
+    transform: translateX(0.35rem);
+  }
+
+  main > section:nth-of-type(3) > ul p {
+    grid-column: 2;
+    margin-top: 0.35rem;
+    font-size: 0.98rem;
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(3) > ul mark {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radio-pildora);
+    font-family: var(--fuente-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--tinta);
+    background: var(--ambar);
+  }
+
+  /* =========================================================
+     8. CÓMO TRABAJAMOS (sección oscura)
+     ========================================================= */
+  main > section:nth-of-type(4) {
+    color: var(--nieve);
+    background: var(--tinta);
+  }
+
+  main > section:nth-of-type(4) > p:first-child,
+  main > section:nth-of-type(4) > h2 + p {
+    color: var(--lavanda-clara);
+  }
+
+  main > section:nth-of-type(4) > ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 4.5rem;
+    counter-reset: paso;
+  }
+
+  main > section:nth-of-type(4) > ol li {
+    position: relative;
+    padding: 2.5rem 2.25rem 0 0;
+    border-top: 1px solid var(--linea-clara);
+    counter-increment: paso;
+  }
+
+  main > section:nth-of-type(4) > ol li::before {
+    content: counter(paso, decimal-leading-zero);
+    display: block;
+    margin-bottom: 2rem;
+    font-size: clamp(4.5rem, 9vw, 8rem);
+    font-weight: 600;
+    font-stretch: 68%;
+    line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--lavanda);
+    transition: color var(--transicion), -webkit-text-stroke-color var(--transicion);
+  }
+
+  main > section:nth-of-type(4) > ol li::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 3rem;
+    height: 3px;
+    background: var(--ambar);
+    transition: width 0.6s var(--suave);
+  }
+
+  main > section:nth-of-type(4) > ol li:hover::before {
+    color: var(--ambar);
+    -webkit-text-stroke-color: var(--ambar);
+  }
+
+  main > section:nth-of-type(4) > ol li:hover::after {
+    width: 100%;
+  }
+
+  main > section:nth-of-type(4) > ol h3 {
+    font-size: 1.3rem;
+  }
+
+  main > section:nth-of-type(4) > ol p {
+    max-width: 32ch;
+    margin-top: 0.6rem;
+    color: var(--lavanda-clara);
+  }
+
+  /* =========================================================
+     9. TÉCNICOS
+     ========================================================= */
+  main > section:nth-of-type(5) {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-rows: 1fr auto auto auto auto 1fr;
+    column-gap: clamp(2.5rem, 7vw, 6.5rem);
+  }
+
+  main > section:nth-of-type(5) > p:first-child { grid-column: 2; grid-row: 2; justify-self: start; }
+  main > section:nth-of-type(5) > h2 { grid-column: 2; grid-row: 3; }
+  main > section:nth-of-type(5) > p:nth-of-type(2) { grid-column: 2; grid-row: 4; }
+
+  main > section:nth-of-type(5) > ul {
+    grid-column: 2;
+    grid-row: 5;
+    margin-top: 2.5rem;
+  }
+
+  main > section:nth-of-type(5) > ul li {
+    position: relative;
+    padding: 1.2rem 0 1.2rem 2.75rem;
+    border-bottom: 1px solid var(--linea);
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(5) > ul li:first-of-type {
+    border-top: 1px solid var(--linea);
+  }
+
+  main > section:nth-of-type(5) > ul li::before {
+    content: "✓";
+    position: absolute;
+    top: 1.25rem;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--tinta);
+    background: var(--ambar);
+  }
+
+  main > section:nth-of-type(5) > ul strong {
+    color: var(--tinta);
+  }
+
+  main > section:nth-of-type(5) > figure {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    aspect-ratio: 4 / 5;
+  }
+
+  main > section:nth-of-type(5) > figure figcaption {
+    position: absolute;
+    left: 1.25rem;
+    bottom: 1.25rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    column-gap: 0.85rem;
+    padding: 0.75rem 1.4rem 0.75rem 0.75rem;
+    border-radius: var(--radio-pildora);
+    font-size: 0.92rem;
+    line-height: 1.3;
+    background: var(--nieve);
+    box-shadow: var(--sombra-flotante);
+  }
+
+  main > section:nth-of-type(5) > figure figcaption::before {
+    content: "✓";
+    grid-row: 1 / 3;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    font-weight: 700;
+    color: var(--tinta);
+    background: var(--ambar);
+  }
+
+  main > section:nth-of-type(5) > figure figcaption small {
+    font-size: 0.8rem;
+    color: var(--tinta-suave);
+  }
+
+  /* =========================================================
+     10. LO QUE REPARAMOS (tira de fotos)
+     ========================================================= */
+  main > section:nth-of-type(6) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 0.375rem;
+    padding-inline: 0;
+  }
+
+  main > section:nth-of-type(6) > p:first-child,
+  main > section:nth-of-type(6) > h2 {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-left: var(--margen);
+  }
+
+  main > section:nth-of-type(6) > h2 {
+    max-width: 18ch;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  main > section:nth-of-type(6) > figure {
+    height: clamp(20rem, 38vw, 34rem);
+    border-radius: 0;
+  }
+
+  main > section:nth-of-type(6) > figure img {
+    transition: transform 1.2s var(--suave);
+  }
+
+  main > section:nth-of-type(6) > figure:hover img {
+    transform: scale(1.05);
+  }
+
+  main > section:nth-of-type(6) > figure::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, var(--velo) 0%, transparent 45%);
+    pointer-events: none;
+  }
+
+  main > section:nth-of-type(6) > figure figcaption {
+    position: absolute;
+    left: 1.1rem;
+    bottom: 1.25rem;
+    z-index: 1;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--nieve);
+  }
+
+  main > section:nth-of-type(6) > article {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--ambar);
+  }
+
+  main > section:nth-of-type(6) > article data {
+    font-size: clamp(4rem, 9vw, 8rem);
+    font-weight: 600;
+    font-stretch: 68%;
+    line-height: 0.85;
+  }
+
+  main > section:nth-of-type(6) > article p {
+    max-width: 18ch;
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* =========================================================
+     11. LA DIFERENCIA (tabla comparativa)
+     ========================================================= */
+  main > section:nth-of-type(7) > table {
+    width: 100%;
+    margin-top: 3.5rem;
+    border-collapse: collapse;
+  }
+
+  main > section:nth-of-type(7) th,
+  main > section:nth-of-type(7) td {
+    padding: 1.35rem 1.4rem;
+    border-bottom: 1px solid var(--linea);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  main > section:nth-of-type(7) thead th {
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(7) thead th:nth-of-type(2) {
+    border-bottom-color: var(--linea-clara);
+    border-radius: var(--radio-foto) var(--radio-foto) 0 0;
+    color: var(--ambar);
+    background: var(--tinta);
+  }
+
+  main > section:nth-of-type(7) tbody th {
+    width: 22%;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-stretch: 85%;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  main > section:nth-of-type(7) tbody td:nth-of-type(1) {
+    border-bottom-color: var(--linea-clara);
+    font-weight: 500;
+    color: var(--nieve);
+    background: var(--tinta);
+  }
+
+  main > section:nth-of-type(7) tbody tr:last-of-type td:nth-of-type(1) {
+    border-radius: 0 0 var(--radio-foto) var(--radio-foto);
+  }
+
+  main > section:nth-of-type(7) tbody td:nth-of-type(2) {
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(7) tbody td::before {
+    display: inline-grid;
+    place-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.75rem;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    vertical-align: -0.2em;
+  }
+
+  main > section:nth-of-type(7) tbody td:nth-of-type(1)::before {
+    content: "✓";
+    color: var(--tinta);
+    background: var(--ambar);
+  }
+
+  main > section:nth-of-type(7) tbody td:nth-of-type(2)::before {
+    content: "✕";
+    border: 1px solid var(--lavanda);
+    color: var(--tinta-suave);
+  }
+
+  /* =========================================================
+     12. OPINIONES
+     ========================================================= */
+  main > section:nth-of-type(8) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(1.5rem, 3vw, 2.75rem);
+  }
+
+  main > section:nth-of-type(8) > p:first-child,
+  main > section:nth-of-type(8) > h2,
+  main > section:nth-of-type(8) > p:nth-of-type(2) {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  main > section:nth-of-type(8) > p:nth-of-type(2) {
+    margin-bottom: 3.5rem;
+  }
+
+  main > section:nth-of-type(8) > article {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 1.75rem;
+    border-top: 2px solid var(--tinta);
+  }
+
+  main > section:nth-of-type(8) > article > p:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+  }
+
+  main > section:nth-of-type(8) > article > p:first-of-type::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--ambar);
+  }
+
+  main > section:nth-of-type(8) > article blockquote {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+
+  main > section:nth-of-type(8) > article blockquote::before {
+    content: "“";
+    display: block;
+    height: 2.2rem;
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--lavanda);
+  }
+
+  main > section:nth-of-type(8) > article > p:last-of-type {
+    margin-top: auto;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  /* =========================================================
+     13. LLAMADA FINAL (bloque ámbar)
+     ========================================================= */
+  main > section:nth-of-type(9) {
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    column-gap: 4rem;
+    align-items: end;
+    overflow: clip;
+    background: var(--ambar);
+  }
+
+  main > section:nth-of-type(9)::before {
+    content: "";
+    position: absolute;
+    top: -12%;
+    right: -3%;
+    z-index: -1;
+    width: clamp(14rem, 30vw, 28rem);
+    aspect-ratio: 3 / 4;
+    background: var(--tinta);
+    opacity: 0.07;
+    clip-path: polygon(62% 0, 8% 58%, 44% 58%, 34% 100%, 92% 38%, 56% 38%);
+  }
+
+  main > section:nth-of-type(9) > h2 {
+    grid-column: 1;
+    max-width: 14ch;
+    font-size: clamp(2.6rem, 6.5vw, 6rem);
+  }
+
+  main > section:nth-of-type(9) > h2 + p {
+    grid-column: 1;
+    color: var(--tinta);
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    justify-self: end;
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(2) a {
+    display: inline-block;
+    padding-bottom: 0.3rem;
+    border-bottom: 3px solid var(--tinta);
+    font-size: clamp(2.4rem, 5.5vw, 5rem);
+    font-weight: 600;
+    font-stretch: var(--estrecho);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(2) a::before {
+    content: "Teléfono de guardia";
+    display: block;
+    margin-bottom: 0.9rem;
+    font-family: var(--fuente-mono);
+    font-size: 0.78rem;
+    font-weight: 400;
+    font-stretch: 100%;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(3) {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 3rem;
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(3) a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.95rem 1.6rem;
+    border: 1.5px solid var(--tinta);
+    border-radius: var(--radio-pildora);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(3) a:first-of-type {
+    color: var(--nieve);
+    background: var(--tinta);
+  }
+
+  main > section:nth-of-type(9) > p:nth-of-type(3) a:hover {
+    color: var(--nieve);
+    background: var(--tinta);
+    transform: translateY(-2px);
+  }
+
+  /* =========================================================
+     14. PREGUNTAS FRECUENTES
+     ========================================================= */
+  main > section:nth-of-type(10) {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    column-gap: clamp(2.5rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  main > section:nth-of-type(10) > header {
+    grid-column: 1;
+    grid-row: 1 / span 6;
+    position: sticky;
+    top: calc(var(--alto-cabecera) + 2rem);
+  }
+
+  main > section:nth-of-type(10) > details {
+    grid-column: 2;
+    border-top: 1px solid var(--linea);
+  }
+
+  main > section:nth-of-type(10) > details:last-of-type {
+    border-bottom: 1px solid var(--linea);
+  }
+
+  main > section:nth-of-type(10) summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    font-size: 1.12rem;
+    font-weight: 600;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  main > section:nth-of-type(10) summary::-webkit-details-marker {
+    display: none;
+  }
+
+  main > section:nth-of-type(10) summary::after {
+    content: "+";
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--linea);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 400;
+    transition: transform var(--transicion), background var(--transicion), border-color var(--transicion);
+  }
+
+  main > section:nth-of-type(10) details[open] summary::after {
+    border-color: var(--ambar);
+    background: var(--ambar);
+    transform: rotate(45deg);
+  }
+
+  main > section:nth-of-type(10) details p {
+    max-width: 60ch;
+    padding: 0 3.5rem 1.6rem 0;
+    color: var(--tinta-suave);
+  }
+
+  /* =========================================================
+     15. PIE DE PÁGINA
+     ========================================================= */
+  body > footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+      "marca    servicios cobertura empresa"
+      "gigante  gigante   gigante   gigante"
+      "firma    firma     legal     legal";
+    padding: clamp(4rem, 8vw, 6rem) var(--margen) 0;
+    overflow: clip;
+    color: var(--lavanda-clara);
+    background: var(--tinta);
+  }
+
+  body > footer address {
+    grid-area: marca;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding-right: 2rem;
+    font-style: normal;
+  }
+
+  body > footer address p:first-of-type {
+    max-width: 30ch;
+    font-size: 0.95rem;
+  }
+
+  body > footer address a:nth-of-type(2) {
+    font-size: 1.75rem;
+    font-weight: 600;
+    font-stretch: 80%;
+    color: var(--ambar);
+  }
+
+  body > footer address p:nth-of-type(2) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  body > footer address p:nth-of-type(2)::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--ambar);
+    animation: latido 2s ease-out infinite;
+  }
+
+  body > footer nav:nth-of-type(1) { grid-area: servicios; }
+  body > footer nav:nth-of-type(2) { grid-area: cobertura; }
+  body > footer nav:nth-of-type(3) { grid-area: empresa; }
+
+  body > footer nav h2 {
+    margin-bottom: 1.25rem;
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-stretch: 100%;
+    letter-spacing: 0.14em;
+    color: var(--lavanda-clara);
+  }
+
+  body > footer nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  body > footer nav a {
+    font-size: 0.95rem;
+    color: var(--lavanda-clara);
+    transition: color var(--transicion);
+  }
+
+  body > footer nav a:hover {
+    color: var(--ambar);
+  }
+
+  /* Marca gigante de fondo (decorativa, generada con CSS) */
+  body > footer::after {
+    content: "Electro Rápido";
+    grid-area: gigante;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    font-size: min(12.6rem, calc((100vw - 2.75rem) / 6.15));
+    font-weight: 700;
+    font-stretch: 66%;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: color-mix(in srgb, var(--nieve) 7%, transparent);
+    user-select: none;
+  }
+
+  body > footer > p,
+  body > footer nav:nth-of-type(4) {
+    padding: 1.5rem 0 2rem;
+    border-top: 1px solid var(--linea-clara);
+    font-size: 0.85rem;
+  }
+
+  body > footer > p { grid-area: firma; }
+  body > footer nav:nth-of-type(4) { grid-area: legal; }
+
+  body > footer > p a {
+    color: var(--nieve);
+    transition: color var(--transicion);
+  }
+
+  body > footer > p a:hover {
+    color: var(--ambar);
+  }
+
+  body > footer nav:nth-of-type(4) ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+
+  body > footer nav:nth-of-type(4) a {
+    font-size: 0.85rem;
+  }
+
+  /* Barra de contacto fija (solo móvil) */
+  body > aside {
+    position: fixed;
+    inset: auto 0.75rem 0.75rem;
+    z-index: 60;
+    display: none;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: var(--radio-pildora);
+    background: var(--tinta);
+    box-shadow: var(--sombra-flotante);
+    transition: transform 0.45s var(--suave);
+  }
+
+  body > aside a {
+    flex: 1;
+  }
+
+  body[data-scroll="no"] > aside {
+    transform: translateY(160%);
+  }
+
+  /* =========================================================
+     16. ANIMACIONES
+     ========================================================= */
+  @keyframes latido {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ambar) 70%, transparent); }
+    70%  { box-shadow: 0 0 0 0.6rem transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+
+  @keyframes subir {
+    from { opacity: 0; transform: translateY(35%); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes acercar {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* =========================================================
+     17. RESPONSIVE
+     ========================================================= */
+  @media (max-width: 1024px) {
+    main > section:nth-of-type(2) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        "etiqueta etiqueta"
+        "titulo   titulo"
+        "texto    texto"
+        "foto     foto"
+        "cifra1   cifra2"
+        "cifra3   cifra4";
+    }
+
+    main > section:nth-of-type(2) > p:nth-of-type(2) {
+      max-width: 46ch;
+      padding-right: 0;
+    }
+
+    main > section:nth-of-type(2) > figure {
+      aspect-ratio: 16 / 9;
+      margin: 3rem 0;
+    }
+
+    body > footer {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-areas:
+        "marca     marca     marca"
+        "servicios cobertura empresa"
+        "gigante   gigante   gigante"
+        "firma     firma     legal";
+      row-gap: 3rem;
+    }
+
+    body > footer::after {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 900px) {
+    /* Cabecera con menú plegable */
+    body > header nav > button {
+      display: inline-flex;
+    }
+
+    body > header nav ul {
+      position: absolute;
+      top: calc(100% + 0.25rem);
+      left: 0.75rem;
+      right: 0.75rem;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.75rem 1.25rem 1.25rem;
+      border-radius: 1.25rem;
+      background: var(--tinta);
+      box-shadow: var(--sombra-flotante);
+    }
+
+    body > header nav > button[aria-expanded="true"] + ul {
+      display: flex;
+    }
+
+    body > header nav li:not(:last-of-type) a {
+      display: block;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--linea-clara);
+      font-size: 1.05rem;
+      background: none;
+    }
+
+    body > header nav li:last-of-type a {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.95rem 1.6rem;
+    }
+
+    /* Hero en una columna */
+    main > section:nth-of-type(1) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: 1fr auto auto auto auto;
+    }
+
+    main > section:nth-of-type(1) > p:nth-of-type(2) { grid-column: 1; grid-row: 3; }
+    main > section:nth-of-type(1) > p:nth-of-type(3) { grid-column: 1; grid-row: 4; }
+
+    main > section:nth-of-type(1) > p:nth-of-type(4) {
+      grid-column: 1;
+      grid-row: 5;
+      margin-top: 2.25rem;
+    }
+
+    main > section:nth-of-type(1) > h1 span:nth-of-type(2) {
+      padding-left: 8%;
+    }
+
+    /* Listas y rejillas a una columna */
+    main > section:nth-of-type(3) > ul,
+    main > section:nth-of-type(4) > ol {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    main > section:nth-of-type(3)::before {
+      top: 0.25rem;
+      font-size: 3.75rem;
+    }
+
+    main > section:nth-of-type(3) > ul li:nth-last-of-type(-n + 2) {
+      border-bottom: 0;
+    }
+
+    main > section:nth-of-type(3) > ul li:last-of-type {
+      border-bottom: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(4) > ol li {
+      padding: 2rem 0 2.5rem;
+    }
+
+    main > section:nth-of-type(5) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: none;
+    }
+
+    main > section:nth-of-type(5) > * {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    main > section:nth-of-type(5) > p:first-child { grid-column: 1; grid-row: auto; }
+    main > section:nth-of-type(5) > h2 { grid-column: 1; grid-row: auto; }
+    main > section:nth-of-type(5) > p:nth-of-type(2) { grid-column: 1; grid-row: auto; }
+    main > section:nth-of-type(5) > ul { grid-column: 1; grid-row: auto; }
+
+    main > section:nth-of-type(5) > figure {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 3rem;
+    }
+
+    main > section:nth-of-type(6) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 0.375rem;
+    }
+
+    main > section:nth-of-type(6) > figure {
+      height: clamp(15rem, 52vw, 24rem);
+    }
+
+    main > section:nth-of-type(8) {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 3rem;
+    }
+
+    main > section:nth-of-type(8) > p:nth-of-type(2) {
+      margin-bottom: 0;
+    }
+
+    main > section:nth-of-type(9) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    main > section:nth-of-type(9) > p:nth-of-type(2) {
+      grid-column: 1;
+      grid-row: auto;
+      justify-self: start;
+      margin-top: 3rem;
+    }
+
+    main > section:nth-of-type(10) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    main > section:nth-of-type(10) > header {
+      grid-row: auto;
+      position: static;
+      margin-bottom: 3rem;
+    }
+
+    main > section:nth-of-type(10) > details {
+      grid-column: 1;
+    }
+
+    /* Barra fija y espacio para ella en el pie */
+    body > aside {
+      display: flex;
+    }
+
+    body > footer {
+      padding-bottom: 5.5rem;
+    }
+  }
+
+  @media (max-width: 700px) {
+    /* La tabla pasa a filas apiladas */
+    main > section:nth-of-type(7) > table,
+    main > section:nth-of-type(7) thead,
+    main > section:nth-of-type(7) tbody {
+      display: block;
+    }
+
+    main > section:nth-of-type(7) tr {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    main > section:nth-of-type(7) thead th:first-of-type {
+      display: none;
+    }
+
+    main > section:nth-of-type(7) th,
+    main > section:nth-of-type(7) td {
+      padding: 1rem;
+      font-size: 0.92rem;
+    }
+
+    main > section:nth-of-type(7) tbody th {
+      grid-column: 1 / -1;
+      width: auto;
+      padding: 1.5rem 0 0.6rem;
+      border-bottom: 0;
+      font-size: 0.82rem;
+    }
+
+    main > section:nth-of-type(7) thead th:nth-of-type(2),
+    main > section:nth-of-type(7) tbody td:nth-of-type(1),
+    main > section:nth-of-type(7) tbody tr:last-of-type td:nth-of-type(1) {
+      border-radius: var(--radio-foto);
+    }
+
+    main > section:nth-of-type(7) tbody td::before {
+      display: grid;
+      margin: 0 0 0.6rem;
+    }
+
+    body > footer {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        "marca     marca"
+        "servicios cobertura"
+        "empresa   empresa"
+        "gigante   gigante"
+        "firma     firma"
+        "legal     legal";
+    }
+
+    body > footer nav:nth-of-type(4) {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    body > footer nav:nth-of-type(4) ul {
+      justify-content: flex-start;
+      gap: 0.5rem 1rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    main > section:nth-of-type(1) > p:nth-of-type(3) a {
+      flex: 1 1 100%;
+    }
+
+    main > section:nth-of-type(2) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        "etiqueta"
+        "titulo"
+        "texto"
+        "foto"
+        "cifra1"
+        "cifra2"
+        "cifra3"
+        "cifra4";
+    }
+
+    main > section:nth-of-type(2) > article {
+      min-height: 12rem;
+      border-left: 0;
+      padding-inline: 0;
+    }
+
+    main > section:nth-of-type(2) > article:nth-of-type(4) {
+      margin-top: 1rem;
+      padding-inline: 1.5rem;
+    }
+
+    main > section:nth-of-type(3) > ul li {
+      grid-template-columns: 2.25rem minmax(0, 1fr);
+    }
+
+    main > section:nth-of-type(3) > ul mark {
+      grid-column: 2;
+      grid-row: auto;
+      justify-self: start;
+      margin-top: 0.75rem;
+    }
+
+    main > section:nth-of-type(9) > p:nth-of-type(3) a {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+
+    main > section:nth-of-type(10) details p {
+      padding-right: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- CABECERA -->
+<header>
+  <nav aria-label="Navegación principal">
+    <a href="#inicio" aria-label="Electro Rápido 24h, ir al inicio">Electro Rápido <b>24h</b></a>
+    <button type="button" aria-expanded="false" aria-controls="menu-principal">Menú</button>
+    <ul id="menu-principal">
+      <li><a href="#urgencias">Urgencias</a></li>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#tecnicos">Técnicos</a></li>
+      <li><a href="#opiniones">Opiniones</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+      <li><a href="tel:+34900000000">Llamar ahora</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="inicio" aria-labelledby="titulo-inicio">
+    <figure>
+      <img src="imagenes/hero-electricista.jpg" alt="Electricista con casco amarillo comprobando una instalación con un medidor" width="1800" height="1202" fetchpriority="high">
+    </figure>
+    <p>Guardia activa ahora <time hidden></time> · 24 h / 365 días</p>
+    <h1 id="titulo-inicio">
+      <span>Confirmamos</span>
+      <span>un técnico</span>
+      <span>en <em>60 segundos</em></span>
+    </h1>
+    <p>Corte de luz, cortocircuito u olor a quemado. Guardia activa las 24 horas con precio cerrado antes de tocar un cable. Al otro lado del teléfono contesta una persona.</p>
+    <p>
+      <a href="tel:+34900000000">Llamar ahora</a>
+      <a href="https://wa.me/34900000000">Enviar ubicación por WhatsApp</a>
+    </p>
+    <p><strong>4,8/5</strong> en más de 1.200 valoraciones verificadas</p>
+  </section>
+
+  <!-- QUIÉNES SOMOS -->
+  <section id="nosotros" aria-labelledby="titulo-nosotros">
+    <p>01 — Quiénes somos</p>
+    <h2 id="titulo-nosotros">Luz <small>&amp;</small> calma,</h2>
+    <p>Una avería eléctrica no tiene por qué convertirse en una noche de nervios. Respondemos en un minuto, cerramos el precio antes de empezar y dejamos la garantía por escrito.</p>
+    <figure>
+      <img src="imagenes/bombilla.jpg" alt="Bombilla encendida colgando de un cable en la oscuridad" width="1100" height="733" loading="lazy">
+    </figure>
+    <article>
+      <p>Avisos resueltos desde que abrimos la primera guardia nocturna.</p>
+      <data value="15000">15.000</data>
+    </article>
+    <article>
+      <p>Segundos de media entre tu llamada y saber qué técnico viene.</p>
+      <data value="60">60</data>
+    </article>
+    <article>
+      <p>Valoración media sobre más de 1.200 opiniones verificadas.</p>
+      <data value="4.8">4,8</data>
+    </article>
+    <article>
+      <p>Precio cerrado antes de tocar un cable. Lo que se acuerda por teléfono es lo que se paga.</p>
+      <a href="#proceso">Ver cómo trabajamos <span aria-hidden="true">→</span></a>
+    </article>
+  </section>
+
+  <!-- URGENCIAS -->
+  <section id="urgencias" aria-labelledby="titulo-urgencias">
+    <p>02 — Urgencias</p>
+    <h2 id="titulo-urgencias">Si te pasa esto ahora, es nuestro trabajo.</h2>
+    <p>No hace falta que sepas qué es. Descríbelo por teléfono y nosotros nos ocupamos.</p>
+    <ul>
+      <li>
+        <h3>Cortocircuito repentino</h3>
+        <p>Chispas, ruido o apagón instantáneo en toda la casa.</p>
+        <mark>Riesgo alto</mark>
+      </li>
+      <li>
+        <h3>El diferencial salta y no vuelve</h3>
+        <p>Restableces la luz y se corta otra vez a los pocos segundos.</p>
+      </li>
+      <li>
+        <h3>Apagón solo en tu vivienda</h3>
+        <p>El resto del edificio o la calle tiene luz; tu casa, no.</p>
+      </li>
+      <li>
+        <h3>Olor a quemado o plástico fundido</h3>
+        <p>Señal de riesgo real. Cortamos el suministro y localizamos el origen.</p>
+        <mark>Riesgo alto</mark>
+      </li>
+      <li>
+        <h3>Avería en cuadro industrial</h3>
+        <p>Tu negocio se ha parado y cada hora cuesta dinero.</p>
+      </li>
+      <li>
+        <h3>Instalación que da calambre</h3>
+        <p>Un enchufe o interruptor que «pica» al tocarlo. No esperes.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CÓMO TRABAJAMOS -->
+  <section id="proceso" aria-labelledby="titulo-proceso">
+    <p>03 — Cómo trabajamos</p>
+    <h2 id="titulo-proceso">Tres pasos, nada más.</h2>
+    <p>De la llamada a la reparación, sin sorpresas por el camino.</p>
+    <ol>
+      <li>
+        <h3>Llamas o compartes tu ubicación</h3>
+        <p>Un botón de llamada o WhatsApp. Nos das la dirección y el problema en una frase.</p>
+      </li>
+      <li>
+        <h3>Un técnico confirma en 60 segundos</h3>
+        <p>Te decimos quién viene y a qué hora, por SMS o WhatsApp.</p>
+      </li>
+      <li>
+        <h3>Repara y te deja garantía por escrito</h3>
+        <p>Presupuesto cerrado, trabajo hecho y papel en mano.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- TÉCNICOS -->
+  <section id="tecnicos" aria-labelledby="titulo-tecnicos">
+    <p>04 — Técnicos</p>
+    <h2 id="titulo-tecnicos">Sabes exactamente quién entra en tu casa.</h2>
+    <p>Antes de asignar un aviso comprobamos tres cosas. No mandamos a cualquiera a tocar tu instalación.</p>
+    <ul>
+      <li><strong>Licencia de instalador eléctrico</strong> vigente y verificada.</li>
+      <li><strong>Seguro de responsabilidad civil</strong> activo en cada intervención.</li>
+      <li><strong>Historial de valoraciones</strong> real de avisos anteriores.</li>
+    </ul>
+    <figure>
+      <img src="imagenes/tecnico-verificado.jpg" alt="Electricista con casco amarillo y guantes revisando una instalación" width="880" height="1100" loading="lazy">
+      <figcaption><strong>Técnico verificado</strong> <small>4,9 ★ · licencia al día</small></figcaption>
+    </figure>
+  </section>
+
+  <!-- LO QUE REPARAMOS -->
+  <section id="trabajos" aria-labelledby="titulo-trabajos">
+    <p>05 — Lo que reparamos</p>
+    <h2 id="titulo-trabajos">Del enchufe de casa al cuadro de una nave.</h2>
+    <figure>
+      <img src="imagenes/trabajo-instalaciones.jpg" alt="Instalador trabajando en una caja de conexiones eléctricas en una fachada" width="900" height="506" loading="lazy">
+      <figcaption>Cuadros e instalaciones</figcaption>
+    </figure>
+    <figure>
+      <img src="imagenes/trabajo-lineas.jpg" alt="Operario con casco y arnés reparando una línea eléctrica aérea" width="900" height="600" loading="lazy">
+      <figcaption>Líneas y acometidas</figcaption>
+    </figure>
+    <figure>
+      <img src="imagenes/trabajo-medicion.jpg" alt="Electricista midiendo un cuadro eléctrico con un multímetro" width="900" height="675" loading="lazy">
+      <figcaption>Diagnóstico y medición</figcaption>
+    </figure>
+    <article>
+      <data value="365">365</data>
+      <p>días al año de guardia, festivos y madrugadas incluidos.</p>
+    </article>
+  </section>
+
+  <!-- LA DIFERENCIA -->
+  <section id="diferencia" aria-labelledby="titulo-diferencia">
+    <p>06 — La diferencia</p>
+    <h2 id="titulo-diferencia">La diferencia se nota a las 3 de la madrugada.</h2>
+    <table aria-labelledby="titulo-diferencia">
+      <thead>
+        <tr>
+          <th scope="col">Lo que importa</th>
+          <th scope="col">Electro Rápido 24h</th>
+          <th scope="col">Un electricista cualquiera</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Respuesta</th>
+          <td>Confirmación en 60 segundos</td>
+          <td>Te devuelve la llamada cuando puede</td>
+        </tr>
+        <tr>
+          <th scope="row">Horario</th>
+          <td>Guardia real los 365 días</td>
+          <td>Solo en horario comercial</td>
+        </tr>
+        <tr>
+          <th scope="row">Presupuesto</th>
+          <td>Cerrado por adelantado</td>
+          <td>Crece sobre la marcha</td>
+        </tr>
+        <tr>
+          <th scope="row">Técnico</th>
+          <td>Licenciado y asegurado</td>
+          <td>Difícil de verificar</td>
+        </tr>
+        <tr>
+          <th scope="row">Garantía</th>
+          <td>Por escrito</td>
+          <td>De palabra</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- OPINIONES -->
+  <section id="opiniones" aria-labelledby="titulo-opiniones">
+    <p>07 — Opiniones</p>
+    <h2 id="titulo-opiniones">Lo que dicen quienes ya nos llamaron.</h2>
+    <p>4,8 de media en más de 1.200 valoraciones verificadas.</p>
+    <article>
+      <p>02:14 · Corte de luz</p>
+      <blockquote>
+        <p>Se saltó el diferencial de madrugada con mi hija de dos años en casa. Confirmaron técnico en menos de un minuto y nos dejaron todo funcionando sin sustos.</p>
+      </blockquote>
+      <p>Marta G. — Vivienda particular</p>
+    </article>
+    <article>
+      <p>Domingo · Cuadro comercial</p>
+      <blockquote>
+        <p>Se nos quemó el cuadro del local antes de abrir. Precio cerrado por teléfono, sin rodeos, y en un rato ya estábamos facturando otra vez.</p>
+      </blockquote>
+      <p>Javier R. — Negocio local</p>
+    </article>
+    <article>
+      <p>23:40 · Olor a quemado</p>
+      <blockquote>
+        <p>Olía a quemado en el pasillo un viernes por la noche. Llegaron rapidísimo y con la tranquilidad de saber que eran profesionales certificados.</p>
+      </blockquote>
+      <p>Laura M. — Vivienda particular</p>
+    </article>
+  </section>
+
+  <!-- LLAMADA FINAL -->
+  <section id="llamar" aria-labelledby="titulo-llamar">
+    <h2 id="titulo-llamar">Cada minuto con un cable suelto es un riesgo.</h2>
+    <p>Nuestros técnicos de guardia están disponibles ahora. Cuéntanos qué pasa y confirmamos respuesta en 60 segundos.</p>
+    <p><a href="tel:+34900000000">900 000 000</a></p>
+    <p>
+      <a href="tel:+34900000000">Llamar ahora</a>
+      <a href="https://wa.me/34900000000">WhatsApp inmediato</a>
+    </p>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <section id="preguntas" aria-labelledby="titulo-preguntas">
+    <header>
+      <p>08 — Preguntas frecuentes</p>
+      <h2 id="titulo-preguntas">Lo que todo el mundo pregunta.</h2>
+      <p>¿No encuentras tu duda? Llámanos y te lo explicamos en un minuto.</p>
+    </header>
+    <details open>
+      <summary>¿Cuánto cuesta una intervención de noche o en fin de semana?</summary>
+      <p>El precio se comunica y se cierra contigo antes de intervenir, tanto de día como de noche o festivos. No aplicamos recargos ocultos: lo que se acuerda por teléfono es lo que se paga.</p>
+    </details>
+    <details>
+      <summary>¿En qué zonas tenéis cobertura?</summary>
+      <p>Al compartir tu ubicación o código postal te confirmamos al instante si tienes cobertura de respuesta en 60 segundos.</p>
+    </details>
+    <details>
+      <summary>¿Qué métodos de pago aceptáis?</summary>
+      <p>Efectivo, tarjeta y transferencia inmediata. El técnico lleva datáfono móvil, así que no necesitas tener efectivo en casa.</p>
+    </details>
+    <details>
+      <summary>¿Es de fiar el electricista que va a venir a mi casa?</summary>
+      <p>Todos nuestros técnicos son licenciados, certificados y están asegurados. Te confirmamos el nombre del técnico asignado antes de que llegue.</p>
+    </details>
+    <details>
+      <summary>¿Qué pasa si el problema no se resuelve en la primera visita?</summary>
+      <p>El técnico te lo explica en el momento, con presupuesto cerrado para cualquier trabajo adicional. No tienes obligación de aceptarlo en el acto.</p>
+    </details>
+    <details>
+      <summary>¿De verdad tardáis solo 60 segundos?</summary>
+      <p>Ese es el tiempo de confirmación: te decimos qué técnico viene y a qué hora llega. El tiempo de llegada física depende de tu ubicación.</p>
+    </details>
+  </section>
+
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+  <address>
+    <a href="#inicio" aria-label="Electro Rápido 24h, volver al inicio">Electro Rápido <b>24h</b></a>
+    <p>Guardia eléctrica de urgencia. Técnicos licenciados y asegurados, disponibles todo el año.</p>
+    <a href="tel:+34900000000">900 000 000</a>
+    <p>Guardia activa ahora</p>
+  </address>
+
+  <nav aria-labelledby="pie-servicios">
+    <h2 id="pie-servicios">Servicios</h2>
+    <ul>
+      <li><a href="#urgencias">Cortocircuitos</a></li>
+      <li><a href="#trabajos">Cuadro eléctrico</a></li>
+      <li><a href="#urgencias">Apagones y averías</a></li>
+      <li><a href="#trabajos">Urgencias industriales</a></li>
+    </ul>
+  </nav>
+
+  <nav aria-labelledby="pie-cobertura">
+    <h2 id="pie-cobertura">Cobertura</h2>
+    <ul>
+      <li><a href="#preguntas">Consulta tu zona</a></li>
+      <li><a href="#">Viviendas particulares</a></li>
+      <li><a href="#">Negocios y locales</a></li>
+      <li><a href="#">Comunidades de vecinos</a></li>
+    </ul>
+  </nav>
+
+  <nav aria-labelledby="pie-empresa">
+    <h2 id="pie-empresa">Empresa</h2>
+    <ul>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#preguntas">Preguntas frecuentes</a></li>
+      <li><a href="#">Trabaja con nosotros</a></li>
+      <li><a href="mailto:hola@electrorapido.example">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+  <p><small>© <time datetime="2026">2026</time> Electro Rápido 24h · <a href="https://allpixels.dev">Plantilla de All Pixels</a></small></p>
+
+  <nav aria-label="Legal">
+    <ul>
+      <li><a href="#">Aviso legal</a></li>
+      <li><a href="#">Privacidad</a></li>
+      <li><a href="#">Cookies</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<!-- BARRA DE CONTACTO MÓVIL -->
+<aside aria-label="Contacto rápido">
+  <a href="tel:+34900000000">Llamar ahora</a>
+  <a href="https://wa.me/34900000000">WhatsApp</a>
+</aside>
+
+<script>
+  /* 0. Año del pie */
+  const anio = document.querySelector("body > footer time");
+  anio.textContent = new Date().getFullYear();
+  anio.setAttribute("datetime", anio.textContent);
+
+  /* 1. Cabecera transparente sobre el hero, sólida al hacer scroll */
+  const cuerpo = document.body;
+  const marcarScroll = () => {
+    cuerpo.dataset.scroll = window.scrollY > 40 ? "si" : "no";
+  };
+  marcarScroll();
+  window.addEventListener("scroll", marcarScroll, { passive: true });
+
+  /* 2. Hora actual en el aviso de guardia del hero */
+  const reloj = document.querySelector("main > section:first-of-type > p:first-of-type time");
+  const ponerHora = () => {
+    const ahora = new Date();
+    reloj.textContent = ahora.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+    reloj.setAttribute("datetime", ahora.toISOString());
+    reloj.hidden = false;
+  };
+  ponerHora();
+  setInterval(ponerHora, 30000);
+
+  /* 3. Menú plegable en móvil (se cierra al elegir, con Escape o tocando fuera) */
+  const botonMenu = document.querySelector("body > header nav > button");
+  const menu = document.querySelector("body > header nav ul");
+  const cerrarMenu = () => botonMenu.setAttribute("aria-expanded", "false");
+
+  botonMenu.addEventListener("click", () => {
+    const abierto = botonMenu.getAttribute("aria-expanded") === "true";
+    botonMenu.setAttribute("aria-expanded", String(!abierto));
+  });
+
+  menu.addEventListener("click", (evento) => {
+    if (evento.target.closest("a")) cerrarMenu();
+  });
+
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") cerrarMenu();
+  });
+
+  document.addEventListener("click", (evento) => {
+    if (!evento.target.closest("body > header")) cerrarMenu();
+  });
+
+  /* 4. Enlace del menú de la sección visible */
+  const enlaces = [...menu.querySelectorAll('a[href^="#"]')];
+  if ("IntersectionObserver" in window) {
+    const espia = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        enlaces.forEach((a) => a.setAttribute("aria-current", a.getAttribute("href") === "#" + entrada.target.id));
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll("main > section[id]").forEach((s) => espia.observe(s));
+  }
+
+  /* 5. Aparición de bloques y contadores al entrar en pantalla */
+  const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const formatear = (numero, decimales) =>
+    numero.toLocaleString("es-ES", {
+      minimumFractionDigits: decimales,
+      maximumFractionDigits: decimales,
+    });
+
+  const contar = (cifra) => {
+    const final = parseFloat(cifra.value);
+    const decimales = (cifra.value.split(".")[1] || "").length;
+    const duracion = 1400;
+    const inicio = performance.now();
+
+    const paso = (ahora) => {
+      const progreso = Math.min((ahora - inicio) / duracion, 1);
+      const suavizado = 1 - Math.pow(1 - progreso, 3);
+      cifra.textContent = formatear(final * suavizado, decimales);
+      if (progreso < 1) requestAnimationFrame(paso);
+    };
+
+    requestAnimationFrame(paso);
+  };
+
+  if (!sinMovimiento && "IntersectionObserver" in window) {
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        entrada.target.removeAttribute("data-oculto");
+        entrada.target.querySelectorAll("data[value]").forEach(contar);
+        observador.unobserve(entrada.target);
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+
+    document.querySelectorAll("main > section:not(:first-of-type) > *").forEach((bloque) => {
+      bloque.setAttribute("data-oculto", "");
+      observador.observe(bloque);
+    });
+  }
+</script>
+
+</body>
+</html>

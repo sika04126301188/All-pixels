@@ -1,0 +1,4 @@
+# Archivos de la carpeta Sitio-web que NO deben publicarse en la web
+.assetsignore
+wrangler.jsonc
+*.md

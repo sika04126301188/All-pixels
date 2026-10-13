@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natura Studio | Diseño con raíz</title>
+<meta name="description" content="Natura Studio: estudio de diseño y desarrollo web en Barcelona. Webs modulares, accesibles y ligeras, con una identidad inspirada en la naturaleza.">
+<meta name="theme-color" content="#FBF1EC">
+<!-- Natura Studio · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+<style>
+/* ==========================================================================
+   NATURA STUDIO — marcado semántico (header/nav/main/section/article/
+   figure/aside/table/dl/footer), selectores por etiqueta + :first-of-type /
+   :nth-of-type en lugar de clases repetidas, cero estilos en línea.
+   ========================================================================== */
+
+/* Tipografías incluidas en la carpeta fuentes/ (sin Google Fonts) */
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 400; font-display: swap; src: url('fuentes/fraunces-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 500; font-display: swap; src: url('fuentes/fraunces-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 700; font-display: swap; src: url('fuentes/fraunces-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 400; font-display: swap; src: url('fuentes/fraunces-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-700-normal.woff2') format('woff2'); }
+
+:root {
+    --c-wine: #5C3446;
+    --c-terracota: #9C6C82;
+    --c-autumn-gold: #D3A66A;
+    --c-gold-text: #8A5F22;      /* dorado oscuro para textos sobre fondo claro (contraste AA) */
+    --c-terracota-text: #84506A; /* malva más profundo para textos pequeños (contraste AA) */
+    --c-sand-bg: #FBF1EC;
+    --c-pine-green: #6B4258;
+
+    --c-white-pure: #FFFFFF;
+    --c-text-dark: #2E2024;
+    --c-text-muted: #75606A;     /* un poco más oscuro que el original para leerse bien */
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-interface: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-heading: 'Fraunces', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --bento-gap: 1.5rem;
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Regla 4: los enlaces siempre sin subrayado y con un color propio, definido primero */
+a { text-decoration: none; color: var(--c-wine); }
+
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+input, textarea { font: inherit; }
+ul { list-style: none; }
+table { border-collapse: collapse; }
+img { display: block; max-width: 100%; }
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 110px;
+    font-size: 16px;
+    background-color: var(--c-sand-bg);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--c-text-dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible { outline: 2px solid var(--c-terracota); outline-offset: 3px; }
+
+/* Contenedores de ancho — un único div hijo directo por sección, sin clase */
+header,
+#landing-hero > div,
+#bento-section > div,
+#contacto-section > div,
+footer > div {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   NAVEGACIÓN — <header> como barra flotante, <nav> para los enlaces
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 24px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: rgba(251, 241, 236, 0.92);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(92, 52, 70, 0.12);
+    padding: 1rem 1.5rem 1rem 2.5rem;
+    border-radius: 20px;
+    z-index: 1000;
+    transition: box-shadow 0.4s ease;
+}
+/* Sombra suave cuando la página ya se ha desplazado (atributo que pone el script) */
+header[data-scrolled] { box-shadow: 0 12px 40px rgba(92, 52, 70, 0.1); }
+
+header > a {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--c-wine);
+    white-space: nowrap;
+}
+header > a span { color: var(--c-terracota); }
+
+header nav { display: flex; gap: 2.5rem; }
+header nav a {
+    font-family: var(--font-interface);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--c-text-muted);
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+}
+header nav a:hover, header nav a.active { color: var(--c-terracota-text); }
+
+header > div { display: flex; align-items: center; gap: 0.75rem; }
+header > div > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.3rem;
+    background-color: var(--c-wine);
+    color: var(--c-sand-bg);
+    font-family: var(--font-interface);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+}
+header > div > a::after { content: '→'; }
+header > div > a:hover { background-color: var(--c-terracota); }
+
+header > div > button { display: none; flex-direction: column; gap: 6px; padding: 10px 4px; }
+header > div > button span { width: 22px; height: 2px; background-color: var(--c-wine); display: block; transition: var(--transition-smooth); }
+
+/* ==========================================================================
+   1. HERO — <section><div><div>[<div>contenido, <div>visual]<ul>franja</div>
+   ========================================================================== */
+#landing-hero { padding-top: 160px; padding-bottom: 3rem; }
+
+#landing-hero > div > div {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+#landing-hero > div > div > div:first-of-type { position: relative; padding-bottom: 3.5rem; }
+
+#landing-hero > div > div > div:first-of-type > p:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background-color: rgba(92, 52, 70, 0.08);
+    color: var(--c-wine);
+    font-family: var(--font-interface);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 50px;
+    margin-bottom: 1.6rem;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    font-weight: 500;
+    line-height: 1.08;
+    color: var(--c-text-dark);
+    margin-bottom: 1.6rem;
+    max-width: 620px;
+}
+h1 em { font-style: italic; font-weight: 400; color: var(--c-terracota); }
+
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(2) {
+    font-size: 1.08rem;
+    color: var(--c-text-muted);
+    max-width: 480px;
+    margin-bottom: 2.2rem;
+}
+
+/* Fila de botones (tercer párrafo del bloque de contenido) */
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.8rem;
+    background-color: var(--c-wine);
+    color: var(--c-sand-bg);
+    font-family: var(--font-interface);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 50px;
+    transition: var(--transition-smooth);
+}
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:first-of-type::after {
+    content: '→';
+    width: 26px; height: 26px; border-radius: 50%;
+    background-color: rgba(251, 241, 236, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    transition: transform 0.4s ease;
+}
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:first-of-type:hover {
+    background-color: var(--c-terracota);
+    box-shadow: 0 15px 30px rgba(156, 108, 130, 0.3);
+}
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:first-of-type:hover::after { transform: translateX(4px); }
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:last-of-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: var(--font-interface);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:last-of-type::before {
+    content: '▶';
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(92, 52, 70, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    transition: var(--transition-smooth);
+}
+#landing-hero > div > div > div:first-of-type > p:nth-of-type(3) a:last-of-type:hover::before {
+    background-color: var(--c-wine); color: var(--c-sand-bg); border-color: var(--c-wine);
+}
+
+/* Tarjeta de estadísticas: <aside> con tres <p>, hijo de la primera columna */
+#landing-hero > div > div > div:first-of-type > aside {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.8rem;
+    background-color: var(--c-white-pure);
+    border-radius: 20px;
+    padding: 1.3rem 2rem;
+    box-shadow: 0 30px 60px rgba(92, 52, 70, 0.12);
+}
+#landing-hero > div > div > div:first-of-type > aside p { text-align: center; }
+#landing-hero > div > div > div:first-of-type > aside p:not(:last-of-type) { position: relative; padding-right: 1.8rem; }
+#landing-hero > div > div > div:first-of-type > aside p:not(:last-of-type)::after {
+    content: '';
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    width: 1px; height: 34px; background-color: rgba(92, 52, 70, 0.12);
+}
+#landing-hero > div > div > div:first-of-type > aside strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--c-wine);
+    line-height: 1;
+}
+#landing-hero > div > div > div:first-of-type > aside span {
+    display: block;
+    font-family: var(--font-interface);
+    font-size: 0.72rem;
+    color: var(--c-text-muted);
+    margin-top: 0.3rem;
+}
+
+/* Columna visual: <figure> con la foto + <aside> con la agenda */
+#landing-hero > div > div > div:last-of-type { position: relative; }
+
+#landing-hero figure {
+    position: relative;
+    border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
+    overflow: hidden;
+    aspect-ratio: 4 / 4.6;
+    background-color: var(--c-pine-green);
+    box-shadow: 0 40px 80px rgba(92, 52, 70, 0.18);
+    animation: morph 14s ease-in-out infinite;   /* la forma orgánica "respira" despacio */
+}
+#landing-hero figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+#landing-hero figure:hover img { transform: scale(1.04); }
+#landing-hero figure::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(92, 52, 70, 0) 40%, rgba(46, 32, 36, 0.55) 100%);
+}
+#landing-hero figure::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(200deg, rgba(46, 32, 36, 0.45) 0%, rgba(46, 32, 36, 0) 35%);
+}
+#landing-hero figure figcaption {
+    position: absolute;
+    left: 16%; bottom: 16%;       /* abajo a la izquierda: dentro de la forma orgánica y sobre el degradado */
+    z-index: 2;
+    color: var(--c-sand-bg);
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-style: italic;
+    max-width: 200px;
+    line-height: 1.3;
+    text-shadow: 0 2px 12px rgba(46, 32, 36, 0.4);
+}
+@keyframes morph {
+    0%, 100% { border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%; }
+    50% { border-radius: 55% 45% 45% 55% / 45% 55% 45% 55%; }
+}
+
+/* Widget de agenda: <aside> con <hgroup>, <table> y <button> */
+#landing-hero > div > div > div:last-of-type > aside {
+    position: absolute;
+    right: -1rem; bottom: -2.5rem;
+    width: 260px;
+    background-color: var(--c-white-pure);
+    border-radius: 22px;
+    padding: 1.4rem;
+    box-shadow: 0 30px 60px rgba(92, 52, 70, 0.18);
+    z-index: 3;
+}
+#landing-hero > div > div > div:last-of-type > aside > hgroup {
+    display: grid; grid-template-columns: 34px 1fr; column-gap: 0.7rem; align-items: center; margin-bottom: 1rem;
+}
+/* Icono de calendario dibujado con SVG (se ve igual en todos los sistemas) */
+#landing-hero > div > div > div:last-of-type > aside > hgroup::before {
+    content: '';
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--c-terracota) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FBF1EC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M16 3v4M8 3v4M3 10h18'/%3E%3C/svg%3E") center / 16px no-repeat;
+    grid-row: span 2;
+}
+#landing-hero > div > div > div:last-of-type > aside h2 { font-family: var(--font-display); font-size: 0.95rem; color: var(--c-wine); margin-bottom: 0.15rem; }
+#landing-hero > div > div > div:last-of-type > aside hgroup p { font-size: 0.72rem; color: var(--c-text-muted); }
+
+#landing-hero table { width: 100%; table-layout: fixed; border-spacing: 0; margin-bottom: 1rem; }
+/* El <caption> se queda como título de tabla (con flex se colocaba debajo de los días) */
+#landing-hero caption {
+    caption-side: top;
+    text-align: center;
+    line-height: 26px;
+    font-family: var(--font-interface); font-size: 0.75rem; font-weight: 600;
+    color: var(--c-wine); margin-bottom: 0.6rem; white-space: nowrap;
+}
+#landing-hero caption button:first-of-type { float: left; }
+#landing-hero caption button:last-of-type { float: right; }
+#landing-hero caption button { color: var(--c-terracota); font-size: 1rem; width: 26px; height: 26px; border-radius: 50%; transition: var(--transition-smooth); }
+#landing-hero caption button:hover { background-color: var(--c-sand-bg); color: var(--c-wine); }
+#landing-hero th, #landing-hero td {
+    font-family: var(--font-interface); font-size: 0.7rem; text-align: center;
+    padding: 0.3rem 0; border-radius: 6px;
+}
+#landing-hero th { font-size: 0.65rem; color: var(--c-text-muted); font-weight: 500; }
+#landing-hero td { color: var(--c-text-dark); }
+#landing-hero tbody tr:first-of-type td:nth-of-type(1),
+#landing-hero tbody tr:first-of-type td:nth-of-type(2) { color: rgba(138, 115, 119, 0.4); }
+#landing-hero tbody tr:nth-of-type(4) td:first-of-type { background-color: var(--c-wine); color: var(--c-sand-bg); font-weight: 700; }
+
+/* Calendario interactivo: el script pone un <button> en cada día */
+#landing-hero td button {
+    width: 100%; aspect-ratio: 1; max-width: 28px;
+    border-radius: 8px; font-size: 0.7rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+#landing-hero td button:hover { background-color: var(--c-sand-bg); }
+#landing-hero td button:disabled { color: rgba(138, 115, 119, 0.45); cursor: default; background: none; }
+#landing-hero td button[aria-pressed="true"] { background-color: var(--c-wine); color: var(--c-sand-bg); font-weight: 700; }
+#landing-hero tbody[data-js] td { padding: 0.1rem 0; }
+#landing-hero tbody[data-js] tr:nth-of-type(n) td:nth-of-type(n) { background: none; color: inherit; font-weight: inherit; }
+
+#landing-hero > div > div > div:last-of-type > aside > button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--c-wine);
+    color: var(--c-sand-bg);
+    border-radius: 12px;
+    font-family: var(--font-interface);
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    transition: var(--transition-smooth);
+}
+#landing-hero > div > div > div:last-of-type > aside > button:hover { background-color: var(--c-terracota); }
+
+/* Franja de características: <ul> de cuatro <li> con icono SVG por nth-of-type */
+#landing-hero > div > ul {
+    margin-top: 5.5rem;
+    background-color: var(--c-wine);
+    border-radius: 60px;
+    padding: 1.4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+}
+#landing-hero > div > ul li {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-family: var(--font-interface);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--c-sand-bg);
+}
+#landing-hero > div > ul li::before {
+    content: '';
+    width: 34px; height: 34px; border-radius: 50%;
+    background-color: rgba(251, 241, 236, 0.12);
+    background-position: center;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
+/* hoja */
+#landing-hero > div > ul li:nth-of-type(1)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D3A66A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E"); }
+/* reloj */
+#landing-hero > div > ul li:nth-of-type(2)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D3A66A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E"); }
+/* corazón / trato cercano */
+#landing-hero > div > ul li:nth-of-type(3)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D3A66A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z'/%3E%3C/svg%3E"); }
+/* escudo */
+#landing-hero > div > ul li:nth-of-type(4)::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D3A66A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E"); }
+
+/* ==========================================================================
+   2. BENTO GRID — <hgroup> + seis <article>, coloreados por :nth-of-type
+   ========================================================================== */
+#bento-section { padding: 6rem 0; background-color: var(--c-white-pure); border-radius: 40px 40px 0 0; }
+#bento-section hgroup { margin-bottom: 4rem; }
+#bento-section hgroup p { font-family: var(--font-interface); color: var(--c-gold-text); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem; }
+#bento-section hgroup h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); color: var(--c-wine); }
+
+#bento-section > div > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--bento-gap);
+    grid-auto-rows: minmax(220px, auto);
+}
+
+#bento-section article {
+    background-color: var(--c-sand-bg);
+    border-radius: 24px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease, opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), translate 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+}
+#bento-section article:hover { box-shadow: 0 30px 60px rgba(92, 52, 70, 0.1); z-index: 5; }
+/* Al salir el ratón la tarjeta vuelve a su sitio con suavidad */
+#bento-section article[data-tilt-reset] { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), translate 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Reflejo de luz que sigue al cursor (variables --mx/--my que pone el script) */
+#bento-section article::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 3;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.16), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+#bento-section article:hover::before { opacity: 1; }
+
+#bento-section article p:first-of-type {
+    font-family: var(--font-interface);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+#bento-section article h3 { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; margin: 1rem 0; }
+#bento-section article p:last-of-type { font-family: var(--font-body); font-size: 0.95rem; color: var(--c-text-muted); }
+
+/* Cubo 1 — grande, malva */
+#bento-section article:nth-of-type(1) { grid-column: span 2; grid-row: span 2; background-color: var(--c-terracota); color: var(--c-white-pure); }
+#bento-section article:nth-of-type(1) h3 { font-size: 2.2rem; max-width: 80%; font-family: var(--font-heading); }
+#bento-section article:nth-of-type(1) p:first-of-type { opacity: 1; }
+#bento-section article:nth-of-type(1) p:last-of-type { color: var(--c-white-pure); font-size: 1.05rem; max-width: 90%; }
+
+/* Cubo 2 — vertical, malva oscuro, círculo animado por pseudo-elemento */
+#bento-section article:nth-of-type(2) { grid-row: span 2; background-color: var(--c-pine-green); color: var(--c-white-pure); }
+#bento-section article:nth-of-type(2) p:last-of-type { color: rgba(255, 255, 255, 0.88); }
+#bento-section article:nth-of-type(2)::after {
+    content: '';
+    display: block;
+    width: 130px; height: 130px;
+    border: 2px dashed var(--c-autumn-gold);
+    border-radius: 50%;
+    margin: 2rem auto;
+    animation: rotateSlow 20s infinite linear;
+}
+@keyframes rotateSlow { 100% { transform: rotate(360deg); } }
+
+/* Cubo 3 — foto de paisaje dentro de <figure><img>; ocupa dos columnas para cerrar la retícula */
+#bento-section article:nth-of-type(3) { grid-column: span 2; height: 280px; color: var(--c-white-pure); justify-content: flex-end; padding: 0; }
+#bento-section article:nth-of-type(3) figure { position: absolute; inset: 0; z-index: 1; }
+#bento-section article:nth-of-type(3) figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+#bento-section article:nth-of-type(3) figure::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(46, 32, 36, 0) 30%, rgba(46, 32, 36, 0.75) 100%);
+}
+#bento-section article:nth-of-type(3) p,
+#bento-section article:nth-of-type(3) h3 { position: relative; z-index: 2; padding: 0 2.5rem; }
+#bento-section article:nth-of-type(3) p {
+    font-family: var(--font-interface); font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 1.5px; opacity: 1; color: inherit; margin: 0;
+}
+#bento-section article:nth-of-type(3) h3 { margin-bottom: 2.5rem; }
+#bento-section article:nth-of-type(3):hover figure img { transform: scale(1.06); }
+
+/* Cubo 4 — estadística con <data> */
+#bento-section article:nth-of-type(4) { background-color: var(--c-autumn-gold); color: var(--c-wine); justify-content: center; text-align: center; height: 280px; }
+#bento-section article:nth-of-type(4) data { display: block; font-family: var(--font-display); font-size: 4rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
+#bento-section article:nth-of-type(4) p:last-of-type { color: var(--c-wine); }
+
+/* Cubo 5 — horizontal, con círculo decorativo pulsante (div vacío, necesario: sin contenido textual posible) */
+#bento-section article:nth-of-type(5) { grid-column: span 2; background-color: var(--c-sand-bg); color: var(--c-wine); flex-direction: row; align-items: center; gap: 3rem; }
+#bento-section article:nth-of-type(5) div:last-child {
+    width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0; position: relative;
+    background-color: var(--c-wine);
+}
+#bento-section article:nth-of-type(5) div:last-child::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 14px; height: 14px; background-color: var(--c-autumn-gold); border-radius: 50%;
+}
+#bento-section article:nth-of-type(5) div:last-child::after {
+    content: '';
+    position: absolute; top: 50%; left: 50%; margin: -7px 0 0 -7px;
+    width: 14px; height: 14px;
+    border: 2px solid var(--c-autumn-gold); border-radius: 50%;
+    animation: pulseAnimation 1.5s infinite ease-out;
+}
+@keyframes pulseAnimation { 100% { transform: scale(1.8); opacity: 0; } }
+
+/* Cubo 6 — cierre oscuro, flecha por pseudo-elemento; toda la tarjeta es un enlace */
+#bento-section article:nth-of-type(6) { background-color: var(--c-wine); color: var(--c-white-pure); cursor: pointer; }
+#bento-section article:nth-of-type(6) p {
+    font-family: var(--font-interface); font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 1.5px; opacity: 0.8; color: inherit;
+}
+#bento-section article:nth-of-type(6) h3 { font-family: var(--font-interface); font-size: 1.2rem; margin: 1rem 0 0; color: inherit; }
+#bento-section article:nth-of-type(6) h3 a { color: inherit; }
+#bento-section article:nth-of-type(6) h3 a::before { content: ''; position: absolute; inset: 0; z-index: 4; }
+#bento-section article:nth-of-type(6)::after {
+    content: '→'; font-size: 1.8rem; color: var(--c-autumn-gold);
+    align-self: flex-end; transition: var(--transition-smooth);
+}
+#bento-section article:nth-of-type(6):hover::after { transform: translateX(8px); }
+
+/* ==========================================================================
+   3. CONTACTO — <hgroup> + tres <article> (info / conecta / formulario)
+   ========================================================================== */
+#contacto-section { padding: 8rem 0; background-color: var(--c-sand-bg); }
+#contacto-section hgroup { margin-bottom: 3rem; }
+#contacto-section hgroup p { font-family: var(--font-interface); color: var(--c-gold-text); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.5rem; }
+#contacto-section hgroup h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); color: var(--c-wine); }
+
+#contacto-section > div > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--bento-gap);
+    align-items: stretch;
+}
+
+#contacto-section article {
+    border-radius: 24px;
+    padding: 2.6rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cubo 1 — filosofía */
+#contacto-section article:nth-of-type(1) { background-color: var(--c-white-pure); justify-content: center; }
+#contacto-section article:nth-of-type(1) h3 { font-family: var(--font-heading); font-size: clamp(1.8rem, 2.6vw, 2.3rem); font-weight: 500; color: var(--c-wine); line-height: 1.15; margin-bottom: 1.2rem; }
+#contacto-section article:nth-of-type(1) p { font-family: var(--font-interface); font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--c-text-dark); }
+#contacto-section article:nth-of-type(1) p:first-of-type { font-family: var(--font-body); color: var(--c-text-muted); margin-bottom: 1.8rem; font-size: 1rem; }
+#contacto-section article:nth-of-type(1) strong { color: var(--c-wine); }
+
+/* Cubo 2 — conecta directamente: <dl> + <ul> de redes */
+#contacto-section article:nth-of-type(2) { background-color: var(--c-wine); color: var(--c-sand-bg); justify-content: space-between; }
+#contacto-section article:nth-of-type(2) > p:first-of-type { text-transform: uppercase; letter-spacing: 1.5px; font-size: 0.72rem; font-weight: 600; color: var(--c-autumn-gold); margin-bottom: 0.8rem; }
+#contacto-section article:nth-of-type(2) h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: 500; }
+#contacto-section article:nth-of-type(2) dl { margin-bottom: 1.8rem; }
+#contacto-section article:nth-of-type(2) dt {
+    font-family: var(--font-interface); font-size: 0.7rem; opacity: 0.75;
+    text-transform: uppercase; letter-spacing: 1px; margin-top: 1.1rem;
+}
+#contacto-section article:nth-of-type(2) dt:first-of-type { margin-top: 0; }
+#contacto-section article:nth-of-type(2) dd { font-family: var(--font-interface); font-size: 0.92rem; font-weight: 500; }
+#contacto-section article:nth-of-type(2) dd a { color: inherit; border-bottom: 1px solid rgba(211, 166, 106, 0.5); transition: var(--transition-smooth); }
+#contacto-section article:nth-of-type(2) dd a:hover { color: var(--c-autumn-gold); }
+#contacto-section article:nth-of-type(2) dt:nth-of-type(1)::before { content: '✉ '; }
+#contacto-section article:nth-of-type(2) dt:nth-of-type(2)::before { content: '☎ '; }
+#contacto-section article:nth-of-type(2) dt:nth-of-type(3)::before { content: '◷ '; }
+
+/* Cubo 3 — formulario, sin divs contenedores: espaciado por hermanos adyacentes */
+#contacto-section article:nth-of-type(3) { background-color: var(--c-white-pure); border: 1px solid rgba(92, 52, 70, 0.06); }
+#contacto-section form label {
+    display: block; font-family: var(--font-interface); font-size: 0.82rem;
+    margin-bottom: 0.4rem; color: var(--c-wine); font-weight: 500;
+}
+#contacto-section form label:not(:first-of-type) { margin-top: 1.3rem; }
+#contacto-section form input, #contacto-section form textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(92, 52, 70, 0.18);
+    background-color: var(--c-sand-bg);
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 1rem;              /* 16px: evita el zoom automático de Safari en iPhone */
+    color: var(--c-text-dark);
+    transition: var(--transition-smooth);
+}
+#contacto-section form textarea { resize: vertical; }
+#contacto-section form input::placeholder, #contacto-section form textarea::placeholder { color: #8E7B82; }
+#contacto-section form input:focus, #contacto-section form textarea:focus { outline: none; border-color: var(--c-terracota); background-color: var(--c-white-pure); box-shadow: 0 0 0 4px rgba(156, 108, 130, 0.15); }
+
+/* Casilla de privacidad: <p> con <input> + <label> */
+#contacto-section form p { display: flex; align-items: flex-start; gap: 0.6rem; margin-top: 1.2rem; }
+#contacto-section form p input { width: 18px; height: 18px; padding: 0; margin-top: 2px; flex-shrink: 0; accent-color: var(--c-wine); }
+#contacto-section form p label { margin: 0; font-size: 0.8rem; font-weight: 400; line-height: 1.5; color: var(--c-text-muted); }
+#contacto-section form p label:not(:first-of-type) { margin-top: 0; }
+#contacto-section form p a { text-decoration: underline; text-underline-offset: 3px; }
+
+#contacto-section form button {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--c-wine);
+    color: var(--c-white-pure);
+    border-radius: 12px;
+    font-family: var(--font-interface);
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    margin-top: 1.3rem;
+}
+#contacto-section form button:hover { background-color: var(--c-terracota); }
+
+/* Mensaje del formulario (output que rellena el script) */
+#contacto-section form output, footer form + output { display: block; font-family: var(--font-interface); font-size: 0.85rem; }
+#contacto-section form output { margin-top: 1rem; color: var(--c-wine); }
+#contacto-section form output:empty, footer form + output:empty { display: none; }
+#contacto-section form output[data-error] { color: #A2352B; }
+
+/* Listas de redes sociales (aplican tanto en el cubo 2 como en el footer) */
+#contacto-section article:nth-of-type(2) ul, footer > div > div:first-of-type > div:first-of-type ul {
+    display: flex; gap: 0.8rem;
+}
+#contacto-section article:nth-of-type(2) ul a, footer > div > div:first-of-type > div:first-of-type ul a {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid rgba(251, 241, 236, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-interface); font-size: 0.8rem;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+#contacto-section article:nth-of-type(2) ul a:hover, footer > div > div:first-of-type > div:first-of-type ul a:hover {
+    background-color: var(--c-autumn-gold); border-color: var(--c-autumn-gold); color: var(--c-wine);
+}
+
+/* ==========================================================================
+   FOOTER — <div>marca, <nav>×2, <div>newsletter — identificados por :first/last-of-type
+   ========================================================================== */
+footer {
+    background-color: var(--c-wine);
+    color: rgba(251, 241, 236, 0.75);
+    border-radius: 40px 40px 0 0;
+    padding-top: 5rem;
+}
+footer > div > div:first-of-type {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(251, 241, 236, 0.12);
+}
+footer > div > div:first-of-type > div:first-of-type > p:first-of-type { font-family: var(--font-display); font-size: 1.8rem; color: var(--c-white-pure); margin-bottom: 1rem; }
+footer > div > div:first-of-type > div:first-of-type > p:first-of-type span { color: var(--c-autumn-gold); }
+footer > div > div:first-of-type > div:first-of-type > p:last-of-type { max-width: 280px; font-size: 0.92rem; margin-bottom: 1.5rem; }
+
+footer h2 {
+    font-family: var(--font-interface);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--c-autumn-gold);
+    margin-bottom: 1.3rem;
+}
+footer nav ul { display: flex; flex-direction: column; gap: 0.8rem; }
+footer nav a { font-size: 0.9rem; color: rgba(251, 241, 236, 0.8); transition: var(--transition-smooth); }
+footer nav a:hover { color: var(--c-white-pure); }
+
+footer > div > div:first-of-type > div:last-of-type p { font-size: 0.9rem; margin-bottom: 1rem; }
+footer form { display: flex; gap: 0.5rem; }
+footer form input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(251, 241, 236, 0.2);
+    background-color: rgba(251, 241, 236, 0.08);
+    color: var(--c-white-pure);
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+footer form input::placeholder { color: rgba(251, 241, 236, 0.6); }
+footer form input:focus { outline: none; border-color: var(--c-autumn-gold); }
+footer form button {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    background-color: var(--c-autumn-gold);
+    color: var(--c-wine);
+    font-family: var(--font-interface);
+    font-weight: 700;
+    transition: var(--transition-smooth);
+}
+footer form button:hover { background-color: var(--c-white-pure); }
+footer form + output { margin-top: 0.8rem; color: var(--c-autumn-gold); }
+
+footer > div > div:last-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem 0;
+    font-family: var(--font-interface);
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+footer > div > div:last-of-type ul { display: flex; gap: 1.5rem; }
+footer > div > div:last-of-type a { color: rgba(251, 241, 236, 0.75); transition: var(--transition-smooth); }
+footer > div > div:last-of-type a:hover { color: var(--c-autumn-gold); }
+
+/* ==========================================================================
+   APARICIÓN AL HACER SCROLL — el script añade data-reveal (sin script, todo visible)
+   ========================================================================== */
+[data-reveal] { opacity: 0; translate: 0 32px; transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), translate 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal="visible"] { opacity: 1; translate: 0 0; }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+    #bento-section > div > div { grid-template-columns: repeat(2, 1fr); }
+    #bento-section article:nth-of-type(1),
+    #bento-section article:nth-of-type(5),
+    #bento-section article:nth-of-type(6) { grid-column: span 2; }
+    #bento-section article:nth-of-type(3) { grid-column: span 1; }
+
+    #landing-hero > div > div { grid-template-columns: 1fr; }
+    #landing-hero > div > div > div:last-of-type { margin-top: 4rem; max-width: 480px; }
+    #landing-hero > div > div > div:last-of-type > aside { right: 0.5rem; }
+
+    #contacto-section > div > div { grid-template-columns: 1fr; }
+    footer > div > div:first-of-type { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+    header { padding: 0.8rem 1rem 0.8rem 1.4rem; top: 16px; }
+    header > div > button { display: flex; }
+
+    /* El <header> tiene transform, así que el menú fijo se coloca respecto a él */
+    header nav {
+        position: absolute;
+        top: calc(100% + 12px); left: 0;
+        transform: scale(0.95);
+        transform-origin: top center;
+        width: 100%;
+        background-color: var(--c-white-pure);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        border-radius: 16px;
+        border: 1px solid rgba(92, 52, 70, 0.1);
+        box-shadow: 0 30px 60px rgba(92, 52, 70, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: var(--transition-smooth);
+    }
+    header nav.show { opacity: 1; visibility: visible; pointer-events: auto; transform: scale(1); }
+    header nav a { font-size: 1.05rem; }
+
+    header > div > button.open span:first-child { transform: translateY(4px) rotate(45deg); }
+    header > div > button.open span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+    header > div > a { padding: 0.55rem 1rem; font-size: 0.78rem; }
+
+    #landing-hero { padding-top: 130px; }
+    #landing-hero > div > div > div:first-of-type > p:nth-of-type(3) { gap: 1.2rem; }
+    #landing-hero > div > div > div:first-of-type > aside { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 0.6rem; padding: 1.1rem 1rem; }
+    #landing-hero > div > div > div:first-of-type > aside p:not(:last-of-type) { padding-right: 0; }
+    #landing-hero > div > div > div:first-of-type > aside p:not(:last-of-type)::after { display: none; }
+    #landing-hero > div > ul { border-radius: 30px; padding: 1.4rem 1.6rem; justify-content: flex-start; margin-top: 3.5rem; }
+    #landing-hero > div > div > div:last-of-type { margin-top: 1rem; }
+    #landing-hero > div > div > div:last-of-type > aside { position: static; width: 100%; margin-top: 1.5rem; }
+    #landing-hero figure figcaption { display: none; }
+
+    #bento-section > div > div { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    #bento-section article:nth-of-type(1),
+    #bento-section article:nth-of-type(3),
+    #bento-section article:nth-of-type(5),
+    #bento-section article:nth-of-type(6) { grid-column: span 1; }
+    #bento-section article:nth-of-type(1) h3 { font-size: 1.8rem; max-width: none; }
+    #bento-section article { padding: 2rem 1.6rem; }
+    #bento-section article:nth-of-type(3) p, #bento-section article:nth-of-type(3) h3 { padding: 0 1.6rem; }
+    #bento-section article:nth-of-type(3) h3 { margin-bottom: 1.8rem; }
+    #bento-section article:nth-of-type(5) { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+
+    #contacto-section { padding: 6rem 0; }
+    #contacto-section article { padding: 2rem 1.6rem; }
+    footer > div > div:first-of-type { grid-template-columns: 1fr; text-align: left; }
+    footer > div > div:last-of-type { flex-direction: column; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+    <header>
+        <a href="#landing-hero" aria-label="Natura Studio, ir al inicio">Natura<span>.</span></a>
+        <nav id="navMenu" aria-label="Principal">
+            <a href="#landing-hero" class="active">Concepto</a>
+            <a href="#bento-section">Ecosistema Bento</a>
+            <a href="#contacto-section">Conectar</a>
+        </nav>
+        <div>
+            <a href="#contacto-section">Iniciar Proyecto</a>
+            <button id="burgerToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- 1. HERO -->
+        <section id="landing-hero">
+            <div>
+                <div>
+                    <div>
+                        <p>✦ Donde la naturaleza inspira el diseño</p>
+                        <h1>Estructuras ordenadas, <em>inspiradas en la naturaleza.</em></h1>
+                        <p>Fusionamos la precisión del diseño modular de un Bento Grid con los colores de la tierra, la arcilla y el musgo. Un ecosistema visual pensado para la exploración interactiva.</p>
+                        <p>
+                            <a href="#bento-section">Explorar la Retícula</a>
+                            <a href="#bento-section">Ver Nuestro Proceso</a>
+                        </p>
+                        <aside aria-label="El estudio en cifras">
+                            <p><strong>150+</strong><span>Proyectos entregados</span></p>
+                            <p><strong>15+</strong><span>Años de evolución</span></p>
+                            <p><strong>40+</strong><span>Marcas confiadas</span></p>
+                        </aside>
+                    </div>
+
+                    <div>
+                        <figure>
+                            <img src="imagenes/copas.jpg" width="760" height="1350" fetchpriority="high" alt="Copas de árboles vistas desde abajo, con la luz del sol filtrándose entre las hojas">
+                            <figcaption>Diseño con raíz, crecimiento con propósito.</figcaption>
+                        </figure>
+
+                        <aside aria-label="Agenda una sesión">
+                            <hgroup>
+                                <h2>Agenda tu Sesión</h2>
+                                <p>Porque tu proyecto merece lo mejor.</p>
+                            </hgroup>
+                            <table>
+                                <caption>
+                                    <button type="button" aria-label="Mes anterior">‹</button>
+                                    <span aria-live="polite">Septiembre 2026</span>
+                                    <button type="button" aria-label="Mes siguiente">›</button>
+                                </caption>
+                                <thead>
+                                    <tr><th abbr="domingo">D</th><th abbr="lunes">L</th><th abbr="martes">M</th><th abbr="miércoles">M</th><th abbr="jueves">J</th><th abbr="viernes">V</th><th abbr="sábado">S</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>30</td><td>31</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                                    <tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+                                    <tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+                                    <tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+                                </tbody>
+                            </table>
+                            <button type="button">Elegir Fecha y Hora →</button>
+                        </aside>
+                    </div>
+                </div>
+
+                <ul>
+                    <li>Diseño Sostenible</li>
+                    <li>Entrega Puntual</li>
+                    <li>Atención Personalizada</li>
+                    <li>Código Seguro</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 2. BENTO GRID — seis <article> con efecto 3D (data-tilt) -->
+        <section id="bento-section">
+            <div>
+                <hgroup>
+                    <p>Ecosistema Dinámico</p>
+                    <h2>Nuestra Esencia en Módulos</h2>
+                </hgroup>
+
+                <div>
+                    <article data-tilt>
+                        <p>01 / Filosofía</p>
+                        <h3>La arcilla y el fuego moldean nuestra visión estética.</h3>
+                        <p>Entendemos el espacio digital como un lienzo vivo, donde los tonos cálidos del otoño aportan arraigo, mientras que las micro-interacciones guían al usuario de manera intuitiva.</p>
+                    </article>
+
+                    <article data-tilt>
+                        <p>02 / Sostenibilidad</p>
+                        <h3>Diseño de código limpio y duradero</h3>
+                        <p>Optimizamos el rendimiento reduciendo la huella de carbono digital sin sacrificar animaciones premium.</p>
+                    </article>
+
+                    <article data-tilt>
+                        <figure><img src="imagenes/ramas.jpg" width="1000" height="500" loading="lazy" alt="Ramas y troncos de un árbol bajo una copa verde iluminada por el sol"></figure>
+                        <p>03 / Paisaje</p>
+                        <h3>Inspiración Silvestre</h3>
+                    </article>
+
+                    <article data-tilt>
+                        <data value="94">94%</data>
+                        <p>De retención emocional debido a interfaces inmersivas.</p>
+                    </article>
+
+                    <article data-tilt>
+                        <div>
+                            <p>04 / Interactividad</p>
+                            <h3>Módulos vivos que responden a tu tacto</h3>
+                            <p>Mueve tu cursor sobre los bloques para experimentar el efecto de profundidad física y refracción lumínica en tiempo real.</p>
+                        </div>
+                        <div></div>
+                    </article>
+
+                    <article data-tilt>
+                        <p>05 / Código</p>
+                        <h3><a href="#contacto-section">15+ Años de Evolución</a></h3>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CONTACTO — tres <article>: filosofía / conecta directamente / formulario -->
+        <section id="contacto-section">
+            <div>
+                <hgroup>
+                    <p>Hablemos</p>
+                    <h2>Conecta con Natura Studio</h2>
+                </hgroup>
+
+                <div>
+                    <article>
+                        <h3>Hagamos florecer tu próximo entorno digital.</h3>
+                        <p>Nos apasiona estructurar marcas bajo sistemas limpios, accesibles y con una identidad arraigada en la naturaleza.</p>
+                        <p><strong>Ubicación:</strong> Barcelona, España</p>
+                        <p><strong>Desarrollo:</strong> HTML5 / CSS3 / Vanilla JS</p>
+                    </article>
+
+                    <article>
+                        <p>Contacto Directo</p>
+                        <h3>Escríbenos o agenda una llamada</h3>
+                        <dl>
+                            <dt>Email</dt>
+                            <dd><a href="mailto:hola@naturastudio.example">hola@naturastudio.example</a></dd>
+                            <dt>Teléfono</dt>
+                            <dd><a href="tel:+34600000000">+34 600 000 000</a></dd>
+                            <dt>Horario</dt>
+                            <dd>Lun–Vie, 9:00–18:00</dd>
+                        </dl>
+                        <ul>
+                            <li><a href="#" aria-label="Awwwards">Aw</a></li>
+                            <li><a href="#" aria-label="GitHub">Gh</a></li>
+                            <li><a href="#" aria-label="LinkedIn">In</a></li>
+                        </ul>
+                    </article>
+
+                    <article>
+                        <!-- Para recibir los mensajes, conecta este formulario (ver README.md) -->
+                        <form id="natureForm" action="#" method="POST" novalidate>
+                            <label for="clientName">Tu Nombre</label>
+                            <input type="text" id="clientName" name="nombre" autocomplete="name" placeholder="Ej. Aurora Vidal" required>
+                            <label for="clientEmail">Email Corporativo</label>
+                            <input type="email" id="clientEmail" name="email" autocomplete="email" placeholder="aurora@estudio.com" required>
+                            <label for="clientMessage">Mensaje del Proyecto</label>
+                            <textarea id="clientMessage" name="mensaje" rows="3" placeholder="Háblanos de tu visión espacial o digital..." required></textarea>
+                            <p>
+                                <input type="checkbox" id="clientPrivacy" name="privacidad" required>
+                                <label for="clientPrivacy">He leído y acepto la <a href="#">política de privacidad</a>.</label>
+                            </p>
+                            <button type="submit">Enviar Propuesta</button>
+                            <output for="clientName clientEmail clientMessage" aria-live="polite"></output>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div>
+            <div>
+                <div>
+                    <p>Natura<span>.</span></p>
+                    <p>Estudio de vanguardia y ergonomía visual digital, con raíces en la naturaleza y ramas en la tecnología.</p>
+                    <ul>
+                        <li><a href="#" aria-label="Awwwards">Aw</a></li>
+                        <li><a href="#" aria-label="GitHub">Gh</a></li>
+                        <li><a href="#" aria-label="LinkedIn">In</a></li>
+                    </ul>
+                </div>
+                <nav aria-label="Navegación del sitio">
+                    <h2>Navegación</h2>
+                    <ul>
+                        <li><a href="#landing-hero">Concepto</a></li>
+                        <li><a href="#bento-section">Ecosistema Bento</a></li>
+                        <li><a href="#contacto-section">Conectar</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Estudio">
+                    <h2>Estudio</h2>
+                    <ul>
+                        <li><a href="#">Filosofía</a></li>
+                        <li><a href="#">Proceso</a></li>
+                        <li><a href="#">Proyectos</a></li>
+                    </ul>
+                </nav>
+                <div>
+                    <h2>Newsletter</h2>
+                    <p>Ideas de diseño modular, directo a tu correo.</p>
+                    <!-- Para recibir suscripciones, conecta este formulario a tu servicio de newsletter (ver README.md) -->
+                    <form id="newsForm" action="#" method="POST" novalidate>
+                        <input type="email" name="email" autocomplete="email" placeholder="tu@email.com" aria-label="Tu email" required>
+                        <button type="submit" aria-label="Suscribirme">→</button>
+                    </form>
+                    <output aria-live="polite"></output>
+                </div>
+            </div>
+            <div>
+                <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+                <p>&copy; <span id="footerYear">2026</span> Natura Studio · <a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+                <ul>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            const cards = document.querySelectorAll('[data-tilt]');
+            const burgerToggle = document.getElementById('burgerToggle');
+            const navMenu = document.getElementById('navMenu');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+            // 1. Efecto 3D de las tarjetas bento (solo con ratón) + reflejo de luz
+            if (finePointer && !reduceMotion) {
+                cards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = ((centerY - y) / centerY) * 10;
+                        const rotateY = ((x - centerX) / centerX) * 10;
+                        card.removeAttribute('data-tilt-reset');
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                        card.style.setProperty('--mx', `${x}px`);
+                        card.style.setProperty('--my', `${y}px`);
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.setAttribute('data-tilt-reset', '');
+                        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    });
+                });
+            }
+
+            // 2. Menú móvil: abrir/cerrar, cerrar al elegir enlace o con Escape
+            const setMenu = (open) => {
+                burgerToggle.classList.toggle('open', open);
+                navMenu.classList.toggle('show', open);
+                burgerToggle.setAttribute('aria-expanded', open);
+                burgerToggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+            };
+            burgerToggle.addEventListener('click', () => setMenu(!navMenu.classList.contains('show')));
+            navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+            document.addEventListener('click', (e) => { if (!header.contains(e.target)) setMenu(false); });
+
+            // 3. Enlace activo del menú y sombra de la cabecera al hacer scroll
+            const sections = document.querySelectorAll('main section');
+            const onScroll = () => {
+                header.toggleAttribute('data-scrolled', window.scrollY > 30);
+                const scrollPosition = window.scrollY + 140;
+                sections.forEach(section => {
+                    if (scrollPosition >= section.offsetTop && scrollPosition < (section.offsetTop + section.offsetHeight)) {
+                        const currentId = section.getAttribute('id');
+                        navMenu.querySelectorAll('a').forEach(item => {
+                            item.classList.toggle('active', item.getAttribute('href') === `#${currentId}`);
+                        });
+                    }
+                });
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // 4. Aparición suave de los bloques al hacer scroll
+            if ('IntersectionObserver' in window && !reduceMotion) {
+                const targets = document.querySelectorAll('#bento-section hgroup, #bento-section article, #contacto-section hgroup, #contacto-section article');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.setAttribute('data-reveal', 'visible');
+                            observer.unobserve(entry.target);
+                            setTimeout(() => { entry.target.style.transitionDelay = ''; }, 1200);   // el retraso solo para la entrada, no para el efecto 3D
+                        }
+                    });
+                }, { rootMargin: '0px 0px -8% 0px' });
+                targets.forEach((el, i) => {
+                    el.setAttribute('data-reveal', '');
+                    el.style.transitionDelay = `${(i % 3) * 90}ms`;
+                    observer.observe(el);
+                });
+            }
+
+            // 5. Agenda: calendario real con meses, elección de día y aviso en el formulario
+            const agenda = document.querySelector('#landing-hero aside[aria-label="Agenda una sesión"]');
+            const [prevBtn, nextBtn] = agenda.querySelectorAll('caption button');
+            const monthLabel = agenda.querySelector('caption span');
+            const tbody = agenda.querySelector('tbody');
+            const pickBtn = agenda.querySelector(':scope > button');
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+            let vista = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+            let elegido = null;
+
+            const pintarMes = () => {
+                const y = vista.getFullYear(), m = vista.getMonth();
+                monthLabel.textContent = `${meses[m]} ${y}`;
+                prevBtn.disabled = y === hoy.getFullYear() && m === hoy.getMonth();
+                const inicio = new Date(y, m, 1 - new Date(y, m, 1).getDay());   // semana empieza en domingo (D L M M J V S)
+                tbody.setAttribute('data-js', '');
+                tbody.innerHTML = '';
+                for (let semana = 0; semana < 6; semana++) {
+                    const fila = document.createElement('tr');
+                    let tieneDiasDelMes = false;
+                    for (let d = 0; d < 7; d++) {
+                        const fecha = new Date(inicio.getFullYear(), inicio.getMonth(), inicio.getDate() + semana * 7 + d);
+                        if (fecha.getMonth() === m) tieneDiasDelMes = true;
+                        const celda = document.createElement('td');
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.textContent = fecha.getDate();
+                        btn.setAttribute('aria-label', fecha.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }));
+                        const festivo = fecha.getDay() === 0 || fecha.getDay() === 6;   // sin sesiones en fin de semana
+                        btn.disabled = fecha.getMonth() !== m || fecha < hoy || festivo;
+                        btn.setAttribute('aria-pressed', String(!!elegido && fecha.getTime() === elegido.getTime()));
+                        btn.addEventListener('click', () => {
+                            elegido = fecha;
+                            tbody.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+                            btn.setAttribute('aria-pressed', 'true');
+                            pickBtn.textContent = `Reservar el ${fecha.getDate()} de ${meses[fecha.getMonth()].toLowerCase()} →`;
+                        });
+                        celda.appendChild(btn);
+                        fila.appendChild(celda);
+                    }
+                    if (tieneDiasDelMes) tbody.appendChild(fila);   // no pintar semanas que son solo del mes siguiente
+                }
+            };
+            prevBtn.addEventListener('click', () => { vista.setMonth(vista.getMonth() - 1); pintarMes(); });
+            nextBtn.addEventListener('click', () => { vista.setMonth(vista.getMonth() + 1); pintarMes(); });
+            pickBtn.addEventListener('click', () => {
+                const msg = document.getElementById('clientMessage');
+                if (elegido && !msg.value.includes('Sesión solicitada')) {
+                    msg.value = `Sesión solicitada para el ${elegido.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' })}.\n` + msg.value;
+                }
+                document.getElementById('contacto-section').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+                setTimeout(() => document.getElementById('clientName').focus({ preventScroll: true }), 600);
+            });
+            pintarMes();
+
+            // 6. Formularios (mientras action="#", muestran un aviso en lugar de enviar)
+            const natureForm = document.getElementById('natureForm');
+            const formOutput = natureForm.querySelector('output');
+            natureForm.addEventListener('submit', (e) => {
+                if (!natureForm.checkValidity()) {
+                    e.preventDefault();
+                    formOutput.setAttribute('data-error', '');
+                    formOutput.textContent = 'Revisa tu nombre, tu email, el mensaje y la casilla de privacidad.';
+                    natureForm.querySelector(':invalid').focus();
+                    return;
+                }
+                if (natureForm.getAttribute('action') === '#') {
+                    e.preventDefault();
+                    formOutput.removeAttribute('data-error');
+                    formOutput.textContent = '¡Gracias! Te responderemos en menos de 24 horas. (Formulario de ejemplo: conéctalo siguiendo el README).';
+                    natureForm.reset();
+                }
+            });
+
+            const newsForm = document.getElementById('newsForm');
+            const newsOutput = newsForm.nextElementSibling;
+            newsForm.addEventListener('submit', (e) => {
+                if (!newsForm.checkValidity()) {
+                    e.preventDefault();
+                    newsOutput.textContent = 'Escribe un email válido.';
+                    newsForm.querySelector('input').focus();
+                    return;
+                }
+                if (newsForm.getAttribute('action') === '#') {
+                    e.preventDefault();
+                    newsOutput.textContent = '¡Gracias por suscribirte al ecosistema Natura!';
+                    newsForm.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

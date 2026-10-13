@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flama Urbana | Sabor que Enciende la Ciudad</title>
+<meta name="description" content="Comida callejera gourmet a la brasa, preparada al momento. Carne premium, ingredientes frescos y nuestra salsa flama secreta.">
+<meta name="theme-color" content="#111827">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<!-- Flama Urbana · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+<style>
+
+/* -----------------------------------------
+   TIPOGRAFÍA (incluida en fuentes/, sin Google Fonts)
+----------------------------------------- */
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 300; font-display: swap; src: url('fuentes/poppins-latin-300-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('fuentes/poppins-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('fuentes/poppins-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('fuentes/poppins-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('fuentes/poppins-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 800; font-display: swap; src: url('fuentes/poppins-latin-800-normal.woff2') format('woff2'); }
+
+/* -----------------------------------------
+   VARIABLES Y CONFIGURACIÓN BASE
+----------------------------------------- */
+:root {
+    --primary: #FAE06E;        /* Amarillo insignia */
+    --primary-hover: #e6cd5b;
+    --flame: #FF6B35;          /* Naranja llama, color de acento */
+    --flame-hover: #e6572a;
+    --star-gold: #B7791F;      /* Dorado de estrellas (legible sobre tarjeta clara) */
+    --review-text: #5f6368;    /* Gris texto sobre tarjeta clara */
+    --dark: #111827;
+    --dark-light: #1f2937;
+    --light: #f9fafb;
+    --muted: #9ca3af;
+    --font-main: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    background-color: var(--dark);
+    color: var(--light);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--light);
+    transition: var(--transition);
+}
+
+a > span {
+    font-weight: 300;
+}
+
+/* Iconos: SVG incluidos en la propia página (sin Font Awesome externo) */
+svg[aria-hidden="true"] {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    vertical-align: -0.125em;
+    flex-shrink: 0;
+}
+
+button {
+    font-family: inherit;
+}
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+/* El "almacén" de iconos (primer svg del body) no se muestra */
+body > svg:first-child { display: none; }
+
+/* Texto solo para lectores de pantalla */
+[data-sr] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+/* -----------------------------------------
+   ENCABEZADOS DE SECCIÓN (compartidos)
+----------------------------------------- */
+#ventajas > h2,
+#como-funciona > h2,
+#menu > h2,
+#galeria > h2,
+#testimonios > h2,
+#faq > h2 {
+    text-align: center;
+    font-size: clamp(1.9rem, 4vw, 2.4rem);
+    margin-bottom: 1rem;
+}
+
+#ventajas > p:first-of-type,
+#como-funciona > p:first-of-type,
+#menu > p:first-of-type,
+#galeria > p:first-of-type,
+#testimonios > p:first-of-type,
+#faq > p:first-of-type {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 4rem;
+}
+
+#ventajas > h2, #ventajas > p:first-of-type,
+#menu > h2, #menu > p:first-of-type,
+#galeria > h2, #galeria > p:first-of-type,
+#testimonios > h2, #testimonios > p:first-of-type {
+    grid-column: 1 / -1;
+}
+
+/* -----------------------------------------
+   1. HEADER / NAVEGACIÓN
+----------------------------------------- */
+body > header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 5%;
+    background-color: rgba(17, 24, 39, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: padding 0.3s ease;
+}
+
+body > header[data-scrolled] { padding-top: 1rem; padding-bottom: 1rem; }
+
+body > header > a {
+    text-decoration: none;
+    color: var(--light);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+body > header > a svg,
+body > footer > article a:first-of-type svg {
+    color: var(--flame);
+    margin-right: 0.4rem;
+}
+
+body > header nav {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+body > header nav a {
+    text-decoration: none;
+    color: var(--light);
+    font-weight: 500;
+}
+
+body > header nav a:hover,
+body > header nav a[aria-current] {
+    color: var(--flame);
+}
+
+body > header nav a:last-of-type {
+    position: relative;
+    text-decoration: none;
+    background-color: var(--primary);
+    color: var(--dark);
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+body > header nav a:last-of-type:hover {
+    background-color: var(--primary-hover);
+    color: var(--dark);
+}
+
+/* Contador del pedido sobre "Pide Ahora" (lo rellena el script) */
+body > header nav a:last-of-type output {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 11px;
+    background-color: var(--flame);
+    color: var(--dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+}
+
+body > header nav a:last-of-type output:empty { display: none; }
+
+body > header button {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 1.6rem;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+}
+
+body > header button[aria-expanded="true"] svg:first-of-type,
+body > header button[aria-expanded="false"] svg:last-of-type { display: none; }
+
+/* -----------------------------------------
+   2. HERO
+----------------------------------------- */
+#inicio {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 8rem 5% 4rem 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+}
+
+#inicio > header > p:first-of-type {
+    background-color: rgba(255, 107, 53, 0.12);
+    color: var(--flame);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+#inicio > header > p:first-of-type svg {
+    margin-right: 0.4rem;
+}
+
+#inicio h1 {
+    font-size: clamp(2.4rem, 5.4vw, 3.8rem);
+    margin-bottom: 1.5rem;
+}
+
+#inicio h1 span {
+    color: var(--flame);
+}
+
+#inicio > header > p:nth-of-type(2) {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+}
+
+#inicio > header > p:last-of-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+#inicio > header > p:last-of-type a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+
+#inicio > header > p:last-of-type a:first-of-type {
+    text-decoration: none;
+    background-color: var(--primary);
+    color: var(--dark);
+}
+
+#inicio > header > p:last-of-type a:first-of-type:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(250, 224, 110, 0.2);
+}
+
+#inicio > header > p:last-of-type a:last-of-type {
+    text-decoration: none;
+    background-color: transparent;
+    color: var(--light);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+#inicio > header > p:last-of-type a:last-of-type:hover {
+    border-color: var(--flame);
+    color: var(--flame);
+}
+
+#inicio > figure {
+    position: relative;
+}
+
+/* Halo de "brasa" detrás de la foto */
+#inicio > figure::before {
+    content: '';
+    position: absolute;
+    inset: 8% -4% -6% 8%;
+    border-radius: 32px;
+    background: radial-gradient(circle at 70% 70%, rgba(255, 107, 53, 0.45), rgba(250, 224, 110, 0.12) 55%, transparent 75%);
+    filter: blur(30px);
+    z-index: -1;
+    animation: brasa 5s ease-in-out infinite alternate;
+}
+
+@keyframes brasa {
+    from { opacity: 0.6; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1.03); }
+}
+
+#inicio > figure img {
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    object-fit: cover;
+    max-height: 550px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* -----------------------------------------
+   3. VENTAJAS
+----------------------------------------- */
+#ventajas {
+    padding: 4rem 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    background-color: var(--dark-light);
+}
+
+#ventajas > article {
+    padding: 2.5rem;
+    border-radius: 16px;
+    background-color: var(--dark);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+#ventajas > article:hover {
+    transform: translateY(-5px);
+    border-color: var(--flame);
+}
+
+#ventajas > article > p:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    background-color: rgba(255, 107, 53, 0.12);
+    color: var(--flame);
+    font-size: 1.6rem;
+}
+
+#ventajas > article h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+}
+
+#ventajas > article > p:last-of-type {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* -----------------------------------------
+   4. CÓMO FUNCIONA
+----------------------------------------- */
+#como-funciona {
+    padding: 6rem 5%;
+}
+
+#como-funciona > ol {
+    list-style: none;
+    counter-reset: paso;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+#como-funciona > ol > li {
+    counter-increment: paso;
+    background-color: var(--dark-light);
+    padding: 2.2rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+#como-funciona > ol > li::before {
+    content: counter(paso);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--flame);
+    color: var(--dark);
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 auto 1.2rem auto;
+}
+
+#como-funciona > ol > li h3 {
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+}
+
+#como-funciona > ol > li p {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* -----------------------------------------
+   5. MENÚ DESTACADO
+----------------------------------------- */
+#menu {
+    padding: 6rem 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 2.5rem;
+}
+
+#menu > article {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-light);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#menu > article:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+#menu > article > figure {
+    height: 240px;
+    overflow: hidden;
+}
+
+#menu > article > figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+#menu > article:hover figure img {
+    transform: scale(1.05);
+}
+
+#menu > article h3 {
+    margin: 1.8rem 1.8rem 0.6rem 1.8rem;
+    font-size: 1.4rem;
+}
+
+#menu > article > p {
+    flex: 1;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 1.8rem 1.5rem 1.8rem;
+}
+
+#menu > article > footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1.8rem 1.8rem 1.8rem;
+}
+
+#menu > article > footer p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+#menu > article > footer button {
+    background-color: var(--light);
+    color: var(--dark);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+#menu > article > footer button:hover {
+    background-color: var(--flame);
+    color: var(--dark);
+    transform: rotate(90deg);
+}
+
+/* Al añadir al pedido, el botón "late" un instante */
+#menu > article > footer button[data-added] {
+    background-color: var(--primary);
+    animation: latido 0.5s ease;
+}
+
+@keyframes latido {
+    50% { transform: scale(1.25); }
+}
+
+/* -----------------------------------------
+   6. GALERÍA
+----------------------------------------- */
+#galeria {
+    padding: 6rem 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    background-color: var(--dark-light);
+}
+
+#galeria > figure {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+#galeria > figure img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+#galeria > figure:hover img {
+    transform: scale(1.08);
+}
+
+#galeria > figure figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: var(--light);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+}
+
+/* -----------------------------------------
+   7. NOSOTROS
+----------------------------------------- */
+#nosotros {
+    padding: 6rem 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+#nosotros > figure img {
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+#nosotros > article h2 {
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+}
+
+#nosotros > article > p {
+    color: var(--muted);
+    margin-bottom: 2rem;
+}
+
+#nosotros > article dl {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+    column-gap: 3rem;
+    row-gap: 0.4rem;
+}
+
+#nosotros > article dl dt {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--flame);
+}
+
+#nosotros > article dl dd {
+    color: var(--light);
+    font-size: 0.9rem;
+}
+
+/* -----------------------------------------
+   8. TESTIMONIOS
+----------------------------------------- */
+#testimonios {
+    padding: 6rem 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    background-color: var(--dark-light);
+}
+
+#testimonios > article {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+#testimonios > article > p:first-of-type {
+    color: var(--star-gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+#testimonios > article blockquote {
+    flex: 1;
+}
+
+#testimonios > article blockquote p {
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+#testimonios > article blockquote footer {
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+#testimonios > article blockquote footer cite {
+    font-style: normal;
+}
+
+#testimonios > article > p:last-of-type {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(17, 24, 39, 0.1);
+    color: var(--review-text);
+    font-size: 0.85rem;
+}
+
+#testimonios > article > p:last-of-type svg {
+    color: var(--flame-hover);
+    font-size: 1rem;
+}
+
+/* -----------------------------------------
+   9. FAQ
+----------------------------------------- */
+#faq {
+    padding: 6rem 5%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#faq > details {
+    background-color: var(--dark-light);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.2rem 1.6rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+#faq > details[open] { border-color: rgba(255, 107, 53, 0.4); }
+
+#faq > details summary {
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 2rem;
+}
+
+#faq > details summary::-webkit-details-marker {
+    display: none;
+}
+
+#faq > details summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: -0.1rem;
+    font-size: 1.4rem;
+    color: var(--flame);
+}
+
+#faq > details[open] summary::after {
+    content: '−';
+}
+
+#faq > details p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 1rem;
+}
+
+/* -----------------------------------------
+   10. VISÍTANOS
+----------------------------------------- */
+#contacto {
+    padding: 6rem 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    background-color: var(--dark-light);
+}
+
+#contacto > article h2 {
+    font-size: clamp(1.9rem, 4vw, 2.3rem);
+    margin-bottom: 1.2rem;
+}
+
+#contacto > article > p {
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+}
+
+#contacto > article address {
+    font-style: normal;
+    color: var(--muted);
+    line-height: 2.1;
+}
+
+#contacto > article address a {
+    text-decoration: none;
+    color: var(--flame);
+}
+
+#contacto > article address a:hover {
+    color: var(--primary);
+}
+
+#contacto > aside {
+    background-color: var(--dark);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#contacto > aside h3 {
+    color: var(--primary);
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+}
+
+#contacto > aside p {
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+}
+
+/* Aviso "Abierto ahora / Cerrado" (lo rellena el script según el horario) */
+#contacto > aside output {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: rgba(156, 163, 175, 0.12);
+    color: var(--muted);
+}
+
+#contacto > aside output:empty { display: none; }
+
+#contacto > aside output::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+#contacto > aside output[data-open] {
+    background-color: rgba(74, 222, 128, 0.12);
+    color: #4ade80;
+}
+
+/* -----------------------------------------
+   11. NEWSLETTER
+----------------------------------------- */
+#newsletter {
+    padding: 5rem 5%;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(250, 224, 110, 0.07), rgba(255, 107, 53, 0.1));
+}
+
+#newsletter h2 {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    margin-bottom: 0.8rem;
+}
+
+#newsletter > p {
+    color: var(--muted);
+    margin-bottom: 2.2rem;
+}
+
+#newsletter form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#newsletter form label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+#newsletter form input {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.9rem 1.3rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: var(--dark-light);
+    color: var(--light);
+    font-family: inherit;
+    font-size: 1rem;                   /* 16px: evita el zoom automático de Safari en iPhone */
+}
+
+#newsletter form input::placeholder { color: var(--muted); }
+
+#newsletter form input:focus {
+    outline: 2px solid var(--flame);
+}
+
+#newsletter form button {
+    padding: 0.9rem 1.9rem;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#newsletter form button:hover {
+    background-color: var(--primary-hover);
+}
+
+#newsletter form output {
+    flex-basis: 100%;
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+#newsletter form output:empty { display: none; }
+
+/* -----------------------------------------
+   12. FOOTER
+----------------------------------------- */
+body > footer {
+    background-color: #0b0f19;
+    padding: 4rem 5% 2rem 5%;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+}
+
+body > footer > article a:first-of-type {
+    text-decoration: none;
+    color: var(--light);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+body > footer > article > p {
+    color: var(--muted);
+    margin: 1rem 0;
+    font-size: 0.95rem;
+}
+
+body > footer > article > p:last-of-type a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    text-decoration: none;
+    color: var(--light);
+    font-size: 1.1rem;
+    margin-right: 0.6rem;
+}
+
+body > footer > article > p:last-of-type a:hover {
+    color: var(--dark);
+    background-color: var(--flame);
+    border-color: var(--flame);
+}
+
+body > footer > article > p:last-of-type a span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+body > footer > nav h2,
+body > footer > aside h2 {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    color: var(--light);
+}
+
+body > footer > nav a {
+    text-decoration: none;
+    color: var(--muted);
+    display: block;
+    width: fit-content;
+    margin-bottom: 0.6rem;
+}
+
+body > footer > nav a:hover {
+    color: var(--flame);
+}
+
+body > footer > aside address {
+    font-style: normal;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+body > footer > aside address a {
+    text-decoration: none;
+    color: var(--muted);
+}
+
+body > footer > aside address a:hover {
+    color: var(--flame);
+}
+
+body > footer > p:last-of-type {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+body > footer > p:last-of-type a { color: var(--primary); }
+body > footer > p:last-of-type a:hover { color: var(--flame); }
+
+/* -----------------------------------------
+   AVISO FLOTANTE DEL PEDIDO (lo crea el script)
+----------------------------------------- */
+body > output {
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.4rem;
+    border-radius: 50px;
+    background-color: var(--primary);
+    color: var(--dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, 150%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    pointer-events: none;
+}
+
+body > output[data-show] {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+/* -----------------------------------------
+   APARICIÓN AL HACER SCROLL (el script añade data-reveal; sin script, todo visible)
+----------------------------------------- */
+[data-reveal] { opacity: 0; translate: 0 28px; transition: opacity 0.7s ease, translate 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+[data-reveal="visible"] { opacity: 1; translate: 0 0; }
+
+/* -----------------------------------------
+   RESPONSIVE
+----------------------------------------- */
+@media (max-width: 992px) {
+    #inicio {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 9rem;
+        gap: 3rem;
+    }
+    #inicio > header > p:nth-of-type(2) {
+        margin: 0 auto 2.5rem auto;
+    }
+    #inicio > header > p:last-of-type {
+        justify-content: center;
+    }
+    #nosotros {
+        grid-template-columns: 1fr;
+    }
+    #nosotros > article dl {
+        justify-content: center;
+        text-align: center;
+    }
+    #contacto {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body > header {
+        padding: 1rem 5%;
+    }
+    body > header button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    body > header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--dark);
+        padding: 2rem;
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    body > header[data-nav-open] nav {
+        display: flex;
+    }
+    body > header nav a {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+    #inicio {
+        padding-top: 7.5rem;
+    }
+    #como-funciona > ol {
+        grid-template-columns: 1fr;
+    }
+    #ventajas, #como-funciona, #menu, #galeria, #nosotros, #testimonios, #faq, #contacto {
+        padding-top: 4.5rem;
+        padding-bottom: 4.5rem;
+    }
+    #ventajas > p:first-of-type,
+    #como-funciona > p:first-of-type,
+    #menu > p:first-of-type,
+    #galeria > p:first-of-type,
+    #testimonios > p:first-of-type,
+    #faq > p:first-of-type {
+        margin-bottom: 2.5rem;
+    }
+    #nosotros > article dl {
+        column-gap: 1.5rem;
+    }
+    #nosotros > article dl dt {
+        font-size: 1.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+</style>
+</head>
+<body>
+
+    <!-- Iconos (Font Awesome Free, licencia CC BY 4.0 — ver LICENCIA-ICONOS-FONT-AWESOME.txt) -->
+    <svg aria-hidden="true">
+        <symbol id="i-fire" viewBox="0 0 448 512"><path d="M160.5-26.4c9.3-7.8 23-7.5 31.9 .9 12.3 11.6 23.3 24.4 33.9 37.4 13.5 16.5 29.7 38.3 45.3 64.2 5.2-6.8 10-12.8 14.2-17.9 1.1-1.3 2.2-2.7 3.3-4.1 7.9-9.8 17.7-22.1 30.8-22.1 13.4 0 22.8 11.9 30.8 22.1 1.3 1.7 2.6 3.3 3.9 4.8 10.3 12.4 24 30.3 37.7 52.4 27.2 43.9 55.6 106.4 55.6 176.6 0 123.7-100.3 224-224 224S0 411.7 0 288c0-91.1 41.1-170 80.5-225 19.9-27.7 39.7-49.9 54.6-65.1 8.2-8.4 16.5-16.7 25.5-24.2zM225.7 416c25.3 0 47.7-7 68.8-21 42.1-29.4 53.4-88.2 28.1-134.4-4.5-9-16-9.6-22.5-2l-25.2 29.3c-6.6 7.6-18.5 7.4-24.7-.5-17.3-22.1-49.1-62.4-65.3-83-5.4-6.9-15.2-8-21.5-1.9-18.3 17.8-51.5 56.8-51.5 104.3 0 68.6 50.6 109.2 113.7 109.2z"/></symbol>
+        <symbol id="i-truck" viewBox="0 0 640 512"><path d="M64 96c0-35.3 28.7-64 64-64l288 0c35.3 0 64 28.7 64 64l0 32 50.7 0c17 0 33.3 6.7 45.3 18.7L621.3 192c12 12 18.7 28.3 18.7 45.3L640 384c0 35.3-28.7 64-64 64l-3.3 0c-10.4 36.9-44.4 64-84.7 64s-74.2-27.1-84.7-64l-102.6 0c-10.4 36.9-44.4 64-84.7 64s-74.2-27.1-84.7-64l-3.3 0c-35.3 0-64-28.7-64-64l0-48-40 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L24 240c-13.3 0-24-10.7-24-24s10.7-24 24-24l176 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L24 144c-13.3 0-24-10.7-24-24S10.7 96 24 96l40 0zM576 288l0-50.7-45.3-45.3-50.7 0 0 96 96 0zM256 424a40 40 0 1 0 -80 0 40 40 0 1 0 80 0zm232 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"/></symbol>
+        <symbol id="i-seedling" viewBox="0 0 512 512"><path d="M512 32C512 140.1 435.4 230.3 333.6 251.4 325.7 193.3 299.6 141 261.1 100.5 301.2 40 369.9 0 448 0l32 0c17.7 0 32 14.3 32 32zM0 96C0 78.3 14.3 64 32 64l32 0c123.7 0 224 100.3 224 224l0 192c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-160C100.3 320 0 219.7 0 96z"/></symbol>
+        <symbol id="i-certificate" viewBox="0 0 576 512"><path d="M239.2-8c-6.1-6.2-15-8.7-23.4-6.4S200.9-5.6 198.8 2.8L183.5 63c-1.1 4.4-5.6 7-9.9 5.7L113.8 51.9c-8.4-2.4-17.4 0-23.5 6.1s-8.5 15.1-6.1 23.5l16.9 59.8c1.2 4.3-1.4 8.8-5.7 9.9L35.1 166.5c-8.4 2.1-15 8.7-17.3 17.1s.2 17.3 6.4 23.4l44.5 43.3c3.2 3.1 3.2 8.3 0 11.5L24.3 305.1c-6.2 6.1-8.7 15-6.4 23.4s8.9 14.9 17.3 17.1l60.2 15.3c4.4 1.1 7 5.6 5.7 9.9L84.2 430.5c-2.4 8.4 0 17.4 6.1 23.5s15.1 8.5 23.5 6.1l59.8-16.9c4.3-1.2 8.8 1.4 9.9 5.7l15.3 60.2c2.1 8.4 8.7 15 17.1 17.3s17.3-.2 23.4-6.4l43.3-44.5c3.1-3.2 8.3-3.2 11.5 0L337.3 520c6.1 6.2 15 8.7 23.4 6.4s14.9-8.9 17.1-17.3L393.1 449c1.1-4.4 5.6-7 9.9-5.7l59.8 16.9c8.4 2.4 17.4 0 23.5-6.1s8.5-15.1 6.1-23.5l-16.9-59.8c-1.2-4.3 1.4-8.8 5.7-9.9l60.2-15.3c8.4-2.1 15-8.7 17.3-17.1s-.2-17.4-6.4-23.4l-44.5-43.3c-3.2-3.1-3.2-8.3 0-11.5l44.5-43.3c6.2-6.1 8.7-15 6.4-23.4s-8.9-14.9-17.3-17.1l-60.2-15.3c-4.4-1.1-7-5.6-5.7-9.9l16.9-59.8c2.4-8.4 0-17.4-6.1-23.5s-15.1-8.5-23.5-6.1L403 68.8c-4.3 1.2-8.8-1.4-9.9-5.7L377.8 2.8c-2.1-8.4-8.7-15-17.1-17.3s-17.3 .2-23.4 6.4L294 36.5c-3.1 3.2-8.3 3.2-11.5 0L239.2-8z"/></symbol>
+        <symbol id="i-bars" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></symbol>
+        <symbol id="i-xmark" viewBox="0 0 384 512"><path d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 448 512"><path d="M256 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 160-160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0 0 160c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160 160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0 0-160z"/></symbol>
+        <symbol id="i-comment" viewBox="0 0 512 512"><path d="M256 480c141.4 0 256-107.5 256-240S397.4 0 256 0 0 107.5 0 240c0 54.3 19.2 104.3 51.6 144.5L2.8 476.8c-4.8 9-3.3 20 3.6 27.5s17.8 9.8 27.1 5.8l118.4-50.7C183.7 472.6 218.9 480 256 480zM128 208a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm128 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm96 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></symbol>
+        <symbol id="i-instagram" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol>
+        <symbol id="i-tiktok" viewBox="0 0 448 512"><path d="M448.5 209.9c-44 .1-87-13.6-122.8-39.2l0 178.7c0 33.1-10.1 65.4-29 92.6s-45.6 48-76.6 59.6-64.8 13.5-96.9 5.3-60.9-25.9-82.7-50.8-35.3-56-39-88.9 2.9-66.1 18.6-95.2 40-52.7 69.6-67.7 62.9-20.5 95.7-16l0 89.9c-15-4.7-31.1-4.6-46 .4s-27.9 14.6-37 27.3-14 28.1-13.9 43.9 5.2 31 14.5 43.7 22.4 22.1 37.4 26.9 31.1 4.8 46-.1 28-14.4 37.2-27.1 14.2-28.1 14.2-43.8l0-349.4 88 0c-.1 7.4 .6 14.9 1.9 22.2 3.1 16.3 9.4 31.9 18.7 45.7s21.3 25.6 35.2 34.6c19.9 13.1 43.2 20.1 67 20.1l0 87.4z"/></symbol>
+        <symbol id="i-facebook" viewBox="0 0 512 512"><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5l0-170.3-52.8 0 0-78.2 52.8 0 0-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4l0 70.8c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2l0 27.8 83.6 0-14.4 78.2-69.3 0 0 175.9C413.8 494.8 512 386.9 512 256z"/></symbol>
+    </svg>
+
+    <header>
+        <a href="#inicio" aria-label="Flama Urbana, ir al inicio"><svg aria-hidden="true"><use href="#i-fire"/></svg>Flama<span>Urbana</span></a>
+        <nav id="menu-principal" aria-label="Principal">
+            <a href="#inicio">Inicio</a>
+            <a href="#menu">Menú</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#testimonios">Opiniones</a>
+            <a href="#contacto">Visítanos</a>
+            <a href="#menu">Pide Ahora <output aria-label="Productos en el pedido"></output></a>
+        </nav>
+        <button type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><svg aria-hidden="true"><use href="#i-bars"/></svg><svg aria-hidden="true"><use href="#i-xmark"/></svg></button>
+    </header>
+
+    <main>
+
+        <section id="inicio">
+            <header>
+                <p><svg aria-hidden="true"><use href="#i-fire"/></svg> La favorita del barrio</p>
+                <h1>Sabor que <span>enciende</span> tus sentidos.</h1>
+                <p>Bocatas, tacos y platos a la brasa preparados al momento, con carne 100% premium, ingredientes locales y nuestra legendaria salsa flama secreta. ¿Te atreves a probarla?</p>
+                <p>
+                    <a href="#menu">Ver Menú</a>
+                    <a href="#nosotros">Nuestra Historia</a>
+                </p>
+            </header>
+            <figure>
+                <img src="imagenes/portada.jpg" width="1100" height="1375" fetchpriority="high" alt="Bocatas de albóndigas con salsa de tomate y parmesano en bandejas de cartón">
+            </figure>
+        </section>
+
+        <section id="ventajas">
+            <h2>¿Por qué elegirnos?</h2>
+            <p>Lo que nos hace diferentes en cada pedido.</p>
+            <article>
+                <p><svg aria-hidden="true"><use href="#i-truck"/></svg></p>
+                <h3>Envío Flash</h3>
+                <p>Caliente y en la puerta de tu casa en menos de 30 minutos.</p>
+            </article>
+            <article>
+                <p><svg aria-hidden="true"><use href="#i-seedling"/></svg></p>
+                <h3>Calidad Premium</h3>
+                <p>Ingredientes frescos de granja seleccionados cada mañana.</p>
+            </article>
+            <article>
+                <p><svg aria-hidden="true"><use href="#i-fire"/></svg></p>
+                <h3>Sabor Ahumado</h3>
+                <p>Carne cocinada a la parrilla con carbón vegetal original.</p>
+            </article>
+            <article>
+                <p><svg aria-hidden="true"><use href="#i-certificate"/></svg></p>
+                <h3>Higiene Certificada</h3>
+                <p>Cocina con los más altos estándares de limpieza y seguridad alimentaria.</p>
+            </article>
+        </section>
+
+        <section id="como-funciona">
+            <h2>Pide en 3 simples pasos</h2>
+            <p>Del antojo a tu mesa en minutos.</p>
+            <ol>
+                <li>
+                    <h3>Elige tu combo</h3>
+                    <p>Explora el menú y arma el pedido perfecto para ti.</p>
+                </li>
+                <li>
+                    <h3>Paga seguro</h3>
+                    <p>Múltiples métodos de pago, sin complicaciones.</p>
+                </li>
+                <li>
+                    <h3>Recíbelo caliente</h3>
+                    <p>Nuestros riders te lo entregan en tiempo récord.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section id="menu">
+            <h2>Los Más Codiciados</h2>
+            <p>Una selección de nuestros combos más brutales.</p>
+            <article>
+                <figure>
+                    <img src="imagenes/taco-brasa.jpg" width="1000" height="1209" loading="lazy" alt="Taco Brasa con ternera, pico de gallo y salsa blanca">
+                </figure>
+                <h3>Taco Brasa</h3>
+                <p>Tortilla de maíz tostada, ternera a la brasa, pico de gallo, salsa de yogur y cebolleta asada.</p>
+                <footer>
+                    <p>8,90 €</p>
+                    <button type="button" aria-label="Añadir Taco Brasa al pedido"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+                </footer>
+            </article>
+            <article>
+                <figure>
+                    <img src="imagenes/saltado-flama.jpg" width="1000" height="900" loading="lazy" alt="Saltado Flama con huevo frito, aguacate y cilantro">
+                </figure>
+                <h3>Saltado Flama</h3>
+                <p>Ternera salteada al wok con cebolla y tomate sobre arroz crujiente, huevo frito y aguacate.</p>
+                <footer>
+                    <p>13,50 €</p>
+                    <button type="button" aria-label="Añadir Saltado Flama al pedido"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+                </footer>
+            </article>
+            <article>
+                <figure>
+                    <img src="imagenes/queso-crispy.jpg" width="1000" height="750" loading="lazy" alt="Dados de queso rebozados con salsa agridulce">
+                </figure>
+                <h3>Queso Crispy</h3>
+                <p>Dados de queso fundente rebozados y extra crujientes. Incluye salsa agridulce de la casa.</p>
+                <footer>
+                    <p>7,20 €</p>
+                    <button type="button" aria-label="Añadir Queso Crispy al pedido"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+                </footer>
+            </article>
+            <article>
+                <figure>
+                    <img src="imagenes/pulpitos-flama.jpg" width="1000" height="675" loading="lazy" alt="Salchichas cortadas en forma de pulpo sobre patatas con pimentón">
+                </figure>
+                <h3>Pulpitos Flama</h3>
+                <p>Salchichas ahumadas cortadas en forma de pulpo sobre patatas con piel y pimentón de la Vera.</p>
+                <footer>
+                    <p>6,50 €</p>
+                    <button type="button" aria-label="Añadir Pulpitos Flama al pedido"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+                </footer>
+            </article>
+            <article>
+                <figure>
+                    <img src="imagenes/bocata-smokehouse.jpg" width="1000" height="868" loading="lazy" alt="Bocata Smokehouse con chorizo, queso fundido y tomate">
+                </figure>
+                <h3>Bocata Smokehouse</h3>
+                <p>Pan gratinado, chorizo a la brasa, queso gouda fundido, pico de gallo y nuestra salsa flama.</p>
+                <footer>
+                    <p>10,40 €</p>
+                    <button type="button" aria-label="Añadir Bocata Smokehouse al pedido"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+                </footer>
+            </article>
+            <article>
+                <figure>
+                    <img src="imagenes/entrana-brasa.jpg" width="1000" height="682" loading="lazy" alt="Entraña a la brasa con rúcula, patatas y mantequilla de hierbas">
+                </figure>
+                <h3>Entraña a la Brasa</h3>
+                <p>Entraña de ternera al carbón con rúcula, patatas fritas y mantequilla de hierbas.</p>
+                <footer>
+                    <p>14,90 €</p>
+                    <button type="button" aria-label="Añadir Entraña a la Brasa al pedido"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+                </footer>
+            </article>
+        </section>
+
+        <section id="galeria">
+            <h2>Directo de la parrilla</h2>
+            <p>Un vistazo a lo que se cocina en Flama Urbana cada día.</p>
+            <figure>
+                <img src="imagenes/galeria-tosta.jpg" width="1000" height="855" loading="lazy" alt="Tosta gratinada con ensalada de aceitunas en la terraza">
+                <figcaption>Tostas en la terraza</figcaption>
+            </figure>
+            <figure>
+                <img src="imagenes/galeria-compartir.jpg" width="1000" height="960" loading="lazy" alt="Fuente de burrata con tomates cherry, mozzarella y pesto">
+                <figcaption>Para compartir</figcaption>
+            </figure>
+            <figure>
+                <img src="imagenes/galeria-catering.jpg" width="1000" height="1005" loading="lazy" alt="Mesa de catering con minibocadillos y bollería salada">
+                <figcaption>Catering para eventos</figcaption>
+            </figure>
+            <figure>
+                <img src="imagenes/galeria-eventos.jpg" width="1000" height="975" loading="lazy" alt="Mesa de evento nocturno con flores, quesos y platos para compartir">
+                <figcaption>Noches de evento</figcaption>
+            </figure>
+        </section>
+
+        <section id="nosotros">
+            <figure>
+                <img src="imagenes/nosotros-mesa.jpg" width="1000" height="1250" loading="lazy" alt="Vista cenital de una mesa con pizza, mejillones, carnes y patatas">
+            </figure>
+            <article>
+                <h2>No somos comida rápida común, somos una cultura.</h2>
+                <p>Desde 2015 rompemos las reglas de la cocina tradicional y demostramos que lo rápido también puede ser gourmet. Cada plato que sale de nuestra parrilla es una obra de arte diseñada para saciar tus antojos más salvajes.</p>
+                <dl>
+                    <dt>+15k</dt>
+                    <dd>Clientes Felices</dd>
+                    <dt>25 min</dt>
+                    <dd>Tiempo Promedio</dd>
+                    <dt>4,9★</dt>
+                    <dd>Valoración Media</dd>
+                </dl>
+            </article>
+        </section>
+
+        <section id="testimonios">
+            <h2>Lo que dicen los verdaderos expertos</h2>
+            <p>Nuestros clientes no mienten (ni dejan ni las migas).</p>
+            <article>
+                <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+                <blockquote>
+                    <p>"El Bocata Smokehouse es de otro planeta. El envío llegó antes de tiempo y seguía quemando. Mi sitio de confianza desde ya."</p>
+                    <footer>— <cite>Carlos Mendoza</cite></footer>
+                </blockquote>
+                <p><svg aria-hidden="true"><use href="#i-comment"/></svg> Opinión de cliente</p>
+            </article>
+            <article>
+                <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+                <blockquote>
+                    <p>"El Taco Brasa es espectacular, la tortilla crujiente y la carne en su punto. Además, el branding de la web y el empaque es de 10."</p>
+                    <footer>— <cite>Sofía Galán</cite></footer>
+                </blockquote>
+                <p><svg aria-hidden="true"><use href="#i-comment"/></svg> Opinión de cliente</p>
+            </article>
+            <article>
+                <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+                <blockquote>
+                    <p>"Pedí los Pulpitos Flama por curiosidad y ahora son mi debilidad. Llegan calientes y el rider siempre es súper amable."</p>
+                    <footer>— <cite>Diego Torres</cite></footer>
+                </blockquote>
+                <p><svg aria-hidden="true"><use href="#i-comment"/></svg> Opinión de cliente</p>
+            </article>
+        </section>
+
+        <section id="faq">
+            <h2>Preguntas frecuentes</h2>
+            <p>Todo lo que necesitas saber antes de pedir.</p>
+            <details>
+                <summary>¿Cuál es el tiempo de entrega?</summary>
+                <p>Nuestro tiempo promedio es de 25 minutos, aunque puede variar según tu ubicación y la demanda del momento.</p>
+            </details>
+            <details>
+                <summary>¿Tienen opciones vegetarianas?</summary>
+                <p>Sí, contamos con alternativas vegetarianas en nuestra carta y en los acompañamientos.</p>
+            </details>
+            <details>
+                <summary>¿Puedo pagar con tarjeta al recibir el pedido?</summary>
+                <p>Claro, aceptamos pago en efectivo, tarjeta y billeteras digitales al momento de la entrega.</p>
+            </details>
+            <details>
+                <summary>¿Hacen envíos fuera de la ciudad?</summary>
+                <p>Por ahora solo cubrimos el área metropolitana, pero estamos trabajando en expandir nuestra cobertura.</p>
+            </details>
+        </section>
+
+        <section id="contacto">
+            <article>
+                <h2>Visítanos</h2>
+                <p>También puedes disfrutar de Flama Urbana directamente en nuestro local.</p>
+                <address>
+                    Calle del Fuego 123, Madrid, España<br>
+                    <a href="tel:+34600000000">+34 600 000 000</a><br>
+                    <a href="mailto:hola@flamaurbana.example">hola@flamaurbana.example</a>
+                </address>
+            </article>
+            <aside>
+                <h3>Horarios</h3>
+                <p>Lunes - Jueves: 19:00 - 23:30</p>
+                <p>Viernes - Domingo: 13:00 - 00:30</p>
+                <output aria-live="polite"></output>
+            </aside>
+        </section>
+
+        <section id="newsletter">
+            <h2>No te pierdas ni una oferta</h2>
+            <p>Suscríbete y recibe un 10% de descuento en tu primer pedido.</p>
+            <!-- Para recibir suscripciones, conecta este formulario a tu servicio de newsletter (ver README.md) -->
+            <form action="#" method="post" novalidate>
+                <label for="email-newsletter">Correo electrónico</label>
+                <input type="email" id="email-newsletter" name="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+                <button type="submit">Quiero mi descuento</button>
+                <output aria-live="polite"></output>
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <article>
+            <a href="#inicio" aria-label="Flama Urbana, ir al inicio"><svg aria-hidden="true"><use href="#i-fire"/></svg>Flama<span>Urbana</span></a>
+            <p>Cocinando la revolución fast-food noche y día.</p>
+            <p>
+                <a href="#" aria-label="Instagram de Flama Urbana"><svg aria-hidden="true"><use href="#i-instagram"/></svg><span>Instagram</span></a>
+                <a href="#" aria-label="TikTok de Flama Urbana"><svg aria-hidden="true"><use href="#i-tiktok"/></svg><span>TikTok</span></a>
+                <a href="#" aria-label="Facebook de Flama Urbana"><svg aria-hidden="true"><use href="#i-facebook"/></svg><span>Facebook</span></a>
+            </p>
+        </article>
+        <nav aria-label="Explora">
+            <h2>Explora</h2>
+            <a href="#inicio">Inicio</a>
+            <a href="#menu">Menú</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Visítanos</a>
+        </nav>
+        <aside>
+            <h2>Contacto</h2>
+            <address>
+                Calle del Fuego 123, Madrid<br>
+                <a href="tel:+34600000000">+34 600 000 000</a><br>
+                <a href="mailto:hola@flamaurbana.example">hola@flamaurbana.example</a>
+            </address>
+        </aside>
+        <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+        <p>&copy; <span id="anio">2026</span> Flama Urbana · <a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+    </footer>
+
+    <script>
+        const siteHeader = document.querySelector('body > header');
+        const menuToggle = siteHeader.querySelector('button');
+        const navLinks = siteHeader.querySelectorAll('nav a');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        document.getElementById('anio').textContent = new Date().getFullYear();
+
+        // 1. Menú móvil
+        function closeMenu() {
+            siteHeader.removeAttribute('data-nav-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Abrir menú');
+        }
+
+        function openMenu() {
+            siteHeader.setAttribute('data-nav-open', '');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            menuToggle.setAttribute('aria-label', 'Cerrar menú');
+        }
+
+        menuToggle.addEventListener('click', () => {
+            siteHeader.hasAttribute('data-nav-open') ? closeMenu() : openMenu();
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+        document.addEventListener('click', (e) => { if (!siteHeader.contains(e.target)) closeMenu(); });
+
+        // 2. Cabecera compacta y enlace activo al hacer scroll
+        const sections = [...document.querySelectorAll('main > section[id]')];
+        const onScroll = () => {
+            siteHeader.toggleAttribute('data-scrolled', window.scrollY > 40);
+            let current = 'inicio';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 140) current = section.id;
+            });
+            navLinks.forEach((link, i) => {
+                const isLast = i === navLinks.length - 1;   // "Pide Ahora" no se marca
+                if (!isLast && link.getAttribute('href') === '#' + current) link.setAttribute('aria-current', 'true');
+                else link.removeAttribute('aria-current');
+            });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // 3. Botones "+" del menú: suman al pedido y muestran un aviso
+        const orderCount = siteHeader.querySelector('nav a:last-of-type output');
+        const toast = document.createElement('output');
+        toast.setAttribute('aria-live', 'polite');
+        document.body.appendChild(toast);
+        let items = 0;
+        let toastTimer;
+
+        document.querySelectorAll('#menu > article > footer button').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.closest('article').querySelector('h3').textContent;
+                items += 1;
+                orderCount.textContent = items;
+                toast.textContent = name + ' añadido a tu pedido (' + items + ')';
+                toast.setAttribute('data-show', '');
+                button.removeAttribute('data-added');
+                void button.offsetWidth;                    // reinicia la animación
+                button.setAttribute('data-added', '');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.removeAttribute('data-show'), 2500);
+            });
+        });
+
+        // 4. Aviso "Abierto ahora" según el horario (L-J 19:00-23:30 · V-D 13:00-00:30)
+        const hoursOutput = document.querySelector('#contacto > aside output');
+        const HORARIO = {             // 0 = domingo … 6 = sábado · [apertura, cierre] en minutos
+            0: [13 * 60, 24 * 60 + 30], 1: [19 * 60, 23 * 60 + 30], 2: [19 * 60, 23 * 60 + 30],
+            3: [19 * 60, 23 * 60 + 30], 4: [19 * 60, 23 * 60 + 30],
+            5: [13 * 60, 24 * 60 + 30], 6: [13 * 60, 24 * 60 + 30]
+        };
+        function updateOpen() {
+            const now = new Date();
+            const minutes = now.getHours() * 60 + now.getMinutes();
+            const today = HORARIO[now.getDay()];
+            const yesterday = HORARIO[(now.getDay() + 6) % 7];
+            const open = (minutes >= today[0] && minutes < today[1]) || (minutes + 24 * 60 < yesterday[1]);
+            hoursOutput.toggleAttribute('data-open', open);
+            hoursOutput.textContent = open ? 'Abierto ahora' : 'Cerrado ahora';
+        }
+        updateOpen();
+        setInterval(updateOpen, 60000);
+
+        // 5. Newsletter (mientras action="#", muestra un aviso en lugar de enviar)
+        const newsForm = document.querySelector('#newsletter form');
+        const newsOutput = newsForm.querySelector('output');
+        newsForm.addEventListener('submit', (e) => {
+            if (!newsForm.checkValidity()) {
+                e.preventDefault();
+                newsOutput.textContent = 'Escribe un correo electrónico válido.';
+                newsForm.querySelector('input').focus();
+                return;
+            }
+            if (newsForm.getAttribute('action') === '#') {
+                e.preventDefault();
+                newsOutput.textContent = '¡Listo! Revisa tu correo para conseguir tu 10% de descuento.';
+                newsForm.reset();
+            }
+        });
+
+        // 6. Aparición suave de los bloques al hacer scroll
+        if ('IntersectionObserver' in window && !reduceMotion) {
+            const targets = document.querySelectorAll('#ventajas > article, #como-funciona li, #menu > article, #galeria > figure, #nosotros > *, #testimonios > article, #faq > details, #contacto > *');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.setAttribute('data-reveal', 'visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -8% 0px' });
+            targets.forEach(el => { el.setAttribute('data-reveal', ''); observer.observe(el); });
+        }
+    </script>
+</body>
+</html>

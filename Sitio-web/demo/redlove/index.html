@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>redLove · Agencia de bodas en Madrid</title>
+<meta name="description" content="redLove diseña y organiza bodas elegantes y auténticas en Madrid. Planificación integral, decoración y coordinación del día.">
+<meta name="theme-color" content="#3e0f18">
+<!--
+  redLove — Landing page para agencias de bodas
+  Plantilla de All Pixels · https://allpixels.dev
+  Licencia Gratis: mantén el crédito del pie de página (ver LICENCIA.txt)
+-->
+<style>
+/* =========================================================
+   1. ENLACES
+   ========================================================= */
+a {
+  text-decoration: none;
+  color: #7a1f2e;
+  transition: color .3s, background-color .3s, border-color .3s;
+}
+
+/* =========================================================
+   2. TIPOGRAFÍAS (incluidas en la carpeta fuentes/)
+   ========================================================= */
+@font-face { font-family: "Cormorant Garamond"; src: url("fuentes/cormorant-garamond-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fuentes/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("fuentes/cormorant-garamond-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("fuentes/jost-latin-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("fuentes/jost-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("fuentes/jost-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+
+/* =========================================================
+   3. VARIABLES — cambia aquí los colores y las fuentes
+   ========================================================= */
+:root {
+  --vino: #7a1f2e;
+  --vino-oscuro: #3e0f18;
+  --vino-medio: #52162a;
+  --marfil: #faf6f0;
+  --arena: #f1e8dc;
+  --arena-oscura: #e6d8c6;
+  --oro: #b8955a;          /* adornos y fondos oscuros */
+  --oro-texto: #85622b;    /* texto dorado sobre fondo claro (contraste AA) */
+  --tinta: #2b2325;
+  --suave: #62575a;
+  --fuente-titulos: "Cormorant Garamond", Georgia, serif;
+  --fuente-texto: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --ancho: 1200px;
+  --curva: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* =========================================================
+   4. BASE
+   ========================================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+
+body {
+  font-family: var(--fuente-texto);
+  font-weight: 300;
+  font-size: 1.0625rem;
+  color: var(--tinta);
+  background-color: var(--marfil);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+figure { overflow: hidden; position: relative; }
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-titulos);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--vino-oscuro);
+  text-wrap: balance;
+}
+
+h2 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+
+h1 em, h2 em { font-style: italic; color: var(--vino); }
+
+small {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  font-size: .74rem;
+  font-weight: 400;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+  margin-bottom: 1.2rem;
+}
+
+small::before {
+  content: "";
+  width: 2.4rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+:focus-visible { outline: 2px solid var(--vino); outline-offset: 3px; }
+
+/* =========================================================
+   5. CABECERA Y NAVEGACIÓN
+   ========================================================= */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: rgba(250, 246, 240, .9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .4s, box-shadow .4s;
+}
+
+header[data-scroll] {
+  border-bottom-color: var(--arena-oscura);
+  box-shadow: 0 10px 30px -22px rgba(62, 15, 24, .45);
+}
+
+header nav {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 1.1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Logotipo */
+header nav > a:first-of-type {
+  font-family: var(--fuente-titulos);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--tinta);
+  letter-spacing: .01em;
+  margin-right: auto;
+}
+
+header nav > a:first-of-type strong { font-weight: 500; color: var(--vino); }
+
+/* Botón de menú (solo móvil) */
+header nav button {
+  display: none;
+  font: inherit;
+  font-size: .74rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--tinta);
+  background: none;
+  border: 1px solid var(--arena-oscura);
+  padding: .6rem 1rem;
+  cursor: pointer;
+}
+
+header nav ul {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+header nav ul a {
+  position: relative;
+  font-size: .78rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--tinta);
+  padding: .3rem 0;
+}
+
+header nav ul a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--vino);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s var(--curva);
+}
+
+header nav ul a:hover { color: var(--vino); }
+
+/* "Reservar cita" dentro del menú: solo en móvil */
+header nav ul li:last-of-type { display: none; }
+
+header nav ul a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* Botón "Reservar cita" */
+header nav > a:last-of-type {
+  font-size: .74rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--marfil);
+  background-color: var(--vino);
+  padding: .8rem 1.5rem;
+}
+
+header nav > a:last-of-type:hover { background-color: var(--vino-oscuro); }
+
+/* =========================================================
+   6. SECCIONES — base común
+   ========================================================= */
+main > section {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 7.5rem 1.5rem;
+}
+
+/* =========================================================
+   7. PORTADA
+   ========================================================= */
+main > section:first-of-type {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 5rem;
+  padding-top: 4.5rem;
+  padding-bottom: 6rem;
+}
+
+main > section:first-of-type h1 {
+  font-size: clamp(3.2rem, 7.4vw, 6.2rem);
+  letter-spacing: -.01em;
+  margin-bottom: 1.8rem;
+}
+
+main > section:first-of-type h1 em { display: block; }
+
+main > section:first-of-type article > p {
+  max-width: 31rem;
+  font-size: 1.12rem;
+  color: var(--suave);
+  margin-bottom: 2.6rem;
+}
+
+main > section:first-of-type article > a {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: 1.05rem 2.1rem;
+}
+
+main > section:first-of-type article > a:first-of-type {
+  color: var(--marfil);
+  background-color: var(--vino);
+  margin-right: 1.4rem;
+}
+
+main > section:first-of-type article > a:first-of-type:hover { background-color: var(--vino-oscuro); }
+
+main > section:first-of-type article > a:last-of-type {
+  color: var(--vino);
+  border-bottom: 1px solid var(--oro);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+main > section:first-of-type article > a:last-of-type:hover { color: var(--oro-texto); border-bottom-color: var(--vino); }
+
+/* Datos rápidos bajo los botones */
+main > section:first-of-type article ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 2rem;
+  list-style: none;
+  margin-top: 3.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--arena-oscura);
+  font-size: .86rem;
+  color: var(--suave);
+}
+
+main > section:first-of-type article li strong { font-weight: 500; color: var(--vino-oscuro); }
+
+/* Foto principal en arco + foto pequeña superpuesta */
+main > section:first-of-type figure:first-of-type {
+  grid-column: 2;
+  grid-row: 1;
+  aspect-ratio: 3 / 4;
+  border-radius: 16rem 16rem 0 0;
+  outline: 1px solid var(--oro);
+  outline-offset: 14px;
+  overflow: hidden;
+}
+
+main > section:first-of-type figure:first-of-type img { object-position: center 55%; }
+
+main > section:first-of-type figure:last-of-type {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: start;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid var(--marfil);
+  transform: translate(-38%, 18%);
+  box-shadow: 0 24px 50px -20px rgba(62, 15, 24, .5);
+}
+
+main > section:first-of-type figure:last-of-type img { object-position: center 30%; }
+
+/* =========================================================
+   8. CINTA DE PALABRAS
+   ========================================================= */
+main > section:nth-of-type(2) {
+  max-width: none;
+  padding: 1.6rem 0;
+  overflow: hidden;
+  background-color: var(--vino-oscuro);
+  display: flex;
+}
+
+main > section:nth-of-type(2) ul {
+  display: flex;
+  flex-shrink: 0;
+  gap: 3rem;
+  padding-right: 3rem;
+  list-style: none;
+  animation: cinta 40s linear infinite;
+}
+
+main > section:nth-of-type(2) li {
+  font-family: var(--fuente-titulos);
+  font-style: italic;
+  font-size: 1.7rem;
+  white-space: nowrap;
+  color: var(--arena);
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+main > section:nth-of-type(2) li::after {
+  content: "✦";
+  font-style: normal;
+  font-size: .9rem;
+  color: var(--oro);
+}
+
+@keyframes cinta { to { transform: translateX(-100%); } }
+
+/* =========================================================
+   9. NOSOTROS
+   ========================================================= */
+main > section:nth-of-type(3) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+main > section:nth-of-type(3) figure {
+  aspect-ratio: 4 / 5;
+}
+
+main > section:nth-of-type(3) figure img { object-position: center 70%; }
+
+main > section:nth-of-type(3) figcaption {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  font-family: var(--fuente-titulos);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--marfil);
+  background-color: rgba(62, 15, 24, .7);
+  padding: .5rem 1rem;
+}
+
+main > section:nth-of-type(3) article h2 { margin-bottom: 1.8rem; }
+
+main > section:nth-of-type(3) article p {
+  color: var(--suave);
+  margin-bottom: 1.2rem;
+}
+
+main > section:nth-of-type(3) article ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  list-style: none;
+  margin-top: 2.6rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid var(--arena-oscura);
+}
+
+main > section:nth-of-type(3) article li {
+  font-size: .74rem;
+  font-weight: 400;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--suave);
+}
+
+main > section:nth-of-type(3) article li strong {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--vino);
+  line-height: 1;
+  margin-bottom: .4rem;
+}
+
+/* =========================================================
+   10. SERVICIOS
+   ========================================================= */
+main > section:nth-of-type(4) {
+  max-width: none;
+  background-color: var(--vino-oscuro);
+  color: var(--arena);
+  padding-left: max(1.5rem, calc((100% - var(--ancho)) / 2 + 1.5rem));
+  padding-right: max(1.5rem, calc((100% - var(--ancho)) / 2 + 1.5rem));
+}
+
+main > section:nth-of-type(4) small { color: var(--oro); }
+
+main > section:nth-of-type(4) h2,
+main > section:nth-of-type(4) h3 { color: var(--marfil); }
+
+main > section:nth-of-type(4) h2 em { color: var(--oro); }
+
+main > section:nth-of-type(4) ol {
+  margin-top: 4rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background-color: rgba(184, 149, 90, .3);
+  border: 1px solid rgba(184, 149, 90, .3);
+}
+
+main > section:nth-of-type(4) li {
+  background-color: var(--vino-oscuro);
+  padding: 3rem 2.4rem 3.2rem;
+  transition: background-color .5s var(--curva);
+}
+
+main > section:nth-of-type(4) li:hover { background-color: var(--vino-medio); }
+
+main > section:nth-of-type(4) li span {
+  font-family: var(--fuente-titulos);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--oro);
+}
+
+main > section:nth-of-type(4) h3 {
+  font-size: 2rem;
+  margin: 1.2rem 0 1rem;
+}
+
+main > section:nth-of-type(4) li p {
+  font-size: .98rem;
+  color: rgba(241, 232, 220, .78);
+  margin-bottom: 1.6rem;
+}
+
+main > section:nth-of-type(4) li ul {
+  list-style: none;
+  font-size: .88rem;
+  color: rgba(241, 232, 220, .78);
+  border-top: 1px solid rgba(184, 149, 90, .25);
+  padding-top: 1.2rem;
+}
+
+main > section:nth-of-type(4) li ul li {
+  padding: .25rem 0 .25rem 1.4rem;
+  position: relative;
+}
+
+main > section:nth-of-type(4) li ul li:hover { background-color: transparent; }
+
+main > section:nth-of-type(4) li ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--oro);
+}
+
+/* =========================================================
+   11. GALERÍA
+   ========================================================= */
+main > section:nth-of-type(5) > h2 { margin-bottom: 3.5rem; }
+
+main > section:nth-of-type(5) > article {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr 1fr;
+  grid-template-rows: 18rem 18rem;
+  gap: 1rem;
+}
+
+main > section:nth-of-type(5) figure img { transition: transform 1.2s var(--curva); }
+
+main > section:nth-of-type(5) figure:hover img { transform: scale(1.05); }
+
+main > section:nth-of-type(5) figure:first-of-type { grid-row: span 2; }
+
+main > section:nth-of-type(5) figure:first-of-type img { object-position: center 35%; }
+
+main > section:nth-of-type(5) figure:nth-of-type(2) img { object-position: center 30%; }
+
+main > section:nth-of-type(5) figure:nth-of-type(3) { grid-row: span 2; }
+
+main > section:nth-of-type(5) figure:nth-of-type(3) img { object-position: center 40%; }
+
+main > section:nth-of-type(5) figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2.4rem 1.3rem 1.1rem;
+  font-family: var(--fuente-titulos);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--marfil);
+  background: linear-gradient(to top, rgba(30, 8, 13, .75), transparent);
+  opacity: 0;
+  transform: translateY(.6rem);
+  transition: opacity .5s, transform .5s var(--curva);
+}
+
+main > section:nth-of-type(5) figure:hover figcaption { opacity: 1; transform: none; }
+
+/* =========================================================
+   12. TESTIMONIO
+   ========================================================= */
+main > section:nth-of-type(6) {
+  max-width: 920px;
+  text-align: center;
+  padding-top: 3rem;
+}
+
+main > section:nth-of-type(6) blockquote p {
+  font-family: var(--fuente-titulos);
+  font-style: italic;
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  line-height: 1.3;
+  color: var(--vino-oscuro);
+  text-wrap: balance;
+}
+
+main > section:nth-of-type(6) blockquote p::before {
+  content: "“";
+  display: block;
+  font-size: 5rem;
+  line-height: .6;
+  color: var(--oro);
+  margin-bottom: 1.2rem;
+}
+
+main > section:nth-of-type(6) blockquote footer {
+  margin-top: 1.8rem;
+  font-size: .78rem;
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+}
+
+/* =========================================================
+   13. PROCESO
+   ========================================================= */
+main > section:nth-of-type(7) {
+  max-width: none;
+  background-color: var(--arena);
+  text-align: center;
+}
+
+main > section:nth-of-type(7) small { justify-content: center; }
+
+main > section:nth-of-type(7) ol {
+  position: relative;
+  max-width: 1040px;
+  margin: 4.5rem auto 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.4rem;
+  counter-reset: paso;
+}
+
+/* Línea que une los pasos */
+main > section:nth-of-type(7) ol::before {
+  content: "";
+  position: absolute;
+  top: 2.2rem;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background-color: var(--oro);
+}
+
+main > section:nth-of-type(7) li {
+  position: relative;
+  counter-increment: paso;
+  font-size: .96rem;
+  color: var(--suave);
+}
+
+main > section:nth-of-type(7) li::before {
+  content: counter(paso, decimal-leading-zero);
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  margin: 0 auto 1.4rem;
+  border: 1px solid var(--oro);
+  border-radius: 50%;
+  background-color: var(--arena);
+  font-family: var(--fuente-titulos);
+  font-size: 1.7rem;
+  color: var(--vino);
+}
+
+main > section:nth-of-type(7) li strong {
+  display: block;
+  font-family: var(--fuente-titulos);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--vino-oscuro);
+  margin-bottom: .4rem;
+}
+
+/* =========================================================
+   14. PREGUNTAS FRECUENTES
+   ========================================================= */
+main > section:nth-of-type(8) {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+main > section:nth-of-type(8) > article:first-of-type p {
+  color: var(--suave);
+  margin-top: 1.5rem;
+}
+
+main > section:nth-of-type(8) details {
+  border-bottom: 1px solid var(--arena-oscura);
+}
+
+main > section:nth-of-type(8) details:first-of-type { border-top: 1px solid var(--arena-oscura); }
+
+main > section:nth-of-type(8) summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  font-family: var(--fuente-titulos);
+  font-size: 1.55rem;
+  color: var(--vino-oscuro);
+}
+
+main > section:nth-of-type(8) summary::-webkit-details-marker { display: none; }
+
+main > section:nth-of-type(8) summary::after {
+  content: "+";
+  flex-shrink: 0;
+  font-family: var(--fuente-texto);
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--oro-texto);
+  transition: transform .4s var(--curva);
+}
+
+main > section:nth-of-type(8) details[open] summary::after { transform: rotate(45deg); }
+
+main > section:nth-of-type(8) summary:hover { color: var(--vino); }
+
+main > section:nth-of-type(8) details p {
+  color: var(--suave);
+  padding: 0 3rem 1.6rem 0;
+}
+
+/* =========================================================
+   15. CONTACTO
+   ========================================================= */
+main > section:last-of-type {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 5rem;
+  padding-top: 3rem;
+}
+
+main > section:last-of-type h2 { margin-bottom: 2.6rem; }
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.8rem 1.6rem;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  font-size: .72rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--suave);
+}
+
+form label:nth-of-type(5) { grid-column: span 2; }
+
+/* Casilla de privacidad */
+form label:nth-of-type(6) {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: .7rem;
+  font-size: .86rem;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.5;
+}
+
+form label:nth-of-type(6) input {
+  flex: 0 0 auto;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: .2rem;
+  accent-color: var(--vino);
+}
+
+form label:nth-of-type(6) a { border-bottom: 1px solid currentColor; }
+
+input, select, textarea {
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--tinta);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #b9a893;
+  border-radius: 0;
+  padding: .65rem 0;
+  outline: none;
+  transition: border-color .3s;
+}
+
+input:focus, select:focus, textarea:focus { border-bottom-color: var(--vino); }
+
+input::placeholder, textarea::placeholder { color: #8e8285; }
+
+textarea { resize: vertical; min-height: 7.5rem; }
+
+form button {
+  grid-column: span 2;
+  justify-self: start;
+  font: inherit;
+  font-size: .78rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--marfil);
+  background-color: var(--vino);
+  border: none;
+  padding: 1.15rem 2.8rem;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+
+form button:hover { background-color: var(--vino-oscuro); }
+
+form output {
+  grid-column: span 2;
+  font-size: .95rem;
+  color: var(--vino);
+}
+
+main > section:last-of-type aside {
+  background-color: var(--arena);
+  padding: 3rem 2.6rem;
+  align-self: start;
+  border-top: 3px solid var(--vino);
+}
+
+main > section:last-of-type aside h3 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+main > section:last-of-type aside dt {
+  font-size: .72rem;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--oro-texto);
+}
+
+main > section:last-of-type aside dd {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+main > section:last-of-type aside dd:last-of-type { margin-bottom: 0; }
+
+main > section:last-of-type aside a { color: var(--vino); border-bottom: 1px solid transparent; }
+
+main > section:last-of-type aside a:hover { border-bottom-color: currentColor; }
+
+/* =========================================================
+   16. PIE DE PÁGINA
+   ========================================================= */
+body > footer {
+  background-color: var(--tinta);
+  color: rgba(250, 246, 240, .72);
+  padding: 4.5rem 1.5rem 2rem;
+  text-align: center;
+}
+
+body > footer > p:first-of-type {
+  font-family: var(--fuente-titulos);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--marfil);
+}
+
+body > footer > p:first-of-type strong { font-weight: 500; color: #d9798a; }
+
+body > footer > p:nth-of-type(2) {
+  font-family: var(--fuente-titulos);
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-top: .6rem;
+}
+
+body > footer nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem 2.2rem;
+  list-style: none;
+  padding: 2rem 0 1rem;
+}
+
+body > footer nav a {
+  font-size: .76rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(250, 246, 240, .78);
+}
+
+body > footer nav a:hover { color: var(--oro); }
+
+body > footer > p:last-of-type {
+  max-width: var(--ancho);
+  margin: 1.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(250, 246, 240, .12);
+  font-size: .82rem;
+}
+
+body > footer > p:last-of-type a { color: var(--marfil); border-bottom: 1px solid rgba(250, 246, 240, .35); }
+
+body > footer > p:last-of-type a:hover { color: var(--oro); border-bottom-color: var(--oro); }
+
+/* =========================================================
+   17. APARICIÓN SUAVE AL HACER SCROLL (solo con JavaScript)
+   ========================================================= */
+html[data-js] main > section:not(:first-of-type):not(:nth-of-type(2)) > * {
+  opacity: 0;
+  transform: translateY(1.6rem);
+  transition: opacity .9s var(--curva), transform .9s var(--curva);
+}
+
+html[data-js] main > section[data-visible]:not(:first-of-type):not(:nth-of-type(2)) > * { opacity: 1; transform: none; }
+
+html[data-js] main > section[data-visible] > *:nth-child(2) { transition-delay: .12s; }
+
+html[data-js] main > section[data-visible] > *:nth-child(3) { transition-delay: .24s; }
+
+/* =========================================================
+   18. ADAPTACIÓN A TABLET Y MÓVIL
+   ========================================================= */
+@media (max-width: 960px) {
+  header nav { gap: 1rem; flex-wrap: wrap; }
+
+  header nav button { display: block; }
+
+  header nav ul {
+    display: none;
+    order: 4;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding: .5rem 0 .8rem;
+    border-top: 1px solid var(--arena-oscura);
+  }
+
+  header nav button[aria-expanded="true"] ~ ul { display: flex; }
+
+  header:has(nav button[aria-expanded="true"]) { background-color: var(--marfil); }
+
+  header nav ul a { display: block; padding: .9rem 0; font-size: .82rem; }
+
+  header nav ul a::after { display: none; }
+
+  main > section { padding: 5.5rem 1.25rem; }
+
+  main > section:first-of-type,
+  main > section:nth-of-type(3),
+  main > section:nth-of-type(8),
+  main > section:last-of-type {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  main > section:first-of-type { padding-top: 3rem; }
+
+  main > section:first-of-type figure:first-of-type,
+  main > section:first-of-type figure:last-of-type { grid-column: 1; grid-row: 2; }
+
+  main > section:first-of-type figure:first-of-type {
+    width: min(100% - 28px, 28rem);
+    justify-self: center;
+  }
+
+  main > section:first-of-type figure:last-of-type {
+    width: min(34%, 10rem);
+    transform: translate(10%, 18%);
+  }
+
+  main > section:nth-of-type(3) figure { aspect-ratio: 4 / 3; }
+
+  main > section:nth-of-type(4) ol { grid-template-columns: 1fr; }
+
+  main > section:nth-of-type(5) > article {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 22rem 14rem;
+  }
+
+  main > section:nth-of-type(5) figure:first-of-type,
+  main > section:nth-of-type(5) figure:nth-of-type(3) { grid-row: span 1; }
+
+  main > section:nth-of-type(5) figcaption { opacity: 1; transform: none; }
+
+  main > section:nth-of-type(7) ol { grid-template-columns: 1fr 1fr; row-gap: 3rem; }
+
+  main > section:nth-of-type(7) ol::before { display: none; }
+}
+
+@media (max-width: 560px) {
+  body { font-size: 1rem; }
+
+  header nav { padding: .9rem 1.1rem; }
+
+  header nav > a:first-of-type { font-size: 1.7rem; }
+
+  header nav > a:last-of-type { display: none; }
+
+  header nav ul li:last-of-type { display: block; }
+
+  header nav ul li:last-of-type a { color: var(--vino); }
+
+  main > section:first-of-type article > a { display: block; text-align: center; }
+
+  main > section:first-of-type article > a:first-of-type { margin: 0 0 1rem; }
+
+  main > section:first-of-type article > a:last-of-type { justify-self: center; display: table; margin: 0 auto; }
+
+  main > section:nth-of-type(2) li { font-size: 1.4rem; }
+
+  main > section:nth-of-type(3) article ul { gap: 1rem; }
+
+  main > section:nth-of-type(3) article li strong { font-size: 2.4rem; }
+
+  main > section:nth-of-type(4) li { padding: 2.4rem 1.6rem; }
+
+  main > section:nth-of-type(5) > article {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: 20rem;
+  }
+
+  main > section:nth-of-type(5) figure:first-of-type { grid-row: span 1; }
+
+  main > section:nth-of-type(7) ol { grid-template-columns: 1fr; }
+
+  main > section:nth-of-type(8) summary { font-size: 1.35rem; }
+
+  main > section:nth-of-type(8) details p { padding-right: 0; }
+
+  form { grid-template-columns: 1fr; }
+
+  form label:nth-of-type(5),
+  form label:nth-of-type(6),
+  form button,
+  form output { grid-column: span 1; }
+
+  form button { justify-self: stretch; }
+
+  main > section:last-of-type aside { padding: 2.4rem 1.6rem; }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html[data-js] main > section > * { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= CABECERA ======================= -->
+<header>
+  <nav aria-label="Principal">
+    <a href="#inicio" aria-label="redLove, ir al inicio">red<strong>Love</strong></a>
+    <button type="button" aria-expanded="false" aria-controls="menu">Menú</button>
+    <ul id="menu">
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+      <li><a href="#contacto">Reservar cita</a></li>
+    </ul>
+    <a href="#contacto">Reservar cita</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ======================= 1. PORTADA ======================= -->
+  <section id="inicio">
+    <article>
+      <small>Agencia de bodas · Madrid</small>
+      <h1>Vuestra historia, <em>contada con amor</em></h1>
+      <p>Diseñamos y organizamos bodas elegantes y auténticas. Nosotros cuidamos cada detalle para que vosotros solo tengáis que vivir el momento.</p>
+      <a href="#contacto">Empezar a planear</a>
+      <a href="#galeria">Ver bodas</a>
+      <ul>
+        <li><strong>Madrid</strong> y alrededores</li>
+        <li><strong>20 – 250</strong> invitados</li>
+        <li>Primera cita <strong>sin compromiso</strong></li>
+      </ul>
+    </article>
+    <figure>
+      <img src="imagenes/portada-novia-puerta.jpg" width="1200" height="1800" alt="Novia entrando del brazo de su madre por una puerta de ladrillo bajo guirnaldas de luces" fetchpriority="high">
+    </figure>
+    <figure>
+      <img src="imagenes/detalle-retrato.jpg" width="900" height="900" alt="Retrato en blanco y negro de una pareja de novios">
+    </figure>
+  </section>
+
+  <!-- ======================= 2. CINTA ======================= -->
+  <section aria-label="Tipos de boda que organizamos">
+    <ul>
+      <li>Bodas civiles</li>
+      <li>Bodas religiosas</li>
+      <li>Bodas íntimas</li>
+      <li>Bodas en jardín</li>
+      <li>Bodas de destino</li>
+      <li>Renovación de votos</li>
+    </ul>
+    <ul aria-hidden="true">
+      <li>Bodas civiles</li>
+      <li>Bodas religiosas</li>
+      <li>Bodas íntimas</li>
+      <li>Bodas en jardín</li>
+      <li>Bodas de destino</li>
+      <li>Renovación de votos</li>
+    </ul>
+  </section>
+
+  <!-- ======================= 3. NOSOTROS ======================= -->
+  <section id="nosotros">
+    <figure>
+      <img src="imagenes/detalle-luces.jpg" width="1280" height="1600" alt="Jardín iluminado con guirnaldas de luces y la novia esperando en la puerta" loading="lazy">
+      <figcaption>Cada detalle, pensado</figcaption>
+    </figure>
+    <article>
+      <small>Quiénes somos</small>
+      <h2>Bodas con alma, <em>sin estrés</em></h2>
+      <p>En redLove creemos que cada pareja merece una celebración que se parezca a ella. Escuchamos vuestra historia y la transformamos en un día coherente, cálido y bonito.</p>
+      <p>Desde la primera idea hasta el último baile, un equipo dedicado os acompaña en cada decisión.</p>
+      <ul>
+        <li><strong>+250</strong>bodas</li>
+        <li><strong>12</strong>años</li>
+        <li><strong>100%</strong>a medida</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ======================= 4. SERVICIOS ======================= -->
+  <section id="servicios">
+    <small>Lo que hacemos</small>
+    <h2>Servicios <em>pensados para vosotros</em></h2>
+    <ol>
+      <li>
+        <span>I.</span>
+        <h3>Planificación integral</h3>
+        <p>Presupuesto, calendario, proveedores y coordinación completa del día para que todo fluya.</p>
+        <ul>
+          <li>Búsqueda de espacio</li>
+          <li>Gestión de proveedores</li>
+          <li>Coordinación el día de la boda</li>
+        </ul>
+      </li>
+      <li>
+        <span>II.</span>
+        <h3>Diseño y decoración</h3>
+        <p>Flores, mesas, iluminación y papelería con una estética elegante y personal.</p>
+        <ul>
+          <li>Propuesta de estilo y paleta</li>
+          <li>Flores y centros de mesa</li>
+          <li>Invitaciones y papelería</li>
+        </ul>
+      </li>
+      <li>
+        <span>III.</span>
+        <h3>Foto y vídeo</h3>
+        <p>Fotógrafos y videógrafos que capturan la emoción real de cada instante.</p>
+        <ul>
+          <li>Preboda y reportaje</li>
+          <li>Vídeo resumen del día</li>
+          <li>Álbum impreso</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ======================= 5. GALERÍA ======================= -->
+  <section id="galeria">
+    <small>Galería</small>
+    <h2>Momentos <em>que se quedan</em></h2>
+    <article>
+      <figure>
+        <img src="imagenes/pareja-estudio.jpg" width="1000" height="1800" alt="Retrato en blanco y negro de una pareja de novios en estudio" loading="lazy">
+        <figcaption>Retrato en estudio</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/detalle-manos.jpg" width="1200" height="900" alt="Detalle de la mano del novio con la alianza" loading="lazy">
+        <figcaption>La alianza</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/pareja-noche.jpg" width="1200" height="1800" alt="Pareja de novios de noche junto a un árbol con su perro" loading="lazy">
+        <figcaption>Boda de noche en el jardín</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/detalle-perro.jpg" width="1120" height="1400" alt="El perro de los novios saltando junto a ellos" loading="lazy">
+        <figcaption>Invitado de honor</figcaption>
+      </figure>
+    </article>
+  </section>
+
+  <!-- ======================= 6. TESTIMONIO ======================= -->
+  <section aria-label="Opinión de una pareja">
+    <blockquote>
+      <p>No tuvimos que preocuparnos de nada. Fue exactamente la boda que habíamos imaginado, y aún mejor.</p>
+      <footer>Lucía y Marcos · Boda en jardín</footer>
+    </blockquote>
+  </section>
+
+  <!-- ======================= 7. PROCESO ======================= -->
+  <section id="proceso">
+    <small>Cómo trabajamos</small>
+    <h2>Cuatro pasos <em>hasta el «sí, quiero»</em></h2>
+    <ol>
+      <li><strong>Conocernos</strong>Una primera reunión para escuchar vuestra idea.</li>
+      <li><strong>Diseñar</strong>Propuesta visual, presupuesto y proveedores.</li>
+      <li><strong>Organizar</strong>Coordinamos cada detalle y cada reserva.</li>
+      <li><strong>Celebrar</strong>El día de la boda, nosotros nos ocupamos de todo.</li>
+    </ol>
+  </section>
+
+  <!-- ======================= 8. PREGUNTAS FRECUENTES ======================= -->
+  <section id="preguntas">
+    <article>
+      <small>Preguntas frecuentes</small>
+      <h2>Lo que <em>suelen preguntarnos</em></h2>
+      <p>¿Tenéis otra duda? Escribidnos y os respondemos en menos de 48 horas.</p>
+    </article>
+    <article>
+      <details open>
+        <summary>¿Con cuánta antelación debemos contactaros?</summary>
+        <p>Lo ideal es entre 9 y 12 meses antes, sobre todo si la boda es en primavera o verano. Aun así, también organizamos bodas con menos tiempo: contadnos vuestra fecha y vemos qué es posible.</p>
+      </details>
+      <details>
+        <summary>¿Trabajáis fuera de Madrid?</summary>
+        <p>Sí. Organizamos bodas en toda la Comunidad de Madrid y también bodas de destino en otras provincias. Los desplazamientos se incluyen en el presupuesto.</p>
+      </details>
+      <details>
+        <summary>¿Podemos contratar solo una parte?</summary>
+        <p>Claro. Podéis elegir la planificación integral, solo el diseño y la decoración, o solo la coordinación del día de la boda.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto cuesta organizar la boda con vosotros?</summary>
+        <p>Depende del número de invitados y de los servicios. Tras la primera reunión, que no tiene coste, os enviamos un presupuesto detallado y cerrado.</p>
+      </details>
+    </article>
+  </section>
+
+  <!-- ======================= 9. CONTACTO ======================= -->
+  <section id="contacto">
+    <article>
+      <small>Contacto</small>
+      <h2>Hablemos de <em>vuestra boda</em></h2>
+      <!-- Para recibir los mensajes, conecta este formulario (ver README.md) -->
+      <form action="#" method="post">
+        <label>Nombres
+          <input type="text" name="nombres" placeholder="Ana y Carlos" autocomplete="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" placeholder="hola@ejemplo.com" autocomplete="email" required>
+        </label>
+        <label>Fecha prevista
+          <input type="date" name="fecha">
+        </label>
+        <label>Invitados
+          <select name="invitados">
+            <option>Menos de 50</option>
+            <option>50 – 100</option>
+            <option>100 – 200</option>
+            <option>Más de 200</option>
+          </select>
+        </label>
+        <label>Mensaje
+          <textarea name="mensaje" placeholder="Contadnos cómo imagináis vuestro día..."></textarea>
+        </label>
+        <label>
+          <input type="checkbox" name="privacidad" required>
+          <span>He leído y acepto la <a href="#">política de privacidad</a>.</span>
+        </label>
+        <button type="submit">Enviar mensaje</button>
+        <output aria-live="polite"></output>
+      </form>
+    </article>
+    <aside>
+      <h3>redLove</h3>
+      <dl>
+        <dt>Teléfono</dt>
+        <dd><a href="tel:+34600000000">+34 600 000 000</a></dd>
+        <dt>Email</dt>
+        <dd><a href="mailto:hola@redlove.example">hola@redlove.example</a></dd>
+        <dt>Estudio</dt>
+        <dd>Calle del Amor 14, Madrid</dd>
+        <dt>Horario</dt>
+        <dd>Lunes a sábado · 10:00 – 19:00</dd>
+      </dl>
+    </aside>
+  </section>
+
+</main>
+
+<!-- ======================= PIE DE PÁGINA ======================= -->
+<footer>
+  <p>red<strong>Love</strong></p>
+  <p>Bodas con alma en Madrid</p>
+  <nav aria-label="Pie de página">
+    <ul>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+  <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+  <p>© <span>2026</span> redLove · <a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+</footer>
+
+<script>
+(function () {
+  var raiz = document.documentElement;
+  raiz.setAttribute('data-js', '');
+
+  /* Año actual en el pie */
+  var anio = document.querySelector('body > footer > p:last-of-type span');
+  if (anio) anio.textContent = new Date().getFullYear();
+
+  /* Menú móvil */
+  var cabecera = document.querySelector('header');
+  var boton = document.querySelector('header nav button');
+  boton.addEventListener('click', function () {
+    var abierto = boton.getAttribute('aria-expanded') === 'true';
+    boton.setAttribute('aria-expanded', String(!abierto));
+    boton.textContent = abierto ? 'Menú' : 'Cerrar';
+  });
+  document.querySelectorAll('header nav ul a').forEach(function (enlace) {
+    enlace.addEventListener('click', function () {
+      boton.setAttribute('aria-expanded', 'false');
+      boton.textContent = 'Menú';
+    });
+  });
+
+  /* Sombra de la cabecera al hacer scroll */
+  function alHacerScroll() { cabecera.toggleAttribute('data-scroll', window.scrollY > 10); }
+  window.addEventListener('scroll', alHacerScroll, { passive: true });
+  alHacerScroll();
+
+  /* Aparición suave de las secciones */
+  var secciones = document.querySelectorAll('main > section');
+  if ('IntersectionObserver' in window) {
+    var observador = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) { e.target.setAttribute('data-visible', ''); observador.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    secciones.forEach(function (s) { observador.observe(s); });
+  } else {
+    secciones.forEach(function (s) { s.setAttribute('data-visible', ''); });
+  }
+
+  /* Formulario: mientras no esté conectado, avisa en lugar de recargar la página */
+  var formulario = document.querySelector('form');
+  formulario.addEventListener('submit', function (e) {
+    if (formulario.getAttribute('action') === '#') {
+      e.preventDefault();
+      formulario.querySelector('output').textContent = 'Gracias. Este formulario aún no está conectado: consulta el README para empezar a recibir mensajes.';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

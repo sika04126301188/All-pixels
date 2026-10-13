@@ -1,0 +1,2392 @@
+<!DOCTYPE html>
+<!--
+  Cepadech · Plantilla de All Pixels — https://allpixels.dev
+  Concesionario de carros de primera y segunda mano.
+  Consulta el README y la LICENCIA incluidos en la descarga.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cepadech · Carros de primera y segunda mano</title>
+  <meta name="description" content="Cepadech, agencia de venta de carros de primera y segunda mano. Revisión de 150 puntos, garantía de hasta 24 meses y financiación a tu medida.">
+  <meta name="theme-color" content="#2E3A2F">
+  <link rel="icon" href="imagenes/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fuentes/unbounded-200.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* =====================================================
+       0. TIPOGRAFÍAS LOCALES (SIL Open Font License, ver fuentes/)
+       ===================================================== */
+    @font-face { font-family: "Unbounded"; font-weight: 200; font-display: swap; src: url("fuentes/unbounded-200.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 300; font-display: swap; src: url("fuentes/unbounded-300.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 400; font-display: swap; src: url("fuentes/unbounded-400.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 500; font-display: swap; src: url("fuentes/unbounded-500.woff2") format("woff2"); }
+    @font-face { font-family: "Unbounded"; font-weight: 600; font-display: swap; src: url("fuentes/unbounded-600.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 400; font-display: swap; src: url("fuentes/manrope-400.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 500; font-display: swap; src: url("fuentes/manrope-500.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 600; font-display: swap; src: url("fuentes/manrope-600.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 700; font-display: swap; src: url("fuentes/manrope-700.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope Reserva"; src: local("Arial"), local("Helvetica"), local("Liberation Sans"); size-adjust: 103%; }
+
+    /* =====================================================
+       1. VARIABLES · Paleta Earthy Minimal
+       ===================================================== */
+    :root {
+      /* Paleta original */
+      --verde: #2E3A2F;      /* primario */
+      --salvia: #6B7F5B;     /* secundario */
+      --arena: #D9C9B2;      /* terciario */
+      --terracota: #C96F4F;  /* acento */
+      --crema: #F8F6EE;      /* fondo */
+
+      /* Tonos derivados de la misma paleta */
+      --arena-suave: color-mix(in srgb, var(--arena) 38%, var(--crema));
+      --terracota-hondo: color-mix(in srgb, var(--terracota) 82%, #000);
+      --terracota-claro: color-mix(in srgb, var(--terracota) 72%, var(--crema));
+      --terracota-boton: #A9553A; /* fondo de botones y etiquetas: contraste AA con texto crema */
+      --salvia-hondo: #57693F;
+      --texto: var(--verde);
+      --texto-suave: color-mix(in srgb, var(--verde) 76%, var(--crema));
+      --crema-suave: color-mix(in srgb, var(--crema) 74%, transparent);
+      --linea: color-mix(in srgb, var(--verde) 14%, transparent);
+      --linea-clara: color-mix(in srgb, var(--crema) 24%, transparent);
+
+      /* Tipografía */
+      --fuente-titulo: "Unbounded", "Arial Black", sans-serif;
+      --fuente-texto: "Manrope", "Manrope Reserva", system-ui, sans-serif;
+
+      /* Medidas */
+      --marco: clamp(10px, 1.5vw, 22px);
+      --ancho: 1240px;
+      --margen: clamp(20px, 5vw, 64px);
+      --espacio: clamp(80px, 10vw, 140px);
+      --relleno-hero: clamp(20px, 4vw, 56px);
+      --radio-xl: clamp(20px, 2.4vw, 32px);
+      --radio: 18px;
+      --radio-sm: 10px;
+
+      /* Sombras y movimiento */
+      --sombra: 0 26px 60px -30px color-mix(in srgb, var(--verde) 55%, transparent);
+      --sombra-honda: 0 40px 80px -36px rgba(0, 0, 0, .6);
+      --sombra-acento: 0 14px 34px -12px color-mix(in srgb, var(--terracota) 75%, transparent);
+      --suave: cubic-bezier(.2, .7, .2, 1);
+      --transicion: .35s var(--suave);
+    }
+
+    /* =====================================================
+       2. RESET Y BASE
+       ===================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--terracota-hondo);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      font-family: var(--fuente-texto);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto);
+      background: var(--crema);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    ul, ol, menu {
+      list-style: none;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      cursor: pointer;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--fuente-titulo);
+      font-weight: 500;
+      line-height: 1.12;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terracota);
+      outline-offset: 3px;
+    }
+
+    ::selection {
+      color: var(--crema);
+      background: var(--terracota-boton);
+    }
+
+    /* Encabezados de sección compartidos (antetítulo + título) */
+    main > section:not(:first-of-type) hgroup p,
+    body > footer hgroup p {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--fuente-titulo);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--terracota-hondo);
+    }
+
+    main > section:not(:first-of-type) hgroup p::before,
+    body > footer hgroup p::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    main > section h2,
+    body > footer h2 {
+      margin-top: 16px;
+      font-size: clamp(1.9rem, 4vw, 3.3rem);
+      font-weight: 400;
+      letter-spacing: -.02em;
+    }
+
+    main > section h2 em,
+    body > footer h2 em {
+      font-style: normal;
+      font-weight: 200;
+      color: var(--terracota);
+    }
+
+    main > section,
+    body > footer {
+      scroll-margin-top: 90px;
+    }
+
+    /* =====================================================
+       3. CABECERA Y NAVEGACIÓN
+       ===================================================== */
+    body > header {
+      position: absolute;
+      top: var(--marco);
+      left: var(--marco);
+      right: var(--marco);
+      z-index: 50;
+      padding: 22px var(--relleno-hero) 0;
+      animation: entrar 1s var(--suave) both;
+    }
+
+    body > header[data-estado="fijo"] {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      padding: 10px clamp(14px, 2.4vw, 28px);
+      border-radius: var(--radio);
+      background: color-mix(in srgb, var(--verde) 90%, transparent);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--sombra-honda);
+      animation: bajar .5s var(--suave) both;
+    }
+
+    body > header nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.6vw, 40px);
+    }
+
+    /* Línea fina bajo el menú, como en la referencia */
+    body > header nav::after {
+      content: "";
+      position: absolute;
+      left: 72px;
+      right: 0;
+      bottom: 4px;
+      height: 1px;
+      background: var(--linea-clara);
+    }
+
+    body > header[data-estado="fijo"] nav::after {
+      display: none;
+    }
+
+    /* Emblema */
+    body > header nav > a {
+      position: relative;
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      width: 46px;
+      height: 52px;
+      border: 1.5px solid var(--crema-suave);
+      border-radius: 12px 12px 24px 24px;
+      font-family: var(--fuente-titulo);
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--crema);
+      background: color-mix(in srgb, var(--crema) 8%, transparent);
+      transition: border-color var(--transicion), transform var(--transicion);
+    }
+
+    body > header nav > a:hover {
+      border-color: var(--terracota);
+      transform: translateY(-2px);
+    }
+
+    body > header[data-estado="fijo"] nav > a {
+      width: 38px;
+      height: 44px;
+      font-size: 1.05rem;
+    }
+
+    body > header nav ul {
+      display: flex;
+      gap: clamp(14px, 1.8vw, 28px);
+      margin-right: auto;
+      padding-bottom: 6px;
+    }
+
+    body > header nav ul a {
+      position: relative;
+      display: block;
+      padding: 8px 0;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--crema-suave);
+      transition: color var(--transicion);
+    }
+
+    body > header nav ul a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 1px;
+      background: var(--terracota-boton);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transicion);
+    }
+
+    body > header nav ul a:hover,
+    body > header nav ul a[aria-current="true"] {
+      color: var(--crema);
+    }
+
+    body > header nav ul a:hover::after,
+    body > header nav ul a[aria-current="true"]::after {
+      transform: scaleX(1);
+    }
+
+    /* Interruptor Nuevos / Usados (como "Private / Business" de la referencia) */
+    body > header nav p {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 6px;
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--crema) 66%, transparent);
+    }
+
+    body > header nav p:has(button[aria-checked="false"]) span:first-of-type,
+    body > header nav p:has(button[aria-checked="true"]) span:last-of-type {
+      color: var(--crema);
+    }
+
+    body > header nav p button {
+      position: relative;
+      width: 36px;
+      height: 18px;
+      border-radius: 99px;
+      background: var(--terracota-boton);
+    }
+
+    body > header nav p button::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--crema);
+      transition: transform var(--transicion);
+    }
+
+    body > header nav p button[aria-checked="true"]::after {
+      transform: translateX(18px);
+    }
+
+    /* Botón de menú móvil */
+    body > header nav > button {
+      display: none;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      margin-left: auto;
+      border: 1px solid var(--linea-clara);
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--crema) 10%, transparent);
+    }
+
+    body > header nav > button span,
+    body > header nav > button span::before,
+    body > header nav > button span::after {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--crema);
+      transition: transform var(--transicion), background var(--transicion);
+    }
+
+    body > header nav > button span {
+      position: relative;
+    }
+
+    body > header nav > button span::before,
+    body > header nav > button span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    body > header nav > button span::before { transform: translateY(-6px); }
+    body > header nav > button span::after { transform: translateY(6px); }
+
+    body > header nav > button[aria-expanded="true"] span { background: transparent; }
+    body > header nav > button[aria-expanded="true"] span::before { transform: rotate(45deg); }
+    body > header nav > button[aria-expanded="true"] span::after { transform: rotate(-45deg); }
+
+    /* =====================================================
+       4. HERO · inspirado en la referencia fm77
+       ===================================================== */
+    main > section:first-of-type {
+      padding: var(--marco) var(--marco) 0;
+      background:
+        radial-gradient(110% 70% at 10% 0%, color-mix(in srgb, var(--salvia) 55%, transparent), transparent 60%),
+        radial-gradient(80% 60% at 100% 100%, color-mix(in srgb, var(--salvia) 40%, transparent), transparent 60%),
+        var(--verde);
+    }
+
+    main > section:first-of-type article {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 1fr auto;
+      align-items: end;
+      gap: 24px;
+      min-height: max(620px, calc(100svh - var(--marco) - 62px));
+      padding: clamp(130px, 18vh, 180px) var(--relleno-hero) clamp(32px, 6vh, 64px);
+      border-radius: var(--radio-xl);
+      overflow: hidden;
+      isolation: isolate;
+      color: var(--crema);
+      box-shadow: var(--sombra-honda);
+    }
+
+    main > section:first-of-type figure {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    main > section:first-of-type figure img {
+      object-position: 60% 55%;
+      filter: saturate(.85) sepia(.12) contrast(1.05);
+      translate: 0 calc(var(--desplazamiento, 0) * 1px);
+      animation: acercar 16s ease-out both;
+    }
+
+    /* Velo verde para leer el texto sobre la foto */
+    main > section:first-of-type figure::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--verde) 92%, transparent) 0%, color-mix(in srgb, var(--verde) 55%, transparent) 40%, transparent 72%),
+        linear-gradient(0deg, color-mix(in srgb, var(--verde) 75%, transparent) 0%, transparent 38%),
+        linear-gradient(180deg, color-mix(in srgb, var(--verde) 85%, transparent) 0%, color-mix(in srgb, var(--verde) 35%, transparent) 18%, transparent 32%);
+    }
+
+    main > section:first-of-type hgroup {
+      grid-column: 1 / -1;
+      align-self: center;
+    }
+
+    main > section:first-of-type h1 {
+      font-size: clamp(2.1rem, 8.6vw, 8.4rem);
+      font-weight: 200;
+      line-height: 1;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      animation: entrar 1.1s .15s var(--suave) both;
+    }
+
+    main > section:first-of-type hgroup p:first-of-type {
+      margin-top: 18px;
+      font-family: var(--fuente-titulo);
+      font-size: clamp(1.05rem, 2.3vw, 2rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      animation: entrar 1.1s .3s var(--suave) both;
+    }
+
+    main > section:first-of-type hgroup p:last-of-type {
+      margin-top: 4px;
+      font-size: clamp(.82rem, 1.3vw, 1.1rem);
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--crema-suave);
+      animation: entrar 1.1s .45s var(--suave) both;
+    }
+
+    main > section:first-of-type article > p {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(1rem, 2.1vw, 1.75rem);
+      font-weight: 200;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      animation: entrar 1.1s .6s var(--suave) both;
+    }
+
+    main > section:first-of-type article > a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      min-width: 230px;
+      padding: 17px 34px;
+      border-radius: 4px;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: var(--terracota-boton);
+      box-shadow: var(--sombra-acento);
+      transition: background var(--transicion), transform var(--transicion);
+      animation: entrar 1.1s .75s var(--suave) both;
+    }
+
+    main > section:first-of-type article > a:hover {
+      background: var(--terracota-hondo);
+      transform: translateY(-3px);
+    }
+
+    main > section:first-of-type article > a span,
+    main > section:first-of-type aside a span {
+      transition: transform var(--transicion);
+    }
+
+    main > section:first-of-type article > a:hover span {
+      transform: translateX(5px);
+    }
+
+    /* Franja inferior del marco verde (como "Desliza →") */
+    main > section:first-of-type aside {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 20px var(--relleno-hero);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--crema-suave);
+    }
+
+    main > section:first-of-type aside ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px clamp(18px, 3vw, 44px);
+    }
+
+    main > section:first-of-type aside li::before {
+      content: "✦";
+      margin-right: 10px;
+      color: var(--terracota);
+    }
+
+    main > section:first-of-type aside a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+      font-family: var(--fuente-titulo);
+      color: var(--crema);
+    }
+
+    main > section:first-of-type aside a span {
+      font-size: 1.6rem;
+      font-weight: 200;
+      line-height: 1;
+      animation: empujar 2.2s ease-in-out infinite;
+    }
+
+    /* =====================================================
+       5. INVENTARIO
+       ===================================================== */
+    main > section:nth-of-type(2) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 30px);
+      max-width: calc(var(--ancho) + var(--margen) * 2);
+      margin: 0 auto;
+      padding: var(--espacio) var(--margen);
+    }
+
+    main > section:nth-of-type(2) > hgroup {
+      grid-column: span 2;
+    }
+
+    main > section:nth-of-type(2) > p {
+      align-self: end;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(2) menu {
+      display: flex;
+      flex-wrap: wrap;
+      grid-column: 1 / -1;
+      gap: 10px;
+      margin: 8px 0 10px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(2) menu button {
+      padding: 11px 22px;
+      border: 1px solid var(--linea);
+      border-radius: 99px;
+      font-size: .85rem;
+      font-weight: 700;
+      transition: background var(--transicion), color var(--transicion), border-color var(--transicion);
+    }
+
+    main > section:nth-of-type(2) menu button:hover {
+      border-color: var(--verde);
+    }
+
+    main > section:nth-of-type(2) menu button small {
+      margin-left: 8px;
+      font-size: .72rem;
+      opacity: .7;
+    }
+
+    main > section:nth-of-type(2) menu button[aria-pressed="true"] {
+      border-color: var(--verde);
+      color: var(--crema);
+      background: var(--verde);
+    }
+
+    /* Tarjeta de carro */
+    main > section:nth-of-type(2) article {
+      --rx: 0deg;
+      --ry: 0deg;
+      view-transition-name: match-element;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto 1fr auto;
+      align-items: center;
+      gap: 6px 12px;
+      padding: 12px 12px 18px;
+      border-radius: var(--radio);
+      background: var(--arena-suave);
+      transition: transform var(--transicion), box-shadow var(--transicion), opacity .8s ease;
+    }
+
+    main > section:nth-of-type(2) article:hover {
+      transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-6px);
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(2) article figure {
+      position: relative;
+      grid-column: 1 / -1;
+      aspect-ratio: 4 / 5;
+      margin-bottom: 12px;
+      border-radius: calc(var(--radio) - 6px);
+      overflow: hidden;
+    }
+
+    main > section:nth-of-type(2) article img {
+      transition: transform .9s var(--suave);
+    }
+
+    main > section:nth-of-type(2) article:hover img {
+      transform: scale(1.06);
+    }
+
+    main > section:nth-of-type(2) article:nth-of-type(1) img { object-position: 50% 80%; }
+    main > section:nth-of-type(2) article:nth-of-type(2) img { object-position: 55% 64%; }
+    main > section:nth-of-type(2) article:nth-of-type(3) img { object-position: 45% 64%; }
+    main > section:nth-of-type(2) article:nth-of-type(4) img { object-position: 30% 55%; }
+    main > section:nth-of-type(2) article:nth-of-type(5) img { object-position: 60% 62%; }
+
+    main > section:nth-of-type(2) article figcaption {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 6px 13px;
+      border-radius: 99px;
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: var(--terracota-boton);
+    }
+
+    main > section:nth-of-type(2) article[data-tipo="usado"] figcaption {
+      background: var(--salvia-hondo);
+    }
+
+    main > section:nth-of-type(2) article h3 {
+      grid-column: 1 / -1;
+      padding: 0 8px;
+      font-size: 1.15rem;
+    }
+
+    main > section:nth-of-type(2) article ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-self: start;
+      grid-column: 1 / -1;
+      gap: 6px;
+      margin-bottom: 10px;
+      padding: 6px 8px 16px;
+      border-bottom: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(2) article li {
+      padding: 4px 11px;
+      border-radius: 99px;
+      font-size: .76rem;
+      font-weight: 600;
+      color: var(--texto-suave);
+      background: var(--crema);
+    }
+
+    main > section:nth-of-type(2) article p {
+      display: flex;
+      flex-direction: column;
+      padding-left: 8px;
+      line-height: 1.2;
+    }
+
+    main > section:nth-of-type(2) article small {
+      font-size: .66rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(2) article strong {
+      font-family: var(--fuente-titulo);
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+
+    main > section:nth-of-type(2) article a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 4px;
+      padding: 12px 18px;
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--crema);
+      background: var(--verde);
+      transition: background var(--transicion);
+    }
+
+    main > section:nth-of-type(2) article a:hover {
+      background: var(--terracota-boton);
+    }
+
+    main > section:nth-of-type(2) article a span,
+    main > section:nth-of-type(2) aside a span {
+      transition: transform var(--transicion);
+    }
+
+    main > section:nth-of-type(2) article a:hover span,
+    main > section:nth-of-type(2) aside a:hover span {
+      transform: translateX(4px);
+    }
+
+    /* Tarjeta final: llamado a la acción */
+    main > section:nth-of-type(2) aside {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      padding: clamp(26px, 3vw, 38px);
+      border-radius: var(--radio);
+      color: var(--crema);
+      background:
+        radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--salvia) 70%, transparent), transparent 55%),
+        radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--terracota) 30%, transparent), transparent 50%),
+        var(--verde);
+    }
+
+    main > section:nth-of-type(2) aside p:first-of-type {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(3.4rem, 6vw, 5rem);
+      font-weight: 200;
+      line-height: 1;
+      color: var(--terracota-claro);
+    }
+
+    main > section:nth-of-type(2) aside h3 {
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      font-weight: 300;
+    }
+
+    main > section:nth-of-type(2) aside p:last-of-type {
+      color: var(--crema-suave);
+    }
+
+    main > section:nth-of-type(2) aside a {
+      display: flex;
+      align-items: center;
+      align-self: start;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 99px;
+      font-weight: 700;
+      color: var(--crema);
+      background: var(--terracota-boton);
+      box-shadow: var(--sombra-acento);
+      transition: background var(--transicion);
+    }
+
+    main > section:nth-of-type(2) aside a:hover {
+      background: var(--terracota-hondo);
+    }
+
+    /* =====================================================
+       6. POR QUÉ CEPADECH
+       ===================================================== */
+    main > section:nth-of-type(3) {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      align-items: center;
+      gap: clamp(40px, 7vw, 100px) clamp(40px, 6vw, 96px);
+      max-width: calc(var(--ancho) + var(--margen) * 2);
+      margin: 0 auto;
+      padding: 0 var(--margen) var(--espacio);
+      isolation: isolate;
+    }
+
+    main > section:nth-of-type(3) > figure {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      margin-left: 14px;
+    }
+
+    /* Marco desplazado detrás de la foto */
+    main > section:nth-of-type(3) > figure::before {
+      content: "";
+      position: absolute;
+      inset: -14px 14px 14px -14px;
+      z-index: -1;
+      border: 1px solid var(--salvia);
+      border-radius: var(--radio-xl);
+    }
+
+    main > section:nth-of-type(3) > figure img {
+      border-radius: var(--radio-xl);
+      object-position: 50% 55%;
+    }
+
+    main > section:nth-of-type(3) figcaption {
+      position: absolute;
+      right: -28px;
+      bottom: 36px;
+      max-width: 220px;
+      padding: 20px 22px;
+      border-radius: var(--radio);
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--crema);
+      background: var(--terracota-boton);
+      box-shadow: var(--sombra-acento);
+      animation: flotar 6s ease-in-out infinite;
+    }
+
+    main > section:nth-of-type(3) figcaption strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: var(--fuente-titulo);
+      font-size: 2.6rem;
+      font-weight: 200;
+      line-height: 1;
+    }
+
+    main > section:nth-of-type(3) article > p {
+      margin: 22px 0 40px;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(3) ol {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px 34px;
+      counter-reset: beneficio;
+    }
+
+    main > section:nth-of-type(3) ol li {
+      padding-top: 18px;
+      border-top: 1px solid var(--linea);
+      counter-increment: beneficio;
+    }
+
+    main > section:nth-of-type(3) ol li::before {
+      content: counter(beneficio, decimal-leading-zero);
+      display: block;
+      margin-bottom: 10px;
+      font-family: var(--fuente-titulo);
+      font-size: .78rem;
+      letter-spacing: .14em;
+      color: var(--terracota-hondo);
+    }
+
+    main > section:nth-of-type(3) ol h3 {
+      margin-bottom: 8px;
+      font-size: 1.02rem;
+    }
+
+    main > section:nth-of-type(3) ol p {
+      font-size: .92rem;
+      color: var(--texto-suave);
+    }
+
+    /* Cifras */
+    main > section:nth-of-type(3) > ul {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-column: 1 / -1;
+      gap: 28px;
+      padding: clamp(28px, 4vw, 52px);
+      border-radius: var(--radio-xl);
+      color: var(--crema);
+      background:
+        radial-gradient(60% 120% at 100% 0%, color-mix(in srgb, var(--salvia) 55%, transparent), transparent 60%),
+        var(--verde);
+    }
+
+    main > section:nth-of-type(3) > ul li {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-left: 26px;
+      border-left: 1px solid var(--linea-clara);
+    }
+
+    main > section:nth-of-type(3) > ul li:first-of-type {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    main > section:nth-of-type(3) > ul data {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      font-weight: 200;
+      line-height: 1;
+    }
+
+    main > section:nth-of-type(3) > ul data::after {
+      color: var(--terracota-claro);
+    }
+
+    main > section:nth-of-type(3) > ul li:nth-of-type(1) data::after { content: "+"; }
+    main > section:nth-of-type(3) > ul li:nth-of-type(3) data::after { content: "/5"; font-size: .5em; }
+    main > section:nth-of-type(3) > ul li:nth-of-type(4) data::after { content: " h"; font-size: .5em; }
+
+    main > section:nth-of-type(3) > ul span {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--crema-suave);
+    }
+
+    /* =====================================================
+       7. FINANCIACIÓN
+       ===================================================== */
+    main > section:nth-of-type(4) {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      align-items: center;
+      gap: clamp(40px, 6vw, 90px);
+      margin: 0 var(--marco);
+      padding: var(--espacio) max(var(--margen), calc((100% - var(--ancho)) / 2));
+      border-radius: var(--radio-xl);
+      overflow: hidden;
+      color: var(--crema);
+      background:
+        radial-gradient(60% 70% at 0% 0%, color-mix(in srgb, var(--salvia) 60%, transparent), transparent 60%),
+        radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--terracota) 28%, transparent), transparent 60%),
+        var(--verde);
+    }
+
+    main > section:nth-of-type(4) hgroup p {
+      color: var(--terracota-claro);
+    }
+
+    main > section:nth-of-type(4) h2 em {
+      color: var(--terracota-claro);
+    }
+
+    main > section:nth-of-type(4) article > p {
+      max-width: 52ch;
+      margin-top: 22px;
+      color: var(--crema-suave);
+    }
+
+    main > section:nth-of-type(4) ol {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+      counter-reset: paso;
+    }
+
+    main > section:nth-of-type(4) ol li {
+      padding: 22px;
+      border: 1px solid var(--linea-clara);
+      border-radius: var(--radio);
+      background: color-mix(in srgb, var(--crema) 4%, transparent);
+      counter-increment: paso;
+      transition: border-color var(--transicion), background var(--transicion), transform var(--transicion);
+    }
+
+    main > section:nth-of-type(4) ol li:hover {
+      border-color: var(--terracota);
+      background: color-mix(in srgb, var(--crema) 8%, transparent);
+      transform: translateY(-4px);
+    }
+
+    main > section:nth-of-type(4) ol li::before {
+      content: counter(paso);
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 14px;
+      border-radius: 50%;
+      font-family: var(--fuente-titulo);
+      font-size: .9rem;
+      color: var(--crema);
+      background: var(--terracota-boton);
+    }
+
+    main > section:nth-of-type(4) ol h3 {
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    main > section:nth-of-type(4) ol p {
+      font-size: .9rem;
+      color: var(--crema-suave);
+    }
+
+    /* Simulador de cuota */
+    main > section:nth-of-type(4) form {
+      display: grid;
+      gap: 22px;
+      padding: clamp(24px, 3.2vw, 40px);
+      border-radius: var(--radio-xl);
+      color: var(--verde);
+      background: var(--crema);
+      box-shadow: var(--sombra-honda);
+    }
+
+    main > section:nth-of-type(4) form h3 {
+      font-size: 1.35rem;
+    }
+
+    main > section:nth-of-type(4) form > label {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    main > section:nth-of-type(4) form > label output {
+      font-family: var(--fuente-titulo);
+      font-weight: 500;
+    }
+
+    main > section:nth-of-type(4) form input[type="range"] {
+      grid-column: 1 / -1;
+      width: 100%;
+      accent-color: var(--terracota);
+      cursor: pointer;
+    }
+
+    main > section:nth-of-type(4) form fieldset {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border: 0;
+    }
+
+    main > section:nth-of-type(4) form legend {
+      margin-bottom: 10px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    main > section:nth-of-type(4) form fieldset label {
+      position: relative;
+      padding: 8px 15px;
+      border: 1px solid var(--linea);
+      border-radius: 99px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transicion), color var(--transicion), border-color var(--transicion);
+    }
+
+    main > section:nth-of-type(4) form fieldset label:hover {
+      border-color: var(--verde);
+    }
+
+    main > section:nth-of-type(4) form fieldset label:has(input:checked) {
+      border-color: var(--verde);
+      color: var(--crema);
+      background: var(--verde);
+    }
+
+    main > section:nth-of-type(4) form fieldset label:has(input:focus-visible) {
+      outline: 2px solid var(--terracota);
+      outline-offset: 2px;
+    }
+
+    main > section:nth-of-type(4) form fieldset input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    main > section:nth-of-type(4) form p:first-of-type {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 20px 22px;
+      border-radius: var(--radio);
+      font-weight: 700;
+      background: var(--arena-suave);
+    }
+
+    main > section:nth-of-type(4) form p:first-of-type output {
+      margin-left: auto;
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2rem, 3.6vw, 2.7rem);
+      font-weight: 400;
+      line-height: 1;
+      color: var(--terracota-boton);
+    }
+
+    main > section:nth-of-type(4) form p:first-of-type small {
+      font-size: .85rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(4) form p:last-of-type {
+      font-size: .78rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(4) form a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: var(--terracota-boton);
+      box-shadow: var(--sombra-acento);
+      transition: background var(--transicion), transform var(--transicion);
+    }
+
+    main > section:nth-of-type(4) form a:hover {
+      background: var(--terracota-hondo);
+      transform: translateY(-2px);
+    }
+
+    /* =====================================================
+       8. OPINIONES
+       ===================================================== */
+    main > section:nth-of-type(5) {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: start;
+      gap: clamp(18px, 2.4vw, 28px);
+      max-width: calc(var(--ancho) + var(--margen) * 2);
+      margin: 0 auto;
+      padding: var(--espacio) var(--margen) 0;
+    }
+
+    main > section:nth-of-type(5) > hgroup {
+      grid-column: span 2;
+    }
+
+    /* Valoración media */
+    main > section:nth-of-type(5) > p {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-self: end;
+      justify-self: end;
+      align-items: center;
+      gap: 2px 16px;
+      margin-bottom: 30px;
+    }
+
+    main > section:nth-of-type(5) > p strong {
+      grid-row: span 2;
+      font-family: var(--fuente-titulo);
+      font-size: 3.4rem;
+      font-weight: 200;
+      line-height: 1;
+    }
+
+    main > section:nth-of-type(5) > p span {
+      letter-spacing: .2em;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(5) > p small {
+      font-size: .82rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(5) article {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      height: 100%;
+      padding: clamp(26px, 3vw, 38px);
+      border-radius: var(--radio-xl);
+      background: var(--arena-suave);
+      transition: opacity .8s ease, transform var(--transicion), box-shadow var(--transicion);
+    }
+
+    main > section:nth-of-type(5) article:hover {
+      box-shadow: var(--sombra);
+    }
+
+    main > section:nth-of-type(5) article:nth-of-type(2) {
+      color: var(--crema);
+      background: var(--verde);
+      transform: translateY(32px);
+    }
+
+    main > section:nth-of-type(5) article > p:first-of-type {
+      letter-spacing: .22em;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(5) blockquote {
+      flex-grow: 1;
+      font-size: 1.04rem;
+      line-height: 1.7;
+    }
+
+    main > section:nth-of-type(5) blockquote::before {
+      content: "“";
+      display: block;
+      height: 34px;
+      font-family: var(--fuente-titulo);
+      font-size: 4rem;
+      font-weight: 200;
+      line-height: 1;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(5) article h3 {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      align-items: center;
+      gap: 2px 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--linea);
+      font-size: .98rem;
+    }
+
+    main > section:nth-of-type(5) article h3::before {
+      content: attr(data-iniciales);
+      display: grid;
+      grid-row: span 2;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: .8rem;
+      color: var(--crema);
+      background: var(--terracota-boton);
+    }
+
+    main > section:nth-of-type(5) article h3 small {
+      font-family: var(--fuente-texto);
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(5) article:nth-of-type(2) h3 {
+      border-top-color: var(--linea-clara);
+    }
+
+    main > section:nth-of-type(5) article:nth-of-type(2) h3::before {
+      background: var(--salvia);
+    }
+
+    main > section:nth-of-type(5) article:nth-of-type(2) h3 small {
+      color: var(--crema-suave);
+    }
+
+    /* =====================================================
+       9. CONTACTO Y PIE DE PÁGINA
+       ===================================================== */
+    body > footer {
+      margin: calc(var(--espacio) + 32px) var(--marco) var(--marco);
+      padding: clamp(48px, 7vw, 96px) max(var(--margen), calc((100% - var(--ancho)) / 2)) 0;
+      border-radius: var(--radio-xl);
+      overflow: hidden;
+      color: var(--crema);
+      background:
+        radial-gradient(70% 60% at 100% 0%, color-mix(in srgb, var(--salvia) 55%, transparent), transparent 60%),
+        radial-gradient(60% 50% at 0% 100%, color-mix(in srgb, var(--terracota) 22%, transparent), transparent 60%),
+        var(--verde);
+    }
+
+    body > footer hgroup p,
+    body > footer h2 em {
+      color: var(--terracota-claro);
+    }
+
+    body > footer > section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      grid-template-rows: auto auto 1fr;
+      gap: 0 clamp(40px, 6vw, 90px);
+      padding-bottom: clamp(48px, 7vw, 90px);
+      border-bottom: 1px solid var(--linea-clara);
+    }
+
+    body > footer > section > p:first-of-type {
+      max-width: 44ch;
+      margin-top: 22px;
+      color: var(--crema-suave);
+    }
+
+    body > footer > section > p:last-of-type {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 36px;
+    }
+
+    body > footer > section > p:last-of-type a {
+      font-family: var(--fuente-titulo);
+      font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+      font-weight: 300;
+      color: var(--crema);
+      transition: color var(--transicion);
+    }
+
+    body > footer > section > p:last-of-type a:hover {
+      color: var(--terracota-claro);
+    }
+
+    body > footer form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-column: 2;
+      grid-row: 1 / -1;
+      align-self: start;
+      gap: 16px;
+      padding: clamp(22px, 3vw, 36px);
+      border-radius: var(--radio-xl);
+      color: var(--verde);
+      background: var(--crema);
+      box-shadow: var(--sombra-honda);
+    }
+
+    body > footer form label {
+      display: grid;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    body > footer form label:nth-of-type(n + 3) {
+      grid-column: 1 / -1;
+    }
+
+    body > footer form input,
+    body > footer form select,
+    body > footer form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-sm);
+      font-size: .95rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      background: var(--arena-suave);
+      transition: border-color var(--transicion), box-shadow var(--transicion);
+    }
+
+    body > footer form textarea {
+      resize: vertical;
+    }
+
+    body > footer form input:focus,
+    body > footer form select:focus,
+    body > footer form textarea:focus {
+      outline: none;
+      border-color: var(--terracota);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--terracota) 25%, transparent);
+    }
+
+    body > footer form button {
+      grid-column: 1 / -1;
+      padding: 17px;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--crema);
+      background: var(--terracota-boton);
+      box-shadow: var(--sombra-acento);
+      transition: background var(--transicion), transform var(--transicion);
+    }
+
+    body > footer form button:hover {
+      background: var(--terracota-hondo);
+      transform: translateY(-2px);
+    }
+
+    body > footer form output {
+      grid-column: 1 / -1;
+      font-weight: 700;
+      color: var(--salvia);
+    }
+
+    /* Columnas de información */
+    body > footer > aside {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+      gap: 36px;
+      padding: clamp(40px, 5vw, 64px) 0;
+    }
+
+    body > footer > aside h3 {
+      margin-bottom: 16px;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--terracota-claro);
+    }
+
+    body > footer > aside section:first-of-type h3 {
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: .16em;
+      color: var(--crema);
+    }
+
+    body > footer > aside p,
+    body > footer > aside address {
+      max-width: 34ch;
+      font-size: .92rem;
+      font-style: normal;
+      color: var(--crema-suave);
+    }
+
+    body > footer > aside address + p {
+      margin-top: 12px;
+    }
+
+    body > footer > aside ul {
+      display: grid;
+      gap: 8px;
+    }
+
+    body > footer > aside section:first-of-type ul {
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    body > footer > aside a {
+      font-size: .92rem;
+      color: var(--crema);
+      transition: color var(--transicion);
+    }
+
+    body > footer > aside a:hover {
+      color: var(--terracota-claro);
+    }
+
+    body > footer > aside section:first-of-type ul a {
+      display: block;
+      padding: 8px 14px;
+      border: 1px solid var(--linea-clara);
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 600;
+      transition: border-color var(--transicion), color var(--transicion);
+    }
+
+    body > footer > aside section:first-of-type ul a:hover {
+      border-color: var(--terracota);
+    }
+
+    /* Derechos y marca gigante */
+    body > footer > p:first-of-type {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 22px 0;
+      border-top: 1px solid var(--linea-clara);
+      font-size: .8rem;
+      color: color-mix(in srgb, var(--crema) 72%, transparent);
+    }
+
+    body > footer > p:first-of-type small {
+      font-size: inherit;
+    }
+
+    body > footer > p:first-of-type a {
+      color: var(--crema-suave);
+    }
+
+    body > footer > p:first-of-type a:hover {
+      color: var(--terracota-claro);
+    }
+
+    body > footer::after {
+      content: "Cepadech";
+      display: block;
+      margin-bottom: -.14em;
+      font-family: var(--fuente-titulo);
+      font-size: clamp(2.3rem, 10vw, 9.6rem);
+      font-weight: 200;
+      line-height: 1;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: color-mix(in srgb, var(--crema) 9%, transparent);
+      pointer-events: none;
+    }
+
+    /* =====================================================
+       10. ANIMACIONES
+       ===================================================== */
+    main > section > [data-revelar="pendiente"],
+    body > footer > [data-revelar="pendiente"] {
+      opacity: 0;
+      transform: translateY(36px);
+    }
+
+    main > section > [data-revelar="visto"],
+    body > footer > [data-revelar="visto"] {
+      opacity: 1;
+      transition: opacity .9s ease, transform .9s var(--suave);
+    }
+
+    @keyframes entrar {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes acercar {
+      from { transform: scale(1.12); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes bajar {
+      from { transform: translateY(-130%); }
+      to { transform: none; }
+    }
+
+    @keyframes flotar {
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes empujar {
+      50% { transform: translateX(6px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* =====================================================
+       11. RESPONSIVE
+       ===================================================== */
+    @media (max-width: 1100px) {
+      body > header nav > button {
+        display: grid;
+      }
+
+      body > header nav ul {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 18px;
+        border-radius: var(--radio);
+        background: var(--verde);
+        box-shadow: var(--sombra-honda);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity var(--transicion), transform var(--transicion), visibility var(--transicion);
+      }
+
+      body > header nav:has(> button[aria-expanded="true"]) ul {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+
+      body > header nav ul li + li {
+        border-top: 1px solid var(--linea-clara);
+      }
+
+      body > header nav ul a {
+        padding: 15px 0;
+        font-size: .76rem;
+      }
+
+      body > header nav p {
+        margin-left: auto;
+        padding-bottom: 0;
+      }
+
+      body > header nav > button {
+        margin-left: 0;
+      }
+
+      main > section:nth-of-type(2) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      main > section:nth-of-type(2) > hgroup,
+      main > section:nth-of-type(2) > p {
+        grid-column: 1 / -1;
+      }
+
+      main > section:nth-of-type(2) > p {
+        max-width: 60ch;
+      }
+
+      body > footer > aside {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 960px) {
+      main > section:nth-of-type(3),
+      main > section:nth-of-type(4),
+      body > footer > section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      main > section:nth-of-type(3) > figure {
+        max-width: 520px;
+        width: calc(100% - 28px);
+      }
+
+      main > section:nth-of-type(3) figcaption {
+        right: -14px;
+      }
+
+      main > section:nth-of-type(3) > ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      main > section:nth-of-type(3) > ul li:nth-of-type(3) {
+        padding-left: 0;
+        border-left: 0;
+      }
+
+      main > section:nth-of-type(5) {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      main > section:nth-of-type(5) > hgroup {
+        grid-column: auto;
+      }
+
+      main > section:nth-of-type(5) > p {
+        justify-self: start;
+        margin-bottom: 0;
+      }
+
+      main > section:nth-of-type(5) article:nth-of-type(2) {
+        transform: none;
+      }
+
+      body > footer {
+        margin-top: var(--espacio);
+      }
+
+      body > footer form {
+        grid-column: auto;
+        grid-row: auto;
+        margin-top: 40px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      main > section:first-of-type article {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 1fr auto auto;
+        min-height: max(560px, calc(100svh - var(--marco) - 100px));
+        padding-top: 120px;
+      }
+
+      main > section:first-of-type figure img {
+        object-position: 42% 50%;
+      }
+
+      main > section:first-of-type hgroup p:last-of-type {
+        letter-spacing: .1em;
+      }
+
+      main > section:first-of-type figure::after {
+        background:
+          linear-gradient(180deg, color-mix(in srgb, var(--verde) 85%, transparent) 0%, color-mix(in srgb, var(--verde) 35%, transparent) 50%, color-mix(in srgb, var(--verde) 90%, transparent) 100%);
+      }
+
+      main > section:first-of-type hgroup {
+        align-self: start;
+      }
+
+      main > section:first-of-type article > a {
+        min-width: 0;
+      }
+
+      main > section:first-of-type aside {
+        align-items: flex-start;
+        font-size: .62rem;
+      }
+
+      main > section:first-of-type aside ul {
+        flex-direction: column;
+      }
+
+      main > section:nth-of-type(3) ol,
+      main > section:nth-of-type(4) ol {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      main > section:nth-of-type(2) {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      main > section:nth-of-type(2) article figure {
+        aspect-ratio: 1 / 1;
+      }
+
+      body > footer form,
+      body > footer > aside {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      body > header nav p {
+        display: none;
+      }
+
+      body > header nav > button {
+        margin-left: auto;
+      }
+
+      body > header nav::after {
+        left: 62px;
+      }
+
+      main > section:first-of-type aside li:nth-of-type(n + 3) {
+        display: none;
+      }
+
+      main > section:nth-of-type(3) > ul {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      main > section:nth-of-type(3) > ul li {
+        padding: 18px 0 0;
+        border-left: 0;
+        border-top: 1px solid var(--linea-clara);
+      }
+
+      main > section:nth-of-type(3) > ul li:first-of-type {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      main > section:nth-of-type(3) figcaption {
+        max-width: 180px;
+        padding: 16px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECERA -->
+  <header>
+    <nav aria-label="Principal">
+      <a href="#inicio" aria-label="Cepadech, ir al inicio">C</a>
+      <ul id="menu">
+        <li><a href="#inventario">Inventario</a></li>
+        <li><a href="#inventario" data-filtro="nuevo">Primera mano</a></li>
+        <li><a href="#inventario" data-filtro="usado">Segunda mano</a></li>
+        <li><a href="#nosotros">Por qué nosotros</a></li>
+        <li><a href="#financiacion">Financiación</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <p>
+        <span>Nuevos</span>
+        <button type="button" role="switch" aria-checked="false" aria-label="Mostrar carros de segunda mano"></button>
+        <span>Usados</span>
+      </p>
+      <button type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span></button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. HERO -->
+    <section id="inicio" aria-label="Presentación">
+      <article>
+        <figure>
+          <img src="imagenes/hero-concesionario.jpg" alt="Fila de carros relucientes estacionados frente a la exposición" width="1600" height="1200" fetchpriority="high">
+        </figure>
+        <hgroup>
+          <h1>Cepadech</h1>
+          <p>Primera &amp; segunda mano</p>
+          <p>Revisados · Garantizados · Financiados</p>
+        </hgroup>
+        <p>El carro que buscas, sin rodeos</p>
+        <a href="#inventario">Ver inventario <span aria-hidden="true">→</span></a>
+      </article>
+      <aside aria-label="Datos rápidos">
+        <ul>
+          <li>+120 carros en exposición</li>
+          <li>Revisión de 150 puntos</li>
+          <li>Financiación en 24 h</li>
+        </ul>
+        <a href="#inventario">Desliza <span aria-hidden="true">→</span></a>
+      </aside>
+    </section>
+
+    <!-- 2. INVENTARIO -->
+    <section id="inventario">
+      <hgroup>
+        <p>Inventario</p>
+        <h2>Carros listos para <em>rodar</em></h2>
+      </hgroup>
+      <p>Cada carro pasa por nuestro taller antes de llegar a la exposición. Filtra por primera o segunda mano y reserva tu prueba en un clic.</p>
+
+      <menu aria-label="Filtrar inventario">
+        <li><button type="button" data-filtro="todos" aria-pressed="true">Todos</button></li>
+        <li><button type="button" data-filtro="nuevo" aria-pressed="false">Primera mano</button></li>
+        <li><button type="button" data-filtro="usado" aria-pressed="false">Segunda mano</button></li>
+      </menu>
+
+      <article data-tipo="nuevo">
+        <figure>
+          <img src="imagenes/kia-k5.jpg" alt="Kia K5 gris oscuro circulando por una avenida de edificios clásicos" width="619" height="1100" loading="lazy">
+          <figcaption>Primera mano</figcaption>
+        </figure>
+        <h3>Kia K5 GT-Line</h3>
+        <ul>
+          <li>2026</li>
+          <li>0 km</li>
+          <li>Gasolina</li>
+          <li>Automático</li>
+        </ul>
+        <p><small>Desde</small> <strong>32.900 €</strong></p>
+        <a href="#contacto" data-modelo="Kia K5 GT-Line">Lo quiero <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article data-tipo="nuevo">
+        <figure>
+          <img src="imagenes/toyota-chr.jpg" alt="Toyota C-HR azul en una calle arbolada con luz de atardecer" width="733" height="1100" loading="lazy">
+          <figcaption>Primera mano</figcaption>
+        </figure>
+        <h3>Toyota C-HR Hybrid</h3>
+        <ul>
+          <li>2023</li>
+          <li>Km 0</li>
+          <li>Híbrido</li>
+          <li>Automático</li>
+        </ul>
+        <p><small>Precio</small> <strong>27.400 €</strong></p>
+        <a href="#contacto" data-modelo="Toyota C-HR Hybrid">Lo quiero <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article data-tipo="usado">
+        <figure>
+          <img src="imagenes/hyundai-creta.jpg" alt="Hyundai Creta blanco circulando frente a edificios de oficinas" width="734" height="1100" loading="lazy">
+          <figcaption>Segunda mano</figcaption>
+        </figure>
+        <h3>Hyundai Creta</h3>
+        <ul>
+          <li>2022</li>
+          <li>38.500 km</li>
+          <li>Gasolina</li>
+          <li>Manual</li>
+        </ul>
+        <p><small>Precio</small> <strong>17.900 €</strong></p>
+        <a href="#contacto" data-modelo="Hyundai Creta">Lo quiero <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article data-tipo="usado">
+        <figure>
+          <img src="imagenes/mitsubishi-lancer.jpg" alt="Mitsubishi Lancer plateado junto a otro Lancer negro en el taller" width="880" height="839" loading="lazy">
+          <figcaption>Segunda mano</figcaption>
+        </figure>
+        <h3>Mitsubishi Lancer</h3>
+        <ul>
+          <li>2015</li>
+          <li>96.000 km</li>
+          <li>Gasolina</li>
+          <li>Manual</li>
+        </ul>
+        <p><small>Precio</small> <strong>9.800 €</strong></p>
+        <a href="#contacto" data-modelo="Mitsubishi Lancer">Lo quiero <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article data-tipo="usado">
+        <figure>
+          <img src="imagenes/rolls-royce.jpg" alt="Detalle del piloto trasero de un Rolls-Royce azul cielo en exposición" width="734" height="1100" loading="lazy">
+          <figcaption>Segunda mano</figcaption>
+        </figure>
+        <h3>Rolls-Royce Wraith</h3>
+        <ul>
+          <li>2021</li>
+          <li>18.400 km</li>
+          <li>V12</li>
+          <li>Automático</li>
+        </ul>
+        <p><small>Precio</small> <strong>219.000 €</strong></p>
+        <a href="#contacto" data-modelo="Rolls-Royce Wraith">Lo quiero <span aria-hidden="true">→</span></a>
+      </article>
+
+      <aside aria-label="Búsqueda personalizada">
+        <p>+120</p>
+        <h3>Carros esperándote en exposición</h3>
+        <p>¿No ves el tuyo? Cuéntanos qué buscas y te lo encontramos en 72 horas.</p>
+        <a href="#contacto" data-modelo="Aún no lo sé">Encuéntrame uno <span aria-hidden="true">→</span></a>
+      </aside>
+    </section>
+
+    <!-- 3. POR QUÉ CEPADECH -->
+    <section id="nosotros">
+      <figure>
+        <img src="imagenes/taller-certificacion.jpg" alt="BMW rojo y Honda amarillo en el taller de certificación de Cepadech" width="733" height="1100" loading="lazy">
+        <figcaption><strong>150</strong> puntos de control antes de cada entrega</figcaption>
+      </figure>
+
+      <article>
+        <hgroup>
+          <p>Por qué Cepadech</p>
+          <h2>Historia clara, <em>garantía</em> real</h2>
+        </hgroup>
+        <p>Llevamos 15 años vendiendo carros con una sola regla: si no lo compraríamos para nuestra familia, no entra en la exposición. Por eso cada vehículo llega revisado, documentado y con garantía.</p>
+        <ol>
+          <li>
+            <h3>Revisión de 150 puntos</h3>
+            <p>Motor, frenos, electrónica, chasis y papeles. Si algo no está perfecto, se repara antes de la venta.</p>
+          </li>
+          <li>
+            <h3>Garantía de hasta 24 meses</h3>
+            <p>Cobertura mecánica en los carros de segunda mano y la garantía oficial del fabricante en los nuevos.</p>
+          </li>
+          <li>
+            <h3>Tasación en 30 minutos</h3>
+            <p>Trae tu carro actual, lo valoramos al momento y lo descontamos del precio del siguiente.</p>
+          </li>
+          <li>
+            <h3>Kilometraje certificado</h3>
+            <p>Historial de mantenimiento y kilómetros verificados. Sin sorpresas después de firmar.</p>
+          </li>
+        </ol>
+      </article>
+
+      <ul aria-label="Cepadech en cifras">
+        <li><data value="2400">2.400</data> <span>Carros entregados</span></li>
+        <li><data value="15">15</data> <span>Años de experiencia</span></li>
+        <li><data value="4.9">4,9</data> <span>Valoración de clientes</span></li>
+        <li><data value="24">24</data> <span>Para aprobar tu financiación</span></li>
+      </ul>
+    </section>
+
+    <!-- 4. FINANCIACIÓN -->
+    <section id="financiacion">
+      <article>
+        <hgroup>
+          <p>Financiación</p>
+          <h2>Tu carro hoy, <em>a tu ritmo</em></h2>
+        </hgroup>
+        <p>Trabajamos con varias entidades para conseguirte la mejor cuota. Ajusta entrada y plazo, y recibe respuesta en menos de 24 horas.</p>
+        <ol>
+          <li>
+            <h3>Elige</h3>
+            <p>Encuentra tu carro en la exposición o en nuestro inventario online.</p>
+          </li>
+          <li>
+            <h3>Prueba</h3>
+            <p>Agenda una prueba de manejo sin compromiso, cuando te venga bien.</p>
+          </li>
+          <li>
+            <h3>Financia</h3>
+            <p>Elige entrada y plazo. Si tienes carro, lo tasamos como parte de pago.</p>
+          </li>
+          <li>
+            <h3>Conduce</h3>
+            <p>Nos encargamos de papeles y transferencia. Entrega en 72 horas.</p>
+          </li>
+        </ol>
+      </article>
+
+      <form aria-label="Simulador de cuota">
+        <h3>Simula tu cuota</h3>
+        <label>
+          Precio del carro
+          <output name="precioVista">19.000 €</output>
+          <input type="range" name="precio" min="5000" max="90000" step="500" value="19000">
+        </label>
+        <label>
+          Entrada
+          <output name="entradaVista">3.000 €</output>
+          <input type="range" name="entrada" min="0" max="9000" step="500" value="3000">
+        </label>
+        <fieldset>
+          <legend>Plazo en meses</legend>
+          <label><input type="radio" name="plazo" value="24">24</label>
+          <label><input type="radio" name="plazo" value="36">36</label>
+          <label><input type="radio" name="plazo" value="48">48</label>
+          <label><input type="radio" name="plazo" value="60" checked>60</label>
+          <label><input type="radio" name="plazo" value="72">72</label>
+        </fieldset>
+        <p>Cuota estimada <output name="cuota">317 €</output> <small>/ mes</small></p>
+        <p>Cálculo orientativo con TIN 6,99 %. Sujeto a estudio y aprobación de la entidad financiera.</p>
+        <a href="#contacto" data-modelo="Solo financiación">Solicitar financiación <span aria-hidden="true">→</span></a>
+      </form>
+    </section>
+
+    <!-- 5. OPINIONES -->
+    <section id="opiniones">
+      <hgroup>
+        <p>Opiniones</p>
+        <h2>Lo dicen quienes ya <em>conducen</em></h2>
+      </hgroup>
+      <p>
+        <strong>4,9</strong>
+        <span aria-hidden="true">★★★★★</span>
+        <small>Media de 860 reseñas verificadas</small>
+      </p>
+
+      <article>
+        <p aria-label="5 de 5 estrellas">★★★★★</p>
+        <blockquote>
+          <p>Buscaba un SUV de segunda mano y me daba miedo comprar a ciegas. Me enseñaron el informe de revisión punto por punto. Seis meses después, ni un susto.</p>
+        </blockquote>
+        <h3 data-iniciales="LM">Laura Méndez <small>Compró un Hyundai Creta</small></h3>
+      </article>
+
+      <article>
+        <p aria-label="5 de 5 estrellas">★★★★★</p>
+        <blockquote>
+          <p>Entregué mi carro viejo como parte de pago y esa misma mañana salí con el C-HR. La tasación fue justa y los papeles los hicieron ellos.</p>
+        </blockquote>
+        <h3 data-iniciales="JO">Javier Ortega <small>Cambió su carro por un Toyota C-HR</small></h3>
+      </article>
+
+      <article>
+        <p aria-label="5 de 5 estrellas">★★★★★</p>
+        <blockquote>
+          <p>Con el simulador ya sabía la cuota antes de ir. Me aprobaron la financiación al día siguiente y la entrega fue impecable.</p>
+        </blockquote>
+        <h3 data-iniciales="MR">Marta Ruiz <small>Financió su Kia K5</small></h3>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- 6. CONTACTO Y PIE DE PÁGINA -->
+  <footer id="contacto">
+    <section aria-label="Agenda tu visita">
+      <hgroup>
+        <p>Contacto</p>
+        <h2>¿Listo para tu <em>próximo</em> carro?</h2>
+      </hgroup>
+      <p>Agenda una visita o una prueba de manejo. Te llamamos en menos de 2 horas dentro del horario de apertura.</p>
+      <p>
+        <a href="tel:+34600000000">+34 600 000 000</a>
+        <a href="mailto:hola@cepadech.example">hola@cepadech.example</a>
+      </p>
+
+      <form>
+        <label>
+          Nombre
+          <input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre" required>
+        </label>
+        <label>
+          Teléfono
+          <input type="tel" name="telefono" autocomplete="tel" placeholder="+34 600 000 000" required>
+        </label>
+        <label>
+          Carro de interés
+          <select name="modelo">
+            <option>Aún no lo sé</option>
+            <option>Kia K5 GT-Line</option>
+            <option>Toyota C-HR Hybrid</option>
+            <option>Hyundai Creta</option>
+            <option>Mitsubishi Lancer</option>
+            <option>Rolls-Royce Wraith</option>
+            <option>Solo financiación</option>
+            <option>Quiero vender mi carro</option>
+          </select>
+        </label>
+        <label>
+          Mensaje
+          <textarea name="mensaje" rows="3" placeholder="¿Qué día te viene bien venir?"></textarea>
+        </label>
+        <button type="submit">Agendar visita</button>
+        <output name="aviso" role="status"></output>
+      </form>
+    </section>
+
+    <aside aria-label="Información de Cepadech">
+      <section>
+        <h3>Cepadech</h3>
+        <p>Agencia de carros de primera y segunda mano. Revisados, garantizados y listos para rodar.</p>
+        <ul>
+          <li><a href="#" aria-label="Instagram de Cepadech">Instagram</a></li>
+          <li><a href="#" aria-label="TikTok de Cepadech">TikTok</a></li>
+          <li><a href="https://wa.me/34600000000" aria-label="WhatsApp de Cepadech">WhatsApp</a></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Visítanos</h3>
+        <address>Av. del Motor, 128<br>Polígono Industrial Norte, nave 4</address>
+        <p>Lun a vie · 9:00 a 20:00<br>Sábados · 10:00 a 14:00</p>
+      </section>
+      <section>
+        <h3>Contacto</h3>
+        <ul>
+          <li><a href="tel:+34600000000">+34 600 000 000</a></li>
+          <li><a href="mailto:hola@cepadech.example">hola@cepadech.example</a></li>
+          <li><a href="https://wa.me/34600000000">Escríbenos por WhatsApp</a></li>
+        </ul>
+      </section>
+      <nav aria-label="Secciones">
+        <h3>Explora</h3>
+        <ul>
+          <li><a href="#inventario">Inventario</a></li>
+          <li><a href="#nosotros">Por qué nosotros</a></li>
+          <li><a href="#financiacion">Financiación</a></li>
+          <li><a href="#opiniones">Opiniones</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <p>
+      <small>© <time datetime="2026">2026</time> Cepadech · <a href="https://allpixels.dev">Plantilla de All Pixels</a></small>
+      <span><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Cookies</a></span>
+    </p>
+  </footer>
+
+  <script>
+    /* =====================================================
+       CEPADECH · Interacciones
+       ===================================================== */
+    const cabecera = document.querySelector("body > header");
+    const hero = document.querySelector("#inicio");
+    const botonMenu = cabecera.querySelector("nav > button");
+    const interruptor = cabecera.querySelector("nav p button");
+    const inventario = document.querySelector("#inventario");
+    const tarjetas = inventario.querySelectorAll("article");
+    const filtros = inventario.querySelectorAll("menu button");
+    const simulador = document.querySelector("#financiacion form");
+    const formularioContacto = document.querySelector("#contacto form");
+    const movimientoReducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const euros = new Intl.NumberFormat("es-ES", {
+      style: "currency",
+      currency: "EUR",
+      maximumFractionDigits: 0,
+      useGrouping: "always"
+    });
+
+    /* 1. Cabecera fija al salir del hero */
+    function actualizarCabecera() {
+      if (window.scrollY > hero.offsetHeight * 0.6) {
+        cabecera.dataset.estado = "fijo";
+      } else {
+        delete cabecera.dataset.estado;
+      }
+    }
+
+    window.addEventListener("scroll", actualizarCabecera, { passive: true });
+    actualizarCabecera();
+
+    /* 1b. Parallax suave de la foto del hero */
+    const fotoHero = hero.querySelector("img");
+
+    if (!movimientoReducido) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY < hero.offsetHeight) {
+          fotoHero.style.setProperty("--desplazamiento", (window.scrollY * 0.18).toFixed(1));
+        }
+      }, { passive: true });
+    }
+
+    /* 2. Menú móvil */
+    function cambiarMenu(abrir) {
+      botonMenu.setAttribute("aria-expanded", String(abrir));
+      botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+    }
+
+    botonMenu.addEventListener("click", () => {
+      cambiarMenu(botonMenu.getAttribute("aria-expanded") !== "true");
+    });
+
+    cabecera.querySelectorAll("nav ul a").forEach((enlace) => {
+      enlace.addEventListener("click", () => cambiarMenu(false));
+    });
+
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape" && botonMenu.getAttribute("aria-expanded") === "true") {
+        cambiarMenu(false);
+        botonMenu.focus();
+      }
+    });
+
+    document.addEventListener("click", (evento) => {
+      if (!cabecera.contains(evento.target)) cambiarMenu(false);
+    });
+
+    /* 2b. Marca en el menú la sección que estás viendo */
+    const enlacesSeccion = [...cabecera.querySelectorAll("nav ul a:not([data-filtro])")];
+    const vigia = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        enlacesSeccion.forEach((enlace) => {
+          if (enlace.hash === "#" + entrada.target.id) enlace.setAttribute("aria-current", "true");
+          else enlace.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+
+    document.querySelectorAll("main > section[id]:not(:first-of-type), body > footer").forEach((seccion) => vigia.observe(seccion));
+
+    /* 3. Filtro del inventario (botones, menú e interruptor) */
+    filtros.forEach((boton) => {
+      const total = [...tarjetas].filter((tarjeta) => boton.dataset.filtro === "todos" || tarjeta.dataset.tipo === boton.dataset.filtro).length;
+      boton.insertAdjacentHTML("beforeend", ` <small>${total}</small>`);
+    });
+
+    function aplicarFiltro(tipo) {
+      tarjetas.forEach((tarjeta) => {
+        tarjeta.hidden = tipo !== "todos" && tarjeta.dataset.tipo !== tipo;
+      });
+    }
+
+    function filtrarInventario(tipo) {
+      if (document.startViewTransition && !movimientoReducido) {
+        document.startViewTransition(() => aplicarFiltro(tipo));
+      } else {
+        aplicarFiltro(tipo);
+      }
+      filtros.forEach((boton) => {
+        boton.setAttribute("aria-pressed", String(boton.dataset.filtro === tipo));
+      });
+      interruptor.setAttribute("aria-checked", String(tipo === "usado"));
+    }
+
+    filtros.forEach((boton) => {
+      boton.addEventListener("click", () => filtrarInventario(boton.dataset.filtro));
+    });
+
+    document.querySelectorAll("a[data-filtro]").forEach((enlace) => {
+      enlace.addEventListener("click", () => filtrarInventario(enlace.dataset.filtro));
+    });
+
+    interruptor.addEventListener("click", () => {
+      const verUsados = interruptor.getAttribute("aria-checked") !== "true";
+      filtrarInventario(verUsados ? "usado" : "nuevo");
+      inventario.scrollIntoView({ behavior: movimientoReducido ? "auto" : "smooth" });
+    });
+
+    /* 3b. Inclinación 3D de las tarjetas al pasar el ratón */
+    if (!movimientoReducido && window.matchMedia("(hover: hover)").matches) {
+      tarjetas.forEach((tarjeta) => {
+        tarjeta.addEventListener("pointermove", (evento) => {
+          const caja = tarjeta.getBoundingClientRect();
+          const x = (evento.clientX - caja.left) / caja.width - 0.5;
+          const y = (evento.clientY - caja.top) / caja.height - 0.5;
+          tarjeta.style.setProperty("--ry", (x * 8).toFixed(2) + "deg");
+          tarjeta.style.setProperty("--rx", (y * -8).toFixed(2) + "deg");
+        });
+        tarjeta.addEventListener("pointerleave", () => {
+          tarjeta.style.setProperty("--rx", "0deg");
+          tarjeta.style.setProperty("--ry", "0deg");
+        });
+      });
+    }
+
+    /* 4. Los botones "Lo quiero" eligen el modelo en el formulario */
+    document.querySelectorAll("a[data-modelo]").forEach((enlace) => {
+      enlace.addEventListener("click", () => {
+        formularioContacto.elements.modelo.value = enlace.dataset.modelo;
+      });
+    });
+
+    /* 5. Simulador de cuota (sistema francés) */
+    const TIN = 0.0699;
+
+    function calcularCuota() {
+      const { precio, entrada, plazo, precioVista, entradaVista, cuota } = simulador.elements;
+      entrada.max = Math.floor((Number(precio.value) * 0.5) / 500) * 500;
+
+      const capital = Number(precio.value) - Number(entrada.value);
+      const interesMensual = TIN / 12;
+      const meses = Number(plazo.value);
+      const pago = (capital * interesMensual) / (1 - Math.pow(1 + interesMensual, -meses));
+
+      precioVista.value = euros.format(precio.value);
+      entradaVista.value = euros.format(entrada.value);
+      cuota.value = euros.format(pago);
+    }
+
+    simulador.addEventListener("input", calcularCuota);
+    simulador.addEventListener("submit", (evento) => evento.preventDefault());
+    calcularCuota();
+
+    /* 6. Contadores animados */
+    function animarContador(dato) {
+      const final = Number(dato.value);
+      const decimales = dato.value.includes(".") ? 1 : 0;
+      const formato = new Intl.NumberFormat("es-ES", {
+        minimumFractionDigits: decimales,
+        maximumFractionDigits: decimales,
+        useGrouping: "always"
+      });
+      const duracion = 1600;
+      const inicio = performance.now();
+
+      function paso(ahora) {
+        const progreso = Math.min((ahora - inicio) / duracion, 1);
+        const suavizado = 1 - Math.pow(1 - progreso, 3);
+        dato.textContent = formato.format(final * suavizado);
+        if (progreso < 1) requestAnimationFrame(paso);
+      }
+
+      requestAnimationFrame(paso);
+    }
+
+    /* 7. Aparición de bloques al hacer scroll */
+    if (!movimientoReducido && "IntersectionObserver" in window) {
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (!entrada.isIntersecting) return;
+          entrada.target.dataset.revelar = "visto";
+          entrada.target.querySelectorAll("data").forEach(animarContador);
+          observador.unobserve(entrada.target);
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+      document.querySelectorAll("main > section:not(:first-of-type) > *, body > footer > *").forEach((bloque) => {
+        bloque.dataset.revelar = "pendiente";
+        observador.observe(bloque);
+      });
+    }
+
+    /* 8. Año actual en el pie */
+    const anio = document.querySelector("body > footer time");
+    anio.textContent = anio.dateTime = new Date().getFullYear();
+
+    /* 9. Formulario de contacto (demo sin servidor) */
+    formularioContacto.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const nombre = formularioContacto.elements.nombre.value.trim().split(" ")[0];
+      formularioContacto.reset();
+      formularioContacto.elements.aviso.value = `¡Gracias, ${nombre}! Te llamamos en menos de 2 horas para confirmar tu visita.`;
+    });
+  </script>
+</body>
+</html>

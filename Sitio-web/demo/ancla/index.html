@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<!--
+  Espacio Ancla · Plantilla de All Pixels — https://allpixels.dev
+  Psychological therapy landing page (in-person & online).
+  See the README and LICENCIA files included in the download.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espacio Ancla — A Safe Space to Talk About What You Feel</title>
+  <meta name="description" content="In-person and online psychological therapy with close, caring support. Book a free 15-minute call with Espacio Ancla.">
+  <meta name="theme-color" content="#F7F5F6">
+  <meta property="og:title" content="Espacio Ancla — Psychological Therapy">
+  <meta property="og:description" content="A safe space to talk about what you feel. In-person and online therapy.">
+  <link rel="icon" href="imagenes/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fuentes/inter-tight-variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* ========== 0. LOCAL FONTS (SIL Open Font License, see fuentes/) ========== */
+    @font-face { font-family: "Inter Tight"; font-weight: 100 900; font-display: swap; src: url("fuentes/inter-tight-variable.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 100 900; font-display: swap; src: url("fuentes/inter-variable.woff2") format("woff2"); }
+
+    /* ========== 1. VARIABLES ========== */
+    :root {
+      /* Vibrant Sunset palette */
+      --plum: #4D3A4D;
+      --plum-deep: #3B2C3B;
+      --orchid: #BE5CA9;
+      --orchid-deep: #A2468F;
+      --mauve: #D59CC5;
+      --blush: #EADADA;
+
+      /* Light backgrounds */
+      --white: #FFFFFF;
+      --snow: #F7F5F6;
+      --mist: #EDE9EB;
+      --text: #231C23;
+      --muted: #645A63;
+      --soft: #857C85;
+
+      /* Glass */
+      --glass: rgba(255, 255, 255, .62);
+      --glass-line: rgba(255, 255, 255, .85);
+      --blur: blur(22px) saturate(160%);
+
+      /* Shadows, radii and spacing */
+      --shadow: 0 24px 60px -28px rgba(77, 58, 77, .28), 0 2px 8px rgba(77, 58, 77, .05);
+      --glow: 0 40px 90px -30px rgba(190, 92, 169, .55);
+      --radius-lg: 2rem;
+      --radius: 1.25rem;
+      --radius-pill: 999px;
+      --gutter: max(1.25rem, (100% - 72rem) / 2);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+
+      --font-head: "Inter Tight", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, sans-serif;
+    }
+
+    /* ========== 2. RESET AND BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    a { text-decoration: none; color: var(--plum); }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      overflow-x: hidden;
+      font: 400 1.0625rem/1.7 var(--font-body);
+      color: var(--text);
+      background: var(--snow);
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* The anchor "rope" that grows with the scroll */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 60;
+      width: 3px;
+      background: linear-gradient(var(--mauve), var(--orchid), var(--plum));
+      transform: scaleY(var(--scroll, 0));
+      transform-origin: top;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    figure { overflow: hidden; background: linear-gradient(135deg, var(--blush), var(--mauve)); }
+    ul, ol { list-style: none; }
+    h1, h2, h3 { font-family: var(--font-head); line-height: 1.05; letter-spacing: -.035em; text-wrap: balance; color: var(--text); }
+    p { text-wrap: pretty; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+
+    :focus-visible { outline: 3px solid var(--orchid); outline-offset: 3px; border-radius: .5rem; }
+
+    /* Icons: small images inside a figure, coloured in the SVG file */
+    figure:has(> img[src*="iconos/"]) {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1em;
+      height: 1em;
+      overflow: visible;
+      background: none;
+    }
+    img[src*="iconos/"] { width: 100%; height: 100%; object-fit: contain; }
+
+    body > a:first-child {
+      position: absolute;
+      top: -4rem;
+      left: 1rem;
+      z-index: 100;
+      padding: .75rem 1.25rem;
+      border-radius: var(--radius-pill);
+      color: var(--white);
+      background: var(--plum);
+    }
+    body > a:first-child:focus-visible { top: 1rem; }
+
+    /* Buttons (same look in several sections) */
+    body > header nav li:last-of-type a,
+    main > section:first-of-type article > p:nth-of-type(3) a,
+    main > section:first-of-type > aside > a,
+    main > section:nth-of-type(3) article > a,
+    main > section:nth-of-type(5) form button {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .95rem 1.6rem;
+      border: 0;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      color: var(--white);
+      background: var(--plum);
+      box-shadow: 0 14px 30px -14px rgba(77, 58, 77, .7);
+      cursor: pointer;
+      transition: transform .35s var(--ease), background-color .35s var(--ease), box-shadow .35s var(--ease);
+    }
+
+    body > header nav li:last-of-type a:hover,
+    main > section:first-of-type article > p:nth-of-type(3) a:hover,
+    main > section:first-of-type > aside > a:hover,
+    main > section:nth-of-type(3) article > a:hover,
+    main > section:nth-of-type(5) form button:hover {
+      transform: translateY(-2px);
+      background: var(--plum-deep);
+      box-shadow: 0 18px 36px -12px rgba(190, 92, 169, .6);
+    }
+
+    /* Arrow on the main buttons */
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type::after,
+    main > section:nth-of-type(3) article > a::after,
+    main > section:nth-of-type(5) form button::after {
+      content: "→";
+      transition: transform .35s var(--ease);
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) a:first-of-type:hover::after,
+    main > section:nth-of-type(3) article > a:hover::after,
+    main > section:nth-of-type(5) form button:hover::after { transform: translateX(3px); }
+
+    /* Secondary (ghost) button */
+    main > section:first-of-type article > p:nth-of-type(3) a:last-of-type {
+      color: var(--plum);
+      background: var(--glass);
+      border: 1px solid var(--mist);
+      box-shadow: none;
+    }
+    main > section:first-of-type article > p:nth-of-type(3) a:last-of-type:hover { background: var(--white); }
+
+    /* Glass surfaces */
+    body > header,
+    main > section:first-of-type > aside > aside,
+    main > section:nth-of-type(2) > ul li,
+    main > section:nth-of-type(3) article,
+    main > section:nth-of-type(3) > ul li,
+    main > section:nth-of-type(4) ol li,
+    main > section:nth-of-type(4) details,
+    main > section:nth-of-type(5) form,
+    main > section:nth-of-type(5) aside ul {
+      background: var(--glass);
+      border: 1px solid var(--glass-line);
+      -webkit-backdrop-filter: var(--blur);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+    }
+
+    main { overflow-x: clip; }
+
+    /* Shared section structure */
+    main > section {
+      position: relative;
+      padding: clamp(4.5rem, 9vw, 7.5rem) var(--gutter);
+      scroll-margin-top: 5rem;
+    }
+
+    main > section > header { max-width: 44rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+
+    main section header:has(h2) > p:first-of-type,
+    main > section:first-of-type article > p:first-of-type {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 1.25rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    main section header:has(h2) > p:first-of-type::before,
+    main > section:first-of-type article > p:first-of-type::before {
+      content: "";
+      width: 2.5rem;
+      height: 1px;
+      background: currentColor;
+    }
+
+    main > section h2 { font-size: clamp(2.2rem, 4.8vw, 3.8rem); font-weight: 800; }
+    main > section h2 span { display: block; color: var(--soft); }
+    main h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -.02em; }
+
+    /* ========== 3. HEADER AND NAV ========== */
+    body > header {
+      position: sticky;
+      top: .75rem;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: min(72rem, 100% - 2rem);
+      margin: .75rem auto 0;
+      padding: .6rem .6rem .6rem 1.4rem;
+      border-radius: var(--radius-pill);
+    }
+
+    body > header > a,
+    body > footer > article:first-of-type > a {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      font: 800 1.2rem var(--font-head);
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+    body > header > a span,
+    body > footer > article:first-of-type > a span { color: var(--soft); }
+
+    /* Menu button drawn with CSS */
+    body > header > button {
+      position: relative;
+      display: none;
+      width: 2.9rem;
+      height: 2.9rem;
+      border: 0;
+      border-radius: 50%;
+      background: var(--plum);
+      cursor: pointer;
+    }
+    body > header > button::before,
+    body > header > button::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1.05rem;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--white);
+      translate: -50% calc(-50% - 4px);
+      transition: translate .3s var(--ease), rotate .3s var(--ease);
+    }
+    body > header > button::after { translate: -50% calc(-50% + 4px); }
+    body > header > button[aria-expanded="true"]::before { translate: -50% -50%; rotate: 45deg; }
+    body > header > button[aria-expanded="true"]::after { translate: -50% -50%; rotate: -45deg; }
+
+    body > header nav ul { display: flex; align-items: center; gap: .35rem; }
+    body > header nav li a {
+      display: block;
+      padding: .6rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: .95rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color .3s var(--ease), background-color .3s var(--ease);
+    }
+    body > header nav li a:hover,
+    body > header nav li a[aria-current="true"] { color: var(--plum); background: var(--white); }
+    body > header nav li:last-of-type a { margin-left: .5rem; padding: .7rem 1.3rem; }
+    body > header nav li:last-of-type a:hover { color: var(--white); }
+
+    /* ========== 4. HERO ========== */
+    main > section:first-of-type {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      min-height: calc(100svh - 5rem);
+      isolation: isolate;
+    }
+
+    /* Breathing blob of light */
+    main > section:first-of-type::before {
+      content: "";
+      position: absolute;
+      top: 8%;
+      right: -10%;
+      z-index: -1;
+      width: min(48rem, 90vw);
+      aspect-ratio: 1;
+      border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
+      background: radial-gradient(circle at 35% 35%, var(--mauve), transparent 62%),
+                  radial-gradient(circle at 70% 70%, var(--blush), transparent 60%);
+      filter: blur(60px);
+      opacity: .75;
+      animation: breathe 9s var(--ease) infinite alternate;
+    }
+
+    main > section:first-of-type h1 {
+      font-size: clamp(2.8rem, 6.6vw, 5.6rem);
+      font-weight: 800;
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+    main > section:first-of-type h1 span { display: block; color: var(--soft); }
+
+    main > section:first-of-type article > p:nth-of-type(2) {
+      max-width: 34rem;
+      margin-top: 1.75rem;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type article > p:nth-of-type(3) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .85rem;
+      margin-top: 2.25rem;
+    }
+
+    main > section:first-of-type article ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 2.5rem;
+    }
+    main > section:first-of-type article li {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .55rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--mist);
+      box-shadow: inset 0 1px 0 var(--white);
+    }
+
+    /* Hero glass card */
+    main > section:first-of-type > aside {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      max-height: 38rem;
+      border: 1px solid var(--glass-line);
+      border-radius: var(--radius-lg);
+      color: var(--white);
+      box-shadow: var(--glow);
+    }
+    main > section:first-of-type > aside > figure:first-of-type { position: absolute; inset: 0; border-radius: inherit; }
+    main > section:first-of-type > aside > figure:first-of-type img { width: 100%; height: 100%; object-fit: cover; }
+    main > section:first-of-type > aside::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(59, 44, 59, 0) 35%, rgba(59, 44, 59, .82));
+      pointer-events: none;
+    }
+
+    /* Anchor bubble with a breathing halo */
+    main > section:first-of-type > aside > figure:nth-of-type(2) {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 1;
+      width: 3rem;
+      height: 3rem;
+      padding: .8rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .22);
+      -webkit-backdrop-filter: var(--blur);
+      backdrop-filter: var(--blur);
+    }
+    main > section:first-of-type > aside > figure:nth-of-type(2)::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, .7);
+      border-radius: 50%;
+      animation: halo 8s ease-in-out infinite;
+    }
+
+    main > section:first-of-type > aside > p {
+      position: absolute;
+      left: 1.75rem;
+      right: 1.75rem;
+      bottom: 6rem;
+      z-index: 1;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .92);
+    }
+    main > section:first-of-type > aside > p strong {
+      display: block;
+      margin-bottom: .35rem;
+      font: 800 clamp(1.8rem, 3vw, 2.4rem)/1 var(--font-head);
+      letter-spacing: -.035em;
+      color: var(--white);
+    }
+
+    main > section:first-of-type > aside > a {
+      position: absolute;
+      left: 1.75rem;
+      bottom: 1.75rem;
+      z-index: 1;
+      background: rgba(59, 44, 59, .8);
+      -webkit-backdrop-filter: var(--blur);
+      backdrop-filter: var(--blur);
+    }
+
+    /* Floating chip: free call */
+    main > section:first-of-type > aside > aside {
+      position: absolute;
+      top: 2rem;
+      right: -1.5rem;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .9rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: .9rem;
+      line-height: 1.35;
+      color: var(--text);
+      animation: float 6s var(--ease) infinite alternate;
+    }
+    main > section:first-of-type > aside > aside figure { font-size: 1.4rem; }
+
+    /* ========== 5. APPROACH ========== */
+    main > section:nth-of-type(2) {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      grid-template-areas: "head head" "photo text" "pillars pillars";
+      gap: 0 clamp(2rem, 6vw, 5rem);
+      background: var(--white);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    main > section:nth-of-type(2) > header { grid-area: head; }
+
+    main > section:nth-of-type(2) > figure {
+      grid-area: photo;
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 45% 55% 50% 50% / 38% 38% 62% 62%;
+      box-shadow: var(--glow);
+    }
+    main > section:nth-of-type(2) > figure img { width: 100%; height: 100%; object-fit: cover; }
+    main > section:nth-of-type(2) figcaption {
+      position: absolute;
+      left: 50%;
+      bottom: 1.5rem;
+      padding: .6rem 1.1rem;
+      border-radius: var(--radius-pill);
+      font-size: .85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      background: var(--glass);
+      -webkit-backdrop-filter: var(--blur);
+      backdrop-filter: var(--blur);
+      transform: translateX(-50%);
+    }
+
+    main > section:nth-of-type(2) > article { grid-area: text; align-self: center; }
+    main > section:nth-of-type(2) > article p { font-size: 1.12rem; color: var(--muted); }
+    main > section:nth-of-type(2) > article p + p { margin-top: 1.1rem; }
+    main > section:nth-of-type(2) > article p:last-of-type { font-size: .92rem; color: var(--muted); }
+
+    main > section:nth-of-type(2) > article ul { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.75rem 0; }
+    main > section:nth-of-type(2) > article li {
+      padding: .55rem 1.15rem;
+      border-radius: var(--radius-pill);
+      font-size: .9rem;
+      font-weight: 500;
+      background: var(--mist);
+      box-shadow: inset 0 1px 0 var(--white), 0 6px 16px -10px rgba(77, 58, 77, .35);
+    }
+
+    main > section:nth-of-type(2) > ul {
+      grid-area: pillars;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+    main > section:nth-of-type(2) > ul li {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      transition: transform .45s var(--ease);
+    }
+    main > section:nth-of-type(2) > ul li:hover { transform: translateY(-6px); }
+    main > section:nth-of-type(2) > ul li p { margin-top: .5rem; color: var(--muted); }
+
+    /* Icon tile (pillars and areas) */
+    main > section:nth-of-type(2) > ul li > figure,
+    main > section:nth-of-type(3) > ul li > figure {
+      width: 3.25rem;
+      height: 3.25rem;
+      margin-bottom: 1.25rem;
+      padding: .9rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, var(--mauve), var(--orchid));
+      box-shadow: 0 12px 24px -10px rgba(190, 92, 169, .7);
+    }
+
+    /* ========== 6. THERAPY (SERVICES) ========== */
+    main > section:nth-of-type(3) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      background: linear-gradient(180deg, var(--white), var(--snow));
+    }
+    main > section:nth-of-type(3) > header { grid-column: 1 / -1; }
+
+    main > section:nth-of-type(3) article {
+      display: flex;
+      flex-direction: column;
+      padding: .75rem .75rem 2rem;
+      border-radius: var(--radius-lg);
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+    }
+    main > section:nth-of-type(3) article:hover { transform: translateY(-6px); box-shadow: var(--glow); }
+    main > section:nth-of-type(3) article > figure { aspect-ratio: 16 / 9; border-radius: 1.5rem; }
+    main > section:nth-of-type(3) article > figure img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    main > section:nth-of-type(3) article:hover > figure img { transform: scale(1.05); }
+
+    main > section:nth-of-type(3) article h3 { margin: 1.75rem 1.25rem .5rem; font-size: 1.7rem; }
+    main > section:nth-of-type(3) article p { margin-inline: 1.25rem; color: var(--muted); }
+    main > section:nth-of-type(3) article ul { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 1.25rem; font-size: .92rem; font-weight: 500; }
+    main > section:nth-of-type(3) article li { display: flex; align-items: center; gap: .45rem; }
+    main > section:nth-of-type(3) article > a { align-self: flex-start; margin: auto 1.25rem 0; }
+
+    main > section:nth-of-type(3) > ul {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    main > section:nth-of-type(3) > ul li {
+      padding: 1.75rem;
+      border-radius: var(--radius);
+      transition: transform .45s var(--ease);
+    }
+    main > section:nth-of-type(3) > ul li:hover { transform: translateY(-4px); }
+    main > section:nth-of-type(3) > ul li > figure { width: 2.75rem; height: 2.75rem; margin-bottom: 1rem; padding: .75rem; }
+    main > section:nth-of-type(3) > ul li p { margin-top: .35rem; font-size: .95rem; color: var(--muted); }
+
+    /* ========== 7. HOW IT WORKS + FAQ ========== */
+    main > section:nth-of-type(4) { counter-reset: step; }
+
+    main > section:nth-of-type(4) ol {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    /* The rope becomes the timeline */
+    main > section:nth-of-type(4) ol::before {
+      content: "";
+      position: absolute;
+      top: 3.1rem;
+      left: 3rem;
+      right: 3rem;
+      height: 2px;
+      background: linear-gradient(90deg, var(--mauve), var(--orchid), var(--plum));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.6s var(--ease) .3s;
+    }
+    main > section:nth-of-type(4) ol[data-visible]::before { transform: scaleX(1); }
+
+    main > section:nth-of-type(4) ol li {
+      position: relative;
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+      counter-increment: step;
+    }
+    main > section:nth-of-type(4) ol li::before {
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      margin-bottom: 1.5rem;
+      border-radius: 50%;
+      font: 700 1rem var(--font-head);
+      color: var(--plum);
+      background: var(--mist);
+      box-shadow: inset 0 1px 0 var(--white), 0 0 0 6px var(--snow);
+      transition: color .4s var(--ease), background-color .4s var(--ease);
+    }
+    main > section:nth-of-type(4) ol[data-visible] li::before { color: var(--white); background: var(--plum); }
+    main > section:nth-of-type(4) ol li p { margin-top: .5rem; font-size: .95rem; color: var(--muted); }
+
+    main > section:nth-of-type(4) article {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 2rem clamp(2rem, 6vw, 5rem);
+      margin-top: clamp(4rem, 8vw, 6rem);
+      scroll-margin-top: 6rem;
+    }
+    main > section:nth-of-type(4) article h3 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 800; }
+    main > section:nth-of-type(4) article header p { margin-top: 1rem; color: var(--muted); }
+    main > section:nth-of-type(4) article header p a { font-weight: 600; color: var(--orchid-deep); }
+    main > section:nth-of-type(4) article header p a:hover { color: var(--plum); }
+
+    main > section:nth-of-type(4) details { border-radius: var(--radius); }
+    main > section:nth-of-type(4) details + details { margin-top: .75rem; }
+    main > section:nth-of-type(4) summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      font-weight: 600;
+      list-style: none;
+      cursor: pointer;
+    }
+    main > section:nth-of-type(4) summary::-webkit-details-marker { display: none; }
+    main > section:nth-of-type(4) summary::after {
+      content: "+";
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      background: var(--mist);
+      transition: transform .35s var(--ease), background-color .35s var(--ease), color .35s var(--ease);
+    }
+    main > section:nth-of-type(4) details[open] summary::after { color: var(--white); background: var(--orchid-deep); transform: rotate(45deg); }
+    main > section:nth-of-type(4) details p { padding: 0 1.5rem 1.4rem; color: var(--muted); }
+
+    /* ========== 8. BOOKING / CONTACT ========== */
+    main > section:nth-of-type(5) {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      background: var(--white);
+      isolation: isolate;
+    }
+    main > section:nth-of-type(5)::before {
+      content: "";
+      position: absolute;
+      left: -10%;
+      bottom: 0;
+      z-index: -1;
+      width: 40rem;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--blush), transparent 65%);
+      filter: blur(40px);
+    }
+    main > section:nth-of-type(5) > article > header { margin-bottom: 2rem; }
+    main > section:nth-of-type(5) > article > header p:last-of-type { margin-top: 1rem; font-size: 1.1rem; color: var(--muted); }
+
+    main > section:nth-of-type(5) form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.1rem;
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      border-radius: var(--radius-lg);
+    }
+    main > section:nth-of-type(5) form label { display: grid; gap: .45rem; font-size: .9rem; font-weight: 600; }
+    main > section:nth-of-type(5) form label:nth-of-type(n+5) { grid-column: 1 / -1; }
+
+    main > section:nth-of-type(5) input:not([type="checkbox"]),
+    main > section:nth-of-type(5) select,
+    main > section:nth-of-type(5) textarea {
+      width: 100%;
+      padding: .9rem 1.1rem;
+      border: 1px solid var(--mist);
+      border-radius: .9rem;
+      font-weight: 400;
+      background: var(--white);
+      transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    main > section:nth-of-type(5) textarea { min-height: 7.5rem; resize: vertical; }
+    main > section:nth-of-type(5) input:focus-visible,
+    main > section:nth-of-type(5) select:focus-visible,
+    main > section:nth-of-type(5) textarea:focus-visible {
+      outline: none;
+      border-color: var(--orchid);
+      box-shadow: 0 0 0 4px rgba(190, 92, 169, .18);
+    }
+    main > section:nth-of-type(5) [aria-invalid="true"] { border-color: var(--orchid); background: #FCF4FA; }
+
+    main > section:nth-of-type(5) form label:last-of-type {
+      display: flex;
+      align-items: flex-start;
+      gap: .7rem;
+      font-weight: 400;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    main > section:nth-of-type(5) form label:last-of-type a { font-weight: 600; color: var(--orchid-deep); }
+    main > section:nth-of-type(5) input[type="checkbox"] { flex: none; width: 1.15rem; height: 1.15rem; margin-top: .3rem; accent-color: var(--plum); }
+
+    main > section:nth-of-type(5) form button { grid-column: 1 / -1; justify-content: center; }
+    main > section:nth-of-type(5) form button[disabled] { opacity: .7; cursor: progress; }
+    main > section:nth-of-type(5) form output { grid-column: 1 / -1; font-size: .92rem; text-align: center; color: var(--muted); }
+    main > section:nth-of-type(5) form output[data-state="error"] { color: var(--orchid-deep); }
+    main > section:nth-of-type(5) form output[data-state="ok"] { font-weight: 600; color: var(--plum); }
+
+    main > section:nth-of-type(5) aside { display: grid; align-content: start; gap: 1.25rem; }
+    main > section:nth-of-type(5) aside > figure { aspect-ratio: 1; border-radius: var(--radius-lg); box-shadow: var(--glow); }
+    main > section:nth-of-type(5) aside > figure img { width: 100%; height: 100%; object-fit: cover; }
+    main > section:nth-of-type(5) aside ul { padding: .5rem; border-radius: var(--radius-lg); }
+    main > section:nth-of-type(5) aside li a {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      overflow-wrap: anywhere;
+      transition: background-color .3s var(--ease);
+    }
+    main > section:nth-of-type(5) aside li a:hover { background: var(--white); }
+    main > section:nth-of-type(5) aside li figure {
+      width: 2.6rem;
+      height: 2.6rem;
+      padding: .7rem;
+      border-radius: .8rem;
+      background: var(--mist);
+    }
+    main > section:nth-of-type(5) aside li small { display: block; font-size: .8rem; color: var(--soft); }
+
+    /* ========== 9. FOOTER ========== */
+    body > footer {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(2, 1fr);
+      gap: 3rem;
+      padding: clamp(4rem, 8vw, 6rem) var(--gutter) 2rem;
+      background: linear-gradient(180deg, var(--snow), var(--blush));
+      overflow: hidden;
+    }
+
+    /* A calm horizon: the rope ends here */
+    body > footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: var(--gutter);
+      right: var(--gutter);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orchid), transparent);
+    }
+
+    body > footer > article:first-of-type > a { font-size: clamp(2rem, 4vw, 3rem); line-height: 1; letter-spacing: -.045em; }
+    body > footer > article:first-of-type > a figure { font-size: .8em; }
+    body > footer > article:first-of-type p { max-width: 22rem; margin-top: 1rem; color: var(--muted); }
+
+    body > footer > article:first-of-type ul { display: flex; gap: .6rem; margin-top: 1.5rem; }
+    body > footer > article:first-of-type ul a {
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      padding: .8rem;
+      border-radius: 50%;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    body > footer > article:first-of-type ul a figure { width: 100%; height: 100%; }
+    body > footer > article:first-of-type ul a:hover { transform: translateY(-3px); box-shadow: var(--glow); }
+
+    body > footer h2 { margin-bottom: 1rem; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+    body > footer nav li + li { margin-top: .5rem; }
+    body > footer nav a, body > footer address a { color: var(--text); transition: color .3s var(--ease); }
+    body > footer nav a:hover, body > footer address a:hover { color: var(--orchid-deep); }
+    body > footer address { font-style: normal; line-height: 2; overflow-wrap: anywhere; }
+
+    body > footer > aside {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      border: 1px solid var(--glass-line);
+      border-radius: var(--radius);
+      font-size: .95rem;
+      background: var(--glass);
+    }
+    body > footer > aside figure { font-size: 1.3rem; }
+
+    body > footer > p {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(77, 58, 77, .12);
+      font-size: .85rem;
+      color: var(--muted);
+    }
+    body > footer > p small { font-size: inherit; }
+    body > footer > p a { margin-left: 1.25rem; color: var(--muted); }
+    body > footer > p small a { margin-left: 0; font-weight: 600; color: var(--plum); }
+    body > footer > p a:hover { color: var(--orchid-deep); }
+
+    /* ========== 10. ANIMATIONS ========== */
+    @keyframes breathe { to { transform: scale(1.08) rotate(8deg); } }
+    @keyframes float { to { transform: translateY(-12px); } }
+    @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+    @keyframes halo {
+      0%, 100% { opacity: .9; transform: scale(1); }
+      50% { opacity: 0; transform: scale(1.9); }
+    }
+
+    main > section:first-of-type article > *,
+    main > section:first-of-type > aside { animation: rise 1s var(--ease) both; }
+    main > section:first-of-type article > :nth-child(2) { animation-delay: .08s; }
+    main > section:first-of-type article > :nth-child(3) { animation-delay: .16s; }
+    main > section:first-of-type article > :nth-child(4) { animation-delay: .24s; }
+    main > section:first-of-type article > :nth-child(5) { animation-delay: .32s; }
+    main > section:first-of-type > aside { animation-delay: .2s; }
+
+    /* Reveal on scroll (only when JS is running) */
+    html[data-js] main > section:not(:first-of-type) > *,
+    html[data-js] body > footer > * {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .9s var(--ease), transform .9s var(--ease);
+    }
+    html[data-js] main > section:not(:first-of-type) > [data-visible],
+    html[data-js] body > footer > [data-visible] { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html[data-js] main > section > *, html[data-js] body > footer > * { opacity: 1; transform: none; }
+      main > section:nth-of-type(4) ol::before { transform: scaleX(1); }
+    }
+
+    /* ========== 11. RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      main > section:first-of-type > aside > aside { right: 1rem; }
+      main > section:nth-of-type(3) > ul { grid-template-columns: repeat(2, 1fr); }
+      main > section:nth-of-type(4) ol { grid-template-columns: repeat(2, 1fr); }
+      main > section:nth-of-type(4) ol::before { display: none; }
+    }
+
+    @media (max-width: 860px) {
+      body::before { display: none; }
+
+      body > header > button { display: block; }
+      body > header nav {
+        position: absolute;
+        top: calc(100% + .5rem);
+        left: 0;
+        right: 0;
+        display: none;
+        padding: .75rem;
+        border-radius: var(--radius-lg);
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      body > header > button[aria-expanded="true"] + nav { display: block; }
+      body > header nav ul { flex-direction: column; align-items: stretch; }
+      body > header nav li:last-of-type a { margin: .5rem 0 0; justify-content: center; }
+
+      main > section:first-of-type,
+      main > section:nth-of-type(3),
+      main > section:nth-of-type(4) article,
+      main > section:nth-of-type(5) { grid-template-columns: 1fr; }
+      main > section:first-of-type { min-height: auto; padding-top: 3rem; }
+      main > section:first-of-type > aside { width: 100%; max-width: 30rem; }
+
+      main > section:nth-of-type(2) {
+        grid-template-columns: 1fr;
+        grid-template-areas: "head" "photo" "text" "pillars";
+        gap: 2.5rem;
+      }
+      main > section:nth-of-type(2) > figure { max-width: 24rem; border-radius: var(--radius-lg); }
+      main > section:nth-of-type(2) > ul { grid-template-columns: 1fr; margin-top: 0; }
+
+      body > footer { grid-template-columns: 1fr 1fr; }
+      body > footer > article:first-of-type { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 560px) {
+      main > section:nth-of-type(3) > ul,
+      main > section:nth-of-type(4) ol,
+      main > section:nth-of-type(5) form { grid-template-columns: 1fr; }
+      main > section:first-of-type > aside > aside { top: 5.25rem; right: 1rem; }
+      body > footer { grid-template-columns: 1fr; }
+      body > footer > p a { margin: 0 1.25rem 0 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main">Skip to Content</a>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#top" aria-label="Espacio Ancla, back to top" translate="no">
+      <figure><img src="iconos/ancla.svg" alt=""></figure>Espacio<span>Ancla</span>
+    </a>
+    <button type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"></button>
+    <nav id="menu" aria-label="Main">
+      <ul>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#services">Therapy</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Book a Session</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO -->
+    <section id="top" aria-labelledby="hero-title">
+      <article>
+        <p translate="no">Espacio Ancla · Psychology</p>
+        <h1 id="hero-title">A safe space to talk <span>about what you feel.</span></h1>
+        <p>In-person and online psychological therapy with close, caring support — at your own pace.</p>
+        <p>
+          <a href="#contact">Book Your First Session</a>
+          <a href="#approach">How We Work</a>
+        </p>
+        <ul aria-label="Why Espacio Ancla">
+          <li><figure><img src="iconos/psicologa.svg" alt=""></figure>Licensed Psychologist</li>
+          <li><figure><img src="iconos/candado.svg" alt=""></figure>100% Confidential</li>
+          <li><figure><img src="iconos/casa-portatil.svg" alt=""></figure>In-Person &amp; Online</li>
+        </ul>
+      </article>
+
+      <aside aria-label="Your first step">
+        <figure>
+          <img src="imagenes/hero-abstracto.jpg" alt="Abstract fluid art with soft swirls of pink and purple" width="1100" height="1375" fetchpriority="high">
+        </figure>
+        <figure><img src="iconos/ancla-blanco.svg" alt=""></figure>
+        <p><strong>Find Your Anchor</strong>Talk, breathe and find your footing again.</p>
+        <a href="#contact">Book Now</a>
+        <aside aria-label="Free call">
+          <figure><img src="iconos/conversacion.svg" alt=""></figure>
+          <p>Free 15-min call.<br>No commitment.</p>
+        </aside>
+      </aside>
+    </section>
+
+    <!-- 2. APPROACH -->
+    <section id="approach" aria-labelledby="approach-title">
+      <header>
+        <p>01 — Our Approach</p>
+        <h2 id="approach-title">You don’t need it all figured out <span>to begin.</span></h2>
+      </header>
+
+      <figure>
+        <img src="imagenes/enfoque-abstracto.jpg" alt="Flowing abstract artwork in soft pink and plum layers" width="800" height="1000" loading="lazy">
+        <figcaption>Licensed Clinical Psychologist</figcaption>
+      </figure>
+
+      <article>
+        <p>Therapy at Espacio Ancla is a calm, judgment-free place where you can slow down, name what’s happening inside and find steadier ground.</p>
+        <p>We combine an integrative, evidence-based approach with genuine warmth. Every process is tailored to you: your story, your rhythm, your goals.</p>
+        <ul aria-label="Our values">
+          <li>Warm</li>
+          <li>Evidence-Based</li>
+          <li>Confidential</li>
+          <li>Flexible</li>
+        </ul>
+        <p>Registered psychologist · License No. 00000 · Member of the Official College of Psychologists</p>
+      </article>
+
+      <ul>
+        <li>
+          <figure><img src="iconos/taza.svg" alt=""></figure>
+          <h3>Listening Without Judgment</h3>
+          <p>Say it as it comes. Here, every feeling has room and nothing is “too small”.</p>
+        </li>
+        <li>
+          <figure><img src="iconos/brote.svg" alt=""></figure>
+          <h3>A Pace That Fits You</h3>
+          <p>No rush, no pressure. We move forward step by step, at the speed you need.</p>
+        </li>
+        <li>
+          <figure><img src="iconos/brujula.svg" alt=""></figure>
+          <h3>Real, Practical Tools</h3>
+          <p>Strategies you can use day to day to manage emotions and understand yourself.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 3. THERAPY -->
+    <section id="services" aria-labelledby="services-title">
+      <header>
+        <p>02 — Therapy</p>
+        <h2 id="services-title">How we can work <span>together.</span></h2>
+      </header>
+
+      <article>
+        <figure>
+          <img src="imagenes/terapia-presencial.jpg" alt="Abstract fluid art with swirling pink and purple tones" width="1000" height="563" loading="lazy">
+        </figure>
+        <h3>In-Person Therapy</h3>
+        <p>A quiet, welcoming room designed to help you feel at ease from the moment you walk in.</p>
+        <ul>
+          <li><figure><img src="iconos/reloj.svg" alt=""></figure>50-minute sessions</li>
+          <li><figure><img src="iconos/ubicacion.svg" alt=""></figure>City-center practice</li>
+        </ul>
+        <a href="#contact">Book In-Person</a>
+      </article>
+
+      <article>
+        <figure>
+          <img src="imagenes/terapia-online.jpg" alt="Abstract fluid art with layered pink, white and plum waves" width="1000" height="563" loading="lazy">
+        </figure>
+        <h3>Online Therapy</h3>
+        <p>The same close support from wherever you feel safest, through a secure video call.</p>
+        <ul>
+          <li><figure><img src="iconos/reloj.svg" alt=""></figure>50-minute sessions</li>
+          <li><figure><img src="iconos/escudo.svg" alt=""></figure>Encrypted platform</li>
+        </ul>
+        <a href="#contact">Book Online</a>
+      </article>
+
+      <ul aria-label="Areas we work on">
+        <li><figure><img src="iconos/viento.svg" alt=""></figure><h3>Anxiety &amp; Stress</h3><p>Quiet the noise and regain a sense of control.</p></li>
+        <li><figure><img src="iconos/corazon.svg" alt=""></figure><h3>Self-Esteem</h3><p>Build a kinder relationship with yourself.</p></li>
+        <li><figure><img src="iconos/paloma.svg" alt=""></figure><h3>Grief &amp; Loss</h3><p>Space to honor what you’ve lost and heal.</p></li>
+        <li><figure><img src="iconos/personas.svg" alt=""></figure><h3>Relationships</h3><p>Communicate better and set healthy limits.</p></li>
+        <li><figure><img src="iconos/ruta.svg" alt=""></figure><h3>Life Transitions</h3><p>Navigate change, crisis and new beginnings.</p></li>
+        <li><figure><img src="iconos/mente.svg" alt=""></figure><h3>Emotional Balance</h3><p>Understand and regulate what you feel.</p></li>
+      </ul>
+    </section>
+
+    <!-- 4. HOW IT WORKS + FAQ -->
+    <section id="process" aria-labelledby="process-title">
+      <header>
+        <p>03 — How It Works</p>
+        <h2 id="process-title">Your first step, <span>without pressure.</span></h2>
+      </header>
+
+      <ol>
+        <li><h3>Reach Out</h3><p>Send a short message telling us what brings you here.</p></li>
+        <li><h3>Free 15-Min Call</h3><p>We get to know each other and answer every question.</p></li>
+        <li><h3>First Session</h3><p>In-person or online, whichever feels right for you.</p></li>
+        <li><h3>Your Care Plan</h3><p>Clear goals, reviewed together as you progress.</p></li>
+      </ol>
+
+      <article id="faq" aria-labelledby="faq-title">
+        <header>
+          <h3 id="faq-title">Questions you might have</h3>
+          <p>Can’t find your answer? <a href="#contact">Write to us</a> — we reply within 24 hours.</p>
+        </header>
+        <section aria-label="Frequently asked questions">
+          <details>
+            <summary>How long does a session last?</summary>
+            <p>Each session lasts 50 minutes. Most people start with one session per week and space them out as they feel better.</p>
+          </details>
+          <details>
+            <summary>Is online therapy as effective as in-person?</summary>
+            <p>Research shows online therapy can be just as effective for most concerns. Choose the format where you feel most comfortable.</p>
+          </details>
+          <details>
+            <summary>What happens in the first session?</summary>
+            <p>We talk about what brings you here, what you’d like to change and how we can work together. No pressure to share more than you want.</p>
+          </details>
+          <details>
+            <summary>Is everything confidential?</summary>
+            <p>Yes. Everything you share is protected by professional confidentiality and data protection law.</p>
+          </details>
+          <details>
+            <summary>How many sessions will I need?</summary>
+            <p>It depends on each person and goal. We review progress together regularly so you always know where you stand.</p>
+          </details>
+        </section>
+      </article>
+    </section>
+
+    <!-- 5. BOOKING / CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <article>
+        <header>
+          <p>04 — Book a Session</p>
+          <h2 id="contact-title">Taking the first step <span>is an act of care.</span></h2>
+          <p>Leave your details and we’ll call you to arrange a free 15-minute orientation call.</p>
+        </header>
+
+        <form novalidate aria-label="Request a call">
+          <label>Full Name
+            <input type="text" name="name" autocomplete="name" placeholder="e.g. Laura Martin…" required>
+          </label>
+          <label>Email
+            <input type="email" name="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="you@example.com" required>
+          </label>
+          <label>Phone (optional)
+            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+1 555 000 000…">
+          </label>
+          <label>Preferred Format
+            <select name="format" required>
+              <option value="">Choose one…</option>
+              <option>In-person</option>
+              <option>Online</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label>Anything you’d like to share? (optional)
+            <textarea name="message" autocomplete="off" placeholder="A few words are enough…"></textarea>
+          </label>
+          <label>
+            <input type="checkbox" name="privacy" required>
+            <span>I accept the <a href="#">privacy policy</a>. My data will only be used to contact me.</span>
+          </label>
+          <button type="submit">Request My Free Call</button>
+          <output aria-live="polite">We reply within 24 hours. Your data stays confidential.</output>
+        </form>
+      </article>
+
+      <aside aria-label="Other ways to reach us">
+        <figure>
+          <img src="imagenes/contacto-abstracto.jpg" alt="Close-up of abstract fluid art in pink and plum" width="800" height="800" loading="lazy">
+        </figure>
+        <ul>
+          <li><a href="https://wa.me/0000000000"><figure><img src="iconos/whatsapp.svg" alt=""></figure><span><small>WhatsApp</small>Message us directly</span></a></li>
+          <li><a href="mailto:hello@espacioancla.example"><figure><img src="iconos/sobre.svg" alt=""></figure><span><small>Email</small>hello@espacioancla.example</span></a></li>
+          <li><a href="https://maps.google.com" target="_blank" rel="noopener"><figure><img src="iconos/ubicacion.svg" alt=""></figure><span><small>Visit</small>Calm Street 12, City Center</span></a></li>
+        </ul>
+      </aside>
+    </section>
+
+  </main>
+
+  <!-- 6. FOOTER -->
+  <footer>
+    <article>
+      <a href="#top" translate="no"><figure><img src="iconos/ancla.svg" alt=""></figure>Espacio<span>Ancla</span></a>
+      <p>A place to stay calm. Psychological therapy, in-person and online.</p>
+      <ul aria-label="Social media">
+        <li><a href="#" aria-label="Instagram"><figure><img src="iconos/instagram.svg" alt=""></figure></a></li>
+        <li><a href="#" aria-label="LinkedIn"><figure><img src="iconos/linkedin.svg" alt=""></figure></a></li>
+        <li><a href="#" aria-label="Spotify podcast"><figure><img src="iconos/spotify.svg" alt=""></figure></a></li>
+      </ul>
+    </article>
+
+    <nav aria-labelledby="footer-nav">
+      <h2 id="footer-nav">Explore</h2>
+      <ul>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#services">Therapy</a></li>
+        <li><a href="#process">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <article aria-labelledby="footer-visit">
+      <h2 id="footer-visit">Visit</h2>
+      <address>
+        Calm Street 12, City Center<br>
+        Mon–Fri · 9:00–20:00<br>
+        <a href="tel:+10000000000">+1 000 000 000</a><br>
+        <a href="mailto:hello@espacioancla.example">hello@espacioancla.example</a>
+      </address>
+    </article>
+
+    <aside aria-label="Urgent help">
+      <figure><img src="iconos/salvavidas.svg" alt=""></figure>
+      <p>If you are in crisis or danger, please call your local emergency number or a crisis helpline right away.</p>
+    </aside>
+
+    <p>
+      <small>© <time datetime="2026">2026</time> Espacio Ancla · <a href="https://allpixels.dev">Template by All Pixels</a></small>
+      <span><a href="#">Legal Notice</a><a href="#">Privacy</a><a href="#">Cookies</a></span>
+    </p>
+  </footer>
+
+  <script>
+    document.documentElement.dataset.js = '';
+
+    const header = document.querySelector('body > header');
+    const menuButton = header.querySelector('button');
+    const form = document.querySelector('#contact form');
+    const status = form.querySelector('output');
+
+    /* Mobile menu */
+    const setMenu = open => {
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+    header.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('click', event => { if (!header.contains(event.target)) setMenu(false); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') setMenu(false); });
+
+    /* Highlight the section you are reading */
+    const navLinks = [...header.querySelectorAll('nav li:not(:last-of-type) a')];
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => {
+          if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('#approach, #services, #process, #faq, #contact').forEach(el => spy.observe(el));
+
+    /* Anchor rope: scroll progress */
+    let ticking = false;
+    const updateScroll = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      document.documentElement.style.setProperty('--scroll', (scrollY / max).toFixed(3));
+      ticking = false;
+    };
+    addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(updateScroll); ticking = true; }
+    }, { passive: true });
+
+    /* Reveal on scroll */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.dataset.visible = '';
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .15 });
+    document.querySelectorAll('main > section:not(:first-of-type) > *, body > footer > *, #process ol')
+      .forEach(el => observer.observe(el));
+
+    /* Form (demo without a server) */
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const fields = [...form.querySelectorAll('input, select, textarea')];
+      fields.forEach(field => field.setAttribute('aria-invalid', String(!field.checkValidity())));
+      const firstInvalid = fields.find(field => !field.checkValidity());
+
+      if (firstInvalid) {
+        status.dataset.state = 'error';
+        status.textContent = 'Please complete the highlighted fields and accept the privacy policy.';
+        firstInvalid.focus();
+        return;
+      }
+
+      const button = form.querySelector('button');
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      setTimeout(() => {
+        form.reset();
+        fields.forEach(field => field.removeAttribute('aria-invalid'));
+        button.disabled = false;
+        button.textContent = 'Request My Free Call';
+        status.dataset.state = 'ok';
+        status.textContent = 'Thank you. We’ll contact you within 24 hours.';
+      }, 1200);
+    });
+
+    /* Current year in the footer */
+    const year = document.querySelector('body > footer time');
+    year.textContent = year.dateTime = new Date().getFullYear();
+  </script>
+</body>
+</html>

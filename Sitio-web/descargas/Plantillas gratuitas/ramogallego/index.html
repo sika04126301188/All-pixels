@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<!--
+  Ramogallego · Plantilla de All Pixels — https://allpixels.dev
+  Despacho de abogados: áreas de práctica, método, opiniones y contacto.
+  Consulta el README y la LICENCIA incluidos en la descarga.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramogallego · Abogados</title>
+  <meta name="description" content="Ramogallego, despacho de abogados: derecho civil, penal, laboral, familia y herencias. Primera consulta gratuita y presupuesto cerrado.">
+  <meta name="theme-color" content="#2E3A2F">
+  <link rel="icon" href="imagenes/favicon.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="imagenes/hero.jpg">
+  <link rel="preload" href="fuentes/manrope-800.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* =========================================================
+       0. TIPOGRAFÍAS LOCALES (SIL Open Font License, ver fuentes/)
+       ========================================================= */
+    @font-face { font-family: "Manrope"; font-weight: 400; font-display: swap; src: url("fuentes/manrope-400.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 500; font-display: swap; src: url("fuentes/manrope-500.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 600; font-display: swap; src: url("fuentes/manrope-600.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 700; font-display: swap; src: url("fuentes/manrope-700.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope"; font-weight: 800; font-display: swap; src: url("fuentes/manrope-800.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Serif"; font-display: swap; src: url("fuentes/instrument-serif.woff2") format("woff2"); }
+    @font-face { font-family: "Instrument Serif"; font-style: italic; font-display: swap; src: url("fuentes/instrument-serif-italic.woff2") format("woff2"); }
+    @font-face { font-family: "Manrope Reserva"; src: local("Arial"), local("Helvetica"), local("Liberation Sans"); size-adjust: 103%; }
+
+    /* =========================================================
+       1. VARIABLES · Paleta 05 "Earthy Minimal"
+       ========================================================= */
+    :root {
+      /* Paleta */
+      --verde: #2E3A2F;            /* primario   */
+      --oliva: #6B7F5B;            /* secundario */
+      --arena: #D9C9B2;            /* terciario  */
+      --terracota: #A9553A;        /* acento (oscurecido para contraste AA con texto claro) */
+      --crema: #F8F6EE;            /* fondo      */
+
+      /* Derivados de la paleta */
+      --blanco: #FFFFFF;
+      --terracota-oscura: #8F4630;
+      --terracota-clara: #E2966F;
+      --texto-suave: #5E675C;
+      --linea: rgba(46, 58, 47, 0.12);
+      --linea-clara: rgba(248, 246, 238, 0.14);
+      --crema-suave: rgba(248, 246, 238, 0.72);
+      --crema-cristal: rgba(248, 246, 238, 0.84);
+      --verde-velo: rgba(46, 58, 47, 0.06);
+      --crema-velo: rgba(248, 246, 238, 0.04);
+      --arena-brillo: rgba(217, 201, 178, 0.6);
+      --arena-tenue: rgba(217, 201, 178, 0.14);
+      --terracota-velo: rgba(201, 111, 79, 0.16);
+      --degradado-foto: linear-gradient(180deg, rgba(46, 58, 47, 0.35) 0%, rgba(46, 58, 47, 0.05) 35%, rgba(46, 58, 47, 0.92) 100%);
+
+      /* Tipografía */
+      --fuente: "Manrope", "Manrope Reserva", system-ui, sans-serif;
+      --fuente-serif: "Instrument Serif", Georgia, serif;
+
+      /* Medidas */
+      --ancho: 1180px;
+      --margen: clamp(1.25rem, 4vw, 2.5rem);
+      --relleno: max(var(--margen), calc((100% - var(--ancho)) / 2));
+      --espacio: clamp(4.5rem, 9vw, 7.5rem);
+
+      /* Radios */
+      --radio-s: 12px;
+      --radio-m: 20px;
+      --radio-l: 28px;
+      --radio-xl: 40px;
+      --radio-pildora: 999px;
+      --radio-arco: 50% 50% var(--radio-l) var(--radio-l) / 40% 40% var(--radio-l) var(--radio-l);
+
+      /* Recortes curvos (hero y áreas) */
+      --hueco: 14px;
+      --curva: 26px;
+
+      /* Sombras */
+      --sombra-s: 0 6px 18px rgba(46, 58, 47, 0.08);
+      --sombra-m: 0 22px 45px -18px rgba(46, 58, 47, 0.35);
+      --sombra-acento: 0 14px 30px -12px rgba(201, 111, 79, 0.75);
+      --sombra-acento-fuerte: 0 20px 36px -12px rgba(201, 111, 79, 0.95);
+
+      /* Movimiento */
+      --suave: cubic-bezier(0.2, 0.7, 0.2, 1);
+      --transicion: 0.35s var(--suave);
+    }
+
+    /* =========================================================
+       2. RESET Y BASE
+       ========================================================= */
+    a {
+      text-decoration: none;
+      color: var(--verde);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+    }
+
+    body {
+      font-family: var(--fuente);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--verde);
+      background: var(--crema);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    ul,
+    ol,
+    menu {
+      list-style: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.035em;
+      color: var(--verde);
+      text-wrap: balance;
+    }
+
+    h1 em,
+    h2 em {
+      font-family: var(--fuente-serif);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--terracota);
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--terracota);
+      outline-offset: 3px;
+    }
+
+    main {
+      overflow-x: clip;
+    }
+
+    main > section {
+      padding: var(--espacio) var(--relleno);
+    }
+
+    /* Cabecera común de sección: etiqueta + título + entradilla */
+    main section header > p:first-of-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.95rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-pildora);
+      background: var(--blanco);
+      box-shadow: var(--sombra-s);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--texto-suave);
+    }
+
+    main section header > p:first-of-type::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--terracota);
+    }
+
+    main section header h2 {
+      margin-top: 1.1rem;
+      font-size: clamp(2.1rem, 4.6vw, 3.5rem);
+    }
+
+    main section header > h2 + p {
+      max-width: 34rem;
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: var(--texto-suave);
+    }
+
+    /* Botón principal (cabecera, hero y método) */
+    body > header > a:last-of-type,
+    main > section:first-of-type > a,
+    main > section:nth-of-type(4) > footer > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.65rem 0.65rem 1.35rem;
+      border-radius: var(--radio-pildora);
+      background: var(--terracota);
+      color: var(--blanco);
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: var(--sombra-acento);
+      transition: transform var(--transicion), background var(--transicion), box-shadow var(--transicion);
+    }
+
+    body > header > a:last-of-type::after,
+    main > section:first-of-type > a::after,
+    main > section:nth-of-type(4) > footer > a::after {
+      content: "→";
+      display: grid;
+      place-items: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      transition: rotate var(--transicion);
+    }
+
+    body > header > a:last-of-type:hover,
+    main > section:first-of-type > a:hover,
+    main > section:nth-of-type(4) > footer > a:hover {
+      transform: translateY(-2px);
+      background: var(--terracota-oscura);
+      box-shadow: var(--sombra-acento-fuerte);
+    }
+
+    body > header > a:last-of-type:hover::after,
+    main > section:first-of-type > a:hover::after,
+    main > section:nth-of-type(4) > footer > a:hover::after {
+      rotate: -45deg;
+    }
+
+    /* =========================================================
+       3. CABECERA Y NAVEGACIÓN
+       ========================================================= */
+    body > header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem var(--relleno);
+      background: var(--crema-cristal);
+      border-bottom: 1px solid transparent;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: border-color var(--transicion), box-shadow var(--transicion);
+    }
+
+    body > header[data-scroll] {
+      border-bottom-color: var(--linea);
+      box-shadow: var(--sombra-s);
+    }
+
+    /* Logotipo (cabecera y pie) */
+    body > header > a:first-of-type,
+    body > footer > section:first-of-type > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    body > header > a:first-of-type {
+      justify-self: start;
+    }
+
+    body > header > a:first-of-type::before,
+    body > footer > section:first-of-type > a::before {
+      content: "R";
+      display: grid;
+      place-items: center;
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 11px;
+      background: var(--terracota);
+      font-family: var(--fuente-serif);
+      font-size: 1.55rem;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--crema);
+      box-shadow: var(--sombra-acento);
+    }
+
+    body > header > button {
+      display: none;
+    }
+
+    body > header nav ul {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    body > header nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radio-pildora);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--texto-suave);
+      transition: color var(--transicion), background var(--transicion);
+    }
+
+    body > header nav a:hover {
+      background: var(--verde-velo);
+      color: var(--verde);
+    }
+
+    body > header nav a[aria-current] {
+      background: var(--terracota);
+      color: var(--blanco);
+      box-shadow: var(--sombra-acento);
+    }
+
+    body > header nav a[aria-current]::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    body > header > a:last-of-type {
+      justify-self: end;
+    }
+
+    /* =========================================================
+       4. HERO · composición con curvas (referencia Triloe)
+       ========================================================= */
+    main > section:first-of-type {
+      padding-top: clamp(2.5rem, 6vw, 4.5rem);
+      text-align: center;
+      background: radial-gradient(ellipse 65% 420px at 50% 0%, var(--arena-brillo), transparent 72%);
+    }
+
+    main > section:first-of-type > header {
+      max-width: 50rem;
+      margin-inline: auto;
+    }
+
+    main > section:first-of-type h1 {
+      margin-top: 1.25rem;
+      font-size: clamp(2.6rem, 6.6vw, 5rem);
+    }
+
+    main > section:first-of-type h1 + p {
+      max-width: 37rem;
+      margin: 1.25rem auto 0;
+      font-size: 1.05rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:first-of-type figure {
+      position: relative;
+      width: min(100%, 880px);
+      margin: clamp(2.75rem, 6vw, 4rem) auto clamp(2.75rem, 5vw, 3.5rem);
+      text-align: left;
+    }
+
+    main > section:first-of-type figure img {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      object-fit: cover;
+      object-position: 50% 40%;
+      border-radius: var(--radio-l);
+    }
+
+    /* Recorte superior izquierdo con la tarjeta oscura */
+    main > section:first-of-type figure aside:first-of-type {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 27%;
+      padding: 0 var(--hueco) var(--hueco) 0;
+      background: var(--crema);
+      border-bottom-right-radius: calc(var(--radio-m) + var(--hueco));
+    }
+
+    main > section:first-of-type figure aside:first-of-type::before,
+    main > section:first-of-type figure aside:first-of-type::after {
+      content: "";
+      position: absolute;
+      width: var(--curva);
+      height: var(--curva);
+      background: radial-gradient(circle at 100% 100%, transparent calc(var(--curva) - 0.5px), var(--crema) var(--curva));
+    }
+
+    main > section:first-of-type figure aside:first-of-type::before {
+      top: 100%;
+      left: 0;
+    }
+
+    main > section:first-of-type figure aside:first-of-type::after {
+      top: 0;
+      left: 100%;
+    }
+
+    main > section:first-of-type figure aside:first-of-type dl {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.25rem;
+      min-height: 10.5rem;
+      padding: 1.35rem 1.4rem;
+      border-radius: var(--radio-m);
+      background: var(--verde);
+    }
+
+    main > section:first-of-type figure aside:first-of-type dt {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--crema);
+    }
+
+    main > section:first-of-type figure aside:first-of-type dd {
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--crema-suave);
+    }
+
+    /* Tarjetas flotantes blancas */
+    main > section:first-of-type figure aside:nth-of-type(2),
+    main > section:first-of-type figure aside:nth-of-type(3) {
+      position: absolute;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radio-m);
+      background: var(--blanco);
+      box-shadow: var(--sombra-m);
+      animation: flotar 6s ease-in-out infinite;
+    }
+
+    main > section:first-of-type figure aside:nth-of-type(2) {
+      top: 54%;
+      left: -7%;
+    }
+
+    main > section:first-of-type figure aside:nth-of-type(3) {
+      top: 11%;
+      right: -8%;
+      animation-delay: -3s;
+    }
+
+    main > section:first-of-type figure aside:nth-of-type(2) dt,
+    main > section:first-of-type figure aside:nth-of-type(3) dt {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    main > section:first-of-type figure aside:nth-of-type(2) dd,
+    main > section:first-of-type figure aside:nth-of-type(3) dd {
+      max-width: 8.5rem;
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+      line-height: 1.35;
+      color: var(--texto-suave);
+    }
+
+    main > section:first-of-type figure aside:nth-of-type(3) dt::after {
+      content: "★";
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: var(--verde);
+      font-size: 0.75rem;
+      letter-spacing: 0;
+      color: var(--arena);
+    }
+
+    /* Recorte inferior derecho con las áreas */
+    main > section:first-of-type figure nav {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 47%;
+      padding: var(--hueco) 0 0 var(--hueco);
+      background: var(--crema);
+      border-top-left-radius: var(--radio-l);
+    }
+
+    main > section:first-of-type figure nav::before,
+    main > section:first-of-type figure nav::after {
+      content: "";
+      position: absolute;
+      width: var(--curva);
+      height: var(--curva);
+      background: radial-gradient(circle at 0 0, transparent calc(var(--curva) - 0.5px), var(--crema) var(--curva));
+    }
+
+    main > section:first-of-type figure nav::before {
+      right: 0;
+      bottom: 100%;
+    }
+
+    main > section:first-of-type figure nav::after {
+      right: 100%;
+      bottom: 0;
+    }
+
+    main > section:first-of-type figure nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-right: -3rem;
+      padding: 0.6rem 0 0 0.6rem;
+    }
+
+    main > section:first-of-type figure nav a {
+      display: inline-block;
+      padding: 0.6rem 1.15rem;
+      border-radius: var(--radio-s);
+      background: var(--blanco);
+      box-shadow: var(--sombra-s);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color var(--transicion), translate var(--transicion);
+    }
+
+    main > section:first-of-type figure nav a:hover {
+      color: var(--terracota);
+      translate: 0 -2px;
+    }
+
+    main > section:first-of-type > p {
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+    }
+
+    /* =========================================================
+       5. FRANJA DE ESPECIALIDADES
+       ========================================================= */
+    main > aside {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      overflow: hidden;
+      margin-inline: -2%;
+      padding: 1.15rem 0;
+      background: var(--verde);
+      box-shadow: var(--sombra-m);
+      rotate: -1.6deg;
+    }
+
+    main > aside ul {
+      display: flex;
+      flex-shrink: 0;
+      gap: 2.5rem;
+      padding-right: 2.5rem;
+      animation: desfile 38s linear infinite;
+    }
+
+    main > aside li {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      font-family: var(--fuente-serif);
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      font-style: italic;
+      line-height: 1.2;
+      white-space: nowrap;
+      color: var(--arena);
+    }
+
+    main > aside li::after {
+      content: "✦";
+      font-family: var(--fuente);
+      font-size: 0.7em;
+      font-style: normal;
+      color: var(--terracota);
+    }
+
+    /* =========================================================
+       6. DESPACHO
+       ========================================================= */
+    main > section:nth-of-type(2) {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      align-items: center;
+      gap: clamp(3rem, 7vw, 6.5rem);
+    }
+
+    main > section:nth-of-type(2) figure {
+      position: relative;
+      isolation: isolate;
+      max-width: 30rem;
+    }
+
+    main > section:nth-of-type(2) figure::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border: 1.5px solid var(--terracota);
+      border-radius: var(--radio-arco);
+      translate: 1.1rem 1.1rem;
+    }
+
+    main > section:nth-of-type(2) figure img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: 50% 30%;
+      border-radius: var(--radio-arco);
+    }
+
+    main > section:nth-of-type(2) figcaption {
+      position: absolute;
+      right: -1.75rem;
+      bottom: 14%;
+      display: grid;
+      place-content: center;
+      width: 8.75rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--terracota);
+      font-size: 0.74rem;
+      font-weight: 600;
+      line-height: 1.25;
+      text-align: center;
+      color: var(--crema);
+      box-shadow: var(--sombra-acento);
+      rotate: -10deg;
+    }
+
+    main > section:nth-of-type(2) figcaption::before {
+      content: "";
+      position: absolute;
+      inset: 0.45rem;
+      border: 1px dashed var(--crema-suave);
+      border-radius: 50%;
+      animation: girar 24s linear infinite;
+    }
+
+    main > section:nth-of-type(2) figcaption strong {
+      display: block;
+      font-family: var(--fuente-serif);
+      font-size: 3.1rem;
+      font-weight: 400;
+      line-height: 0.9;
+    }
+
+    main > section:nth-of-type(2) article > p {
+      margin-top: 1.1rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(2) article > p:first-of-type {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--verde);
+    }
+
+    main > section:nth-of-type(2) article ul {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.25rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(2) article li::before {
+      content: "";
+      display: block;
+      width: 1.75rem;
+      height: 3px;
+      margin-bottom: 0.9rem;
+      border-radius: 3px;
+      background: var(--terracota);
+    }
+
+    main > section:nth-of-type(2) article li h3 {
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    main > section:nth-of-type(2) article li p {
+      margin-top: 0.35rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(2) blockquote {
+      position: relative;
+      margin-top: 2.25rem;
+      padding: 1.6rem 1.75rem;
+      border-radius: var(--radio-l);
+      background: var(--blanco);
+      box-shadow: var(--sombra-s);
+    }
+
+    main > section:nth-of-type(2) blockquote::before {
+      content: "“";
+      position: absolute;
+      top: -1.7rem;
+      left: 1.25rem;
+      font-family: var(--fuente-serif);
+      font-size: 4.5rem;
+      line-height: 1;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(2) blockquote p {
+      font-family: var(--fuente-serif);
+      font-size: 1.45rem;
+      line-height: 1.3;
+    }
+
+    main > section:nth-of-type(2) blockquote footer {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--texto-suave);
+    }
+
+    /* =========================================================
+       7. ÁREAS DE PRÁCTICA · foto fija + acordeón
+       ========================================================= */
+    main > section:nth-of-type(3) {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      align-items: start;
+      column-gap: clamp(2.5rem, 6vw, 5.5rem);
+      counter-reset: area;
+    }
+
+    main > section:nth-of-type(3) > header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      grid-column: 1 / -1;
+      align-items: end;
+      column-gap: 3rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    main > section:nth-of-type(3) > header > * {
+      grid-column: 1;
+    }
+
+    main > section:nth-of-type(3) > header > p:first-of-type {
+      justify-self: start;
+    }
+
+    main > section:nth-of-type(3) > header > h2 + p {
+      grid-column: 2;
+      grid-row: 2;
+      margin-top: 0;
+    }
+
+    main > section:nth-of-type(3) figure {
+      position: sticky;
+      top: 6.5rem;
+      grid-column: 1;
+      grid-row: 2 / span 4;
+      overflow: hidden;
+      border-radius: var(--radio-xl) var(--radio-xl) var(--radio-xl) 0;
+    }
+
+    main > section:nth-of-type(3) figure img {
+      width: 100%;
+      aspect-ratio: 5 / 4;
+      object-fit: cover;
+      object-position: 50% 45%;
+      transition: opacity 0.3s ease, scale 0.6s var(--suave);
+    }
+
+    main > section:nth-of-type(3) figure img[data-cambiando] {
+      opacity: 0;
+      scale: 1.05;
+    }
+
+    /* Pestaña recortada con el nombre del área (mismas curvas del hero) */
+    main > section:nth-of-type(3) figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: var(--hueco) 1.5rem 0 0.6rem;
+      background: var(--crema);
+      border-top-right-radius: var(--radio-l);
+      font-family: var(--fuente-serif);
+      font-size: 1.6rem;
+      font-style: italic;
+      line-height: 1.2;
+    }
+
+    main > section:nth-of-type(3) figcaption::before,
+    main > section:nth-of-type(3) figcaption::after {
+      content: "";
+      position: absolute;
+      width: var(--curva);
+      height: var(--curva);
+      background: radial-gradient(circle at 100% 0, transparent calc(var(--curva) - 0.5px), var(--crema) var(--curva));
+    }
+
+    main > section:nth-of-type(3) figcaption::before {
+      bottom: 100%;
+      left: 0;
+    }
+
+    main > section:nth-of-type(3) figcaption::after {
+      bottom: 0;
+      left: 100%;
+    }
+
+    main > section:nth-of-type(3) details {
+      grid-column: 2;
+      border-top: 1px solid var(--linea);
+      counter-increment: area;
+    }
+
+    main > section:nth-of-type(3) details:last-of-type {
+      border-bottom: 1px solid var(--linea);
+    }
+
+    main > section:nth-of-type(3) summary {
+      display: grid;
+      grid-template-columns: 2.25rem 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      list-style: none;
+      cursor: pointer;
+      transition: color var(--transicion);
+    }
+
+    main > section:nth-of-type(3) summary::-webkit-details-marker {
+      display: none;
+    }
+
+    main > section:nth-of-type(3) summary::before {
+      content: counter(area, decimal-leading-zero);
+      font-family: var(--fuente-serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(3) summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 2.6rem;
+      height: 2.6rem;
+      border: 1px solid var(--linea);
+      border-radius: 50%;
+      font-size: 1.35rem;
+      font-weight: 400;
+      transition: rotate var(--transicion), background var(--transicion), color var(--transicion), border-color var(--transicion);
+    }
+
+    main > section:nth-of-type(3) summary:hover {
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(3) details[open] > summary::after {
+      border-color: var(--terracota);
+      background: var(--terracota);
+      color: var(--blanco);
+      rotate: 45deg;
+    }
+
+    main > section:nth-of-type(3) details > p,
+    main > section:nth-of-type(3) details > ul,
+    main > section:nth-of-type(3) details > a {
+      margin-left: 3.25rem;
+    }
+
+    main > section:nth-of-type(3) details[open] > :not(summary) {
+      animation: aparecer 0.5s var(--suave) both;
+    }
+
+    main > section:nth-of-type(3) details > p {
+      max-width: 33rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(3) details > ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+    }
+
+    main > section:nth-of-type(3) details > ul li {
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-pildora);
+      background: var(--blanco);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    main > section:nth-of-type(3) details > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      margin-bottom: 1.75rem;
+      font-weight: 700;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(3) details > a::after {
+      content: "→";
+      transition: translate var(--transicion);
+    }
+
+    main > section:nth-of-type(3) details > a:hover::after {
+      translate: 0.3rem 0;
+    }
+
+    /* =========================================================
+       8. MÉTODO · escalera de pasos sobre verde
+       ========================================================= */
+    main > section:nth-of-type(4) {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      margin-inline: clamp(0.75rem, 2vw, 1.5rem);
+      border-radius: var(--radio-xl);
+      background: var(--verde);
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(4)::before {
+      content: "§";
+      position: absolute;
+      top: -6rem;
+      right: -2rem;
+      z-index: -1;
+      font-family: var(--fuente-serif);
+      font-size: clamp(20rem, 40vw, 34rem);
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--arena-tenue);
+    }
+
+    main > section:nth-of-type(4) > header > p:first-of-type {
+      border-color: var(--linea-clara);
+      background: transparent;
+      box-shadow: none;
+      color: var(--arena);
+    }
+
+    main > section:nth-of-type(4) h2,
+    main > section:nth-of-type(4) h3 {
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(4) h2 em {
+      color: var(--terracota-clara);
+    }
+
+    main > section:nth-of-type(4) > header > h2 + p {
+      color: var(--crema-suave);
+    }
+
+    main > section:nth-of-type(4) ol {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: start;
+      gap: 1.25rem;
+      margin-top: 3.5rem;
+      counter-reset: paso;
+    }
+
+    main > section:nth-of-type(4) ol li {
+      padding: 1.75rem 1.5rem 2rem;
+      border: 1px solid var(--linea-clara);
+      border-radius: var(--radio-l);
+      background: var(--crema-velo);
+      counter-increment: paso;
+      transition: translate var(--transicion), border-color var(--transicion);
+    }
+
+    main > section:nth-of-type(4) ol li:nth-of-type(1) { margin-top: 9rem; }
+    main > section:nth-of-type(4) ol li:nth-of-type(2) { margin-top: 6rem; }
+    main > section:nth-of-type(4) ol li:nth-of-type(3) { margin-top: 3rem; }
+
+    main > section:nth-of-type(4) ol li::before {
+      content: counter(paso, decimal-leading-zero);
+      display: block;
+      margin-bottom: 2.75rem;
+      font-family: var(--fuente-serif);
+      font-size: 3.6rem;
+      font-style: italic;
+      line-height: 1;
+      color: var(--terracota-clara);
+    }
+
+    main > section:nth-of-type(4) ol li h3 {
+      font-size: 1.3rem;
+    }
+
+    main > section:nth-of-type(4) ol li p {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--crema-suave);
+    }
+
+    main > section:nth-of-type(4) ol li:hover {
+      border-color: var(--terracota-clara);
+      translate: 0 -6px;
+    }
+
+    main > section:nth-of-type(4) ol li:last-of-type {
+      border-color: var(--terracota);
+      background: var(--terracota);
+    }
+
+    main > section:nth-of-type(4) ol li:last-of-type::before,
+    main > section:nth-of-type(4) ol li:last-of-type p {
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(4) > footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--linea-clara);
+    }
+
+    main > section:nth-of-type(4) > footer p {
+      font-size: 1.15rem;
+      color: var(--crema-suave);
+    }
+
+    main > section:nth-of-type(4) > footer strong {
+      font-family: var(--fuente-serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--terracota-clara);
+    }
+
+    /* =========================================================
+       9. OPINIONES · carrusel con desplazamiento
+       ========================================================= */
+    main > section:nth-of-type(5) > header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      column-gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    main > section:nth-of-type(5) > header > * {
+      grid-column: 1;
+    }
+
+    main > section:nth-of-type(5) > header > p:first-of-type {
+      justify-self: start;
+    }
+
+    main > section:nth-of-type(5) menu {
+      display: flex;
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      gap: 0.6rem;
+    }
+
+    main > section:nth-of-type(5) menu button {
+      width: 3.1rem;
+      height: 3.1rem;
+      border: 1px solid var(--linea);
+      border-radius: 50%;
+      background: var(--blanco);
+      font-size: 1.1rem;
+      transition: background var(--transicion), color var(--transicion), border-color var(--transicion);
+    }
+
+    main > section:nth-of-type(5) menu button:hover {
+      border-color: var(--verde);
+      background: var(--verde);
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(5) > ul {
+      display: grid;
+      grid-auto-columns: minmax(18rem, calc((100% - 2.5rem) / 3));
+      grid-auto-flow: column;
+      gap: 1.25rem;
+      overflow-x: auto;
+      padding: 0.5rem 0.25rem 1.5rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    main > section:nth-of-type(5) > ul::-webkit-scrollbar {
+      display: none;
+    }
+
+    main > section:nth-of-type(5) > ul li {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      padding: 1.75rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-l);
+      background: var(--blanco);
+      box-shadow: var(--sombra-s);
+      scroll-snap-align: start;
+    }
+
+    main > section:nth-of-type(5) > ul li:nth-of-type(3n + 2) {
+      border-color: var(--verde);
+      background: var(--verde);
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(5) > ul li > p:first-of-type {
+      font-size: 0.95rem;
+      letter-spacing: 0.25em;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(5) > ul li blockquote p {
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    main > section:nth-of-type(5) > ul li footer {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      column-gap: 0.85rem;
+      margin-top: auto;
+      padding-top: 1.1rem;
+      border-top: 1px dashed var(--linea);
+    }
+
+    main > section:nth-of-type(5) > ul li footer::before {
+      content: attr(data-inicial);
+      display: grid;
+      grid-row: span 2;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      background: var(--arena);
+      font-family: var(--fuente-serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--verde);
+    }
+
+    main > section:nth-of-type(5) > ul li footer strong {
+      font-size: 0.95rem;
+    }
+
+    main > section:nth-of-type(5) > ul li footer small {
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(5) > ul li:nth-of-type(3n + 2) footer {
+      border-top-color: var(--linea-clara);
+    }
+
+    main > section:nth-of-type(5) > ul li:nth-of-type(3n + 2) footer::before {
+      background: var(--terracota);
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(5) > ul li:nth-of-type(3n + 2) footer small {
+      color: var(--crema-suave);
+    }
+
+    /* =========================================================
+       10. PREGUNTAS FRECUENTES
+       ========================================================= */
+    main > section:nth-of-type(6) {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      align-items: start;
+      column-gap: clamp(2.5rem, 6vw, 5.5rem);
+    }
+
+    main > section:nth-of-type(6) > header {
+      position: sticky;
+      top: 6.5rem;
+      grid-column: 1;
+      grid-row: 1 / span 5;
+    }
+
+    main > section:nth-of-type(6) > header aside {
+      margin-top: 2rem;
+      padding: 1.6rem;
+      border-radius: var(--radio-l);
+      background: var(--arena);
+    }
+
+    main > section:nth-of-type(6) > header aside h3 {
+      font-size: 1.15rem;
+    }
+
+    main > section:nth-of-type(6) > header aside p {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    main > section:nth-of-type(6) > header aside a {
+      display: inline-block;
+      margin-top: 0.9rem;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      transition: color var(--transicion);
+    }
+
+    main > section:nth-of-type(6) > header aside a:hover {
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(6) details {
+      grid-column: 2;
+      margin-bottom: 0.75rem;
+      padding: 0 1.5rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-m);
+      background: var(--blanco);
+      transition: border-color var(--transicion), box-shadow var(--transicion);
+    }
+
+    main > section:nth-of-type(6) details[open] {
+      border-color: var(--terracota);
+      box-shadow: var(--sombra-s);
+    }
+
+    main > section:nth-of-type(6) summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.3rem 0;
+      font-size: 1.02rem;
+      font-weight: 700;
+      list-style: none;
+      cursor: pointer;
+    }
+
+    main > section:nth-of-type(6) summary::-webkit-details-marker {
+      display: none;
+    }
+
+    main > section:nth-of-type(6) summary::after {
+      content: "↓";
+      display: grid;
+      flex-shrink: 0;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--crema);
+      font-size: 0.85rem;
+      transition: rotate var(--transicion), background var(--transicion), color var(--transicion);
+    }
+
+    main > section:nth-of-type(6) details[open] summary::after {
+      background: var(--terracota);
+      color: var(--blanco);
+      rotate: 180deg;
+    }
+
+    main > section:nth-of-type(6) details p {
+      padding-bottom: 1.35rem;
+      font-size: 0.95rem;
+      color: var(--texto-suave);
+      animation: aparecer 0.45s var(--suave) both;
+    }
+
+    /* =========================================================
+       11. CONTACTO · panel partido en diagonal
+       ========================================================= */
+    main > section:nth-of-type(7) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      overflow: hidden;
+      width: min(var(--ancho), 100% - 2 * var(--margen));
+      margin: 0 auto var(--espacio);
+      padding: 0;
+      border-radius: var(--radio-xl);
+      background: var(--blanco);
+      box-shadow: var(--sombra-m);
+    }
+
+    main > section:nth-of-type(7) figure {
+      position: relative;
+      isolation: isolate;
+      min-height: 40rem;
+      clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+    }
+
+    main > section:nth-of-type(7) figure img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 45%;
+    }
+
+    main > section:nth-of-type(7) figure::before {
+      content: "Ramogallego · Abogados";
+      position: absolute;
+      top: 2.25rem;
+      left: 2.5rem;
+      z-index: 2;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(7) figure::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: var(--degradado-foto);
+    }
+
+    main > section:nth-of-type(7) figcaption {
+      position: absolute;
+      right: 26%;
+      bottom: 2.75rem;
+      left: 2.5rem;
+      z-index: 2;
+      color: var(--crema);
+    }
+
+    main > section:nth-of-type(7) figcaption strong {
+      display: block;
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    main > section:nth-of-type(7) figcaption em {
+      display: block;
+      font-family: var(--fuente-serif);
+      font-size: clamp(2.1rem, 3.6vw, 2.9rem);
+      line-height: 1.05;
+      color: var(--terracota-clara);
+    }
+
+    main > section:nth-of-type(7) figcaption::after {
+      content: "";
+      display: block;
+      width: 1.75rem;
+      height: 0.35rem;
+      margin-top: 1.75rem;
+      border-radius: var(--radio-pildora);
+      background: var(--crema);
+      box-shadow: 2.25rem 0 0 var(--crema-suave), 4.5rem 0 0 var(--crema-suave);
+    }
+
+    main > section:nth-of-type(7) form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: center;
+      gap: 1rem;
+      padding: clamp(2rem, 4.5vw, 3.75rem);
+    }
+
+    main > section:nth-of-type(7) form > * {
+      grid-column: 1 / -1;
+    }
+
+    main > section:nth-of-type(7) form > label:nth-of-type(-n + 4) {
+      grid-column: auto;
+    }
+
+    main > section:nth-of-type(7) form::before {
+      content: "R";
+      display: grid;
+      grid-column: 1 / -1;
+      justify-self: center;
+      place-items: center;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--terracota-clara), var(--terracota));
+      font-family: var(--fuente-serif);
+      font-size: 2rem;
+      font-style: italic;
+      color: var(--crema);
+      box-shadow: var(--sombra-acento);
+    }
+
+    main > section:nth-of-type(7) form h2 {
+      font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+      text-align: center;
+    }
+
+    main > section:nth-of-type(7) form h2 + p {
+      margin: -0.5rem 0 0.5rem;
+      font-size: 0.92rem;
+      text-align: center;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(7) form label {
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(7) form input,
+    main > section:nth-of-type(7) form select,
+    main > section:nth-of-type(7) form textarea {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--linea);
+      border-radius: var(--radio-m);
+      background: var(--crema);
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: normal;
+      text-transform: none;
+      color: var(--verde);
+      transition: border-color var(--transicion), box-shadow var(--transicion), background var(--transicion);
+    }
+
+    main > section:nth-of-type(7) form input:focus,
+    main > section:nth-of-type(7) form select:focus,
+    main > section:nth-of-type(7) form textarea:focus {
+      outline: none;
+      border-color: var(--terracota);
+      background: var(--blanco);
+      box-shadow: 0 0 0 4px var(--terracota-velo);
+    }
+
+    main > section:nth-of-type(7) form textarea {
+      min-height: 6.5rem;
+      resize: vertical;
+    }
+
+    main > section:nth-of-type(7) form label:nth-of-type(6) {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: normal;
+      text-transform: none;
+    }
+
+    main > section:nth-of-type(7) form label:nth-of-type(6) input {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin-right: 0.5rem;
+      padding: 0;
+      vertical-align: -0.2rem;
+      accent-color: var(--terracota);
+    }
+
+    main > section:nth-of-type(7) form label:nth-of-type(6) a {
+      border-bottom: 1px solid currentColor;
+      color: var(--terracota);
+    }
+
+    main > section:nth-of-type(7) form button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      padding: 0.6rem 0.6rem 0.6rem 1.6rem;
+      border: 0;
+      border-radius: var(--radio-pildora);
+      background: linear-gradient(90deg, var(--terracota), #B8603F);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blanco);
+      box-shadow: var(--sombra-acento);
+      transition: translate var(--transicion), box-shadow var(--transicion);
+    }
+
+    main > section:nth-of-type(7) form button::after {
+      content: "→";
+      display: grid;
+      place-items: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      background: var(--blanco);
+      color: var(--terracota);
+      transition: rotate var(--transicion);
+    }
+
+    main > section:nth-of-type(7) form button:hover {
+      box-shadow: var(--sombra-acento-fuerte);
+      translate: 0 -2px;
+    }
+
+    main > section:nth-of-type(7) form button:hover::after {
+      rotate: -45deg;
+    }
+
+    main > section:nth-of-type(7) form output {
+      min-height: 1.4em;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--oliva);
+    }
+
+    main > section:nth-of-type(7) form > p:last-of-type {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+    }
+
+    main > section:nth-of-type(7) form > p:last-of-type::before,
+    main > section:nth-of-type(7) form > p:last-of-type::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--linea);
+    }
+
+    main > section:nth-of-type(7) form ul {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    main > section:nth-of-type(7) form ul a {
+      display: grid;
+      place-items: center;
+      width: 3.2rem;
+      height: 3.2rem;
+      border: 1px solid var(--linea);
+      border-radius: 50%;
+      background: var(--blanco);
+      box-shadow: var(--sombra-s);
+      font-size: 1.15rem;
+      transition: translate var(--transicion), border-color var(--transicion), color var(--transicion);
+    }
+
+    main > section:nth-of-type(7) form ul a:hover {
+      border-color: var(--terracota);
+      color: var(--terracota);
+      translate: 0 -3px;
+    }
+
+    /* =========================================================
+       12. PIE DE PÁGINA
+       ========================================================= */
+    body > footer {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+      gap: 2.5rem;
+      overflow: hidden;
+      padding: clamp(4rem, 8vw, 6rem) var(--relleno) 0;
+      border-radius: var(--radio-xl) var(--radio-xl) 0 0;
+      background: var(--verde);
+      color: var(--crema-suave);
+    }
+
+    body > footer a {
+      color: var(--crema-suave);
+      transition: color var(--transicion);
+    }
+
+    body > footer a:hover {
+      color: var(--terracota-clara);
+    }
+
+    body > footer > section:first-of-type > a {
+      color: var(--crema);
+    }
+
+    body > footer > section:first-of-type > p {
+      max-width: 22rem;
+      margin-top: 1.1rem;
+      font-size: 0.92rem;
+    }
+
+    body > footer h3 {
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--arena);
+    }
+
+    body > footer nav ul,
+    body > footer address {
+      display: grid;
+      gap: 0.6rem;
+      font-size: 0.92rem;
+      font-style: normal;
+    }
+
+    body > footer dl {
+      display: grid;
+      gap: 0.15rem;
+      font-size: 0.92rem;
+    }
+
+    body > footer dt {
+      color: var(--crema);
+    }
+
+    body > footer dd + dt {
+      margin-top: 0.6rem;
+    }
+
+    body > footer > p:first-of-type {
+      display: flex;
+      flex-wrap: wrap;
+      grid-column: 1 / -1;
+      gap: 0.5rem 1.5rem;
+      margin-top: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--linea-clara);
+      font-size: 0.82rem;
+    }
+
+    body > footer > p:first-of-type small {
+      margin-right: auto;
+      font-size: inherit;
+    }
+
+    body > footer::after {
+      content: "Ramogallego";
+      grid-column: 1 / -1;
+      margin-bottom: -0.16em;
+      font-size: clamp(3.5rem, 14.5vw, 13.5rem);
+      font-weight: 800;
+      line-height: 0.8;
+      letter-spacing: -0.06em;
+      text-align: center;
+      white-space: nowrap;
+      color: var(--arena-tenue);
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       13. ANIMACIONES
+       ========================================================= */
+    :root[data-js] [data-revelar] {
+      opacity: 0;
+      translate: 0 28px;
+      transition: opacity 0.8s var(--suave), translate 0.8s var(--suave);
+    }
+
+    :root[data-js] [data-revelar="visto"] {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    @keyframes flotar {
+      0%, 100% { translate: 0 0; }
+      50%      { translate: 0 -10px; }
+    }
+
+    @keyframes desfile {
+      to { translate: -100% 0; }
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; translate: 0 10px; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+
+    @keyframes girar {
+      to { rotate: 360deg; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      :root[data-js] [data-revelar] {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    /* =========================================================
+       14. RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1080px) {
+      body > header {
+        grid-template-columns: 1fr auto auto;
+      }
+
+      body > header > a:last-of-type {
+        order: 2;
+      }
+
+      body > header > button {
+        position: relative;
+        order: 3;
+        display: block;
+        width: 2.75rem;
+        height: 2.75rem;
+        border: 1px solid var(--linea);
+        border-radius: 50%;
+        background: var(--blanco);
+      }
+
+      body > header > button::before,
+      body > header > button::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        width: 1.1rem;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--verde);
+        translate: -50% 0;
+        transition: top var(--transicion), rotate var(--transicion);
+      }
+
+      body > header > button::before {
+        top: calc(50% - 4px);
+      }
+
+      body > header > button::after {
+        top: calc(50% + 2px);
+      }
+
+      body > header > button[aria-expanded="true"]::before,
+      body > header > button[aria-expanded="true"]::after {
+        top: calc(50% - 1px);
+      }
+
+      body > header > button[aria-expanded="true"]::before {
+        rotate: 45deg;
+      }
+
+      body > header > button[aria-expanded="true"]::after {
+        rotate: -45deg;
+      }
+
+      body > header nav {
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        right: var(--margen);
+        left: var(--margen);
+        padding: 0.6rem;
+        border-radius: var(--radio-l);
+        background: var(--blanco);
+        box-shadow: var(--sombra-m);
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 -0.5rem;
+        transition: opacity var(--transicion), visibility var(--transicion), translate var(--transicion);
+      }
+
+      body > header[data-menu-abierto] nav {
+        opacity: 1;
+        visibility: visible;
+        translate: 0 0;
+      }
+
+      body > header nav ul {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      body > header nav a {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.9rem 1.1rem;
+        font-size: 1rem;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(2) {
+        left: -3%;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(3) {
+        right: -3%;
+      }
+
+      main > section:first-of-type figure nav ul {
+        margin-right: -1rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      main > section:nth-of-type(2),
+      main > section:nth-of-type(3),
+      main > section:nth-of-type(6),
+      main > section:nth-of-type(7) {
+        grid-template-columns: 1fr;
+      }
+
+      main > section:nth-of-type(2) figure {
+        justify-self: center;
+        width: min(100%, 26rem);
+      }
+
+      main > section:nth-of-type(3) > header {
+        grid-template-columns: 1fr;
+      }
+
+      main > section:nth-of-type(3) > header > h2 + p {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 1rem;
+      }
+
+      main > section:nth-of-type(3) figure {
+        position: relative;
+        top: auto;
+        grid-column: 1;
+        grid-row: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      main > section:nth-of-type(3) figure img {
+        aspect-ratio: 16 / 10;
+      }
+
+      main > section:nth-of-type(3) details {
+        grid-column: 1;
+      }
+
+      main > section:nth-of-type(4) ol {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      main > section:nth-of-type(4) ol li:nth-of-type(1),
+      main > section:nth-of-type(4) ol li:nth-of-type(3) {
+        margin-top: 3rem;
+      }
+
+      main > section:nth-of-type(4) ol li:nth-of-type(2) {
+        margin-top: 0;
+      }
+
+      main > section:nth-of-type(5) > ul {
+        grid-auto-columns: minmax(16rem, 70%);
+      }
+
+      main > section:nth-of-type(6) > header {
+        position: static;
+        grid-row: auto;
+        margin-bottom: 2rem;
+      }
+
+      main > section:nth-of-type(6) details {
+        grid-column: 1;
+      }
+
+      main > section:nth-of-type(7) figure {
+        min-height: 24rem;
+        clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+      }
+
+      main > section:nth-of-type(7) figcaption {
+        right: 2.5rem;
+        bottom: 4.5rem;
+      }
+
+      body > footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      body > footer > section:first-of-type {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --hueco: 10px;
+        --curva: 20px;
+      }
+
+      body > header > a:last-of-type {
+        padding: 0.55rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      body > header > a:last-of-type::after {
+        display: none;
+      }
+
+      main > section:first-of-type figure img {
+        aspect-ratio: 4 / 5;
+        object-position: 80% 50%;
+      }
+
+      main > section:first-of-type figure aside:first-of-type {
+        width: 50%;
+      }
+
+      main > section:first-of-type figure aside:first-of-type dl {
+        min-height: 8rem;
+        padding: 1rem;
+      }
+
+      main > section:first-of-type figure aside:first-of-type dt {
+        font-size: 1.9rem;
+      }
+
+      main > section:first-of-type figure aside:first-of-type dd {
+        font-size: 0.72rem;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(2),
+      main > section:first-of-type figure aside:nth-of-type(3) {
+        padding: 0.7rem 0.9rem;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(2) {
+        top: auto;
+        bottom: 33%;
+        left: -0.6rem;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(3) {
+        top: 40%;
+        right: -0.6rem;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(2) dt,
+      main > section:first-of-type figure aside:nth-of-type(3) dt {
+        font-size: 1.35rem;
+      }
+
+      main > section:first-of-type figure aside:nth-of-type(2) dd,
+      main > section:first-of-type figure aside:nth-of-type(3) dd {
+        max-width: 6.5rem;
+        font-size: 0.68rem;
+      }
+
+      main > section:first-of-type figure nav {
+        width: 84%;
+      }
+
+      main > section:first-of-type figure nav ul {
+        gap: 0.4rem;
+        margin-right: 0;
+        padding: 0.4rem 0 0 0.4rem;
+      }
+
+      main > section:first-of-type figure nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.76rem;
+      }
+
+      main > section:nth-of-type(2) figcaption {
+        right: -0.5rem;
+        width: 7.25rem;
+      }
+
+      main > section:nth-of-type(2) figcaption strong {
+        font-size: 2.5rem;
+      }
+
+      main > section:nth-of-type(2) article ul,
+      main > section:nth-of-type(4) ol,
+      main > section:nth-of-type(7) form,
+      body > footer {
+        grid-template-columns: 1fr;
+      }
+
+      main > section:nth-of-type(3) summary {
+        grid-template-columns: 1.75rem 1fr auto;
+        gap: 0.75rem;
+      }
+
+      main > section:nth-of-type(3) details > p,
+      main > section:nth-of-type(3) details > ul,
+      main > section:nth-of-type(3) details > a {
+        margin-left: 2.5rem;
+      }
+
+      main > section:nth-of-type(4) ol li:nth-of-type(n) {
+        margin-top: 0;
+      }
+
+      main > section:nth-of-type(4) ol li::before {
+        margin-bottom: 1.25rem;
+        font-size: 2.8rem;
+      }
+
+      main > section:nth-of-type(5) > header {
+        grid-template-columns: 1fr;
+      }
+
+      main > section:nth-of-type(5) menu {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 1.5rem;
+      }
+
+      main > section:nth-of-type(5) > ul {
+        grid-auto-columns: 86%;
+      }
+
+      main > section:nth-of-type(7) form > label:nth-of-type(-n + 4) {
+        grid-column: 1 / -1;
+      }
+
+      main > section:nth-of-type(7) figure {
+        min-height: 21rem;
+      }
+
+      main > section:nth-of-type(7) figure::before {
+        left: 1.5rem;
+      }
+
+      main > section:nth-of-type(7) figcaption {
+        right: 1.5rem;
+        bottom: 4rem;
+        left: 1.5rem;
+      }
+
+      body > footer > p:first-of-type small {
+        flex-basis: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECERA -->
+  <header>
+    <a href="#inicio">Ramogallego</a>
+    <button type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"></button>
+    <nav id="menu-principal" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#inicio" aria-current="true">Inicio</a></li>
+        <li><a href="#despacho">Despacho</a></li>
+        <li><a href="#areas">Áreas</a></li>
+        <li><a href="#metodo">Método</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul>
+    </nav>
+    <a href="#contacto">Contactar</a>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="inicio">
+      <header>
+        <p>Abogados para particulares y empresas</p>
+        <h1>Defensa jurídica <em>a tu medida</em></h1>
+        <p>Te escuchamos, te explicamos tus opciones sin tecnicismos y luchamos por el mejor resultado: desde un despido o una reclamación hasta una herencia o un juicio.</p>
+      </header>
+
+      <figure>
+        <img src="imagenes/hero.jpg" alt="Abogado redactando un escrito con una estatua de la Justicia en primer plano" width="1760" height="1175" fetchpriority="high">
+        <aside aria-label="Casos resueltos">
+          <dl>
+            <dt data-contar="98" data-sufijo="%">98%</dt>
+            <dd>de los casos cerrados con acuerdo o sentencia favorable</dd>
+          </dl>
+        </aside>
+        <aside aria-label="Clientes">
+          <dl>
+            <dt data-contar="1200" data-prefijo="+">+1.200</dt>
+            <dd>clientes asesorados desde 2008</dd>
+          </dl>
+        </aside>
+        <aside aria-label="Valoración">
+          <dl>
+            <dt data-contar="4.9" data-decimales="1">4,9</dt>
+            <dd>valoración media de nuestros clientes</dd>
+          </dl>
+        </aside>
+        <nav aria-label="Áreas de práctica">
+          <ul>
+            <li><a href="#area-civil">Civil</a></li>
+            <li><a href="#area-penal">Penal</a></li>
+            <li><a href="#area-laboral">Laboral</a></li>
+            <li><a href="#area-familia">Familia</a></li>
+            <li><a href="#area-familia">Herencias</a></li>
+          </ul>
+        </nav>
+      </figure>
+
+      <a href="#contacto">Reserva tu consulta gratuita</a>
+      <p>Sin compromiso · Respuesta en menos de 24 horas</p>
+    </section>
+
+    <!-- FRANJA DE ESPECIALIDADES -->
+    <aside aria-label="Especialidades del despacho">
+      <ul>
+        <li>Derecho civil</li>
+        <li>Derecho penal</li>
+        <li>Derecho laboral</li>
+        <li>Familia</li>
+        <li>Herencias</li>
+        <li>Contratos</li>
+        <li>Reclamaciones</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Derecho civil</li>
+        <li>Derecho penal</li>
+        <li>Derecho laboral</li>
+        <li>Familia</li>
+        <li>Herencias</li>
+        <li>Contratos</li>
+        <li>Reclamaciones</li>
+      </ul>
+    </aside>
+
+    <!-- DESPACHO -->
+    <section id="despacho">
+      <figure data-revelar>
+        <img src="imagenes/abogada-libros.jpg" alt="Abogada del despacho consultando un código legal" width="1000" height="1498" loading="lazy">
+        <figcaption><strong>18</strong> años<br>de ejercicio</figcaption>
+      </figure>
+
+      <article data-revelar>
+        <header>
+          <p>El despacho</p>
+          <h2>Un despacho pequeño, <em>a propósito</em></h2>
+        </header>
+        <p>En Ramogallego no eres un número de expediente. Llevamos pocos asuntos a la vez para dedicar a cada uno el tiempo que merece: hablas siempre con tu abogado, sabes en qué punto está tu caso y entiendes cada paso antes de darlo.</p>
+        <p>Desde 2008 acompañamos a familias, trabajadores, autónomos y pymes. Preparamos cada caso como si fuera a llegar a juicio, aunque la mayoría los cerramos antes con un buen acuerdo.</p>
+        <ul>
+          <li>
+            <h3>Cercanía</h3>
+            <p>Te respondemos en menos de 24 horas.</p>
+          </li>
+          <li>
+            <h3>Claridad</h3>
+            <p>Presupuesto cerrado y por escrito.</p>
+          </li>
+          <li>
+            <h3>Rigor</h3>
+            <p>Cada estrategia la revisan dos letrados.</p>
+          </li>
+        </ul>
+        <blockquote>
+          <p>La ley es la misma para todos. La diferencia está en quién te acompaña.</p>
+          <footer>— Socio fundador de Ramogallego</footer>
+        </blockquote>
+      </article>
+    </section>
+
+    <!-- ÁREAS DE PRÁCTICA -->
+    <section id="areas">
+      <header data-revelar>
+        <p>Áreas de práctica</p>
+        <h2>Te defendemos donde <em>más lo necesitas</em></h2>
+        <p>Cuatro especialidades y un mismo método: estudiar tu caso a fondo y decirte, con honestidad, qué puedes conseguir.</p>
+      </header>
+
+      <figure>
+        <img src="imagenes/abogada-despacho.jpg" alt="Abogada trabajando en su despacho junto a una estatua de la Justicia" width="1400" height="935" loading="lazy">
+        <figcaption>Civil y contratos</figcaption>
+      </figure>
+
+      <details id="area-civil" name="areas" open data-foto="imagenes/abogada-despacho.jpg" data-alt="Abogada trabajando en su despacho junto a una estatua de la Justicia">
+        <summary>Civil y contratos</summary>
+        <p>Reclamaciones de cantidad, contratos de compraventa y alquiler, desahucios, comunidades de propietarios y responsabilidad civil.</p>
+        <ul>
+          <li>Reclamación de deudas</li>
+          <li>Alquileres y desahucios</li>
+          <li>Revisión de contratos</li>
+          <li>Accidentes y daños</li>
+        </ul>
+        <a href="#contacto">Consultar mi caso</a>
+      </details>
+
+      <details id="area-penal" name="areas" data-foto="imagenes/mazo.jpg" data-alt="Juez golpeando el mazo en la sala junto a una estatua de la Justicia">
+        <summary>Derecho penal</summary>
+        <p>Asistencia al detenido las 24 horas, defensa en juicios rápidos y procedimientos penales, y acusación particular para víctimas.</p>
+        <ul>
+          <li>Asistencia en comisaría</li>
+          <li>Delitos contra el patrimonio</li>
+          <li>Delitos de tráfico</li>
+          <li>Acusación particular</li>
+        </ul>
+        <a href="#contacto">Consultar mi caso</a>
+      </details>
+
+      <details id="area-laboral" name="areas" data-foto="imagenes/documentos.jpg" data-alt="Abogada con americana camel repasando documentos sobre un libro de leyes">
+        <summary>Derecho laboral</summary>
+        <p>Despidos, reclamaciones de salario, incapacidades y negociación con la empresa. También asesoramos a empresas en la gestión de su plantilla.</p>
+        <ul>
+          <li>Despidos y sanciones</li>
+          <li>Salarios pendientes</li>
+          <li>Incapacidad laboral</li>
+          <li>Acuerdos de salida</li>
+        </ul>
+        <a href="#contacto">Consultar mi caso</a>
+      </details>
+
+      <details id="area-familia" name="areas" data-foto="imagenes/estatua-detalle.jpg" data-alt="Estatua de la Justicia iluminada por farolas en una fachada">
+        <summary>Familia y herencias</summary>
+        <p>Divorcios de mutuo acuerdo o contenciosos, custodia y pensiones, testamentos y reparto de herencias con el menor desgaste emocional posible.</p>
+        <ul>
+          <li>Divorcio y separación</li>
+          <li>Custodia y pensiones</li>
+          <li>Testamentos</li>
+          <li>Herencias y particiones</li>
+        </ul>
+        <a href="#contacto">Consultar mi caso</a>
+      </details>
+    </section>
+
+    <!-- MÉTODO -->
+    <section id="metodo">
+      <header data-revelar>
+        <p>Cómo trabajamos</p>
+        <h2>Cuatro pasos, <em>cero sorpresas</em></h2>
+        <p>Desde el primer día sabrás qué vamos a hacer, cuánto va a costar y qué puedes esperar.</p>
+      </header>
+
+      <ol data-revelar>
+        <li>
+          <h3>Te escuchamos</h3>
+          <p>Primera reunión gratuita, en el despacho o por videollamada. Nos cuentas tu situación sin prisas.</p>
+        </li>
+        <li>
+          <h3>Analizamos</h3>
+          <p>Estudiamos tus documentos y te explicamos tus opciones reales, con sus riesgos y plazos.</p>
+        </li>
+        <li>
+          <h3>Actuamos</h3>
+          <p>Presupuesto cerrado y estrategia por escrito. Negociamos o vamos a juicio, según te convenga.</p>
+        </li>
+        <li>
+          <h3>Te acompañamos</h3>
+          <p>Te informamos de cada novedad hasta la resolución final. Y seguimos ahí después.</p>
+        </li>
+      </ol>
+
+      <footer>
+        <p>El primer paso no te cuesta nada. <strong>Literalmente.</strong></p>
+        <a href="#contacto">Empezar por el paso 01</a>
+      </footer>
+    </section>
+
+    <!-- OPINIONES -->
+    <section id="opiniones">
+      <header data-revelar>
+        <p>Opiniones</p>
+        <h2>Lo que cuentan <em>quienes confiaron</em></h2>
+        <p>4,9 de valoración media en más de 230 opiniones de clientes.</p>
+        <menu aria-label="Desplazar opiniones">
+          <li><button type="button" aria-label="Opinión anterior">←</button></li>
+          <li><button type="button" aria-label="Opinión siguiente">→</button></li>
+        </menu>
+      </header>
+
+      <ul data-revelar tabindex="0" aria-label="Opiniones de clientes">
+        <li>
+          <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>
+            <p>Me despidieron después de doce años y no sabía por dónde empezar. Me explicaron todo con calma y conseguimos una indemnización muy superior a la que ofrecía la empresa.</p>
+          </blockquote>
+          <footer data-inicial="J"><strong>Javier M.</strong><small>Despido improcedente</small></footer>
+        </li>
+        <li>
+          <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>
+            <p>Un divorcio nunca es fácil, pero aquí lo hicieron llevadero. Siempre supe en qué punto estábamos y qué venía después.</p>
+          </blockquote>
+          <footer data-inicial="L"><strong>Laura G.</strong><small>Divorcio de mutuo acuerdo</small></footer>
+        </li>
+        <li>
+          <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>
+            <p>La herencia de mis padres llevaba dos años bloqueada entre hermanos. Mediaron con paciencia y la cerramos sin llegar a juicio.</p>
+          </blockquote>
+          <footer data-inicial="A"><strong>Antonio R.</strong><small>Reparto de herencia</small></footer>
+        </li>
+        <li>
+          <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>
+            <p>Llamé un sábado por la noche y en menos de una hora tenía a una abogada conmigo en comisaría. No lo olvidaré.</p>
+          </blockquote>
+          <footer data-inicial="S"><strong>Sergio L.</strong><small>Asistencia al detenido</small></footer>
+        </li>
+        <li>
+          <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>
+            <p>Recuperamos más de 9.000 € que un cliente nos debía desde hacía dos años. Rápidos y muy claros con los costes desde el principio.</p>
+          </blockquote>
+          <footer data-inicial="M"><strong>Marta S.</strong><small>Reclamación de deuda</small></footer>
+        </li>
+        <li>
+          <p role="img" aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>
+            <p>Revisaron el contrato de alquiler de nuestro local y detectaron dos cláusulas abusivas antes de firmar. Nos ahorraron un buen disgusto.</p>
+          </blockquote>
+          <footer data-inicial="P"><strong>Pedro y Ana</strong><small>Contrato de arrendamiento</small></footer>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section id="preguntas">
+      <header data-revelar>
+        <p>Preguntas frecuentes</p>
+        <h2>Antes de llamarnos, <em>quizá te preguntes…</em></h2>
+        <p>Resolvemos las dudas más habituales. Si la tuya no está aquí, pregúntanos sin compromiso.</p>
+        <aside>
+          <h3>¿Prefieres hablarlo?</h3>
+          <p>Te atendemos de lunes a viernes, de 9:00 a 19:00.</p>
+          <a href="tel:+34900000000">+34 900 000 000</a>
+        </aside>
+      </header>
+
+      <details name="preguntas" open>
+        <summary>¿La primera consulta es realmente gratuita?</summary>
+        <p>Sí. La primera reunión, de unos 30 minutos, no tiene coste ni compromiso. Sirve para entender tu caso y decirte con franqueza si podemos ayudarte.</p>
+      </details>
+      <details name="preguntas">
+        <summary>¿Cuánto me va a costar el abogado?</summary>
+        <p>Después de estudiar tu caso te damos un presupuesto cerrado y por escrito, sin letra pequeña. En muchos asuntos puedes pagarlo de forma fraccionada.</p>
+      </details>
+      <details name="preguntas">
+        <summary>¿Puedo hacerlo todo online?</summary>
+        <p>Sí. Podemos reunirnos por videollamada, firmar los documentos de forma electrónica y compartir tu expediente por un canal seguro.</p>
+      </details>
+      <details name="preguntas">
+        <summary>¿Cuánto tarda un procedimiento?</summary>
+        <p>Depende del tipo de asunto y del juzgado. Desde el principio te damos una estimación realista y te avisamos de cualquier cambio.</p>
+      </details>
+      <details name="preguntas">
+        <summary>¿Tengo derecho a justicia gratuita?</summary>
+        <p>Si tus ingresos están por debajo de ciertos límites, es posible. Lo revisamos contigo en la primera consulta y te ayudamos con la solicitud.</p>
+      </details>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <figure>
+        <img src="imagenes/estatua-noche.jpg" alt="Estatua de la Justicia iluminada por farolas en la fachada de un edificio" width="1000" height="1780" loading="lazy">
+        <figcaption>
+          <strong>La justicia no espera.</strong>
+          <em>Tu caso, tampoco.</em>
+        </figcaption>
+      </figure>
+
+      <form action="#" method="post">
+        <h2>Cuéntanos <em>tu caso</em></h2>
+        <p>Te llamamos en menos de 24 horas laborables. Sin coste y sin compromiso.</p>
+        <label>Nombre
+          <input type="text" name="nombre" autocomplete="name" placeholder="Nombre y apellidos" required>
+        </label>
+        <label>Teléfono
+          <input type="tel" name="telefono" autocomplete="tel" placeholder="600 000 000" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" placeholder="tu@email.com">
+        </label>
+        <label>Área
+          <select name="area" required>
+            <option value="">Elige un área</option>
+            <option>Civil y contratos</option>
+            <option>Derecho penal</option>
+            <option>Derecho laboral</option>
+            <option>Familia y herencias</option>
+            <option>No lo sé todavía</option>
+          </select>
+        </label>
+        <label>Tu caso en pocas palabras
+          <textarea name="mensaje" rows="4" placeholder="Cuéntanos brevemente qué ha pasado"></textarea>
+        </label>
+        <label>
+          <input type="checkbox" name="privacidad" required>
+          Acepto la <a href="#">política de privacidad</a>
+        </label>
+        <button type="submit">Solicitar consulta gratuita</button>
+        <output aria-live="polite"></output>
+        <p>o contacta directamente</p>
+        <ul>
+          <li><a href="tel:+34900000000" aria-label="Llamar por teléfono">☎</a></li>
+          <li><a href="mailto:contacto@ramogallego.example" aria-label="Enviar un email">@</a></li>
+          <li><a href="https://maps.google.com/?q=Calle+Mayor+12+Madrid" target="_blank" rel="noopener" aria-label="Cómo llegar al despacho">⌂</a></li>
+        </ul>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <section>
+      <a href="#inicio">Ramogallego</a>
+      <p>Despacho de abogados. Defensa jurídica cercana, clara y con presupuesto cerrado para particulares y empresas.</p>
+    </section>
+
+    <nav aria-label="Enlaces del pie">
+      <h3>Navegación</h3>
+      <ul>
+        <li><a href="#despacho">El despacho</a></li>
+        <li><a href="#areas">Áreas de práctica</a></li>
+        <li><a href="#metodo">Cómo trabajamos</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <section>
+      <h3>Contacto</h3>
+      <address>
+        <a href="tel:+34900000000">+34 900 000 000</a>
+        <a href="mailto:contacto@ramogallego.example">contacto@ramogallego.example</a>
+        <p>Calle Mayor 12, 2.º<br>28013 Madrid</p>
+      </address>
+    </section>
+
+    <section>
+      <h3>Horario</h3>
+      <dl>
+        <dt>Lunes a jueves</dt>
+        <dd>9:00 – 19:00</dd>
+        <dt>Viernes</dt>
+        <dd>9:00 – 15:00</dd>
+        <dt>Urgencias penales</dt>
+        <dd>24 horas, todos los días</dd>
+      </dl>
+    </section>
+
+    <p>
+      <small>© <time datetime="2026">2026</time> Ramogallego Abogados · <a href="https://allpixels.dev">Plantilla de All Pixels</a></small>
+      <a href="#">Aviso legal</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Cookies</a>
+    </p>
+  </footer>
+
+  <script>
+    /* ===== 0. Preparación ===== */
+    document.documentElement.dataset.js = "";
+    const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ===== 1. Menú móvil ===== */
+    const cabecera = document.querySelector("body > header");
+    const botonMenu = cabecera.querySelector("button");
+    const enlacesMenu = cabecera.querySelectorAll("nav a");
+
+    function abrirMenu(abrir) {
+      botonMenu.setAttribute("aria-expanded", String(abrir));
+      botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+      cabecera.toggleAttribute("data-menu-abierto", abrir);
+    }
+
+    botonMenu.addEventListener("click", () => {
+      abrirMenu(botonMenu.getAttribute("aria-expanded") !== "true");
+    });
+
+    enlacesMenu.forEach((enlace) => enlace.addEventListener("click", () => abrirMenu(false)));
+
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape") abrirMenu(false);
+    });
+
+    document.addEventListener("click", (evento) => {
+      if (!cabecera.contains(evento.target)) abrirMenu(false);
+    });
+
+    /* ===== 2. Cabecera con borde al hacer scroll ===== */
+    const marcarScroll = () => cabecera.toggleAttribute("data-scroll", window.scrollY > 12);
+    window.addEventListener("scroll", marcarScroll, { passive: true });
+    marcarScroll();
+
+    /* ===== 3. Enlace activo según la sección visible ===== */
+    const observadorSecciones = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        const destino = `#${entrada.target.id}`;
+        const tieneEnlace = [...enlacesMenu].some((enlace) => enlace.hash === destino);
+        if (!tieneEnlace) return;
+
+        enlacesMenu.forEach((enlace) => {
+          if (enlace.hash === destino) enlace.setAttribute("aria-current", "true");
+          else enlace.removeAttribute("aria-current");
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+
+    document.querySelectorAll("main > section[id]").forEach((seccion) => observadorSecciones.observe(seccion));
+
+    /* ===== 4. Aparición de bloques al hacer scroll ===== */
+    const observadorRevelar = new IntersectionObserver((entradas, observador) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        entrada.target.dataset.revelar = "visto";
+        observador.unobserve(entrada.target);
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll("[data-revelar]").forEach((bloque) => observadorRevelar.observe(bloque));
+
+    /* ===== 5. Contadores del hero ===== */
+    function animarContador(cifra) {
+      const final = Number(cifra.dataset.contar);
+      const decimales = Number(cifra.dataset.decimales || 0);
+      const prefijo = cifra.dataset.prefijo || "";
+      const sufijo = cifra.dataset.sufijo || "";
+      // "de-DE" usa punto de miles y coma decimal, igual que el español escrito
+      const formatear = (valor) => prefijo + valor.toLocaleString("de-DE", {
+        minimumFractionDigits: decimales,
+        maximumFractionDigits: decimales
+      }) + sufijo;
+
+      if (sinMovimiento) {
+        cifra.textContent = formatear(final);
+        return;
+      }
+
+      const duracion = 1600;
+      const inicio = performance.now();
+
+      const avanzar = (ahora) => {
+        const progreso = Math.min((ahora - inicio) / duracion, 1);
+        const suavizado = 1 - Math.pow(1 - progreso, 3);
+        cifra.textContent = formatear(final * suavizado);
+        if (progreso < 1) requestAnimationFrame(avanzar);
+      };
+
+      requestAnimationFrame(avanzar);
+    }
+
+    const observadorCifras = new IntersectionObserver((entradas, observador) => {
+      entradas.forEach((entrada) => {
+        if (!entrada.isIntersecting) return;
+        animarContador(entrada.target);
+        observador.unobserve(entrada.target);
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll("[data-contar]").forEach((cifra) => observadorCifras.observe(cifra));
+
+    /* ===== 6. Áreas: la foto cambia con el área abierta ===== */
+    const areas = document.querySelectorAll("#areas details");
+    const fotoArea = document.querySelector("#areas figure img");
+    const rotuloArea = document.querySelector("#areas figure figcaption");
+
+    function mostrarArea(area) {
+      const titulo = area.querySelector("summary").textContent.trim();
+
+      if (fotoArea.getAttribute("src") === area.dataset.foto) {
+        rotuloArea.textContent = titulo;
+        return;
+      }
+
+      fotoArea.setAttribute("data-cambiando", "");
+
+      setTimeout(async () => {
+        fotoArea.src = area.dataset.foto;
+        fotoArea.alt = area.dataset.alt;
+        rotuloArea.textContent = titulo;
+        try {
+          await fotoArea.decode();
+        } catch (error) {
+          // Si la decodificación falla, la foto se muestra igualmente
+        }
+        fotoArea.removeAttribute("data-cambiando");
+      }, sinMovimiento ? 0 : 250);
+    }
+
+    areas.forEach((area) => {
+      area.addEventListener("toggle", () => {
+        if (!area.open) return;
+        // Cierra las demás (por si el navegador no soporta el atributo name)
+        areas.forEach((otra) => {
+          if (otra !== area) otra.open = false;
+        });
+        mostrarArea(area);
+      });
+    });
+
+    // Precarga las fotos de las áreas cuando la sección se acerca
+    const observadorAreas = new IntersectionObserver((entradas, observador) => {
+      if (!entradas[0].isIntersecting) return;
+      areas.forEach((area) => {
+        const precarga = new Image();
+        precarga.src = area.dataset.foto;
+      });
+      observador.disconnect();
+    }, { rootMargin: "400px 0px" });
+
+    observadorAreas.observe(document.querySelector("#areas"));
+
+    // Las etiquetas del hero abren su área directamente
+    document.querySelectorAll('a[href^="#area-"]').forEach((enlace) => {
+      enlace.addEventListener("click", () => {
+        const area = document.querySelector(enlace.hash);
+        if (area) area.open = true;
+      });
+    });
+
+    /* ===== 7. Carrusel de opiniones ===== */
+    const pista = document.querySelector("#opiniones > ul");
+    const [botonAnterior, botonSiguiente] = document.querySelectorAll("#opiniones menu button");
+
+    function desplazarOpiniones(direccion) {
+      const tarjeta = pista.querySelector("li");
+      const separacion = parseFloat(getComputedStyle(pista).columnGap) || 0;
+      pista.scrollBy({
+        left: direccion * (tarjeta.offsetWidth + separacion),
+        behavior: sinMovimiento ? "auto" : "smooth"
+      });
+    }
+
+    botonAnterior.addEventListener("click", () => desplazarOpiniones(-1));
+    botonSiguiente.addEventListener("click", () => desplazarOpiniones(1));
+
+    /* ===== 8. Año actual en el pie ===== */
+    const anio = document.querySelector("body > footer time");
+    anio.textContent = anio.dateTime = new Date().getFullYear();
+
+    /* ===== 9. Formulario de contacto ===== */
+    const formulario = document.querySelector("#contacto form");
+    const aviso = formulario.querySelector("output");
+
+    formulario.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+      const nombre = formulario.elements.nombre.value.trim().split(" ")[0];
+      aviso.textContent = `Gracias, ${nombre}. Te llamaremos en menos de 24 horas laborables.`;
+      formulario.reset();
+    });
+  </script>
+</body>
+</html>

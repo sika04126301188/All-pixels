@@ -1,0 +1,2 @@
+Iconos: Font Awesome Free 7 (https://fontawesome.com) — licencia CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
+Se ha añadido el color con el atributo fill en cada archivo.

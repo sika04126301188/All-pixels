@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neo Óptica | Cuidado visual y monturas de diseño</title>
+<meta name="description" content="Neo Óptica: exámenes visuales de precisión, monturas de diseño y lentes a tu medida.">
+<meta name="theme-color" content="#fafaff">
+<!-- Neo Óptica · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+<style>
+/* ==========================================================================
+   TIPOGRAFÍA (incluida en la carpeta fuentes/, sin Google Fonts)
+   ========================================================================== */
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 600; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 700; font-display: swap; src: url('fuentes/plus-jakarta-sans-latin-700-normal.woff2') format('woff2'); }
+
+/* ==========================================================================
+   VARIABLES
+   ========================================================================== */
+:root {
+    --primary: #2742F5;
+    --primary-light: #536aff;
+    --primary-dark: #1228c2;
+    --primary-alpha: rgba(39, 66, 245, 0.05);
+    --primary-alpha-strong: rgba(39, 66, 245, 0.1);
+
+    --bg-main: #fafaff;
+    --bg-card: #ffffff;
+    --text-main: #0b0f26;
+    --text-muted: #626784;
+    --border-color: rgba(39, 66, 245, 0.08);
+
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;          /* las anclas no quedan tapadas por la cabecera fija */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Enlaces: siempre sin subrayado y con color acorde al contexto */
+a {
+    text-decoration: none;
+    color: var(--primary);
+    transition: var(--transition-premium);
+}
+
+button, input, textarea { font: inherit; }
+
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+figure {
+    margin: 0;
+    line-height: 0;
+}
+
+/* ==========================================================================
+   HEADER / NAVEGACIÓN
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 8%;
+    z-index: 1000;
+    transition: var(--transition-premium);
+}
+
+header.scrolled {
+    padding: 16px 8%;
+    background: rgba(250, 250, 255, 0.9);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+header > a:first-of-type {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--text-main);
+}
+
+header > a:first-of-type span {
+    color: var(--primary);
+}
+
+nav {
+    display: flex;
+    gap: 32px;
+}
+
+nav a {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--text-muted);
+    position: relative;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--primary);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition-premium);
+}
+
+nav a.active::after,
+nav a:hover::after {
+    width: 100%;
+}
+
+header > a:last-of-type {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(39, 66, 245, 0.2);
+}
+
+header > a:last-of-type:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(39, 66, 245, 0.35);
+}
+
+/* Botón del menú móvil (solo visible en pantallas pequeñas) */
+header > button {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    padding: 0 11px;
+    border: 1px solid rgba(11, 15, 38, 0.12);
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+header > button span {
+    display: block;
+    height: 2px;
+    background-color: var(--text-main);
+    border-radius: 2px;
+    transition: var(--transition-premium);
+}
+
+header > button[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+header > button[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* ==========================================================================
+   1. HERO
+   ========================================================================== */
+section:first-of-type {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    gap: 60px;
+}
+
+section:first-of-type article {
+    flex: 1.2;
+    max-width: 650px;
+}
+
+section:first-of-type article p:first-of-type {
+    background-color: var(--primary-alpha-strong);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin-bottom: 24px;
+}
+
+section:first-of-type h1 {
+    font-size: clamp(38px, 6vw, 58px);
+    line-height: 1.1;
+    letter-spacing: -2.5px;
+    margin-bottom: 24px;
+}
+
+section:first-of-type h1 span {
+    color: var(--primary);
+}
+
+section:first-of-type article p:nth-of-type(2) {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+section:first-of-type article p:last-of-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+section:first-of-type article p:last-of-type a:first-of-type {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(39, 66, 245, 0.2);
+}
+
+section:first-of-type article p:last-of-type a:first-of-type:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(39, 66, 245, 0.35);
+}
+
+section:first-of-type article p:last-of-type a:last-of-type {
+    background: transparent;
+    color: var(--text-main);
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid rgba(11, 15, 38, 0.12);
+}
+
+section:first-of-type article p:last-of-type a:last-of-type:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--primary-alpha);
+}
+
+/* Forma orgánica: ahora con anillos de "lente" que giran despacio */
+section:first-of-type aside {
+    position: relative;
+    flex: 0 0 360px;
+    width: 360px;
+    height: 360px;
+    background: linear-gradient(135deg, var(--primary), #8f9fff);
+    border-radius: 40% 60% 60% 40% / 30% 20% 60% 60%;
+    box-shadow: 0 20px 60px rgba(39, 66, 245, 0.3);
+    animation: morphing 8s ease-in-out infinite alternate;
+    margin: 0 auto;
+}
+
+section:first-of-type aside::before,
+section:first-of-type aside::after {
+    content: '';
+    position: absolute;
+    inset: 22%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.25);
+}
+
+section:first-of-type aside::after {
+    inset: 34%;
+    border: 2px dashed rgba(255, 255, 255, 0.55);
+    box-shadow: none;
+    animation: girar 24s linear infinite;
+}
+
+@keyframes morphing {
+    0% { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; }
+    100% { border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; }
+}
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* ==========================================================================
+   2. MARCAS
+   ========================================================================== */
+section:nth-of-type(2) {
+    padding: 40px 8%;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background-color: #ffffff;
+}
+
+section:nth-of-type(2) p:first-of-type {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+}
+
+section:nth-of-type(2) p:last-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px 60px;
+    flex-wrap: wrap;
+}
+
+section:nth-of-type(2) p:last-of-type span {
+    font-size: 20px;
+    font-weight: 700;
+    color: #6f7590;
+    transition: var(--transition-premium);
+}
+
+section:nth-of-type(2) p:last-of-type span:hover {
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   3. SERVICIOS
+   ========================================================================== */
+#servicios {
+    padding: 120px 8%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+#servicios hgroup {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+#servicios hgroup p {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+#servicios hgroup h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+}
+
+#servicios article {
+    background: var(--bg-card);
+    padding: 48px 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(39, 66, 245, 0.04);
+    box-shadow: 0 10px 30px rgba(11, 15, 38, 0.02);
+    transition: transform 0.1s ease, box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.8s ease, translate 0.8s ease;
+}
+
+#servicios article:hover {
+    border-color: rgba(39, 66, 245, 0.15);
+    box-shadow: 0 20px 40px rgba(39, 66, 245, 0.05);
+}
+
+/* Icono de cada servicio: SVG dentro de un círculo */
+#servicios article p:first-of-type {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background-color: var(--primary-alpha-strong);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+#servicios article p:first-of-type svg { width: 30px; height: 30px; }
+
+#servicios article h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+#servicios article p:last-of-type {
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   4. INSTALACIONES (galería de ambiente)
+   ========================================================================== */
+#instalaciones {
+    padding: 120px 8%;
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+#instalaciones hgroup {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+#instalaciones hgroup p {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+#instalaciones hgroup h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+}
+
+#instalaciones aside {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+    background-color: #0b0f26;
+}
+
+/* La primera foto ocupa todo el ancho */
+#instalaciones aside:first-of-type {
+    grid-column: span 2;
+    height: 500px;
+}
+
+#instalaciones aside figure {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    transition: var(--transition-premium);
+}
+
+#instalaciones aside:last-of-type img { object-position: center 60%; }
+
+#instalaciones aside:hover figure {
+    transform: scale(1.05);
+}
+
+#instalaciones aside::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11, 15, 38, 0.95) 0%, rgba(11, 15, 38, 0.3) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+#instalaciones aside p {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+}
+
+#instalaciones aside p strong {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+#instalaciones aside p span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   5. TESTIMONIOS
+   ========================================================================== */
+#testimonios {
+    padding: 120px 8%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+#testimonios hgroup {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+#testimonios hgroup p {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+#testimonios hgroup h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+}
+
+#testimonios article {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(11, 15, 38, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.1s ease, opacity 0.8s ease, translate 0.8s ease;
+}
+
+#testimonios article blockquote {
+    font-size: 18px;
+    color: var(--text-main);
+    font-style: italic;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
+
+#testimonios article footer {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-top: none;
+    display: block;
+}
+
+#testimonios article footer strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+#testimonios article footer span {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Efecto 3D: al salir el ratón, la tarjeta vuelve a su sitio con suavidad */
+#servicios article[data-tilt-reset],
+#testimonios article[data-tilt-reset] { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease; }
+
+/* ==========================================================================
+   6. CONTACTO
+   ========================================================================== */
+#contacto {
+    width: min(1200px, 84%);
+    margin: 80px auto;
+    background: var(--bg-main);
+    padding: 60px;
+    border-radius: 32px;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    border: 1px solid var(--border-color);
+}
+
+#contacto > article {
+    flex: 1;
+}
+
+#contacto > article h2 {
+    font-size: clamp(30px, 4vw, 42px);
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+#contacto > article p:nth-of-type(1) {
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+#contacto > article p:nth-of-type(2) span {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+#contacto > article p:nth-of-type(2) strong {
+    font-size: 20px;
+    color: var(--primary);
+}
+
+#contacto > article p:nth-of-type(2) strong a:hover { color: var(--primary-dark); }
+
+#contacto form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#contacto form p {
+    width: 100%;
+}
+
+#contacto form input,
+#contacto form textarea {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(11, 15, 38, 0.15);
+    font-family: var(--font-sans);
+    font-size: 16px;                   /* 16px: evita el zoom automático de Safari en iPhone */
+    color: var(--text-main);
+    transition: var(--transition-premium);
+    outline: none;
+}
+
+#contacto form textarea { resize: vertical; }
+
+#contacto form input::placeholder,
+#contacto form textarea::placeholder { color: #767b95; }
+
+#contacto form input:focus,
+#contacto form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-alpha-strong);
+}
+
+/* Casilla de privacidad (penúltimo párrafo del formulario) */
+#contacto form p:nth-of-type(4) {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+#contacto form p:nth-of-type(4) input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    margin-top: 3px;
+    flex-shrink: 0;
+    accent-color: var(--primary);
+}
+
+#contacto form p:nth-of-type(4) a { text-decoration: underline; text-underline-offset: 3px; }
+
+#contacto form button {
+    background-color: var(--primary);
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(39, 66, 245, 0.2);
+    transition: var(--transition-premium);
+}
+
+#contacto form button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(39, 66, 245, 0.35);
+}
+
+/* Mensaje del formulario (lo rellena el script) */
+#contacto form output { display: block; font-size: 14px; color: var(--primary-dark); }
+#contacto form output:empty { display: none; }
+#contacto form output[data-error] { color: #c0262d; }
+
+/* ==========================================================================
+   7. FOOTER
+   ========================================================================== */
+body > footer {
+    background-color: #0b0f26;
+    color: #ffffff;
+    padding: 80px 8% 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 40px;
+}
+
+body > footer > article:first-of-type a {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+body > footer > article:first-of-type a span {
+    color: var(--primary-light);
+}
+
+body > footer > article:first-of-type p {
+    color: #a3a9c6;
+    font-size: 15px;
+    max-width: 300px;
+}
+
+body > footer > article:not(:first-of-type) h2 {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+body > footer > article:not(:first-of-type) a {
+    display: block;
+    width: fit-content;
+    color: #c5cbfa;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+body > footer > article:not(:first-of-type) a:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+body > footer > p {
+    grid-column: 1 / -1;
+    padding-top: 40px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    color: #a3a9c6;
+    font-size: 14px;
+}
+
+body > footer > p a { color: #c5cbfa; }
+body > footer > p a:hover { color: #ffffff; }
+
+/* ==========================================================================
+   APARICIÓN AL HACER SCROLL (el script añade data-reveal; sin script, todo visible)
+   ========================================================================== */
+[data-reveal] { opacity: 0; translate: 0 30px; transition: opacity 0.8s ease, translate 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-reveal="visible"] { opacity: 1; translate: 0 0; }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 968px) {
+    section:first-of-type {
+        flex-direction: column-reverse;
+        justify-content: center;
+        padding-top: 130px;
+        padding-bottom: 60px;
+        gap: 40px;
+        text-align: center;
+    }
+    section:first-of-type article p:last-of-type { justify-content: center; }
+    section:first-of-type aside { flex-basis: auto; width: 240px; height: 240px; }
+    #instalaciones,
+    #testimonios,
+    body > footer {
+        grid-template-columns: 1fr;
+    }
+    #contacto { flex-direction: column; align-items: stretch; }
+    #instalaciones aside,
+    #instalaciones aside:first-of-type { grid-column: span 1; height: 350px; padding: 32px; }
+    #contacto { padding: 40px 24px; gap: 40px; width: 90%; }
+    #servicios, #instalaciones, #testimonios { padding: 90px 5%; }
+    #servicios hgroup h2, #instalaciones hgroup h2, #testimonios hgroup h2 { font-size: 30px; }
+    #testimonios article { padding: 32px 28px; }
+
+    /* Menú móvil desplegable */
+    header { padding: 16px 5%; gap: 12px; }
+    header.scrolled { padding: 12px 5%; }
+    header > a:first-of-type { margin-right: auto; }
+    header > a:last-of-type { padding: 10px 18px; font-size: 13px; }
+    header > button { display: flex; order: 3; }
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 5%;
+        right: 5%;
+        flex-direction: column;
+        gap: 18px;
+        padding: 28px;
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: 0 30px 60px rgba(11, 15, 38, 0.12);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: var(--transition-premium);
+    }
+    nav[data-open] { opacity: 1; visibility: visible; transform: none; }
+    nav a { font-size: 17px; width: fit-content; }
+}
+
+@media (max-width: 359px) {
+    header > a:last-of-type { display: none; }   /* en móviles muy estrechos la cita está en el menú (Contacto) */
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <a href="#inicio" aria-label="Neo Óptica, ir al inicio">Neo<span>.</span></a>
+    <nav id="menu" aria-label="Principal">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#instalaciones">Instalaciones</a>
+        <a href="#testimonios">Opiniones</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <a href="#contacto">Agenda tu cita</a>
+    <button type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<main>
+    <section id="inicio">
+        <article>
+            <p>Óptica de confianza</p>
+            <h1>Cuidamos tu visión con la mejor tecnología<span>.</span></h1>
+            <p>Combinamos exámenes precisos, monturas de diseño y atención personalizada para que veas —y te veas— mejor cada día.</p>
+            <p>
+                <a href="#instalaciones">Ver instalaciones</a>
+                <a href="#servicios">Nuestros servicios</a>
+            </p>
+        </article>
+        <aside aria-hidden="true"></aside>
+    </section>
+
+    <section aria-label="Marcas">
+        <p>Marcas y tecnología con las que trabajamos</p>
+        <p>
+            <span>Lumina</span>
+            <span>Nordvik</span>
+            <span>Prisma</span>
+            <span>Clarus</span>
+            <span>Horizonte</span>
+        </p>
+    </section>
+
+    <section id="servicios">
+        <hgroup>
+            <p>Lo que hacemos</p>
+            <h2>Óptica con propósito</h2>
+        </hgroup>
+        <article>
+            <p aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></p>
+            <h3>Examen Visual Completo</h3>
+            <p>Diagnóstico preciso con equipos de última generación para conocer exactamente lo que tu visión necesita.</p>
+        </article>
+        <article>
+            <p aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="15" r="4"/><circle cx="18" cy="15" r="4"/><path d="M10 15a2 2 0 0 1 4 0M2.5 13 5 7M21.5 13 19 7"/></svg></p>
+            <h3>Monturas de Diseño</h3>
+            <p>Una selección curada de monturas donde cada línea y cada color tienen una razón de ser.</p>
+        </article>
+        <article>
+            <p aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg></p>
+            <h3>Lentes de Alta Precisión</h3>
+            <p>Lentes graduados y de contacto fabricados con tecnología de vanguardia para tu día a día.</p>
+        </article>
+    </section>
+
+    <section id="instalaciones">
+        <hgroup>
+            <p>Nuestro compromiso</p>
+            <h2>El ambiente y la eficiencia son nuestro objetivo</h2>
+        </hgroup>
+        <aside>
+            <figure>
+                <img src="imagenes/maletin-prueba.jpg" width="1400" height="784" loading="lazy" alt="Maletín de prueba oftalmológico con montura de graduación universal">
+            </figure>
+            <p>
+                <strong>Equipo de precisión</strong>
+                <span>Maletines de prueba certificados para ajustar cada graduación con exactitud.</span>
+            </p>
+        </aside>
+        <aside>
+            <figure>
+                <img src="imagenes/foroptero.jpg" width="900" height="1350" loading="lazy" alt="Foróptero de última generación en sala de examen visual">
+            </figure>
+            <p>
+                <strong>Tecnología de vanguardia</strong>
+                <span>Forópteros digitales que agilizan cada examen sin perder precisión.</span>
+            </p>
+        </aside>
+        <aside>
+            <figure>
+                <img src="imagenes/montura-prueba.jpg" width="900" height="1350" loading="lazy" alt="Montura de prueba con lentes sobre la mesa de trabajo">
+            </figure>
+            <p>
+                <strong>Atención personalizada</strong>
+                <span>Cada montura y lente se ajusta a tus necesidades específicas.</span>
+            </p>
+        </aside>
+    </section>
+
+    <section id="testimonios">
+        <hgroup>
+            <p>Testimonios</p>
+            <h2>Qué dicen nuestros pacientes</h2>
+        </hgroup>
+        <article>
+            <blockquote>"El examen fue rapidísimo y súper preciso. Encontré las monturas ideales y el equipo me asesoró en todo momento."</blockquote>
+            <footer>
+                <strong>Ana Torres</strong>
+                <span>Paciente</span>
+            </footer>
+        </article>
+        <article>
+            <blockquote>"Excelente atención y una selección de lentes que no encuentro en otras ópticas. Totalmente recomendados."</blockquote>
+            <footer>
+                <strong>Miguel Fernández</strong>
+                <span>Cliente frecuente</span>
+            </footer>
+        </article>
+    </section>
+
+    <section id="contacto">
+        <article>
+            <h2>¿Buscas tu próximo par de lentes?</h2>
+            <p>Agenda tu examen visual o pregúntanos por nuestras monturas y lentes de contacto.</p>
+            <p>
+                <span>Email de contacto:</span>
+                <strong><a href="mailto:hola@neooptica.example">hola@neooptica.example</a></strong>
+            </p>
+        </article>
+        <!-- Para recibir los mensajes, conecta este formulario (ver README.md) -->
+        <form action="#" method="POST" novalidate>
+            <p><input type="text" name="nombre" autocomplete="name" placeholder="Tu nombre" aria-label="Tu nombre" required></p>
+            <p><input type="email" name="email" autocomplete="email" placeholder="Tu email" aria-label="Tu email" required></p>
+            <p><textarea name="mensaje" placeholder="Cuéntanos qué necesitas (examen, monturas, lentes de contacto)" aria-label="Tu mensaje" rows="4" required></textarea></p>
+            <p><input type="checkbox" id="privacidad" name="privacidad" required> <label for="privacidad">He leído y acepto la <a href="#">política de privacidad</a>.</label></p>
+            <p><button type="submit">Enviar Mensaje</button></p>
+            <output aria-live="polite"></output>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <article>
+        <a href="#inicio">Neo<span>.</span></a>
+        <p>Cuidando tu visión con tecnología y diseño. Exámenes, monturas y lentes a tu medida.</p>
+    </article>
+    <article>
+        <h2>Navegación</h2>
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#instalaciones">Instalaciones</a>
+        <a href="#contacto">Contacto</a>
+    </article>
+    <article>
+        <h2>Legal</h2>
+        <a href="#">Privacidad</a>
+        <a href="#">Términos de Uso</a>
+        <a href="#">Cookies</a>
+    </article>
+    <article>
+        <h2>Síguenos</h2>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+    </article>
+    <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+    <p>&copy; <span id="anio">2026</span> Neo Óptica · <a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    const menu = document.getElementById('menu');
+    const menuBtn = header.querySelector('button');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    document.getElementById('anio').textContent = new Date().getFullYear();
+
+    // 1. Cabecera y enlace activo al hacer scroll
+    const sections = document.querySelectorAll('main section[id]');
+    const navItems = menu.querySelectorAll('a');
+
+    const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.toggle('active', item.getAttribute('href').slice(1) === current);
+        });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // 2. Menú móvil
+    const setMenu = (open) => {
+        menu.toggleAttribute('data-open', open);
+        menuBtn.setAttribute('aria-expanded', open);
+        menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        if (open) header.classList.add('scrolled');
+        else onScroll();
+    };
+    menuBtn.addEventListener('click', () => setMenu(!menu.hasAttribute('data-open')));
+    navItems.forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+    document.addEventListener('click', (e) => { if (!header.contains(e.target)) setMenu(false); });
+
+    // 3. Efecto 3D de las tarjetas (solo con ratón)
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion) {
+        const tiltables = document.querySelectorAll('#servicios article, #testimonios article');
+        tiltables.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+                el.removeAttribute('data-tilt-reset');
+                el.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) translateY(-5px)`;
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.setAttribute('data-tilt-reset', '');
+                el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0deg)';
+            });
+        });
+    }
+
+    // 4. Aparición suave de los bloques al hacer scroll
+    if ('IntersectionObserver' in window && !reduceMotion) {
+        const targets = document.querySelectorAll('main hgroup, #servicios article, #instalaciones aside, #testimonios article, #contacto');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.setAttribute('data-reveal', 'visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        targets.forEach(el => { el.setAttribute('data-reveal', ''); observer.observe(el); });
+    }
+
+    // 5. Formulario (mientras action="#", muestra un aviso en lugar de enviar)
+    const form = document.querySelector('#contacto form');
+    const output = form.querySelector('output');
+    form.addEventListener('submit', (e) => {
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            output.setAttribute('data-error', '');
+            output.textContent = 'Revisa tu nombre, tu email, el mensaje y la casilla de privacidad.';
+            form.querySelector(':invalid').focus();
+            return;
+        }
+        if (form.getAttribute('action') === '#') {
+            e.preventDefault();
+            output.removeAttribute('data-error');
+            output.textContent = '¡Mensaje enviado! Te responderemos lo antes posible. (Formulario de ejemplo: conéctalo siguiendo el README).';
+            form.reset();
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALMA Studio | Arquitectura & Paisajismo Avanzado</title>
+    <meta name="description" content="ALMA Studio: estudio de arquitectura y paisajismo sostenible en Barcelona. Espacios biofílicos con maderas nobles, luz difusa y materiales naturales.">
+    <meta name="theme-color" content="#FAF8F5">
+    <!-- ALMA Studio · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+    <!-- Tipografías incluidas en la carpeta fonts/ (Cormorant Garamond + Inter), sin depender de Google Fonts -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header-nav" id="mainHeader">
+        <div class="nav-container">
+            <a href="#inicio" class="logo-studio" aria-label="ALMA Studio, ir al inicio">ALMA<span>.</span></a>
+
+            <button class="burger-trigger" id="burgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sideMenu">
+                <span class="stripe"></span>
+                <span class="stripe"></span>
+            </button>
+
+            <nav class="nav-menu" id="sideMenu" aria-label="Principal">
+                <a href="#inicio" class="menu-link active">El Origen</a>
+                <a href="#filosofia" class="menu-link">Filosofía</a>
+                <a href="#obras" class="menu-link">Obras</a>
+                <a href="#contacto" class="menu-cta">Iniciar Consultoría</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero-block">
+            <div class="hero-wrapper">
+                <div class="hero-text-content">
+                    <div class="organic-badge">Estudio de Diseño Sostenible — 2026</div>
+                    <h1 class="hero-title">Espacios que respiran la <span>calma del entorno.</span></h1>
+                    <p class="hero-description">Esculpimos entornos residenciales y corporativos donde el verde oliva mineral se entrelaza con maderas nobles y luz difusa. Un diseño silencioso pensado para perdurar.</p>
+
+                    <div class="hero-cta-group">
+                        <a href="#obras" class="btn-primary">Ver Portafolio</a>
+                        <a href="#contacto" class="btn-secondary">Contacto</a>
+                    </div>
+
+                    <div class="hero-counters">
+                        <div class="counter-box">
+                            <span class="count-num">100%</span>
+                            <span class="count-lbl">Diseño Biofílico</span>
+                        </div>
+                        <div class="counter-box">
+                            <span class="count-num">15+</span>
+                            <span class="count-lbl">Años de Innovación</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual-content">
+                    <div class="frame-primary">
+                        <img src="img/hero-principal.jpg" width="1100" height="1650" fetchpriority="high" alt="Monstera en maceta de corcho junto a una silla blanca en un interior luminoso">
+                    </div>
+                    <div class="frame-secondary">
+                        <img src="img/hero-detalle.jpg" width="900" height="675" alt="Salón cálido con plantas de interior, sofá de cuero y luz natural">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="filosofia" class="philosophy-block">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="accent-subtitle">Materialidad</span>
+                    <h2 class="main-title">La pureza de los elementos</h2>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="info-card profile-olive featured-card">
+                        <div class="indicator-dot olive-dot"></div>
+                        <h3>Oliva Mineral</h3>
+                        <p>El verde oliva actúa como nuestro eje conductor. Evoca las hojas de eucalipto seco, el musgo de roca y la serenidad de los olivares bajo el sol.</p>
+                    </div>
+                    <div class="info-card profile-wood">
+                        <div class="indicator-dot wood-dot"></div>
+                        <h3>Corteza & Nogal</h3>
+                        <p>Los tonos marrones y cobrizos profundos añaden arraigo visual, estabilidad estructural y un contraste orgánico insustituible.</p>
+                    </div>
+                    <div class="info-card profile-fog">
+                        <div class="indicator-dot fog-dot"></div>
+                        <h3>Bruma & Lino</h3>
+                        <p>Utilizamos una base de blanco roto y grises neblina que envuelven los espacios sin la agresividad o frialdad de los tonos sintéticos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="obras" class="bento-gallery-block">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <span class="accent-subtitle">Curaduría</span>
+                    <h2 class="main-title">Estructuras en Armonía</h2>
+                </div>
+
+                <div class="bento-wrapper">
+                    <div class="bento-item grid-col-2">
+                        <img src="img/casa-eucalipto.jpg" width="1000" height="667" loading="lazy" alt="Casa moderna de madera y cristal iluminada al anochecer bajo un gran eucalipto" class="bento-img">
+                        <div class="bento-data">
+                            <span class="meta-tag">Residencial</span>
+                            <h3>Casa Eucalipto — Prepirineo</h3>
+                        </div>
+                    </div>
+
+                    <div class="bento-item grid-row-2">
+                        <img src="img/lounge-piedra.jpg" width="1000" height="667" loading="lazy" alt="Comedor abierto con escalera de acero, muro de piedra y listones de madera" class="bento-img">
+                        <div class="bento-data">
+                            <span class="meta-tag">Interiorismo</span>
+                            <h3>Lounge Piedra y Ramas</h3>
+                        </div>
+                    </div>
+
+                    <div class="bento-item">
+                        <img src="img/pabellon-meditacion.jpg" width="1200" height="800" loading="lazy" alt="Pabellón blanco con techos de madera y piscina de borde infinito" class="bento-img">
+                        <div class="bento-data">
+                            <span class="meta-tag">Concepto</span>
+                            <h3>Pabellón de Meditación Fluida</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact-block">
+            <div class="contact-grid">
+                <div class="contact-info-side">
+                    <h2 class="contact-title">Demos vida a un nuevo entorno.</h2>
+                    <p class="contact-text">Cuéntanos tu visión arquitectónica o el concepto de tu espacio. Estudiamos las texturas, la incidencia solar y la paleta natural idónea para ti.</p>
+                    <div class="studio-details">
+                        <p><strong>Showroom:</strong> Av. de las Palmeras 104, Barcelona</p>
+                        <p><strong>Email Directo:</strong> <a href="mailto:info@almastudio.example">info@almastudio.example</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-form-side">
+                    <!-- Para recibir los mensajes, conecta este formulario (ver README.md) -->
+                    <form id="studioForm" action="#" method="POST" novalidate>
+                        <div class="field-group">
+                            <label for="fName">Nombre Completo</label>
+                            <input type="text" id="fName" name="nombre" autocomplete="name" placeholder="Ej. Mateo Silva" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="fEmail">Correo Electrónico</label>
+                            <input type="email" id="fEmail" name="email" autocomplete="email" placeholder="mateo@estudio.com" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="fMessage">Sobre tu idea espacial</label>
+                            <textarea id="fMessage" name="mensaje" rows="4" placeholder="Describe brevemente el alcance del proyecto..." required></textarea>
+                        </div>
+                        <div class="field-group field-check">
+                            <input type="checkbox" id="fPrivacy" name="privacidad" required>
+                            <label for="fPrivacy">He leído y acepto la <a href="#">política de privacidad</a>.</label>
+                        </div>
+                        <button type="submit" class="btn-submit-action">Enviar Mensaje</button>
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-block">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <span class="footer-logo">ALMA.</span>
+                <p>Estudio de diseño vanguardista bajo principios de respeto natural.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Behance</a>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; <span id="footerYear">2026</span> ALMA Studio. Todos los derechos reservados.</p>
+                <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+                <p><a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerBtn = document.getElementById('burgerBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const mainHeader = document.getElementById('mainHeader');
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+            // 1. Despliegue de Menú Móvil
+            const setMenu = (isOpen) => {
+                burgerBtn.classList.toggle('active', isOpen);
+                sideMenu.classList.toggle('open', isOpen);
+                document.body.classList.toggle('menu-open', isOpen);
+                burgerBtn.setAttribute('aria-expanded', isOpen);
+                burgerBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+            };
+
+            burgerBtn.addEventListener('click', () => setMenu(!sideMenu.classList.contains('open')));
+
+            // Cerrar menú al presionar enlaces (también el botón de consultoría) o con Escape
+            sideMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => setMenu(false));
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && sideMenu.classList.contains('open')) setMenu(false);
+            });
+
+            // 2. Comportamiento Inteligente del Header al hacer Scroll
+            const onScroll = () => {
+                mainHeader.classList.toggle('scrolled', window.scrollY > 50);
+                highlightMenuOnScroll();
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            function highlightMenuOnScroll() {
+                const sections = document.querySelectorAll('main section[id]');
+                const currentScroll = window.scrollY + 160;
+
+                sections.forEach(section => {
+                    if (currentScroll >= section.offsetTop && currentScroll < (section.offsetTop + section.offsetHeight)) {
+                        const id = section.getAttribute('id');
+                        menuLinks.forEach(item => {
+                            item.classList.toggle('active', item.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }
+            onScroll();
+
+            // 3. Aparición suave de las secciones al hacer scroll
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if ('IntersectionObserver' in window && !reduceMotion) {
+                const revealTargets = document.querySelectorAll('.section-title-wrapper, .info-card, .bento-item, .contact-info-side, .contact-form-side');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '0px 0px -8% 0px' });
+                revealTargets.forEach(el => { el.classList.add('reveal'); observer.observe(el); });
+            }
+
+            // 4. Envío del Formulario (mientras action="#", muestra un aviso en lugar de enviar)
+            const studioForm = document.getElementById('studioForm');
+            const formStatus = document.getElementById('formStatus');
+
+            studioForm.addEventListener('submit', (e) => {
+                if (!studioForm.checkValidity()) {
+                    e.preventDefault();
+                    formStatus.textContent = 'Revisa tu nombre, tu correo, el mensaje y la casilla de privacidad.';
+                    formStatus.classList.add('is-error');
+                    studioForm.querySelector(':invalid').focus();
+                    return;
+                }
+                if (studioForm.getAttribute('action') === '#') {
+                    e.preventDefault();
+                    formStatus.classList.remove('is-error');
+                    formStatus.textContent = '¡Mensaje recibido! Un consultor de ALMA Studio se pondrá en contacto contigo. (Formulario de ejemplo: conéctalo siguiendo el README).';
+                    studioForm.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

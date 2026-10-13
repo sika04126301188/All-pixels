@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirex · Estudio de diseño y desarrollo web</title>
+    <meta name="description" content="Tirex - Estudio de diseño web y desarrollo digital. Interfaces ultrasensibles, arquitectura de código limpia y resultados medibles.">
+    <!-- Tirex · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Iconos de Lucide incluidos en la plantilla (funciona sin internet) -->
+    <script src="js/lucide.min.js"></script>
+</head>
+<body>
+
+    <div class="gradient-bg">
+        <div class="g1"></div>
+        <div class="g2"></div>
+    </div>
+
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-dot"></span> Ti<span>rex</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#inicio" class="active">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#proceso">Proceso</a>
+            <a href="#contacto">Contacto</a>
+            <button class="theme-toggle" id="themeBtn" aria-label="Cambiar a modo claro">
+                <i data-lucide="moon"></i>
+            </button>
+            <a href="#contacto" class="btn-primary">Empezar</a>
+        </nav>
+        <button class="menu-mobile" id="menuMobileBtn" aria-label="Abrir menú" aria-expanded="false">
+            <i data-lucide="menu"></i>
+        </button>
+    </header>
+
+    <main>
+        <!-- 1. HERO -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-content">
+                <span class="badge">Evolución Digital 2026</span>
+                <h1>Construimos el <span class="text-gradient">futuro web</span> hoy</h1>
+                <p>Diseño de vanguardia, interfaces ultrasensibles y arquitectura de código limpia adaptada a la nueva era digital.</p>
+                <div class="hero-actions">
+                    <a href="#proyectos" class="btn-primary-lg">Explorar Portafolio</a>
+                    <a href="#contacto" class="btn-secondary-lg">
+                        Ver Video <i data-lucide="play" class="icon-inline"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="interactive-card">
+                    <div class="card-glow"></div>
+                    <i data-lucide="cpu" class="card-icon"></i>
+                    <h3>Core Engine v2.4</h3>
+                    <p>Rendimiento optimizado al 100% con transiciones fluidas a 60fps.</p>
+                    <div class="card-status">
+                        <span class="pulse-dot"></span> Activo
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ESTADISTICAS / CONFIANZA -->
+        <section class="stats-section reveal">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>+150</h3>
+                    <p>Proyectos entregados</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Clientes satisfechos</p>
+                </div>
+                <div class="stat-item">
+                    <h3>60fps</h3>
+                    <p>Rendimiento garantizado</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Soporte continuo</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SERVICIOS -->
+        <section id="servicios" class="bento-section reveal">
+            <div class="section-title">
+                <span class="badge">Lo que hacemos</span>
+                <h2>Servicios que <span class="text-gradient">marcan la diferencia</span></h2>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-item bento-large">
+                    <i data-lucide="layers"></i>
+                    <h3>UI/UX Experiencial</h3>
+                    <p>Diseños interactivos que retienen usuarios y elevan el valor percibido de tu marca.</p>
+                </div>
+                <div class="bento-item">
+                    <i data-lucide="code-2"></i>
+                    <h3>Frontend Limpio</h3>
+                    <p>Código semántico, accesible y ultrarrápido.</p>
+                </div>
+                <div class="bento-item">
+                    <i data-lucide="zap"></i>
+                    <h3>Optimización SEO</h3>
+                    <p>Estructura óptima para Core Web Vitals.</p>
+                </div>
+                <div class="bento-item bento-medium">
+                    <i data-lucide="sparkles"></i>
+                    <h3>Animaciones Avanzadas</h3>
+                    <p>Microinteracciones que guían al usuario de forma intuitiva a través del embudo de conversión.</p>
+                </div>
+                <div class="bento-item">
+                    <i data-lucide="smartphone"></i>
+                    <h3>100% Responsive</h3>
+                    <p>Cada pantalla, perfecta en cualquier dispositivo.</p>
+                </div>
+                <div class="bento-item">
+                    <i data-lucide="shield-check"></i>
+                    <h3>Seguridad Web</h3>
+                    <p>Infraestructura protegida desde el primer día.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROYECTOS -->
+        <section id="proyectos" class="projects-section reveal">
+            <div class="section-title">
+                <span class="badge">Portafolio</span>
+                <h2>Proyectos que <span class="text-gradient">hablan por sí solos</span></h2>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-thumb thumb-1"><i data-lucide="shopping-cart"></i></div>
+                    <div class="project-info">
+                        <span class="project-tag">E-commerce</span>
+                        <h3>Nova Store</h3>
+                        <p>Plataforma de venta online con checkout optimizado y +40% en conversión.</p>
+                        <a href="#contacto" class="project-link">Ver caso de estudio <i data-lucide="arrow-up-right"></i></a>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <div class="project-thumb thumb-2"><i data-lucide="calendar-check"></i></div>
+                    <div class="project-info">
+                        <span class="project-tag">SaaS</span>
+                        <h3>Flowly</h3>
+                        <p>Panel de gestión de citas con automatización e integraciones nativas.</p>
+                        <a href="#contacto" class="project-link">Ver caso de estudio <i data-lucide="arrow-up-right"></i></a>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <div class="project-thumb thumb-3"><i data-lucide="heart-pulse"></i></div>
+                    <div class="project-info">
+                        <span class="project-tag">Salud</span>
+                        <h3>Vitalis</h3>
+                        <p>Landing page para clínica con reserva de citas online y alta conversión.</p>
+                        <a href="#contacto" class="project-link">Ver caso de estudio <i data-lucide="arrow-up-right"></i></a>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <div class="project-thumb thumb-4"><i data-lucide="building-2"></i></div>
+                    <div class="project-info">
+                        <span class="project-tag">Corporativo</span>
+                        <h3>Aurea Capital</h3>
+                        <p>Sitio institucional con dashboard de inversores y reportes en tiempo real.</p>
+                        <a href="#contacto" class="project-link">Ver caso de estudio <i data-lucide="arrow-up-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 5. PROCESO -->
+        <section id="proceso" class="process-section reveal">
+            <div class="section-title">
+                <span class="badge">Cómo trabajamos</span>
+                <h2>De la idea al <span class="text-gradient">lanzamiento</span></h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <span class="step-number">01</span>
+                    <h3>Descubrimiento</h3>
+                    <p>Analizamos tu marca, tu sector y a tu público antes de diseñar nada.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">02</span>
+                    <h3>Diseño</h3>
+                    <p>Creamos una propuesta visual alineada a tus objetivos de negocio.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">03</span>
+                    <h3>Desarrollo</h3>
+                    <p>Programamos con código limpio, rápido y escalable.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">04</span>
+                    <h3>Lanzamiento</h3>
+                    <p>Publicamos, medimos resultados y optimizamos la conversión.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TESTIMONIOS -->
+        <section class="testimonials-section reveal">
+            <div class="section-title">
+                <span class="badge">Clientes</span>
+                <h2>Lo que dicen de <span class="text-gradient">nosotros</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <p>"Tirex entendió nuestro negocio desde la primera reunión. El resultado superó cada expectativa."</p>
+                    <div class="testimonial-author">
+                        <span class="author-avatar">MG</span>
+                        <div>
+                            <strong>María Gómez</strong>
+                            <span>CEO, Nova Store</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <p>"Duplicamos las conversiones en menos de dos meses. El proceso fue claro de principio a fin."</p>
+                    <div class="testimonial-author">
+                        <span class="author-avatar">JL</span>
+                        <div>
+                            <strong>Javier Lara</strong>
+                            <span>Fundador, Flowly</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <i data-lucide="quote" class="quote-icon"></i>
+                    <p>"Código impecable y un diseño que realmente representa nuestra marca. Los recomendamos sin dudar."</p>
+                    <div class="testimonial-author">
+                        <span class="author-avatar">AC</span>
+                        <div>
+                            <strong>Ana Castro</strong>
+                            <span>Directora, Vitalis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CTA FINAL -->
+        <section id="contacto" class="cta-section reveal">
+            <div class="cta-box">
+                <span class="badge">Empecemos</span>
+                <h2>¿Listo para construir el <span class="text-gradient">futuro</span>?</h2>
+                <p>Cuéntanos tu proyecto y te preparamos una propuesta a medida, sin compromiso.</p>
+                <a href="mailto:hola@tirex.example" class="btn-primary-lg">Empezar mi proyecto</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- 8. FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo"><span class="logo-dot"></span> Ti<span>rex</span></div>
+                <p>Diseño y desarrollo web de vanguardia para marcas que quieren destacar en la nueva era digital.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i data-lucide="camera"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="briefcase-business"></i></a>
+                    <a href="#" aria-label="Dribbble"><i data-lucide="palette"></i></a>
+                    <a href="#" aria-label="GitHub"><i data-lucide="code-xml"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Producto</h4>
+                <a href="#servicios">Servicios</a>
+                <a href="#proyectos">Proyectos</a>
+                <a href="#proceso">Proceso</a>
+            </div>
+            <div class="footer-col">
+                <h4>Compañía</h4>
+                <a href="#inicio">Sobre nosotros</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#">Privacidad</a>
+                <a href="#">Términos</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+            <p>© <span id="anio">2026</span> Tirex · <a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // Preferencias del usuario
+        const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.getElementById('anio').textContent = new Date().getFullYear();
+
+        // 1. Lógica del Modo Oscuro / Claro alternativo (se recuerda al volver)
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+
+        const aplicarTema = (isLight) => {
+            body.classList.toggle('light-theme', isLight);
+            themeBtn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+
+            // Cambiar icono dinámicamente
+            const icon = themeBtn.querySelector('i, svg');
+            icon.outerHTML = `<i data-lucide="${isLight ? 'sun' : 'moon'}"></i>`;
+            lucide.createIcons(); // Re-renderizar icono
+        };
+
+        try { aplicarTema(localStorage.getItem('tirex-tema') === 'claro'); } catch (e) {}
+
+        themeBtn.addEventListener('click', () => {
+            const isLight = !body.classList.contains('light-theme');
+            aplicarTema(isLight);
+            try { localStorage.setItem('tirex-tema', isLight ? 'claro' : 'oscuro'); } catch (e) {}
+        });
+
+        // 2. Efecto Parallax / Seguimiento de Mouse en la Tarjeta Hero (solo con ratón)
+        const card = document.querySelector('.interactive-card');
+        const container = document.querySelector('.hero-visual');
+
+        if (card && container && !sinMovimiento && window.matchMedia('(pointer: fine)').matches) {
+            const glow = card.querySelector('.card-glow');
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left - (rect.width / 2);
+                const y = e.clientY - rect.top - (rect.height / 2);
+
+                // Rotación basada en la posición del mouse
+                card.style.transform = `rotateY(${x * 0.05}deg) rotateX(${-y * 0.05}deg)`;
+
+                // Mover el brillo del fondo (relativo a la tarjeta)
+                const cardRect = card.getBoundingClientRect();
+                glow.style.background = `radial-gradient(circle at ${e.clientX - cardRect.left}px ${e.clientY - cardRect.top}px, rgba(96, 80, 220, 0.4) 0%, transparent 60%)`;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+                glow.style.background = '';
+            });
+        }
+
+        // 3. Animación Scroll Reveal (Aparecer elementos al hacer scroll)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const checkReveal = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (sinMovimiento || elTop < triggerBottom) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkReveal, { passive: true });
+        window.addEventListener('load', checkReveal); // Ejecutar al cargar por si ya están en pantalla
+
+        // 4. Menú móvil
+        const menuMobileBtn = document.getElementById('menuMobileBtn');
+        const navLinks = document.querySelector('.nav-links');
+
+        const setMenu = (isOpen) => {
+            navLinks.classList.toggle('mobile-open', isOpen);
+            menuMobileBtn.setAttribute('aria-expanded', isOpen);
+            menuMobileBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+            const icon = menuMobileBtn.querySelector('i, svg');
+            icon.outerHTML = `<i data-lucide="${isOpen ? 'x' : 'menu'}"></i>`;
+            lucide.createIcons();
+        };
+
+        menuMobileBtn.addEventListener('click', () => {
+            setMenu(!navLinks.classList.contains('mobile-open'));
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMenu(false));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('mobile-open')) setMenu(false);
+        });
+
+        // 5. Resaltar enlace activo del menú al hacer scroll
+        const sections = document.querySelectorAll('main section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a:not(.btn-primary)');
+
+        const highlightNav = () => {
+            let currentId = sections[0]?.id;
+            sections.forEach(sec => {
+                if (window.scrollY >= sec.offsetTop - 140) {
+                    currentId = sec.id;
+                }
+            });
+            navAnchors.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === `#${currentId}`);
+            });
+        };
+
+        window.addEventListener('scroll', highlightNav, { passive: true });
+        window.addEventListener('load', highlightNav);
+    </script>
+</body>
+</html>

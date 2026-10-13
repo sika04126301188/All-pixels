@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<!--
+  Taller Nogal · Plantilla de All Pixels — https://allpixels.dev
+  Carpintería a medida: portada con palabra entre foto y sofá, maderas, pieza de autor en 3D, portafolio en carrusel, proceso, testimonios y contacto.
+  Consulta el README y la LICENCIA incluidos en la descarga.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller Nogal — Carpintería de autor a medida</title>
+<meta name="description" content="Taller Nogal: muebles a medida en madera maciza para hogares y negocios. Diseño, fabricación en taller e instalación.">
+<meta name="theme-color" content="#1D241E">
+<link rel="preload" href="fuentes/manrope-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="imagenes/hero.jpg">
+<script>document.documentElement.setAttribute("data-js", "");</script>
+<style>
+/* ============ 0. TIPOGRAFÍAS LOCALES (SIL Open Font License, ver fuentes/) ============ */
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: normal; font-display: swap; src: url("fuentes/fraunces-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; font-display: swap; src: url("fuentes/fraunces-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 600; font-style: normal; font-display: swap; src: url("fuentes/fraunces-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 400; font-display: swap; src: url("fuentes/manrope-400.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 500; font-display: swap; src: url("fuentes/manrope-500.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 600; font-display: swap; src: url("fuentes/manrope-600.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 700; font-display: swap; src: url("fuentes/manrope-700.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-weight: 800; font-display: swap; src: url("fuentes/manrope-800.woff2") format("woff2"); }
+
+/* ============ 1. PALETA (Earthy Minimal) ============ */
+:root {
+  --verde: #2E3A2F;      /* principal */
+  --salvia: #6B7F5B;     /* secundario */
+  --arena: #D9C9B2;      /* terciario */
+  --terracota: #C96F4F;  /* acento */
+  --marfil: #F8F6EE;     /* fondo */
+  --blanco: #FFFFFF;
+  --salvia-texto: #56684A;  /* salvia más oscuro para textos pequeños */
+  --terracota-texto: #A9533A; /* terracota más oscuro sobre fondos claros */
+  --noche: #1D241E;      /* verde casi negro para el hero */
+  --texto: #535B50;
+  --arena-clara: #EEE6D9;
+  --linea: rgba(46, 58, 47, .14);
+  --linea-clara: rgba(248, 246, 238, .16);
+  --sombra: 0 30px 60px -30px rgba(29, 36, 30, .45);
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --curva: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* ============ 2. BASE ============ */
+a {
+  text-decoration: none;
+  color: var(--verde);
+  transition: color .3s ease, background .3s ease, border-color .3s ease, transform .3s ease;
+}
+a:hover { color: var(--terracota); }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  font-size: 1rem;
+  color: var(--texto);
+  background: var(--marfil);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+ul, ol { list-style: none; }
+figure { position: relative; overflow: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; color: var(--verde); line-height: 1.08; letter-spacing: -.02em; }
+h2 { font-size: clamp(2.1rem, 3.8vw, 3.3rem); }
+h2 em { font-weight: 400; color: var(--terracota-texto); }
+h3 { font-size: 1.3rem; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+:focus-visible { outline: 2px solid var(--terracota); outline-offset: 3px; }
+
+/* Etiqueta pequeña de cada sección */
+main > section > header > p:first-child,
+main > section > article > p:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: 1.1rem;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--salvia-texto);
+}
+main > section > header > p:first-child::before,
+main > section > article > p:first-child::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, var(--terracota) 0 1.5px, var(--arena) 1.5px 3px);
+}
+
+main > section { position: relative; padding: 7.5rem 6vw; scroll-margin-top: 4rem; }
+main > section > header { max-width: 640px; margin-bottom: 3.4rem; }
+main > section > header > p:last-child { margin-top: 1.1rem; font-size: 1.05rem; }
+
+/* Botón principal con brillo al pasar el ratón */
+main > section:first-of-type > p:first-of-type a,
+main > section:last-of-type form button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  overflow: hidden;
+  padding: 1rem 1.7rem;
+  font-size: .95rem;
+  font-weight: 700;
+  border-radius: 60px;
+  transition: background .3s ease, color .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+main > section:first-of-type > p:first-of-type a::before,
+main > section:last-of-type form button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .55), transparent);
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+}
+main > section:first-of-type > p:first-of-type a:hover::before,
+main > section:last-of-type form button:hover::before { left: 130%; }
+
+/* Enlace con flecha */
+main > section:nth-of-type(3) article > a,
+main > section:nth-of-type(4) > header > a {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  font-weight: 700;
+  color: var(--verde);
+}
+main > section:nth-of-type(3) article > a::after,
+main > section:nth-of-type(4) > header > a::after {
+  content: "\2197";
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--terracota);
+  color: var(--blanco);
+  transition: transform .3s var(--curva);
+}
+main > section:nth-of-type(3) article > a:hover::after,
+main > section:nth-of-type(4) > header > a:hover::after { transform: rotate(45deg); }
+
+/* ============ 3. CABECERA (dentro del hero) ============ */
+body > header {
+  position: fixed;
+  inset: 1.9rem max(2.6rem, calc((100% - min(100% - 2rem, (100svh - 2rem) * 1.8333)) / 2 + 1.6rem)) auto;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1.5rem;
+  transition: inset .45s var(--curva), padding .45s var(--curva), background .45s ease, box-shadow .45s ease;
+}
+body > header[data-scroll] {
+  inset: .7rem 1rem auto;
+  padding: .55rem .6rem .55rem 1.3rem;
+  border-radius: 60px;
+  background: rgba(29, 36, 30, .9);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .6);
+}
+
+/* Logotipo: anillos de árbol + nombre */
+body > header > a:first-of-type {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  width: fit-content;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  color: var(--marfil);
+}
+body > header > a:first-of-type::before {
+  content: "";
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 45% 55%, #B98354 0 2px, #8C5A38 2px 3.2px, #C9955F 3.2px 5px);
+  box-shadow: 0 0 0 2px rgba(248, 246, 238, .25);
+}
+body > header > a:first-of-type b { font-weight: 600; color: #E08A68; }
+body > header > a:first-of-type:hover { color: var(--marfil); }
+
+/* Botón de tres líneas (solo móvil) */
+body > header nav button { display: none; }
+
+/* Menú en píldora translúcida */
+body > header nav ul {
+  display: flex;
+  gap: .2rem;
+  padding: .35rem;
+  border-radius: 60px;
+  background: rgba(248, 246, 238, .1);
+  border: 1px solid var(--linea-clara);
+  backdrop-filter: blur(14px);
+}
+body > header[data-scroll] nav ul { background: none; border-color: transparent; }
+body > header nav a {
+  display: block;
+  padding: .5rem 1.05rem;
+  font-size: .88rem;
+  font-weight: 600;
+  border-radius: 40px;
+  color: rgba(248, 246, 238, .82);
+}
+body > header nav a:hover { color: var(--marfil); background: rgba(248, 246, 238, .1); }
+body > header nav a[aria-current] { color: var(--verde); background: var(--marfil); }
+
+/* Botón de consulta */
+body > header > a:last-of-type {
+  justify-self: end;
+  padding: .7rem 1.4rem;
+  font-size: .88rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border-radius: 40px;
+  color: var(--verde);
+  background: var(--marfil);
+}
+body > header > a:last-of-type:hover { background: var(--terracota); color: var(--blanco); }
+
+/* ============ 4. HERO (sección 1) ============ */
+main > section:first-of-type {
+  container-type: inline-size;
+  width: min(calc(100% - 2rem), calc((100svh - 2rem) * 1.8333));
+  aspect-ratio: 1408 / 768;
+  margin: 1rem auto 0;
+  padding: 0;
+  border-radius: 30px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--noche);
+  color: var(--marfil);
+}
+/* La foto y el recorte del sofá ocupan la misma caja: la palabra queda entre los dos */
+main > section:first-of-type > figure { position: absolute; inset: 0; }
+main > section:first-of-type > figure img { animation: acercar 2.8s var(--curva) both; }
+main > section:first-of-type > figure:nth-of-type(2) { z-index: 2; pointer-events: none; }
+
+main > section:first-of-type h1 {
+  position: absolute;
+  left: 50%;
+  top: 10.6cqw;
+  z-index: 1;
+  translate: -50% 0;
+  font-family: var(--sans);
+  font-size: 23cqw;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.055em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  background: linear-gradient(180deg, rgba(248, 244, 234, .62) 0%, rgba(232, 220, 200, .4) 52%, rgba(217, 201, 178, .1) 94%);
+  mix-blend-mode: screen;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: subir 1.4s var(--curva) .2s both;
+}
+
+/* Cifras */
+main > section:first-of-type > dl {
+  position: absolute;
+  left: 4.6cqw;
+  bottom: 10.6cqw;
+  z-index: 3;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+  column-gap: 3.2cqw;
+  animation: subir 1s var(--curva) .5s both;
+}
+main > section:first-of-type dt { font-size: clamp(1.5rem, 2.45cqw, 2.6rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.1; color: var(--marfil); }
+main > section:first-of-type dd { font-size: .86rem; color: rgba(248, 246, 238, .72); }
+
+/* Botón + texto */
+main > section:first-of-type > p {
+  position: absolute;
+  z-index: 3;
+  animation: subir 1s var(--curva) .65s both;
+}
+main > section:first-of-type > p:first-of-type { left: 4.6cqw; bottom: 3.8cqw; }
+main > section:first-of-type > p:first-of-type a {
+  padding-right: 3.9rem;
+  color: var(--verde);
+  background: var(--marfil);
+}
+main > section:first-of-type > p:first-of-type a::after {
+  content: "\2197";
+  position: absolute;
+  right: .35rem;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--terracota);
+  color: var(--blanco);
+  transition: transform .35s var(--curva);
+}
+main > section:first-of-type > p:first-of-type a:hover { color: var(--verde); transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(201, 111, 79, .7); }
+main > section:first-of-type > p:first-of-type a:hover::after { transform: rotate(45deg); }
+main > section:first-of-type > p:nth-of-type(2) {
+  left: calc(4.6cqw + 17.5rem);
+  bottom: 3.9cqw;
+  max-width: 24rem;
+  font-size: .92rem;
+  line-height: 1.5;
+  color: rgba(248, 246, 238, .78);
+}
+
+/* Mini carrusel de proyectos (abajo a la derecha) */
+main > section:first-of-type > aside {
+  position: absolute;
+  right: 3.4cqw;
+  bottom: 3.4cqw;
+  z-index: 3;
+  width: clamp(200px, 19cqw, 290px);
+  padding: .55rem;
+  border-radius: 20px;
+  background: rgba(29, 36, 30, .5);
+  border: 1px solid var(--linea-clara);
+  backdrop-filter: blur(14px);
+  animation: subir 1s var(--curva) .8s both;
+}
+main > section:first-of-type > aside ul { position: relative; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; }
+main > section:first-of-type > aside li { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; }
+main > section:first-of-type > aside li[data-activo] { opacity: 1; }
+main > section:first-of-type > aside figure { height: 100%; }
+main > section:first-of-type > aside li[data-activo] img { animation: acercar 5s linear both; }
+main > section:first-of-type > aside figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.6rem .8rem .6rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--marfil);
+  background: linear-gradient(transparent, rgba(0, 0, 0, .65));
+}
+main > section:first-of-type > aside a { display: block; color: var(--marfil); }
+main > section:first-of-type > aside p {
+  display: flex;
+  align-items: center;
+  padding: .55rem .3rem .2rem;
+  font-size: .76rem;
+  color: rgba(248, 246, 238, .7);
+}
+main > section:first-of-type > aside p b { font-weight: 700; color: var(--marfil); }
+main > section:first-of-type > aside p::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  margin-left: .9rem;
+  border-radius: 2px;
+  background: linear-gradient(var(--marfil), var(--marfil)) left / 0% 100% no-repeat, rgba(248, 246, 238, .2);
+}
+main > section:first-of-type > aside p[data-ciclo="a"]::after { animation: avance-a 5s linear both; }
+main > section:first-of-type > aside p[data-ciclo="b"]::after { animation: avance-b 5s linear both; }
+
+/* ============ 5. POR QUÉ ELEGIRNOS + MADERAS (sección 2) ============ */
+main > section:nth-of-type(2) {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  column-gap: 6vw;
+  align-items: start;
+}
+main > section:nth-of-type(2) > header { margin-bottom: 0; }
+main > section:nth-of-type(2) > ol { counter-reset: valor; }
+main > section:nth-of-type(2) > ol li {
+  counter-increment: valor;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  column-gap: 1.2rem;
+  padding: 1.8rem 0;
+  border-top: 1px solid var(--linea);
+}
+main > section:nth-of-type(2) > ol li:last-of-type { border-bottom: 1px solid var(--linea); }
+main > section:nth-of-type(2) > ol li::before {
+  content: "0" counter(valor);
+  grid-row: span 2;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--terracota);
+}
+main > section:nth-of-type(2) > ol h3 { margin-bottom: .45rem; }
+main > section:nth-of-type(2) > ol p { max-width: 460px; }
+
+/* Muestras de madera */
+main > section:nth-of-type(2) > aside {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2rem 4vw;
+  margin-top: 4.5rem;
+  padding: 2.6rem 3rem;
+  border-radius: 30px;
+  background: var(--arena-clara);
+}
+main > section:nth-of-type(2) > aside h3 { font-size: 1.6rem; max-width: 12ch; }
+main > section:nth-of-type(2) > aside ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+main > section:nth-of-type(2) > aside li { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: .9rem; }
+main > section:nth-of-type(2) > aside figure {
+  grid-row: span 2;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--marfil), 0 12px 24px -10px rgba(46, 58, 47, .5);
+  transition: transform .5s var(--curva);
+}
+main > section:nth-of-type(2) > aside li:hover figure { transform: rotate(20deg) scale(1.08); }
+main > section:nth-of-type(2) > aside strong { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--verde); line-height: 1.2; }
+main > section:nth-of-type(2) > aside li p { font-size: .85rem; line-height: 1.4; }
+
+/* ============ 6. PIEZA DE AUTOR (sección 3, la silla en 3D) ============ */
+main > section:nth-of-type(3) {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 6vw;
+  align-items: center;
+  padding-top: 2rem;
+}
+main > section:nth-of-type(3) > figure {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1.02;
+  border-radius: 30px;
+  background: radial-gradient(circle at 50% 42%, #3C4B3D 0%, var(--verde) 55%, var(--noche) 100%);
+  perspective: 1100px;
+}
+main > section:nth-of-type(3) > figure::before {
+  content: "";
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 201, 178, .22);
+  box-shadow: inset 0 0 0 30px rgba(217, 201, 178, .04);
+}
+main > section:nth-of-type(3) > figure::after {
+  content: "";
+  position: absolute;
+  bottom: 15%;
+  width: 46%;
+  height: 7%;
+  border-radius: 50%;
+  background: radial-gradient(rgba(0, 0, 0, .55), transparent 70%);
+  animation: sombra-flotar 4.2s ease-in-out infinite;
+}
+main > section:nth-of-type(3) > figure img {
+  position: relative;
+  z-index: 1;
+  width: 52%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 30px rgba(0, 0, 0, .45));
+  animation: silla-giro 9s ease-in-out infinite alternate, silla-flotar 4.2s ease-in-out infinite;
+}
+/* Etiquetas sobre la silla */
+main > section:nth-of-type(3) > figure ul { position: absolute; inset: 0; }
+main > section:nth-of-type(3) > figure ul li {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .5rem .95rem .5rem .55rem;
+  font-size: .82rem;
+  font-weight: 600;
+  border-radius: 40px;
+  color: var(--marfil);
+  background: rgba(29, 36, 30, .45);
+  border: 1px solid var(--linea-clara);
+  backdrop-filter: blur(10px);
+}
+main > section:nth-of-type(3) > figure ul li::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--terracota);
+  box-shadow: 0 0 0 4px rgba(201, 111, 79, .3);
+}
+main > section:nth-of-type(3) > figure ul li:nth-of-type(1) { left: 7%; top: 16%; }
+main > section:nth-of-type(3) > figure ul li:nth-of-type(2) { right: 6%; top: 30%; }
+main > section:nth-of-type(3) > figure ul li:nth-of-type(3) { left: 6%; bottom: 30%; }
+main > section:nth-of-type(3) > figure ul li:nth-of-type(4) { right: 8%; bottom: 13%; }
+main > section:nth-of-type(3) > figure figcaption {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.6rem;
+  font-size: .76rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 238, .7);
+}
+
+main > section:nth-of-type(3) article > p:nth-of-type(2) { margin: 1.2rem 0 2rem; max-width: 470px; font-size: 1.05rem; }
+main > section:nth-of-type(3) dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: dense;
+  column-gap: 2rem;
+  margin-bottom: 2.4rem;
+}
+main > section:nth-of-type(3) dt:nth-of-type(odd),
+main > section:nth-of-type(3) dd:nth-of-type(odd) { grid-column: 1; }
+main > section:nth-of-type(3) dt:nth-of-type(even),
+main > section:nth-of-type(3) dd:nth-of-type(even) { grid-column: 2; }
+main > section:nth-of-type(3) dt { padding-top: 1rem; border-top: 1px solid var(--linea); font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--salvia-texto); }
+main > section:nth-of-type(3) dd { padding: .25rem 0 1.1rem; font-family: var(--serif); font-size: 1.2rem; color: var(--verde); }
+
+/* ============ 7. PORTAFOLIO (sección 4, carrusel automático) ============ */
+main > section:nth-of-type(4) {
+  overflow: hidden;
+  padding-inline: 0;
+  background: var(--arena-clara);
+}
+main > section:nth-of-type(4) > header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 1.5rem 3rem;
+  max-width: none;
+  margin: 0 6vw 2.6rem;
+}
+main > section:nth-of-type(4) > header > p:first-child { grid-column: 1 / -1; margin-bottom: 0; width: fit-content; }
+main > section:nth-of-type(4) > header h2 { grid-column: 1; }
+main > section:nth-of-type(4) > header > p:last-of-type { grid-column: 1; margin-top: 0; }
+main > section:nth-of-type(4) > header > a { grid-column: 2; grid-row: 2 / span 2; align-self: end; }
+
+/* Pestañas Hogar / Negocios */
+main > section:nth-of-type(4) > nav { display: flex; gap: .5rem; margin: 0 6vw 2rem; }
+main > section:nth-of-type(4) > nav button {
+  padding: .65rem 1.4rem;
+  font-size: .92rem;
+  font-weight: 700;
+  border-radius: 40px;
+  border: 1px solid var(--linea);
+  color: var(--verde);
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+main > section:nth-of-type(4) > nav button:hover { border-color: var(--verde); }
+main > section:nth-of-type(4) > nav button[aria-pressed="true"] { background: var(--verde); border-color: var(--verde); color: var(--marfil); }
+main > section:nth-of-type(4) > nav button small { margin-left: .35rem; font-size: .75rem; opacity: .75; }
+
+main > section:nth-of-type(4) > ul {
+  display: flex;
+  gap: 1.2rem;
+  width: max-content;
+  padding-left: 6vw;
+  animation: desplazar 46s linear infinite;
+}
+main > section:nth-of-type(4) > ul[hidden] { display: none; }
+main > section:nth-of-type(4) > ul:hover { animation-play-state: paused; }
+main > section:nth-of-type(4) > ul figure {
+  width: 300px;
+  height: 380px;
+  border-radius: 24px;
+  background: var(--arena);
+}
+main > section:nth-of-type(4) > ul li:nth-of-type(even) figure { height: 340px; margin-top: 40px; }
+main > section:nth-of-type(4) > ul img { transition: transform 1.2s var(--curva); }
+main > section:nth-of-type(4) > ul figure:hover img { transform: scale(1.07); }
+main > section:nth-of-type(4) > ul figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 3rem 1.3rem 1.2rem;
+  font-size: .82rem;
+  color: rgba(248, 246, 238, .85);
+  background: linear-gradient(transparent, rgba(29, 36, 30, .88));
+}
+main > section:nth-of-type(4) > ul figcaption strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--marfil);
+}
+main > section:nth-of-type(4) > ul figure::after {
+  content: "\2197";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--marfil);
+  color: var(--verde);
+  opacity: 0;
+  transform: scale(.7);
+  transition: opacity .3s ease, transform .3s var(--curva);
+}
+main > section:nth-of-type(4) > ul figure:hover::after { opacity: 1; transform: none; }
+
+/* ============ 8. PROCESO (sección 5) ============ */
+main > section:nth-of-type(5) {
+  margin: 1rem;
+  border-radius: 30px;
+  background: var(--verde);
+  color: rgba(248, 246, 238, .78);
+  overflow: hidden;
+}
+main > section:nth-of-type(5)::before {
+  content: "";
+  position: absolute;
+  right: -12rem;
+  top: -12rem;
+  width: 34rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, rgba(217, 201, 178, .07) 0 1px, transparent 1px 18px);
+}
+main > section:nth-of-type(5) h2 { color: var(--marfil); }
+main > section:nth-of-type(5) h2 em { color: var(--arena); }
+main > section:nth-of-type(5) > header > p:first-child { color: var(--arena); }
+main > section:nth-of-type(5) ol {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  counter-reset: paso;
+}
+main > section:nth-of-type(5) ol::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 2rem;
+  right: 2rem;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--linea-clara) 0 8px, transparent 8px 14px);
+}
+main > section:nth-of-type(5) li {
+  counter-increment: paso;
+  position: relative;
+  padding-right: 1rem;
+}
+main > section:nth-of-type(5) li::before {
+  content: counter(paso);
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 1.6rem;
+  border-radius: 50%;
+  background: var(--verde);
+  border: 1px solid var(--terracota);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--terracota);
+  transition: background .4s ease, color .4s ease;
+}
+main > section:nth-of-type(5) li:hover::before { background: var(--terracota); color: var(--blanco); }
+main > section:nth-of-type(5) h3 { margin-bottom: .55rem; font-size: 1.25rem; color: var(--marfil); }
+main > section:nth-of-type(5) li p { font-size: .94rem; }
+
+/* ============ 9. TESTIMONIOS (sección 6) ============ */
+main > section:nth-of-type(6) > header { margin-inline: auto; text-align: center; }
+main > section:nth-of-type(6) > ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+main > section:nth-of-type(6) article {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  padding: 2.3rem 2.1rem;
+  border-radius: 26px;
+  background: var(--blanco);
+  transition: transform .5s var(--curva), box-shadow .5s ease;
+}
+main > section:nth-of-type(6) article:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+main > section:nth-of-type(6) li:nth-of-type(2) article { background: var(--salvia-texto); }
+main > section:nth-of-type(6) li:nth-of-type(2) article * { color: var(--marfil); }
+main > section:nth-of-type(6) li:nth-of-type(2) article > p:first-child { color: var(--arena); }
+main > section:nth-of-type(6) article > p:first-child { letter-spacing: .25em; color: var(--terracota-texto); }
+main > section:nth-of-type(6) blockquote {
+  flex: 1;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.22rem;
+  line-height: 1.5;
+  color: var(--verde);
+}
+main > section:nth-of-type(6) footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--linea);
+}
+main > section:nth-of-type(6) li:nth-of-type(2) footer { border-color: var(--linea-clara); }
+main > section:nth-of-type(6) footer figure { flex: none; width: 56px; height: 56px; border-radius: 50%; box-shadow: 0 0 0 3px var(--arena); }
+main > section:nth-of-type(6) footer p { display: grid; }
+main > section:nth-of-type(6) cite { font-style: normal; font-weight: 700; color: var(--verde); }
+main > section:nth-of-type(6) footer small { font-size: .84rem; }
+
+/* ============ 10. CONTACTO (sección 7) ============ */
+main > section:last-of-type { padding-top: 1rem; }
+main > section:last-of-type > article {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 4vw;
+  padding: 4rem;
+  border-radius: 30px;
+  background: var(--arena);
+}
+main > section:last-of-type > article > section > p:first-of-type { margin: 1.1rem 0 2rem; max-width: 40ch; font-size: 1.05rem; color: var(--verde); }
+main > section:last-of-type ul { display: grid; gap: .8rem; margin-bottom: 2.2rem; }
+main > section:last-of-type ul li { display: flex; align-items: center; gap: .8rem; font-weight: 600; color: var(--verde); }
+main > section:last-of-type ul li::before {
+  content: "\2713";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: var(--arena);
+  font-size: .75rem;
+}
+main > section:last-of-type address { font-style: normal; line-height: 1.8; color: var(--verde); }
+main > section:last-of-type address a { font-weight: 700; border-bottom: 1px solid currentColor; overflow-wrap: anywhere; }
+
+main > section:last-of-type form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem 1.2rem;
+  align-content: start;
+  padding: 2.4rem;
+  border-radius: 24px;
+  background: var(--marfil);
+  box-shadow: var(--sombra);
+}
+main > section:last-of-type form label {
+  display: grid;
+  gap: .4rem;
+  min-width: 0;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--verde);
+}
+main > section:last-of-type form label:nth-of-type(1),
+main > section:last-of-type form label:nth-of-type(2),
+main > section:last-of-type form label:nth-of-type(5) { grid-column: 1 / -1; }
+main > section:last-of-type form input,
+main > section:last-of-type form select {
+  width: 100%;
+  min-width: 0;
+  padding: .75rem .1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  border: 0;
+  border-bottom: 1px solid rgba(46, 58, 47, .3);
+  background: transparent;
+  outline: 0;
+  transition: border-color .3s ease;
+}
+main > section:last-of-type form input:focus,
+main > section:last-of-type form select:focus { border-bottom-color: var(--terracota); }
+main > section:last-of-type form input[type="file"] {
+  padding: 1rem;
+  font-size: .88rem;
+  border: 1px dashed rgba(46, 58, 47, .35);
+  border-radius: 14px;
+  cursor: pointer;
+}
+main > section:last-of-type form input[type="file"]::file-selector-button {
+  margin-right: 1rem;
+  padding: .5rem 1rem;
+  font: inherit;
+  font-weight: 700;
+  border: 0;
+  border-radius: 30px;
+  background: var(--arena);
+  color: var(--verde);
+  cursor: pointer;
+}
+main > section:last-of-type form button {
+  grid-column: 1 / -1;
+  justify-content: center;
+  color: var(--blanco);
+  background: var(--terracota-texto);
+  box-shadow: 0 16px 30px -14px rgba(201, 111, 79, .9);
+}
+main > section:last-of-type form button:hover { background: var(--verde); transform: translateY(-2px); }
+main > section:last-of-type form p { grid-column: 1 / -1; font-weight: 600; color: var(--verde); }
+
+/* ============ 11. PIE ============ */
+body > footer {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 2.5rem;
+  margin: 1rem;
+  padding: 4.5rem 5vw 2rem;
+  border-radius: 30px;
+  background: var(--noche);
+  color: rgba(248, 246, 238, .66);
+}
+body > footer a { color: rgba(248, 246, 238, .82); }
+body > footer a:hover { color: var(--arena); }
+body > footer > section:first-of-type > a { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: var(--marfil); }
+body > footer > section:first-of-type > a b { font-weight: 600; color: var(--terracota); }
+body > footer > section:first-of-type p { max-width: 34ch; margin-top: .8rem; font-size: .94rem; }
+body > footer h3 { margin-bottom: 1rem; font-family: var(--sans); font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--arena); }
+body > footer nav ul { display: grid; gap: .5rem; }
+body > footer nav a { font-size: .94rem; }
+body > footer > p {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--linea-clara);
+  font-size: .82rem;
+}
+body > footer > p a { font-weight: 700; color: var(--arena); }
+
+/* ============ 12. ANIMACIONES ============ */
+@keyframes acercar { from { transform: scale(1.08); } to { transform: none; } }
+@keyframes subir { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes silla-giro { from { transform: rotateY(-16deg); } to { transform: rotateY(16deg); } }
+@keyframes silla-flotar { 0%, 100% { translate: 0 -8px; } 50% { translate: 0 8px; } }
+@keyframes sombra-flotar { 0%, 100% { transform: scaleX(.9); opacity: .75; } 50% { transform: scaleX(1.05); opacity: 1; } }
+@keyframes desplazar { to { transform: translateX(-50%); } }
+@keyframes avance-a { to { background-size: 100% 100%, auto; } }
+@keyframes avance-b { to { background-size: 100% 100%, auto; } }
+
+/* Aparición al bajar (solo si hay JavaScript) */
+html[data-js] [data-revelar] { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s var(--curva); }
+html[data-js] [data-revelar="visto"] { opacity: 1; transform: none; }
+li:nth-of-type(3n+2)[data-revelar] { transition-delay: .12s; }
+li:nth-of-type(3n)[data-revelar] { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html[data-js] [data-revelar] { opacity: 1; transform: none; }
+}
+
+/* ============ 13. RESPONSIVE ============ */
+@media (max-width: 1180px) {
+  body > header nav a { padding: .5rem .8rem; }
+  main > section:first-of-type > p:nth-of-type(2) { display: none; }
+  main > section:nth-of-type(2) > aside { grid-template-columns: 1fr; }
+  main > section:nth-of-type(2) > aside h3 { max-width: none; }
+}
+
+@media (max-width: 900px) {
+  body > header { inset: 1.5rem 1.6rem auto; grid-template-columns: 1fr auto auto; gap: .6rem; }
+  body > header[data-scroll] { inset: .7rem .7rem auto; padding: .45rem .45rem .45rem 1rem; }
+
+  /* Menú móvil: tres líneas, cerrado por defecto */
+  body > header nav { order: 3; }
+  body > header nav button {
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(248, 246, 238, .12);
+    border: 1px solid var(--linea-clara);
+    backdrop-filter: blur(14px);
+  }
+  body > header nav button span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--marfil);
+    transition: transform .3s var(--curva), opacity .3s ease;
+  }
+  body > header nav button[aria-expanded="true"] span:first-of-type { transform: translateY(7px) rotate(45deg); }
+  body > header nav button[aria-expanded="true"] span:nth-of-type(2) { opacity: 0; }
+  body > header nav button[aria-expanded="true"] span:last-of-type { transform: translateY(-7px) rotate(-45deg); }
+  body > header nav ul,
+  body > header[data-scroll] nav ul {
+    position: absolute;
+    top: calc(100% + .6rem);
+    right: 0;
+    flex-direction: column;
+    width: min(280px, calc(100vw - 2.4rem));
+    padding: .6rem;
+    border-radius: 22px;
+    background: rgba(29, 36, 30, .96);
+    border: 1px solid var(--linea-clara);
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .7);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -8px;
+    transition: opacity .3s ease, translate .3s var(--curva), visibility .3s;
+  }
+  body > header nav:has(button[aria-expanded="true"]) ul { opacity: 1; visibility: visible; translate: 0 0; }
+  body > header nav a { padding: .8rem 1rem; font-size: 1rem; }
+
+  main > section { padding: 5.5rem 6vw; }
+
+  /* Hero vertical: la foto arriba (sofá entero) y el texto debajo, dentro de la misma tarjeta */
+  main > section:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    width: auto;
+    aspect-ratio: auto;
+    margin: .7rem .7rem 0;
+    padding: 100cqw 1.4rem 1.6rem;
+    border-radius: 26px;
+  }
+  main > section:first-of-type > figure {
+    bottom: auto;
+    height: 125cqw;
+    -webkit-mask-image: linear-gradient(#000 72%, transparent);
+    mask-image: linear-gradient(#000 72%, transparent);
+  }
+  main > section:first-of-type > figure img { object-position: 55% 50%; }
+  main > section:first-of-type h1 { top: 40.5cqw; font-size: 24cqw; }
+  main > section:first-of-type > dl,
+  main > section:first-of-type > p { position: relative; inset: auto; }
+  main > section:first-of-type > dl { z-index: 3; column-gap: 1.4rem; justify-content: start; }
+  main > section:first-of-type dt { font-size: 1.6rem; }
+  main > section:first-of-type dd { font-size: .78rem; line-height: 1.35; }
+  main > section:first-of-type > p:first-of-type,
+  main > section:first-of-type > p:nth-of-type(2) { left: auto; bottom: auto; }
+  main > section:first-of-type > p:nth-of-type(2) { display: block; order: -1; max-width: none; font-size: .95rem; }
+  main > section:first-of-type > aside { display: none; }
+  body > header > a:first-of-type { font-size: 1.2rem; }
+  body > header > a:last-of-type { padding: .55rem .95rem; font-size: .78rem; }
+
+  main > section:nth-of-type(2),
+  main > section:nth-of-type(3),
+  main > section:last-of-type > article { grid-template-columns: 1fr; }
+  main > section:nth-of-type(2) > header { margin-bottom: 2.4rem; }
+  main > section:nth-of-type(2) > aside ul { grid-template-columns: 1fr 1fr; }
+  main > section:nth-of-type(3) { padding-top: 1rem; }
+
+  main > section:nth-of-type(4) > header { grid-template-columns: 1fr; }
+  main > section:nth-of-type(4) > header > a { grid-column: 1; grid-row: auto; }
+  main > section:nth-of-type(4) > ul figure { width: 240px; height: 310px; }
+  main > section:nth-of-type(4) > ul li:nth-of-type(even) figure { height: 280px; margin-top: 30px; }
+
+  main > section:nth-of-type(5) { margin: .7rem; }
+  main > section:nth-of-type(5) ol,
+  main > section:nth-of-type(6) > ul { grid-template-columns: 1fr; }
+  main > section:nth-of-type(5) ol { gap: 2.2rem; }
+  main > section:nth-of-type(5) ol::before { top: 2rem; bottom: 2rem; left: 27px; right: auto; width: 1px; height: auto; background: repeating-linear-gradient(180deg, var(--linea-clara) 0 8px, transparent 8px 14px); }
+  main > section:nth-of-type(5) li { display: grid; grid-template-columns: 54px 1fr; column-gap: 1.2rem; }
+  main > section:nth-of-type(5) li::before { grid-row: span 2; margin: 0; }
+
+  main > section:last-of-type > article { padding: 2.4rem 1.6rem; }
+  body > footer { grid-template-columns: 1fr 1fr; margin: .7rem; }
+  body > footer > section:first-of-type { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  body > header > a:last-of-type { display: none; }
+  body > header { grid-template-columns: 1fr auto; }
+  main > section:first-of-type dd { font-size: .72rem; }
+  main > section:nth-of-type(2) > aside { padding: 2rem 1.4rem; }
+  main > section:nth-of-type(2) > aside ul { grid-template-columns: 1fr; }
+  main > section:nth-of-type(3) > figure ul li { font-size: .72rem; }
+  main > section:nth-of-type(3) dl { grid-template-columns: 1fr; }
+  main > section:nth-of-type(3) dt:nth-of-type(n),
+  main > section:nth-of-type(3) dd:nth-of-type(n) { grid-column: 1; }
+  main > section:last-of-type form { grid-template-columns: 1fr; padding: 1.6rem; }
+  main > section:last-of-type form label:nth-of-type(n) { grid-column: 1; }
+  body > footer > p { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#inicio" aria-label="Taller Nogal, inicio">Taller <b>Nogal</b></a>
+  <nav aria-label="Principal">
+    <button type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    <ul id="menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#taller">Taller</a></li>
+      <li><a href="#portafolio">Portafolio</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+    </ul>
+  </nav>
+  <a href="#contacto">Solicita una consulta</a>
+</header>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section id="inicio">
+    <figure><img src="imagenes/hero.jpg" alt="Sofá de estilo clásico con talla de madera dorada en un salón con luz tenue" fetchpriority="high"></figure>
+    <h1 aria-label="Taller Nogal: muebles a medida que duran generaciones">Nogal</h1>
+    <figure aria-hidden="true"><img src="imagenes/hero-sofa.webp" alt=""></figure>
+    <dl>
+      <dt>25+</dt><dd>años de oficio</dd>
+      <dt>1.200</dt><dd>piezas hechas</dd>
+      <dt>100 %</dt><dd>madera certificada</dd>
+    </dl>
+    <p><a href="#contacto">Diseña tu espacio</a></p>
+    <p>Muebles a medida que duran generaciones: carpintería de autor para hogares y negocios.</p>
+    <aside aria-label="Proyectos recientes">
+      <a href="#portafolio">
+        <ul>
+          <li data-activo><figure><img src="imagenes/recibidor.jpg" alt="Recibidor de listones de madera con armario"><figcaption>Recibidor a medida</figcaption></figure></li>
+          <li><figure><img src="imagenes/biblioteca-cerezo.jpg" alt="Biblioteca de madera de cerezo"><figcaption>Biblioteca Cerezo</figcaption></figure></li>
+          <li><figure><img src="imagenes/barra-listones.jpg" alt="Columnas de listones y barra de roble"><figcaption>Barra y columnas de roble</figcaption></figure></li>
+          <li><figure><img src="imagenes/cama-abatible.jpg" alt="Cama abatible con sofá y cajones"><figcaption>Cama abatible</figcaption></figure></li>
+        </ul>
+      </a>
+      <p data-ciclo="a"><b>01</b>/04</p>
+    </aside>
+  </section>
+
+  <!-- 2. POR QUÉ ELEGIRNOS -->
+  <section id="taller">
+    <header data-revelar>
+      <p>El taller</p>
+      <h2>Por qué elegirnos: madera <em>hecha para quedarse</em></h2>
+      <p>Tres razones que definen cada pieza que sale de nuestro taller en Sevilla.</p>
+    </header>
+    <ol>
+      <li data-revelar>
+        <h3>Diseño 100 % personalizado</h3>
+        <p>Adaptado al milímetro a tu espacio, tu estilo y la forma en la que realmente vives o trabajas.</p>
+      </li>
+      <li data-revelar>
+        <h3>Materiales nobles</h3>
+        <p>Maderas certificadas y herrajes de alta duración, seleccionados pieza a pieza en el taller.</p>
+      </li>
+      <li data-revelar>
+        <h3>Legado y calidad</h3>
+        <p>Piezas concebidas para resistir el paso del tiempo y acompañarte durante décadas.</p>
+      </li>
+    </ol>
+    <aside aria-label="Maderas con las que trabajamos" data-revelar>
+      <h3>Las maderas con las que trabajamos</h3>
+      <ul>
+        <li><figure><img src="imagenes/madera-nogal.jpg" alt="Muestra de madera de nogal" loading="lazy"></figure><strong>Nogal</strong><p>Cálido y profundo</p></li>
+        <li><figure><img src="imagenes/madera-roble.jpg" alt="Muestra de madera de roble" loading="lazy"></figure><strong>Roble</strong><p>Resistente y con nudo</p></li>
+        <li><figure><img src="imagenes/madera-cerezo.jpg" alt="Muestra de madera de cerezo" loading="lazy"></figure><strong>Cerezo</strong><p>Veta fina y rojiza</p></li>
+        <li><figure><img src="imagenes/madera-fresno.jpg" alt="Muestra de madera de fresno" loading="lazy"></figure><strong>Fresno</strong><p>Claro y luminoso</p></li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- 3. PIEZA DE AUTOR -->
+  <section id="pieza">
+    <figure data-revelar>
+      <img src="imagenes/silla.webp" alt="Silla de roble macizo con asiento y respaldo tapizados en tela clara" loading="lazy">
+      <ul aria-label="Detalles de la silla">
+        <li>Roble macizo</li>
+        <li>Ensamble a caja y espiga</li>
+        <li>Tapizado en tela natural</li>
+        <li>Acabado al aceite</li>
+      </ul>
+      <figcaption>Pieza de autor · 01</figcaption>
+    </figure>
+    <article data-revelar>
+      <p>Pieza de autor</p>
+      <h2>Silla Duna: madera que <em>se siente</em></h2>
+      <p>Cada curva se lija a mano y cada unión se ensambla sin tornillos a la vista. Así trabajamos todas nuestras piezas, de una silla a un salón completo.</p>
+      <dl>
+        <dt>Madera</dt><dd>Roble macizo</dd>
+        <dt>Ensamble</dt><dd>Caja y espiga</dd>
+        <dt>Acabado</dt><dd>Aceite natural</dd>
+        <dt>Plazo</dt><dd>4 a 6 semanas</dd>
+      </dl>
+      <a href="#contacto">Encarga la tuya</a>
+    </article>
+  </section>
+
+  <!-- 4. PORTAFOLIO -->
+  <section id="portafolio">
+    <header>
+      <p>Portafolio</p>
+      <h2>Proyectos <em>terminados</em></h2>
+      <p>Una muestra de trabajos entre hogares y negocios. Pasa el ratón para detener el carrusel.</p>
+      <a href="#contacto">Cuéntanos tu proyecto</a>
+    </header>
+    <nav aria-label="Filtrar portafolio">
+      <button type="button" aria-pressed="true">Hogar <small>06</small></button>
+      <button type="button" aria-pressed="false">Negocios <small>06</small></button>
+    </nav>
+    <ul aria-label="Proyectos de hogar">
+      <li><figure><img src="imagenes/biblioteca-cerezo.jpg" alt="Biblioteca de madera de cerezo con molduras" loading="lazy"><figcaption><strong>Biblioteca Cerezo</strong>Salón · pieza clásica a medida</figcaption></figure></li>
+      <li><figure><img src="imagenes/cama-abatible.jpg" alt="Cama abatible con sofá, estantes y cajones" loading="lazy"><figcaption><strong>Cama abatible</strong>Dormitorio multiusos</figcaption></figure></li>
+      <li><figure><img src="imagenes/recibidor.jpg" alt="Recibidor de listones de madera con espejo, consola y armario" loading="lazy"><figcaption><strong>Recibidor a medida</strong>Entrada · armario y espejo</figcaption></figure></li>
+      <li><figure><img src="imagenes/libreria-acanalada.jpg" alt="Librería lacada en blanco con puertas acanaladas y patas doradas" loading="lazy"><figcaption><strong>Librería acanalada</strong>Salón · lacado y latón</figcaption></figure></li>
+      <li><figure><img src="imagenes/modulo-cubos.jpg" alt="Mueble de cubos blanco con cajón central" loading="lazy"><figcaption><strong>Módulo de cubos</strong>Almacenaje para salón</figcaption></figure></li>
+      <li><figure><img src="imagenes/sofa-relax.jpg" alt="Sofá de tres plazas tapizado en piel gris con asiento reclinable" loading="lazy"><figcaption><strong>Sofá relax</strong>Salón · estructura y tapizado</figcaption></figure></li>
+    </ul>
+    <ul aria-label="Proyectos de negocios" hidden>
+      <li><figure><img src="imagenes/restaurante.jpg" alt="Fachada de restaurante revestida de listones de madera con terraza" loading="lazy"><figcaption><strong>Restaurante Cauce</strong>Fachada y terraza</figcaption></figure></li>
+      <li><figure><img src="imagenes/recepcion.jpg" alt="Recepción con mostrador curvo acanalado en verde y estantes de madera" loading="lazy"><figcaption><strong>Oficinas Umbral</strong>Recepción a medida</figcaption></figure></li>
+      <li><figure><img src="imagenes/mostrador.jpg" alt="Mostrador de listones de madera con estanterías y plantas" loading="lazy"><figcaption><strong>Local Pétalo</strong>Estanterías y mostrador</figcaption></figure></li>
+      <li><figure><img src="imagenes/barberia.jpg" alt="Mostrador de barbería hecho con tablillas de madera apiladas" loading="lazy"><figcaption><strong>Barbería del barrio</strong>Mostrador de tablillas</figcaption></figure></li>
+      <li><figure><img src="imagenes/zapateria.jpg" alt="Tienda de calzado con cajas de madera en la pared y baldas colgadas con cuerda" loading="lazy"><figcaption><strong>Zapatería Paso</strong>Expositores de cajas de pino</figcaption></figure></li>
+      <li><figure><img src="imagenes/barra-listones.jpg" alt="Columnas revestidas de listones y barra alta de roble" loading="lazy"><figcaption><strong>Cafetería Raíz</strong>Barra y columnas de roble</figcaption></figure></li>
+    </ul>
+  </section>
+
+  <!-- 5. PROCESO -->
+  <section id="proceso">
+    <header data-revelar>
+      <p>El proceso artesanal</p>
+      <h2>De la idea a la instalación, <em>en cuatro pasos</em></h2>
+    </header>
+    <ol>
+      <li data-revelar><h3>Idea y asesoramiento</h3><p>Escuchamos tu proyecto y visitamos el espacio para entender cada detalle.</p></li>
+      <li data-revelar><h3>Diseño 3D y materiales</h3><p>Visualizamos la pieza y elegimos juntos maderas y acabados.</p></li>
+      <li data-revelar><h3>Fabricación en taller</h3><p>Cada pieza se construye a mano, con tiempos de secado y ensamble reales.</p></li>
+      <li data-revelar><h3>Instalación</h3><p>Entregamos e instalamos sin complicaciones, dejando el espacio listo para usar.</p></li>
+    </ol>
+  </section>
+
+  <!-- 6. TESTIMONIOS -->
+  <section id="testimonios">
+    <header data-revelar>
+      <p>Testimonios</p>
+      <h2>Lo que dicen quienes <em>ya tienen su pieza</em></h2>
+    </header>
+    <ul>
+      <li data-revelar>
+        <article>
+          <p aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>La biblioteca quedó mejor de lo que imaginábamos. Cada balda se ve pensada para nuestros libros, no de catálogo.</blockquote>
+          <footer><figure><img src="imagenes/biblioteca-cerezo.jpg" alt="Biblioteca de Marta" loading="lazy"></figure><p><cite>Marta S.</cite><small>Biblioteca a medida · Sevilla</small></p></footer>
+        </article>
+      </li>
+      <li data-revelar>
+        <article>
+          <p aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>La cama abatible nos devolvió el salón entero. Funciona todos los días y no parece un mueble plegable cualquiera.</blockquote>
+          <footer><figure><img src="imagenes/cama-abatible.jpg" alt="Cama abatible de Javier" loading="lazy"></figure><p><cite>Javier R.</cite><small>Dormitorio multiusos</small></p></footer>
+        </article>
+      </li>
+      <li data-revelar>
+        <article>
+          <p aria-label="5 de 5 estrellas">★★★★★</p>
+          <blockquote>El recibidor aprovecha cada centímetro de la entrada. Se nota que lo pensaron para nuestra casa, no para un catálogo.</blockquote>
+          <footer><figure><img src="imagenes/recibidor.jpg" alt="Recibidor de Lucía" loading="lazy"></figure><p><cite>Lucía F.</cite><small>Recibidor a medida</small></p></footer>
+        </article>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 7. CONTACTO -->
+  <section id="contacto">
+    <article data-revelar>
+      <section>
+        <h2>Transforma tu idea <em>en madera</em></h2>
+        <p>Cuéntanos qué necesitas y te respondemos con una primera valoración, sin compromiso.</p>
+        <ul>
+          <li>Respuesta en menos de 48 h</li>
+          <li>Visita al espacio para medir</li>
+          <li>Primera valoración sin compromiso</li>
+        </ul>
+        <address>
+          Taller Nogal<br>
+          Calle de los Ebanistas, 12 · Sevilla<br>
+          <a href="mailto:hola@tallernogal.com">hola@tallernogal.com</a>
+        </address>
+      </section>
+      <form>
+        <label>Nombre <input name="nombre" type="text" autocomplete="name" required></label>
+        <label>Correo electrónico <input name="correo" type="email" autocomplete="email" required></label>
+        <label>Tipo de proyecto
+          <select name="tipo">
+            <option>Hogar</option>
+            <option>Negocio</option>
+          </select>
+        </label>
+        <label>Presupuesto estimado
+          <select name="presupuesto">
+            <option>Menos de 2.000 €</option>
+            <option>2.000 € – 6.000 €</option>
+            <option>6.000 € – 15.000 €</option>
+            <option>Más de 15.000 €</option>
+          </select>
+        </label>
+        <label>Plano o foto del espacio (opcional) <input name="plano" type="file" accept="image/*,.pdf"></label>
+        <button type="submit">Transforma tu idea en madera</button>
+        <p role="status" hidden>Gracias, hemos recibido tu proyecto. Te escribimos en menos de 48 h.</p>
+      </form>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <section>
+    <a href="#inicio">Taller <b>Nogal</b></a>
+    <p>Carpintería de autor, fabricada a mano en Sevilla desde el respeto por la madera y el tiempo que necesita cada pieza.</p>
+  </section>
+  <nav aria-label="Redes sociales">
+    <h3>Síguenos</h3>
+    <ul>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Pinterest</a></li>
+    </ul>
+  </nav>
+  <nav aria-label="Taller">
+    <h3>Taller</h3>
+    <ul>
+      <li><a href="#contacto">Cómo llegar</a></li>
+      <li><a href="#taller">Política de sostenibilidad</a></li>
+    </ul>
+  </nav>
+  <nav aria-label="Madera">
+    <h3>Madera</h3>
+    <ul>
+      <li><a href="#taller">Maderas certificadas</a></li>
+      <li><a href="#taller">Trazabilidad de origen</a></li>
+    </ul>
+  </nav>
+  <p><small>© <time datetime="2026">2026</time> Taller Nogal · Todos los derechos reservados.</small><small><a href="https://allpixels.dev">Plantilla de All Pixels</a></small></p>
+</footer>
+
+<script>
+  /* 1. Cabecera compacta al hacer scroll */
+  const cabecera = document.querySelector("body > header");
+  addEventListener("scroll", () => cabecera.toggleAttribute("data-scroll", scrollY > 60), { passive: true });
+
+  /* 2. Menú móvil: cerrado por defecto; se cierra al tocar fuera, con Esc, al elegir un enlace o al desplazarse */
+  const botonMenu = document.querySelector("body > header nav button");
+  let scrollAlAbrir = 0;
+  const cambiarMenu = (abrir) => {
+    botonMenu.setAttribute("aria-expanded", String(abrir));
+    botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+    if (abrir) scrollAlAbrir = scrollY;
+  };
+  botonMenu.addEventListener("click", () => cambiarMenu(botonMenu.getAttribute("aria-expanded") !== "true"));
+  document.addEventListener("click", (e) => { if (!e.target.closest("body > header nav")) cambiarMenu(false); });
+  document.querySelectorAll("#menu a").forEach((a) => a.addEventListener("click", () => cambiarMenu(false)));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") cambiarMenu(false); });
+  addEventListener("scroll", () => {
+    if (botonMenu.getAttribute("aria-expanded") === "true" && Math.abs(scrollY - scrollAlAbrir) > 30) cambiarMenu(false);
+  }, { passive: true });
+  addEventListener("pageshow", () => cambiarMenu(false));
+
+  /* 3. Enlace activo del menú según la sección visible */
+  const enlacesMenu = [...document.querySelectorAll("#menu a")];
+  const vigia = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (!e.isIntersecting) return;
+      enlacesMenu.forEach((a) => a.hash === "#" + e.target.id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll("main > section[id]").forEach((s) => vigia.observe(s));
+
+  /* 4. Aparición de bloques al entrar en pantalla */
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (e.isIntersecting) { e.target.dataset.revelar = "visto"; observador.unobserve(e.target); }
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll("[data-revelar]").forEach((el) => observador.observe(el));
+
+  /* 5. Mini carrusel del hero */
+  const diapositivas = [...document.querySelectorAll("#inicio aside li")];
+  const contadorHero = document.querySelector("#inicio aside p");
+  let actual = 0;
+  setInterval(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    diapositivas[actual].removeAttribute("data-activo");
+    actual = (actual + 1) % diapositivas.length;
+    diapositivas[actual].setAttribute("data-activo", "");
+    contadorHero.querySelector("b").textContent = String(actual + 1).padStart(2, "0");
+    contadorHero.dataset.ciclo = contadorHero.dataset.ciclo === "a" ? "b" : "a";
+  }, 5000);
+
+  /* 6. Portafolio: copia de cada lista para el bucle continuo y pestañas */
+  const listas = [...document.querySelectorAll("#portafolio > ul")];
+  listas.forEach((lista) => {
+    [...lista.children].forEach((li) => {
+      const copia = li.cloneNode(true);
+      copia.setAttribute("aria-hidden", "true");
+      lista.append(copia);
+    });
+  });
+  const pestanas = [...document.querySelectorAll("#portafolio nav button")];
+  pestanas.forEach((boton, i) => boton.addEventListener("click", () => {
+    pestanas.forEach((b, j) => b.setAttribute("aria-pressed", String(i === j)));
+    listas.forEach((lista, j) => (lista.hidden = i !== j));
+  }));
+
+  /* 7. Formulario (demostración: no envía datos) */
+  document.querySelector("#contacto form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    e.target.querySelector("p").hidden = false;
+    e.target.reset();
+  });
+
+  /* 8. Año actual en el pie */
+  const anio = document.querySelector("body > footer time");
+  anio.textContent = anio.dateTime = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FILAX — CRM para equipos que venden en serio</title>
+  <meta name="description" content="FILAX es el CRM que convierte cada lead en ingresos: pipeline visual, automatizaciones y previsiones de ventas con IA en una sola plataforma.">
+  <meta name="theme-color" content="#0b0911">
+  <!-- FILAX · Plantilla de All Pixels (https://allpixels.dev) · Licencia Gratis: mantén el crédito del pie -->
+  <!-- Tipografía Plus Jakarta Sans incluida en la carpeta fuentes/, sin depender de Google Fonts -->
+  <link rel="icon" href="imagenes/logo.svg" type="image/svg+xml">
+  <link rel="preload" href="fuentes/plus-jakarta-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* =========================================================
+       0. TIPOGRAFÍA LOCAL
+       ========================================================= */
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 400; font-display: swap; src: url("fuentes/plus-jakarta-sans-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 500; font-display: swap; src: url("fuentes/plus-jakarta-sans-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 600; font-display: swap; src: url("fuentes/plus-jakarta-sans-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 700; font-display: swap; src: url("fuentes/plus-jakarta-sans-latin-700-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Plus Jakarta Sans"; font-weight: 800; font-display: swap; src: url("fuentes/plus-jakarta-sans-latin-800-normal.woff2") format("woff2"); }
+
+    /* =========================================================
+       1. VARIABLES
+       ========================================================= */
+    :root {
+      --bg: #0b0911;
+      --bg-soft: #14101c;
+      --surface: rgba(28, 22, 36, 0.78);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(255, 255, 255, 0.14);
+      --text: #f6f3f8;
+      --muted: #aca6b7;
+      --orange: #ff6b2c;
+      --orange-deep: #ea4b28;
+      --red: #b8261a;
+      --pink: #ee4f75;
+      --green: #4ade80;
+      --gradient: linear-gradient(135deg, #ff8a3d 0%, #ea4b28 50%, #ee4f75 100%);
+      --glow: 0 18px 50px -12px rgba(255, 107, 44, 0.65);
+      --radius: 18px;
+      --container: min(1200px, calc(100% - 32px));
+    }
+
+    /* =========================================================
+       2. BASE
+       ========================================================= */
+    a {
+      text-decoration: none;
+      color: var(--text);
+      transition: color .25s, background .25s, transform .25s, box-shadow .25s, border-color .25s;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+      overflow-x: clip;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: clip;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input {
+      font: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      background: none;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    h1 em,
+    h2 em {
+      font-style: normal;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    mark {
+      background: var(--gradient);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 999px;
+    }
+
+    /* Iconos (SVG en <img>): se pintan en blanco */
+    main figure img[src^="iconos/"],
+    body > footer figure img[src^="iconos/"] {
+      filter: brightness(0) invert(1);
+    }
+
+    /* =========================================================
+       3. HEADER / NAVEGACIÓN
+       ========================================================= */
+    body > header {
+      position: sticky;
+      top: 16px;
+      z-index: 50;
+      width: var(--container);
+      margin: 16px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 12px 10px 18px;
+      background: rgba(20, 16, 28, 0.72);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      transition: background .3s, box-shadow .3s;
+    }
+
+    body > header[data-scrolled] {
+      background: rgba(14, 11, 20, 0.92);
+      box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Logotipo (cabecera y pie) */
+    body > header > a,
+    body > footer > article > header > a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    body > header > a img {
+      width: 34px;
+      height: 34px;
+    }
+
+    body > header > nav:first-of-type ul {
+      display: flex;
+      gap: 34px;
+    }
+
+    body > header > nav:first-of-type a {
+      color: var(--muted);
+      font-size: .93rem;
+      font-weight: 500;
+    }
+
+    body > header > nav:first-of-type a:hover,
+    body > header > nav:first-of-type a[aria-current="true"] {
+      color: var(--text);
+    }
+
+    body > header > nav:last-of-type {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    body > header > nav:last-of-type a:first-of-type {
+      color: var(--muted);
+      font-size: .93rem;
+      font-weight: 600;
+    }
+
+    body > header > nav:last-of-type a:last-of-type {
+      padding: 11px 22px;
+      background: var(--gradient);
+      border-radius: 12px;
+      font-size: .93rem;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: var(--glow);
+    }
+
+    body > header > nav:last-of-type a:hover {
+      color: var(--text);
+    }
+
+    body > header > nav:last-of-type a:last-of-type:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Botón de menú (solo móvil): tres líneas que se convierten en una X */
+    body > header > button {
+      position: relative;
+      display: none;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: linear-gradient(var(--text), var(--text)) center / 18px 2px no-repeat;
+      transition: background-size .3s;
+    }
+
+    body > header > button::before,
+    body > header > button::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      margin: -1px 0 0 -9px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: transform .3s;
+    }
+
+    body > header > button::before { transform: translateY(-6px); }
+    body > header > button::after { transform: translateY(6px); }
+    body > header > button[aria-expanded="true"] { background-size: 0 2px; }
+    body > header > button[aria-expanded="true"]::before { transform: rotate(45deg); }
+    body > header > button[aria-expanded="true"]::after { transform: rotate(-45deg); }
+
+    /* =========================================================
+       4. HERO  (main > section:first-of-type)
+       ========================================================= */
+    main > section:first-of-type {
+      position: relative;
+      width: var(--container);
+      margin: 0 auto;
+      padding: 110px 0 140px;
+      display: grid;
+      grid-template-columns: 1.02fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    /* Resplandor naranja de fondo */
+    main > section:first-of-type::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -120px;
+      left: 50%;
+      width: 100vw;
+      height: 130%;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(40% 45% at 78% 55%, rgba(234, 75, 40, 0.28), transparent 70%),
+        radial-gradient(30% 35% at 10% 20%, rgba(238, 79, 117, 0.14), transparent 70%),
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.07) 1px, transparent 0) 0 0 / 28px 28px;
+      -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+      mask-image: linear-gradient(180deg, #000 60%, transparent);
+    }
+
+    /* --- Columna de texto --- */
+    main > section:first-of-type > article {
+      animation: subir .9s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    main > section:first-of-type > article > p:first-of-type {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 5px 16px 5px 5px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > article > p:first-of-type mark {
+      padding: 3px 12px;
+      font-size: .8rem;
+    }
+
+    main > section:first-of-type h1 {
+      margin: 28px 0 24px;
+      font-size: clamp(2.8rem, 5.8vw, 5rem);
+      font-weight: 800;
+    }
+
+    main > section:first-of-type h1 em {
+      display: block;
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(2) {
+      max-width: 520px;
+      font-size: 1.12rem;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(3) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 40px 0 34px;
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(3) a {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 17px 30px;
+      border-radius: 14px;
+      font-weight: 700;
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(3) a:first-of-type {
+      background: var(--gradient);
+      box-shadow: var(--glow);
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(3) a:last-of-type {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--line-strong);
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(3) a:last-of-type span {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--text);
+      color: var(--bg);
+      font-size: .6rem;
+    }
+
+    main > section:first-of-type > article > p:nth-of-type(3) a:hover {
+      transform: translateY(-3px);
+    }
+
+    main > section:first-of-type > article > ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 30px;
+    }
+
+    main > section:first-of-type > article > ul li {
+      position: relative;
+      padding-left: 30px;
+      font-size: .92rem;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > article > ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--orange);
+      border-radius: 50%;
+      font-size: .66rem;
+      color: var(--orange);
+    }
+
+    main > section:first-of-type > article > footer {
+      margin-top: 64px;
+    }
+
+    main > section:first-of-type > article > footer p {
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--orange);
+    }
+
+    main > section:first-of-type > article > footer ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 38px;
+      margin-top: 18px;
+    }
+
+    main > section:first-of-type > article > footer li {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: rgba(255, 255, 255, 0.45);
+      transition: color .25s;
+    }
+
+    main > section:first-of-type > article > footer li:hover {
+      color: var(--text);
+    }
+
+    /* --- Maqueta del panel (aside) --- */
+    main > section:first-of-type > aside {
+      position: relative;
+      perspective: 1600px;
+      animation: aparecer 1.1s .15s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    main > section:first-of-type > aside::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      right: -120px;
+      bottom: -140px;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 44, 0.55), rgba(184, 38, 26, 0.25) 55%, transparent 72%);
+      filter: blur(10px);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      overflow: hidden;
+      font-size: .72rem;
+      background: rgba(22, 18, 30, 0.9);
+      border: 1px solid var(--line-strong);
+      border-radius: 22px;
+      box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.8), 0 0 80px -20px rgba(255, 107, 44, 0.45);
+      transform: rotateY(-14deg) rotateX(6deg) rotateZ(1deg);
+      transition: transform .6s ease;
+    }
+
+    main > section:first-of-type > aside:hover > article:first-of-type {
+      transform: rotateY(-6deg) rotateX(3deg);
+    }
+
+    /* Barra lateral de la maqueta */
+    main > section:first-of-type > aside > article:first-of-type > nav {
+      padding: 18px 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border-right: 1px solid var(--line);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > nav strong {
+      display: block;
+      margin: 0 0 18px 8px;
+      font-size: .85rem;
+      letter-spacing: .12em;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > nav li {
+      padding: 8px 10px;
+      margin-bottom: 4px;
+      border-radius: 8px;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > nav li:first-of-type {
+      background: rgba(255, 107, 44, 0.14);
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* Contenido de la maqueta */
+    main > section:first-of-type > aside > article:first-of-type > section {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 10px;
+      padding: 16px 18px 18px;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > header,
+    main > section:first-of-type > aside > article:first-of-type > section > h2,
+    main > section:first-of-type > aside > article:first-of-type > section > p,
+    main > section:first-of-type > aside > article:first-of-type > section > ul {
+      grid-column: 1 / -1;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: .85rem;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > header p {
+      flex: 1;
+      max-width: 160px;
+      margin-left: auto;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > header img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > h2 {
+      margin-top: 4px;
+      font-size: 1.05rem;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > p {
+      margin-top: -8px;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul li {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul li:first-of-type {
+      background: var(--gradient);
+      border-color: transparent;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul small {
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul li:first-of-type small,
+    main > section:first-of-type > aside > article:first-of-type > section > ul li:first-of-type span {
+      color: #fff;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul strong {
+      display: block;
+      margin: 4px 0;
+      font-size: 1.5rem;
+      white-space: nowrap;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > ul span {
+      font-size: .64rem;
+      color: var(--green);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > article {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > article h3 {
+      margin-bottom: 10px;
+      font-size: .78rem;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > article img {
+      width: 100%;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > article:last-of-type li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > article:last-of-type li:last-of-type {
+      border-bottom: 0;
+    }
+
+    main > section:first-of-type > aside > article:first-of-type > section > article:last-of-type span {
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* Tarjetas flotantes */
+    main > section:first-of-type > aside > article:not(:first-of-type) {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: rgba(30, 22, 36, 0.92);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.8);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(2) {
+      top: -40px;
+      right: 24px;
+      max-width: 250px;
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(3) {
+      bottom: 30px;
+      left: -48px;
+      max-width: 250px;
+      animation-delay: -2s;
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(4) {
+      bottom: -46px;
+      right: 10px;
+      animation-delay: -4s;
+    }
+
+    main > section:first-of-type > aside > article > figure {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--gradient);
+    }
+
+    main > section:first-of-type > aside > article > figure img {
+      width: 20px;
+      height: 20px;
+    }
+
+    main > section:first-of-type > aside > article p strong {
+      display: block;
+      font-size: .9rem;
+    }
+
+    main > section:first-of-type > aside > article p small {
+      font-size: .76rem;
+      color: var(--muted);
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(4) ul {
+      display: flex;
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(4) li + li {
+      margin-left: -10px;
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(4) img {
+      width: 34px;
+      height: 34px;
+      border: 2px solid var(--bg-soft);
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    main > section:first-of-type > aside > article:nth-of-type(4) p strong {
+      font-size: 1.2rem;
+    }
+
+    /* =========================================================
+       5. ENCABEZADOS COMUNES DE SECCIÓN
+       ========================================================= */
+    main > section:not(:first-of-type) {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 110px 0;
+    }
+
+    main > section > header {
+      max-width: 680px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    main > section > header p:first-of-type {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--orange);
+    }
+
+    main > section > header h2 {
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 800;
+    }
+
+    main > section > header p:last-of-type {
+      margin-top: 18px;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       6. FUNCIONES  (section:nth-of-type(2))
+       ========================================================= */
+    main > section:nth-of-type(2) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    main > section:nth-of-type(2) > ul li {
+      position: relative;
+      padding: 34px 30px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+
+    main > section:nth-of-type(2) > ul li:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 107, 44, 0.5);
+      box-shadow: 0 30px 60px -30px rgba(255, 107, 44, 0.55);
+    }
+
+    main > section:nth-of-type(2) > ul li:first-of-type {
+      grid-column: span 2;
+      background:
+        radial-gradient(60% 90% at 100% 0%, rgba(255, 107, 44, 0.3), transparent 70%),
+        var(--surface);
+    }
+
+    main > section:nth-of-type(2) > ul li figure {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 24px;
+      border-radius: 14px;
+      background: var(--gradient);
+      box-shadow: var(--glow);
+      transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    main > section:nth-of-type(2) > ul li:hover figure {
+      transform: rotate(-8deg) scale(1.08);
+    }
+
+    main > section:nth-of-type(2) > ul li figure img {
+      width: 24px;
+      height: 24px;
+    }
+
+    main > section:nth-of-type(2) > ul li h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    main > section:nth-of-type(2) > ul li p {
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       7. MÉTRICAS  (section:nth-of-type(3))
+       ========================================================= */
+    main > section:nth-of-type(3) {
+      padding: 0;
+    }
+
+    main > section:nth-of-type(3) > ul {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 56px 0;
+      border-block: 1px solid var(--line);
+      background: radial-gradient(50% 120% at 50% 50%, rgba(234, 75, 40, 0.12), transparent 70%);
+    }
+
+    main > section:nth-of-type(3) li {
+      text-align: center;
+    }
+
+    main > section:nth-of-type(3) li + li {
+      border-left: 1px solid var(--line);
+    }
+
+    main > section:nth-of-type(3) strong {
+      display: block;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    main > section:nth-of-type(3) span {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* =========================================================
+       8. PRECIOS  (section:nth-of-type(4))
+       ========================================================= */
+    /* Selector mensual / anual */
+    main > section:nth-of-type(4) > fieldset {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      width: max-content;
+      margin: -24px auto 56px;
+      padding: 5px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    main > section:nth-of-type(4) > fieldset legend {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    main > section:nth-of-type(4) > fieldset label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .25s, color .25s;
+    }
+
+    main > section:nth-of-type(4) > fieldset label:has(input:checked) {
+      color: #fff;
+      background: var(--gradient);
+      box-shadow: var(--glow);
+    }
+
+    main > section:nth-of-type(4) > fieldset label:has(input:focus-visible) {
+      outline: 2px solid var(--orange);
+      outline-offset: 2px;
+    }
+
+    main > section:nth-of-type(4) > fieldset input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    main > section:nth-of-type(4) > fieldset small {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: .72rem;
+      color: var(--bg);
+      background: var(--green);
+    }
+
+    main > section:nth-of-type(4) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: center;
+    }
+
+    main > section:nth-of-type(4) > ul > li {
+      position: relative;
+      padding: 40px 32px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      transition: transform .3s;
+    }
+
+    main > section:nth-of-type(4) > ul > li:hover {
+      transform: translateY(-6px);
+    }
+
+    main > section:nth-of-type(4) > ul > li:nth-of-type(2) {
+      padding-block: 56px;
+      background:
+        linear-gradient(var(--bg-soft), var(--bg-soft)) padding-box,
+        var(--gradient) border-box;
+      border: 2px solid transparent;
+      box-shadow: 0 40px 90px -30px rgba(255, 107, 44, 0.6);
+    }
+
+    main > section:nth-of-type(4) > ul > li mark {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 16px;
+      font-size: .76rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+    }
+
+    main > section:nth-of-type(4) > ul > li h3 {
+      font-size: 1.3rem;
+    }
+
+    main > section:nth-of-type(4) > ul > li > p:first-of-type {
+      margin: 18px 0 6px;
+    }
+
+    main > section:nth-of-type(4) > ul > li > p:first-of-type strong {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    main > section:nth-of-type(4) > ul > li > p:first-of-type strong[data-cambio] {
+      animation: subir .4s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    main > section:nth-of-type(4) > ul > li > p small,
+    main > section:nth-of-type(4) > ul > li > p:nth-of-type(2) {
+      color: var(--muted);
+    }
+
+    main > section:nth-of-type(4) > ul > li > ul {
+      margin: 28px 0 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    main > section:nth-of-type(4) > ul > li > ul li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      font-size: .95rem;
+    }
+
+    main > section:nth-of-type(4) > ul > li > ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+      font-weight: 800;
+    }
+
+    main > section:nth-of-type(4) > ul > li > a {
+      display: block;
+      padding: 15px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    main > section:nth-of-type(4) > ul > li > a:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    main > section:nth-of-type(4) > ul > li:nth-of-type(2) > a {
+      background: var(--gradient);
+      border-color: transparent;
+      box-shadow: var(--glow);
+    }
+
+    main > section:nth-of-type(4) > ul > li:nth-of-type(2) > a:hover {
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    /* =========================================================
+       9. TESTIMONIOS  (section:nth-of-type(5))
+       ========================================================= */
+    main > section:nth-of-type(5) > ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    main > section:nth-of-type(5) > ul li {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 32px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: border-color .3s, transform .3s;
+    }
+
+    main > section:nth-of-type(5) > ul li:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 107, 44, 0.4);
+    }
+
+    main > section:nth-of-type(5) blockquote {
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    main > section:nth-of-type(5) blockquote::before {
+      content: "“";
+      display: block;
+      height: 40px;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--orange);
+    }
+
+    main > section:nth-of-type(5) li footer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    main > section:nth-of-type(5) li img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    main > section:nth-of-type(5) cite {
+      font-style: normal;
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    main > section:nth-of-type(5) cite strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* =========================================================
+       10. FOOTER (efecto horizonte naranja + estrellas)
+       ========================================================= */
+    body > footer {
+      position: relative;
+      overflow: hidden;
+      padding: 160px 16px 48px;
+      background:
+        radial-gradient(70% 22% at 50% 36%, rgba(255, 138, 61, 0.75), transparent 70%),
+        linear-gradient(180deg,
+          var(--bg) 0%,
+          #1a0c18 16%,
+          #4a1414 28%,
+          #d4541c 38%,
+          #b8321a 44%,
+          #521416 56%,
+          #1c0b14 74%,
+          var(--bg) 100%);
+    }
+
+    /* Capa de estrellas */
+    body > footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 12% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 28% 48%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 41% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 57% 42%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 69% 18%, #fff, transparent),
+        radial-gradient(1px 1px at 83% 36%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 92% 26%, #fff, transparent),
+        radial-gradient(1px 1px at 6% 40%, #fff, transparent);
+      opacity: .7;
+      animation: twinkle 4s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    /* CTA final */
+    body > footer > section {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto 150px;
+      text-align: center;
+    }
+
+    body > footer > section h2 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+    }
+
+    body > footer > section p {
+      max-width: 560px;
+      margin: 22px auto 34px;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    body > footer > section a {
+      display: inline-block;
+      padding: 14px 30px;
+      background: linear-gradient(135deg, #ff8a3d, var(--orange-deep));
+      border-radius: 10px;
+      font-weight: 700;
+      box-shadow: 0 12px 40px -8px rgba(255, 107, 44, 0.9);
+    }
+
+    body > footer > section a:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Tarjeta de enlaces */
+    body > footer > article {
+      position: relative;
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 40px;
+      padding: 44px;
+      background: rgba(34, 14, 20, 0.72);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 26px;
+    }
+
+    body > footer > article > header > a {
+      font-size: 1.2rem;
+    }
+
+    body > footer > article > header > a img {
+      width: 30px;
+      height: 30px;
+    }
+
+    body > footer > article > header > p {
+      margin: 12px 0 22px;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    body > footer > article > header ul {
+      display: flex;
+      gap: 10px;
+    }
+
+    body > footer > article > header ul a {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+    }
+
+    body > footer > article > header ul img {
+      width: 16px;
+      height: 16px;
+      opacity: .8;
+    }
+
+    body > footer > article > header ul a:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    body > footer > article > nav h3 {
+      margin-bottom: 16px;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #ff9a6b;
+    }
+
+    body > footer > article > nav li {
+      margin-bottom: 10px;
+    }
+
+    body > footer > article > nav a {
+      font-size: .9rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    body > footer > article > nav a:hover {
+      color: var(--text);
+    }
+
+    body > footer > article > nav mark {
+      margin-left: 8px;
+      padding: 2px 9px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--bg);
+      font-size: .68rem;
+      font-weight: 600;
+    }
+
+    body > footer > article > footer {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      font-size: .82rem;
+    }
+
+    body > footer > article > footer ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    body > footer > article > footer li + li::before {
+      content: "|";
+      margin: 0 12px;
+      color: var(--muted);
+    }
+
+    body > footer > article > footer a:hover {
+      color: #ff9a6b;
+    }
+
+    body > footer > article > footer p a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* =========================================================
+       11. ANIMACIONES
+       ========================================================= */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    @keyframes twinkle {
+      from { opacity: .3; }
+      to   { opacity: .85; }
+    }
+
+    @keyframes subir {
+      from { opacity: 0; translate: 0 24px; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; scale: .96; }
+      to   { opacity: 1; scale: 1; }
+    }
+
+    /* Aparición al hacer scroll (el script marca los elementos con data-reveal) */
+    [data-reveal] {
+      transition: opacity .8s cubic-bezier(.2, .7, .2, 1) var(--d, 0s), translate .8s cubic-bezier(.2, .7, .2, 1) var(--d, 0s);
+    }
+
+    [data-reveal=""] {
+      opacity: 0;
+      translate: 0 28px;
+    }
+
+    /* =========================================================
+       12. RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1024px) {
+      body > header > button {
+        display: block;
+      }
+
+      body > header > nav:first-of-type {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        padding: 12px;
+        background: rgba(14, 11, 20, 0.97);
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        translate: 0 -8px;
+        transition: opacity .3s, translate .3s, visibility .3s;
+      }
+
+      body > header:has(> button[aria-expanded="true"]) > nav:first-of-type {
+        opacity: 1;
+        visibility: visible;
+        translate: 0 0;
+      }
+
+      body > header > nav:first-of-type ul {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      body > header > nav:first-of-type a {
+        display: block;
+        padding: 12px 14px;
+        border-radius: 10px;
+        font-size: 1rem;
+      }
+
+      body > header > nav:first-of-type a:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      body > header > nav:last-of-type {
+        margin-left: auto;
+      }
+
+      main > section:first-of-type {
+        grid-template-columns: 1fr;
+        padding-top: 80px;
+      }
+
+      main > section:first-of-type > aside {
+        margin: 40px 12px 0;
+      }
+
+      main > section:nth-of-type(2) > ul,
+      main > section:nth-of-type(4) > ul,
+      main > section:nth-of-type(5) > ul {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      main > section:nth-of-type(4) > ul > li:nth-of-type(3) {
+        grid-column: 1 / -1;
+      }
+
+      main > section:nth-of-type(5) > ul li:nth-of-type(3) {
+        grid-column: 1 / -1;
+      }
+
+      body > footer > article {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      body > header > nav:last-of-type a:first-of-type {
+        display: none;
+      }
+
+      body > header > nav:last-of-type a:last-of-type {
+        padding: 10px 16px;
+      }
+
+      main > section:first-of-type > aside > article:first-of-type {
+        grid-template-columns: 1fr;
+        transform: none;
+      }
+
+      main > section:first-of-type > aside > article:first-of-type > nav,
+      main > section:first-of-type > aside > article:nth-of-type(3) {
+        display: none;
+      }
+
+      main > section:first-of-type > aside > article:nth-of-type(2) {
+        right: 0;
+        top: -56px;
+      }
+
+      main > section:first-of-type > aside > article:first-of-type > section {
+        grid-template-columns: 1fr;
+      }
+
+      main > section:first-of-type > aside > article:first-of-type > section > ul strong {
+        font-size: 1.15rem;
+      }
+
+      main > section:nth-of-type(2) > ul,
+      main > section:nth-of-type(4) > ul,
+      main > section:nth-of-type(5) > ul,
+      main > section:nth-of-type(3) > ul,
+      body > footer > article {
+        grid-template-columns: 1fr;
+      }
+
+      main > section:nth-of-type(2) > ul li:first-of-type {
+        grid-column: auto;
+      }
+
+      main > section:nth-of-type(3) > ul {
+        gap: 32px;
+      }
+
+      main > section:nth-of-type(3) li + li {
+        border-left: 0;
+      }
+
+      body > footer > article {
+        padding: 32px 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        transition-delay: 0s !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <a href="#inicio" aria-label="FILAX, ir al inicio">
+      <figure>
+        <img src="imagenes/logo.svg" alt="" width="40" height="40">
+      </figure>
+      FILAX
+    </a>
+
+    <nav id="menu-principal" aria-label="Principal">
+      <ul>
+        <li><a href="#funciones">Producto</a></li>
+        <li><a href="#metricas">Resultados</a></li>
+        <li><a href="#precios">Precios</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#contacto">Empresa</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Cuenta">
+      <a href="#">Iniciar sesión</a>
+      <a href="#precios">Empezar gratis</a>
+    </nav>
+
+    <button type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"></button>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="inicio">
+      <article>
+        <p><mark>Nuevo</mark> Presentamos FILAX 3.0 con IA →</p>
+
+        <h1>Domina tu pipeline. <em>Cierra sin piedad.</em></h1>
+
+        <p>FILAX es el CRM que convierte cada lead en ingresos: gestiona clientes, automatiza seguimientos y predice ventas con inteligencia artificial, todo en una sola plataforma.</p>
+
+        <p>
+          <a href="#precios">Prueba gratis 14 días →</a>
+          <a href="#funciones">Ver demo <span aria-hidden="true">▶</span></a>
+        </p>
+
+        <ul>
+          <li>Sin tarjeta de crédito</li>
+          <li>Configuración en 5 minutos</li>
+          <li>Cancela cuando quieras</li>
+        </ul>
+
+        <footer>
+          <p>Con la confianza de +18.000 equipos comerciales</p>
+          <ul aria-label="Empresas que usan FILAX">
+            <li>Lunexa</li>
+            <li>Corvalo</li>
+            <li>Nubra</li>
+            <li>Quíntica</li>
+            <li>Belvar</li>
+          </ul>
+        </footer>
+      </article>
+
+      <aside aria-label="Vista previa del panel de FILAX">
+        <article>
+          <nav aria-label="Menú de ejemplo del panel">
+            <strong>FILAX</strong>
+            <ul>
+              <li>Panel</li>
+              <li>Leads</li>
+              <li>Oportunidades</li>
+              <li>Contactos</li>
+              <li>Campañas</li>
+              <li>Informes</li>
+              <li>Ajustes</li>
+            </ul>
+          </nav>
+
+          <section>
+            <header>
+              <strong>Panel</strong>
+              <p>Buscar clientes…</p>
+              <figure>
+                <img src="imagenes/avatar-carlos.jpg" alt="Avatar de Carlos" width="192" height="192">
+              </figure>
+            </header>
+
+            <h2>Bienvenido, Carlos</h2>
+            <p>Esto es lo que está pasando con tus ventas hoy.</p>
+
+            <ul>
+              <li><small>Ingresos del mes</small><strong>84 k€</strong><span>+24 % vs. mes anterior</span></li>
+              <li><small>Tasa de cierre</small><strong>68 %</strong><span>+12 % vs. mes anterior</span></li>
+              <li><small>Leads nuevos</small><strong>342</strong><span>+58 esta semana</span></li>
+            </ul>
+
+            <article>
+              <h3>Evolución del pipeline</h3>
+              <figure>
+                <img src="imagenes/grafico-pipeline.svg" alt="Gráfico de crecimiento del pipeline" width="300" height="120">
+              </figure>
+            </article>
+
+            <article>
+              <h3>Actividad reciente</h3>
+              <ul>
+                <li>Trato cerrado: Nubra <span>2 min</span></li>
+                <li>Nuevo lead asignado <span>1 h</span></li>
+                <li>Email automático enviado <span>3 h</span></li>
+                <li>Reunión agendada <span>1 d</span></li>
+              </ul>
+            </article>
+          </section>
+        </article>
+
+        <article>
+          <figure><img src="iconos/zap.svg" alt="" width="24" height="24"></figure>
+          <p><strong>Pipeline en vivo</strong><small>Tus tratos se actualizan en tiempo real.</small></p>
+        </article>
+
+        <article>
+          <figure><img src="iconos/sparkles.svg" alt="" width="24" height="24"></figure>
+          <p><strong>IA predictiva</strong><small>Sabe qué lead cerrará antes que tú.</small></p>
+        </article>
+
+        <article>
+          <ul>
+            <li><figure><img src="imagenes/avatar-cliente-1.jpg" alt="" width="192" height="192"></figure></li>
+            <li><figure><img src="imagenes/avatar-cliente-2.jpg" alt="" width="192" height="192"></figure></li>
+            <li><figure><img src="imagenes/avatar-cliente-3.jpg" alt="" width="192" height="192"></figure></li>
+            <li><figure><img src="imagenes/avatar-cliente-4.jpg" alt="" width="192" height="192"></figure></li>
+          </ul>
+          <p><strong>4,9/5</strong><small>Más de 3.200 reseñas</small></p>
+        </article>
+      </aside>
+    </section>
+
+    <!-- ===================== FUNCIONES ===================== -->
+    <section id="funciones">
+      <header>
+        <p>Funciones</p>
+        <h2>Todo lo que necesitas para <em>vender más.</em></h2>
+        <p>Deja de perseguir hojas de cálculo. FILAX centraliza tu proceso comercial y trabaja por ti las 24 horas.</p>
+      </header>
+
+      <ul>
+        <li>
+          <figure><img src="iconos/kanban.svg" alt="" width="24" height="24"></figure>
+          <h3>Pipeline visual que no perdona</h3>
+          <p>Arrastra, suelta y cierra. Visualiza cada oportunidad por etapa, detecta cuellos de botella al instante y prioriza los tratos que más dinero mueven.</p>
+        </li>
+        <li>
+          <figure><img src="iconos/sparkles.svg" alt="" width="24" height="24"></figure>
+          <h3>Scoring con IA</h3>
+          <p>Puntúa automáticamente cada lead según su probabilidad real de compra.</p>
+        </li>
+        <li>
+          <figure><img src="iconos/zap.svg" alt="" width="24" height="24"></figure>
+          <h3>Automatizaciones</h3>
+          <p>Seguimientos, emails y tareas que se disparan solos, sin tocar un botón.</p>
+        </li>
+        <li>
+          <figure><img src="iconos/inbox.svg" alt="" width="24" height="24"></figure>
+          <h3>Bandeja unificada</h3>
+          <p>Email, WhatsApp y llamadas de cada cliente en un único historial.</p>
+        </li>
+        <li>
+          <figure><img src="iconos/chart-column-increasing.svg" alt="" width="24" height="24"></figure>
+          <h3>Informes en tiempo real</h3>
+          <p>Previsiones de ventas y KPIs del equipo actualizados al segundo.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== MÉTRICAS ===================== -->
+    <section id="metricas" aria-label="Resultados de FILAX">
+      <ul>
+        <li><strong>+47 %</strong><span>más tratos cerrados</span></li>
+        <li><strong>12 h</strong><span>ahorradas por vendedor/semana</span></li>
+        <li><strong>18.000</strong><span>equipos activos</span></li>
+        <li><strong>99,9 %</strong><span>de disponibilidad</span></li>
+      </ul>
+    </section>
+
+    <!-- ===================== PRECIOS ===================== -->
+    <section id="precios">
+      <header>
+        <p>Precios</p>
+        <h2>Planes que <em>escalan contigo.</em></h2>
+        <p>Empieza gratis y crece sin límites. Sin contratos, sin letra pequeña.</p>
+      </header>
+
+      <fieldset>
+        <legend>Forma de pago</legend>
+        <label><input type="radio" name="facturacion" value="mensual" checked> Mensual</label>
+        <label><input type="radio" name="facturacion" value="anual"> Anual <small>−20 %</small></label>
+      </fieldset>
+
+      <ul>
+        <li>
+          <h3>Starter</h3>
+          <p><strong data-mensual="19 €" data-anual="15 €">19 €</strong> <small>/usuario/mes</small></p>
+          <p>Para equipos que empiezan a ordenar sus ventas.</p>
+          <ul>
+            <li>Hasta 2.000 contactos</li>
+            <li>Pipeline visual</li>
+            <li>Integración con email</li>
+            <li>Soporte por chat</li>
+          </ul>
+          <a href="#">Empezar gratis</a>
+        </li>
+        <li>
+          <mark>Más popular</mark>
+          <h3>Pro</h3>
+          <p><strong data-mensual="49 €" data-anual="39 €">49 €</strong> <small>/usuario/mes</small></p>
+          <p>Para equipos que quieren aplastar sus objetivos.</p>
+          <ul>
+            <li>Contactos ilimitados</li>
+            <li>Scoring con IA</li>
+            <li>Automatizaciones avanzadas</li>
+            <li>Bandeja unificada</li>
+            <li>Informes personalizados</li>
+          </ul>
+          <a href="#">Probar Pro 14 días</a>
+        </li>
+        <li>
+          <h3>Enterprise</h3>
+          <p><strong>A medida</strong></p>
+          <p>Para organizaciones con procesos complejos.</p>
+          <ul>
+            <li>Todo lo de Pro</li>
+            <li>SSO y permisos avanzados</li>
+            <li>API e integraciones dedicadas</li>
+            <li>Gerente de cuenta propio</li>
+          </ul>
+          <a href="mailto:ventas@filax.example">Hablar con ventas</a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== TESTIMONIOS ===================== -->
+    <section id="clientes">
+      <header>
+        <p>Clientes</p>
+        <h2>Equipos que ya <em>ganan con FILAX.</em></h2>
+        <p>Resultados de empresas que dejaron atrás el caos comercial.</p>
+      </header>
+
+      <ul>
+        <li>
+          <blockquote>En tres meses duplicamos la tasa de cierre. El scoring con IA nos dice exactamente a quién llamar primero.</blockquote>
+          <footer>
+            <figure><img src="imagenes/avatar-laura.jpg" alt="" width="192" height="192" loading="lazy"></figure>
+            <cite><strong>Laura Méndez</strong>Directora comercial, Lunexa</cite>
+          </footer>
+        </li>
+        <li>
+          <blockquote>Migramos 40.000 contactos en una tarde. Las automatizaciones nos ahorran un día entero cada semana.</blockquote>
+          <footer>
+            <figure><img src="imagenes/avatar-diego.jpg" alt="" width="192" height="192" loading="lazy"></figure>
+            <cite><strong>Diego Ramírez</strong>CEO, Corvalo</cite>
+          </footer>
+        </li>
+        <li>
+          <blockquote>Por fin todo el equipo ve el mismo pipeline. Las previsiones de ventas ahora son fiables al 95 %.</blockquote>
+          <footer>
+            <figure><img src="imagenes/avatar-sofia.jpg" alt="" width="192" height="192" loading="lazy"></figure>
+            <cite><strong>Sofía Torres</strong>Directora de ventas, Quíntica</cite>
+          </footer>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="contacto">
+    <section>
+      <h2>Fácil de usar.<br>Brutalmente potente para vender.</h2>
+      <p>Únete a los equipos que convierten más leads en clientes con un CRM que realmente entienden.</p>
+      <a href="#precios">Empieza a vender más</a>
+    </section>
+
+    <article>
+      <header>
+        <a href="#inicio" aria-label="FILAX, ir al inicio">
+          <figure>
+            <img src="imagenes/logo.svg" alt="" width="40" height="40">
+          </figure>
+          FILAX
+        </a>
+        <p>Vende sin límites.</p>
+        <ul>
+          <li><a href="#" aria-label="FILAX en X"><figure><img src="iconos/x-twitter.svg" alt="" width="16" height="16"></figure></a></li>
+          <li><a href="#" aria-label="FILAX en LinkedIn"><figure><img src="iconos/linkedin-in.svg" alt="" width="16" height="16"></figure></a></li>
+          <li><a href="#" aria-label="FILAX en Instagram"><figure><img src="iconos/instagram.svg" alt="" width="16" height="16"></figure></a></li>
+          <li><a href="#" aria-label="FILAX en YouTube"><figure><img src="iconos/youtube.svg" alt="" width="16" height="16"></figure></a></li>
+        </ul>
+      </header>
+
+      <nav aria-label="Producto">
+        <h3>Producto</h3>
+        <ul>
+          <li><a href="#funciones">Funciones</a></li>
+          <li><a href="#precios">Precios</a></li>
+          <li><a href="#">Integraciones</a></li>
+          <li><a href="#">Novedades</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Empresa">
+        <h3>Empresa</h3>
+        <ul>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Empleo</a><mark>Contratando</mark></li>
+          <li><a href="#">Prensa</a></li>
+          <li><a href="mailto:hola@filax.example">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Recursos">
+        <h3>Recursos</h3>
+        <ul>
+          <li><a href="#clientes">Casos de éxito</a></li>
+          <li><a href="#">Blog de ventas</a></li>
+          <li><a href="#">Centro de ayuda</a></li>
+          <li><a href="#">Webinars</a><mark>Próximamente</mark></li>
+        </ul>
+      </nav>
+
+      <footer>
+        <ul>
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Seguridad</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+        <!-- Crédito obligatorio con la Licencia Gratis de All Pixels -->
+        <p>© <time datetime="2026">2026</time> FILAX · <a href="https://allpixels.dev">Plantilla de All Pixels</a></p>
+      </footer>
+    </article>
+  </footer>
+
+  <script>
+    /* =========================================================
+       FILAX · interacciones
+       Los elementos se buscan por su etiqueta, igual que en el CSS.
+       ========================================================= */
+    const sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+    /* Año del pie */
+    const anio = $('body > footer time');
+    anio.textContent = new Date().getFullYear();
+    anio.setAttribute('datetime', anio.textContent);
+
+    /* 1. Cabecera: fondo al bajar, sección activa y menú móvil */
+    const cabecera = $('body > header');
+    const botonMenu = $('body > header > button');
+    const enlacesMenu = $$('#menu-principal a');
+
+    const alScroll = () => cabecera.toggleAttribute('data-scrolled', scrollY > 30);
+    addEventListener('scroll', alScroll, { passive: true });
+    alScroll();
+
+    const alternarMenu = (abrir) => {
+      botonMenu.setAttribute('aria-expanded', abrir);
+      botonMenu.setAttribute('aria-label', abrir ? 'Cerrar menú' : 'Abrir menú');
+    };
+    botonMenu.addEventListener('click', () => alternarMenu(botonMenu.getAttribute('aria-expanded') !== 'true'));
+    $('#menu-principal').addEventListener('click', (e) => { if (e.target.closest('a')) alternarMenu(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') alternarMenu(false); });
+    document.addEventListener('click', (e) => { if (!e.target.closest('body > header')) alternarMenu(false); });
+
+    if ('IntersectionObserver' in window) {
+      const espia = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            enlacesMenu.forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === '#' + entrada.target.id));
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      $$('main > section[id]').forEach((s) => espia.observe(s));
+    }
+
+    /* 2. Aparición al hacer scroll, con un pequeño escalonado */
+    if ('IntersectionObserver' in window && !sinMovimiento) {
+      const objetivos = $$('main > section:not(:first-of-type) > header, main > section:not(:first-of-type) > ul > li, body > footer > section, body > footer > article');
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.dataset.reveal = 'visible';
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      objetivos.forEach((el) => {
+        const posicion = [...el.parentElement.children].indexOf(el);
+        el.style.setProperty('--d', Math.min(posicion, 4) * 0.1 + 's');
+        el.dataset.reveal = '';
+        observador.observe(el);
+      });
+    }
+
+    /* 3. Métricas que cuentan al aparecer (respetan el prefijo, los puntos y el sufijo: "+47 %", "18.000") */
+    const contar = (el) => {
+      const texto = el.textContent;
+      const coincide = texto.match(/^(\D*)([\d.]+)(,\d+)?(.*)$/);
+      if (!coincide || coincide[3]) return;   // las cifras con decimales se dejan tal cual
+      const [, prefijo, numero, , sufijo] = coincide;
+      const total = Number(numero.replace(/\./g, ''));
+      const inicio = performance.now();
+      const paso = (ahora) => {
+        const p = Math.min((ahora - inicio) / 1500, 1);
+        el.textContent = prefijo + Math.round(total * (1 - Math.pow(1 - p, 3))).toLocaleString('es-ES') + sufijo;
+        if (p < 1) requestAnimationFrame(paso);
+      };
+      requestAnimationFrame(paso);
+    };
+
+    if ('IntersectionObserver' in window && !sinMovimiento) {
+      const obsCifras = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) { contar(entrada.target); obsCifras.unobserve(entrada.target); }
+        });
+      }, { threshold: 0.6 });
+      $$('#metricas strong').forEach((c) => obsCifras.observe(c));
+    }
+
+    /* 4. Precios: mensual o anual */
+    const precios = $$('#precios strong[data-mensual]');
+    $$('#precios fieldset input').forEach((opcion) => opcion.addEventListener('change', () => {
+      precios.forEach((precio) => {
+        precio.textContent = precio.dataset[opcion.value];
+        precio.removeAttribute('data-cambio');
+        void precio.offsetWidth;   // reinicia la animación
+        precio.setAttribute('data-cambio', '');
+      });
+    }));
+
+    /* 5. Maqueta del hero: inclinación 3D siguiendo el puntero */
+    const maqueta = $('#inicio > aside');
+    const panel = $(':scope > article:first-of-type', maqueta);
+    if (!sinMovimiento && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      maqueta.addEventListener('pointermove', (e) => {
+        const caja = maqueta.getBoundingClientRect();
+        const x = (e.clientX - caja.left) / caja.width - 0.5;
+        const y = (e.clientY - caja.top) / caja.height - 0.5;
+        panel.style.transform = `rotateY(${(-6 + x * 10).toFixed(2)}deg) rotateX(${(3 - y * 8).toFixed(2)}deg)`;
+      });
+      maqueta.addEventListener('pointerleave', () => { panel.style.transform = ''; });
+    }
+  </script>
+</body>
+</html>
