@@ -769,49 +769,239 @@
   section#como-funciona li.destacado h3,
   section#como-funciona li.destacado p{color:#fff;}
 
-  /* ---------- Beneficios ---------- */
-  section#beneficios{
+  /* ---------- Beneficios · Vista despiezada ---------- */
+  /* Tipografías reales de cada plantilla (se cargan desde su demo solo al usarse) */
+  @font-face{font-family:"Muestra Nogal";font-weight:600;font-display:swap;src:url("demo/nogal/fuentes/fraunces-600-normal.woff2") format("woff2");}
+  @font-face{font-family:"Muestra Motorline";font-weight:100 900;font-display:swap;src:url("demo/motorline/fuentes/montserrat-variable.woff2") format("woff2");}
+  @font-face{font-family:"Muestra Solares";font-weight:800;font-display:swap;src:url("demo/solares/fuentes/sora-800.woff2") format("woff2");}
+
+  section#beneficios{padding-block-end:0;overflow-x:clip;}
+  section#beneficios div.encabezado{display:grid;justify-items:center;text-align:center;}
+  section#beneficios div.encabezado > h2{max-width:34rem;}
+  section#beneficios div.encabezado > h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  section#beneficios div.encabezado > p.sub{max-width:34rem;margin-block-start:.9rem;color:var(--ink-soft);font-size:1.05rem;}
+
+  /* El recorrido mide 3,6 pantallas: mientras bajas, la escena se queda fija */
+  div.recorrido{position:relative;height:360vh;}
+  div.escena{
+    position:sticky;top:0;
+    height:100vh;height:100svh;
     display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:3rem;
-    align-items:start;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+    align-items:center;
+    gap:2rem;
+    padding-block:5rem 2.5rem;
   }
-  section#beneficios div.encabezado ul{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:1.4rem;
-    margin-block-start:2.2rem;
+
+  /* La pila de capas en 3D */
+  div.pila{
+    --tilt:0;--sep:0;--gap:112px;--baja:90px;
+    position:relative;
+    justify-self:center;
+    width:min(360px, 28vw, 37svh);
+    aspect-ratio:4 / 5;
+    transform-style:preserve-3d;
+    transform:perspective(2200px) translateY(calc(var(--sep) * var(--baja))) rotateX(calc(var(--tilt) * 54deg)) rotateZ(calc(var(--tilt) * -38deg));
   }
-  section#beneficios li{
-    background:var(--card);
+  /* Sombra en el suelo que se abre al separarse las capas */
+  div.pila::before{
+    content:"";position:absolute;inset:4% -6% -6% 4%;
+    border-radius:30px;
+    background:radial-gradient(closest-side, rgba(94,66,210,.45), transparent);
+    filter:blur(18px);
+    transform:translateZ(-30px) scale(calc(1 + var(--sep) * .18));
+    opacity:calc(.35 + var(--sep) * .4);
+  }
+  div.pila > figure{
+    position:absolute;inset:0;margin:0;
+    border-radius:18px;overflow:hidden;
     border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:1.6rem;
+    box-shadow:0 30px 60px -28px rgba(15,12,41,.55);
+    transform:translateZ(calc((var(--sep) * var(--gap) * var(--i)) + var(--i) * 1px));
+    transition:box-shadow .35s ease, outline-color .35s ease, filter .35s ease;
+    outline:2px solid transparent;outline-offset:4px;
   }
-  section#beneficios li h3{font-size:1.05rem;margin-block-end:.4rem;}
-  section#beneficios li p{color:var(--ink-soft);font-size:.92rem;}
+  div.pila > figure:nth-of-type(1){--i:0;}
+  div.pila > figure:nth-of-type(2){--i:1;}
+  div.pila > figure:nth-of-type(3){--i:2;}
+  div.pila > figure:nth-of-type(4){--i:3;}
+  div.pila[data-activa] > figure{filter:saturate(.7) brightness(.9);}
+  div.pila > figure[data-activa]{
+    filter:none;outline-color:var(--violet);
+    box-shadow:0 0 0 8px rgba(124,92,255,.18), 0 40px 70px -24px rgba(124,92,255,.65);
+  }
+  /* Línea de luz que recorre la capa activa */
+  div.pila > figure[data-activa]::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg, transparent 0 40%, rgba(255,255,255,.28) 50%, transparent 60% 100%);
+    background-size:100% 260%;
+    animation:escaneo 2.4s ease-in-out infinite;
+  }
+  @keyframes escaneo{from{background-position:0 120%;}to{background-position:0 -20%;}}
+  /* Número de capa (aparece al separarse) */
+  div.pila > figure figcaption{
+    position:absolute;top:10px;left:10px;z-index:2;
+    display:flex;align-items:center;gap:.4rem;
+    font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:.32rem .6rem;border-radius:7px;
+    color:#fff;background:rgba(15,12,41,.8);
+    opacity:var(--sep);
+  }
+  div.pila > figure figcaption b{
+    display:grid;place-items:center;width:1.25rem;height:1.25rem;border-radius:5px;
+    background:var(--grad);font-weight:600;font-size:.6rem;
+  }
+  /* Salto suave al cambiar de plantilla */
+  div.pila[data-cambio] > figure{animation:salto .55s cubic-bezier(.2,.8,.2,1) both;}
+  div.pila[data-cambio] > figure:nth-of-type(2){animation-delay:.05s;}
+  div.pila[data-cambio] > figure:nth-of-type(3){animation-delay:.1s;}
+  div.pila[data-cambio] > figure:nth-of-type(4){animation-delay:.15s;}
+  @keyframes salto{40%{opacity:.35;}}
+
+  /* Capa 1 · Estructura HTML */
+  figure.capa-html{
+    background:#0F0C29;
+    display:grid;grid-template-rows:9% 30% 1fr 11%;gap:7px;
+    padding:40px 14px 14px;
+  }
+  figure.capa-html span{
+    display:flex;align-items:center;justify-content:center;
+    border:1.5px dashed rgba(167,146,255,.75);border-radius:8px;
+    font-family:var(--font-mono);font-size:.68rem;color:#C9BCFF;background:rgba(124,92,255,.08);
+  }
+  figure.capa-html span.columnas{border:0;background:none;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+  figure.capa-html span.columnas i{
+    font-style:normal;display:flex;align-items:center;justify-content:center;
+    border:1.5px dashed rgba(46,230,230,.65);border-radius:8px;color:#9FF3F3;background:rgba(46,230,230,.06);
+  }
+
+  /* Capa 2 · Estilos CSS */
+  figure.capa-css{
+    background:
+      repeating-linear-gradient(0deg, rgba(124,92,255,.10) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, rgba(124,92,255,.10) 0 1px, transparent 1px 24px),
+      var(--card);
+    display:flex;flex-direction:column;justify-content:center;gap:14px;
+    padding:42px 20px 20px;
+  }
+  figure.capa-css ul{display:flex;gap:8px;list-style:none;margin:0;padding:0;}
+  figure.capa-css li{width:34px;aspect-ratio:1;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 1px var(--line);transition:background .5s ease;}
+  figure.capa-css pre{
+    margin:0;padding:13px 15px;border-radius:12px;
+    font-family:var(--font-mono);font-size:.7rem;line-height:1.75;white-space:pre;overflow:hidden;
+    color:#E8E4FF;background:#0F0C29;
+  }
+  figure.capa-css pre b{color:#FF9E8F;font-weight:500;}
+  figure.capa-css pre em{color:#7FF0F0;font-style:normal;}
+  figure.capa-css pre i{display:inline-block;width:.7em;height:.7em;border-radius:2px;vertical-align:-.05em;margin-inline-end:.35em;font-style:normal;}
+  figure.capa-css p{margin:0;font-family:var(--font-mono);font-size:.66rem;color:var(--ink-soft);}
+
+  /* Capa 3 · Tipografías e iconos */
+  figure.capa-tipo{
+    background:linear-gradient(160deg, rgba(255,255,255,.92), rgba(240,236,255,.85));
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:4px;
+    padding:42px 22px 22px;color:#0F0C29;
+  }
+  :root[data-theme="dark"] figure.capa-tipo{background:linear-gradient(160deg, rgba(21,26,66,.92), rgba(17,22,58,.8));color:#fff;}
+  figure.capa-tipo strong{
+    font-size:5.2rem;font-weight:700;line-height:1;letter-spacing:-.03em;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+    padding-inline-end:.1em;
+  }
+  figure.capa-tipo small{font-family:var(--font-mono);font-size:.68rem;opacity:.75;}
+  figure.capa-tipo ul{display:flex;gap:7px;list-style:none;margin:12px 0 0;padding:0;}
+  figure.capa-tipo li{
+    display:grid;place-items:center;width:34px;height:34px;border-radius:9px;
+    background:#0F0C29;color:#fff;font-size:.95rem;
+  }
+  figure.capa-tipo li img{width:18px;height:18px;display:block;}
+
+  /* Capa 4 · Fotos y contenido */
+  figure.capa-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block;}
+
+  /* Columna de texto */
+  div.explica{display:grid;gap:1rem;max-width:27rem;}
+  ol.capas-lista{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;}
+  ol.capas-lista li{
+    display:grid;grid-template-columns:auto 1fr;column-gap:1rem;
+    padding:1rem 1.15rem;
+    border:1px solid var(--line);border-radius:18px;background:var(--card);
+    opacity:.94;
+    transition:opacity .35s ease, transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  ol.capas-lista li > span{
+    grid-row:span 2;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:8px;
+    font-family:var(--font-mono);font-size:.72rem;color:var(--accent-text);background:var(--surface);
+    transition:background .35s ease, color .35s ease;
+  }
+  ol.capas-lista h3{font-size:1rem;margin:0 0 .2rem;}
+  ol.capas-lista p{margin:0;color:var(--ink-soft);font-size:.88rem;}
+  div.escena[data-separada] ol.capas-lista li:not([data-activa]) h3{color:var(--ink-soft);}
+  ol.capas-lista li[data-activa]{opacity:1;transform:translateX(-6px);border-color:rgba(124,92,255,.45);box-shadow:var(--shadow);}
+  ol.capas-lista li[data-activa] > span{background:var(--grad);color:#fff;}
+  div.escena:not([data-separada]) ol.capas-lista li{opacity:1;}
+
+  /* Selector: desmonta otra plantilla */
+  div.otra{display:grid;gap:.55rem;padding:1rem 1.15rem;border-radius:18px;background:var(--surface);border:1px solid var(--line);}
+  div.otra > p{margin:0;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+  div.otra menu{display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:0;list-style:none;}
+  div.otra menu button{
+    padding:.45rem .85rem;border-radius:999px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;
+    transition:background .25s ease, color .25s ease, border-color .25s ease;
+  }
+  div.otra menu button:hover{border-color:var(--violet);}
+  div.otra menu button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  div.otra dl{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin:0;font-size:.78rem;color:var(--ink-soft);}
+  div.otra dl div{display:flex;gap:.3rem;}
+  div.otra dt{font-family:var(--font-mono);}
+  div.otra dd{margin:0;font-weight:700;color:var(--ink);}
+  div.otra a{font-weight:700;font-size:.86rem;}
+
+  /* Indicador de avance */
+  p.desliza{
+    position:absolute;left:50%;bottom:1.1rem;translate:-50% 0;margin:0;
+    display:flex;align-items:center;gap:.6rem;white-space:nowrap;
+    font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  p.desliza i{display:block;width:120px;height:3px;border-radius:3px;background:var(--line);overflow:hidden;}
+  p.desliza i::after{content:"";display:block;height:100%;width:calc(var(--avance,0) * 100%);background:var(--grad);}
+
+  /* Cierre */
   section#beneficios > aside{
-    background:linear-gradient(160deg, var(--surface), var(--card));
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:2.4rem;
-    align-self:stretch;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem 2rem;
+    padding-block:1rem clamp(3.5rem, 6vw, 6rem);text-align:center;
   }
-  section#beneficios > aside p:first-of-type{
-    font-family:var(--font-title);
-    font-size:1.5rem;
-    font-weight:600;
-    line-height:1.3;
-    letter-spacing:-.01em;
+  section#beneficios > aside p{margin:0;font-family:var(--font-title);font-size:clamp(1.3rem, 2.4vw, 1.8rem);font-weight:700;letter-spacing:-.01em;}
+
+  @media (max-width: 860px){
+    div.recorrido{height:320vh;}
+    div.escena{
+      grid-template-columns:minmax(0,1fr);grid-template-rows:1fr auto;
+      gap:.5rem;padding-block:4.4rem 3rem;
+    }
+    div.pila{width:min(210px, 50vw, 30svh);--gap:52px;--baja:36px;}
+    figure.capa-tipo strong{font-size:3.4rem;}
+    figure.capa-css pre{font-size:.56rem;padding:9px 11px;}
+    figure.capa-css li{width:24px;}
+    figure.capa-tipo li{width:26px;height:26px;}
+    figure.capa-tipo li img{width:14px;height:14px;}
+    div.explica{max-width:none;gap:.5rem;}
+    ol.capas-lista li{display:none;transform:none;padding:.85rem 1rem;}
+    ol.capas-lista li[data-activa]{display:grid;}
+    div.escena:not([data-separada]) ol.capas-lista li:first-child{display:grid;}
+    div.otra{padding:.6rem .8rem;gap:.4rem;}
+    div.otra > p, div.otra dl{display:none;}
+    div.otra menu button{padding:.35rem .7rem;font-size:.76rem;}
+    p.desliza{bottom:.7rem;}
   }
-  section#beneficios > aside p:nth-of-type(2){
-    margin-block-start:1rem;
-    color:var(--ink-soft);
-    font-weight:700;
-    font-size:.9rem;
+
+  @media (prefers-reduced-motion: reduce){
+    div.recorrido{height:auto;}
+    div.escena{position:relative;height:auto;padding-block:3rem;}
+    p.desliza{display:none;}
+    ol.capas-lista li{display:grid !important;opacity:1;}
+    div.pila > figure[data-activa]::after{animation:none;}
   }
 
   /* ---------- Comunidad + CTA final ---------- */
@@ -944,7 +1134,7 @@
   section#fundador > p.ojo{margin-block-end:2.2rem;}
   section#fundador > figure{
     position:relative;
-    width:clamp(150px, 18vw, 196px);
+    width:clamp(120px, 15vw, 185px);
     aspect-ratio:1;
     margin:0;
     padding:5px;
@@ -1032,7 +1222,6 @@
   @media (max-width: 980px){
     section#hero{grid-template-columns:1fr;}
     div.portal{margin-block-start:2rem;}
-    section#beneficios{grid-template-columns:1fr;}
     section#comunidad ul.testimonios{grid-template-columns:1fr 1fr;}
     footer{grid-template-columns:repeat(2, minmax(0,1fr));}
   }
@@ -1066,7 +1255,6 @@
     div.portal aside:nth-of-type(1){left:0;}
     div.portal aside:nth-of-type(2){right:0;}
     section#como-funciona ol{grid-template-columns:1fr;}
-    section#beneficios div.encabezado ul{grid-template-columns:1fr;}
     section#comunidad ul.testimonios{grid-template-columns:1fr;}
     footer{grid-template-columns:minmax(0,1fr);}
     footer form div.campo{flex-wrap:wrap;}
@@ -1215,32 +1403,73 @@
     </ol>
   </section>
 
-  <section id="beneficios">
+  <section id="beneficios" aria-labelledby="beneficios-titulo">
     <div class="encabezado">
       <p class="ojo">Beneficios</p>
-      <h2>Por qué All Pixels</h2>
-      <ul>
-        <li>
-          <h3>Calidad premium</h3>
-          <p>Cada diseño pasa una revisión manual antes de sumarse a la mesa.</p>
-        </li>
-        <li>
-          <h3>Código limpio</h3>
-          <p>HTML semántico y CSS ordenado, listo para escalar sin dolores de cabeza.</p>
-        </li>
-        <li>
-          <h3>Catálogo en crecimiento</h3>
-          <p>Añadimos nuevas plantillas de forma regular, organizadas por sectores.</p>
-        </li>
-        <li>
-          <h3>Ayuda por correo</h3>
-          <p>¿Dudas con una plantilla? Escríbenos y te ayudamos a ponerla en marcha.</p>
-        </li>
-      </ul>
+      <h2 id="beneficios-titulo">Por qué All Pixels: <span>mira dentro de una plantilla</span></h2>
+      <p class="sub">Baja despacio: una plantilla real de la mesa se desmonta en las cuatro capas con las que está hecha. Después puedes desmontar otra.</p>
     </div>
+
+    <div class="recorrido">
+      <div class="escena">
+        <div class="pila" aria-hidden="true">
+          <figure class="capa-html">
+            <figcaption><b>1</b>HTML</figcaption>
+            <span>&lt;header&gt;</span>
+            <span>&lt;section&gt;</span>
+            <span class="columnas"><i>&lt;article&gt;</i><i>&lt;article&gt;</i><i>&lt;article&gt;</i></span>
+            <span>&lt;footer&gt;</span>
+          </figure>
+          <figure class="capa-css">
+            <figcaption><b>2</b>CSS</figcaption>
+            <ul><li></li><li></li><li></li><li></li><li></li></ul>
+            <pre></pre>
+            <p>La paleta entera, en un solo sitio.</p>
+          </figure>
+          <figure class="capa-tipo">
+            <figcaption><b>3</b>Fuentes e iconos</figcaption>
+            <strong>Aa</strong>
+            <small data-fuentes></small>
+            <small>incluidas en el .zip</small>
+            <ul></ul>
+          </figure>
+          <figure class="capa-foto">
+            <figcaption><b>4</b>Fotos y contenido</figcaption>
+            <img src="fotos/nogal-1.jpg" alt="" loading="lazy" width="1280" height="1600">
+          </figure>
+        </div>
+
+        <div class="explica">
+          <ol class="capas-lista">
+            <li><span>01</span><h3>Estructura que se entiende</h3><p>HTML semántico: header, main, section, article, footer. Abres el archivo y sabes dónde está cada cosa.</p></li>
+            <li><span>02</span><h3>Estilos ordenados</h3><p>CSS comentado y con los colores en variables: cambias la paleta entera en un minuto.</p></li>
+            <li><span>03</span><h3>Todo incluido</h3><p>Las fuentes y los iconos van dentro del .zip. Ninguna llamada a Google ni a servidores externos.</p></li>
+            <li><span>04</span><h3>Lista para lanzar</h3><p>Probada en móvil, tableta y escritorio, y la ves en vivo antes de descargarla. Gratis.</p></li>
+          </ol>
+          <div class="otra">
+            <p>Desmonta otra plantilla</p>
+            <menu aria-label="Elegir plantilla para desmontar">
+              <li><button type="button" data-plantilla="nogal" aria-pressed="true">Taller Nogal</button></li>
+              <li><button type="button" data-plantilla="motorline" aria-pressed="false">Motorline</button></li>
+              <li><button type="button" data-plantilla="solares" aria-pressed="false">Solares</button></li>
+            </menu>
+            <dl aria-live="polite">
+              <div><dt>.zip</dt><dd data-dato="peso"></dd></div>
+              <div><dt>archivos</dt><dd data-dato="archivos"></dd></div>
+              <div><dt>clases CSS</dt><dd>0</dd></div>
+              <div><dt>peticiones externas</dt><dd>0</dd></div>
+            </dl>
+            <a href="demo/nogal/" target="_blank" rel="noopener">Ver Taller Nogal en vivo ↗</a>
+          </div>
+        </div>
+
+        <p class="desliza" aria-hidden="true"><span>Desliza</span> <i></i></p>
+      </div>
+    </div>
+
     <aside>
       <p>«Cada píxel, listo para lanzar.»</p>
-      <p>Creamos landings completas para que empieces tu proyecto con ventaja, no desde cero.</p>
+      <a class="boton" href="#mesa">Ver la mesa</a>
     </aside>
   </section>
 
@@ -1260,7 +1489,7 @@
     <figure>
       <picture>
         <source srcset="fotos/fundador.webp" type="image/webp">
-        <img src="fotos/fundador.jpg" alt="Samir Salama, fundador de All Pixels, sonriendo con gafas y camiseta clara" width="480" height="480" loading="lazy" decoding="async">
+        <img src="fotos/fundador.jpg" alt="Samir Salama, fundador de All Pixels," width="220" height="220" loading="lazy" decoding="async">
       </picture>
     </figure>
     <blockquote>
@@ -1581,6 +1810,110 @@
     })();
 
   })();
+</script>
+<script>
+/* Beneficios: la plantilla se despieza en capas al bajar */
+(function(){
+  var recorrido = document.querySelector('#beneficios div.recorrido');
+  if(!recorrido) return;
+  var escena = recorrido.querySelector('div.escena');
+  var pila = recorrido.querySelector('div.pila');
+  var capas = Array.prototype.slice.call(pila.querySelectorAll(':scope > figure'));
+  var textos = Array.prototype.slice.call(recorrido.querySelectorAll('ol.capas-lista li'));
+  var aviso = escena.querySelector('p.desliza span');
+  var nombresCapa = ['HTML', 'CSS', 'Fuentes e iconos', 'Fotos'];
+  var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var fijada = -1, pendiente = false;
+
+  /* Datos reales de cada plantilla (peso del .zip y archivos medidos) */
+  var PLANTILLAS = {
+    nogal: { nombre: 'Taller Nogal', foto: 'fotos/nogal-1.jpg', demo: 'demo/nogal/', peso: '1,1 MB', archivos: 32,
+      fuente: '"Muestra Nogal", Georgia, serif', fuentes: 'Fraunces · Manrope',
+      colores: ['#2E3A2F', '#6B7F5B', '#D9C9B2', '#C96F4F', '#F8F6EE'],
+      variables: [['--verde', '#2E3A2F'], ['--arena', '#D9C9B2'], ['--terracota', '#C96F4F']],
+      iconos: ['✦', '↗', '✓', '☎'] },
+    motorline: { nombre: 'Taller Motorline', foto: 'fotos/motorline-1.jpg', demo: 'demo/motorline/', peso: '790 KB', archivos: 36,
+      fuente: '"Muestra Motorline", sans-serif', fuentes: 'Montserrat · Inter',
+      colores: ['#0B132B', '#1C2541', '#00F5D4', '#E0E1DD', '#F4F6F8'],
+      variables: [['--azul-noche', '#0B132B'], ['--cian', '#00F5D4'], ['--gris-plata', '#E0E1DD']],
+      iconos: ['demo/motorline/iconos/llave.svg', 'demo/motorline/iconos/coche.svg', 'demo/motorline/iconos/diagnosis.svg', 'demo/motorline/iconos/garantia.svg'] },
+    solares: { nombre: 'Solares Energía', foto: 'fotos/solares-1.jpg', demo: 'demo/solares/', peso: '448 KB', archivos: 47,
+      fuente: '"Muestra Solares", sans-serif', fuentes: 'Sora · Plus Jakarta Sans',
+      colores: ['#0A1D27', '#133443', '#E19A34', '#1F7A6C', '#DCEFE9'],
+      variables: [['--noche', '#0A1D27'], ['--ambar', '#E19A34'], ['--verde', '#1F7A6C']],
+      iconos: ['demo/solares/iconos/panel.svg', 'demo/solares/iconos/rayo.svg', 'demo/solares/iconos/check-ambar.svg', 'demo/solares/iconos/casa-ambar.svg'] }
+  };
+
+  function crear(etiqueta, texto){ var e = document.createElement(etiqueta); if(texto) e.textContent = texto; return e; }
+
+  function aplicar(id, animar){
+    var t = PLANTILLAS[id];
+    capas[1].querySelectorAll('li').forEach(function(li, i){ li.style.background = t.colores[i]; });
+    var pre = capas[1].querySelector('pre'); pre.textContent = '';
+    var raiz = crear('b', ':root'); pre.appendChild(raiz); pre.appendChild(document.createTextNode(' {\n'));
+    t.variables.forEach(function(v){
+      pre.appendChild(document.createTextNode('  '));
+      pre.appendChild(crear('em', v[0]));
+      pre.appendChild(document.createTextNode(': '));
+      var m = crear('i'); m.style.background = v[1]; pre.appendChild(m);
+      pre.appendChild(document.createTextNode(v[1] + ';\n'));
+    });
+    pre.appendChild(document.createTextNode('}'));
+    var aa = capas[2].querySelector('strong'); aa.style.fontFamily = t.fuente;
+    capas[2].querySelector('small[data-fuentes]').textContent = t.fuentes;
+    var lista = capas[2].querySelector('ul'); lista.textContent = '';
+    t.iconos.forEach(function(ic){
+      var li = crear('li');
+      if(ic.indexOf('/') > -1){ var img = crear('img'); img.src = ic; img.alt = ''; li.appendChild(img); }
+      else li.textContent = ic;
+      lista.appendChild(li);
+    });
+    capas[3].querySelector('img').src = t.foto;
+    recorrido.querySelector('[data-dato="peso"]').textContent = t.peso;
+    recorrido.querySelector('[data-dato="archivos"]').textContent = t.archivos;
+    var enlace = recorrido.querySelector('div.otra a');
+    enlace.href = t.demo; enlace.textContent = 'Ver ' + t.nombre + ' en vivo ↗';
+    recorrido.querySelectorAll('div.otra button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.plantilla === id)); });
+    if(animar && !sinMovimiento.matches){
+      pila.removeAttribute('data-cambio'); void pila.offsetWidth; pila.setAttribute('data-cambio', '');
+      setTimeout(function(){ pila.removeAttribute('data-cambio'); }, 800);
+    }
+  }
+  recorrido.querySelectorAll('div.otra button').forEach(function(b){
+    b.addEventListener('click', function(){ aplicar(b.dataset.plantilla, true); });
+  });
+  aplicar('nogal', false);
+
+  function limitar(v){ return Math.max(0, Math.min(1, v)); }
+  function suave(t){ return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+  function pintar(){
+    pendiente = false;
+    var r = recorrido.getBoundingClientRect();
+    var total = r.height - window.innerHeight;
+    var p = sinMovimiento.matches ? .6 : (total > 0 ? limitar(-r.top / total) : 0);
+    var giro = suave(limitar(p / .2)) * (1 - suave(limitar((p - .9) / .1)));
+    var sep = suave(limitar((p - .1) / .22)) * (1 - suave(limitar((p - .84) / .12)));
+    var activa = (p > .28 && p < .84) ? Math.min(3, Math.floor((p - .28) / .14)) : -1;
+    if(sinMovimiento.matches) activa = -1;
+    if(fijada > -1) activa = fijada;
+    pila.style.setProperty('--tilt', giro.toFixed(3));
+    pila.style.setProperty('--sep', sep.toFixed(3));
+    escena.style.setProperty('--avance', p.toFixed(3));
+    escena.toggleAttribute('data-separada', activa > -1);
+    pila.toggleAttribute('data-activa', activa > -1);
+    capas.forEach(function(c, i){ c.toggleAttribute('data-activa', i === activa); });
+    textos.forEach(function(t, i){ t.toggleAttribute('data-activa', i === activa); });
+    aviso.textContent = activa > -1 ? 'Capa ' + (activa + 1) + ' de 4 · ' + nombresCapa[activa] : (p >= .84 ? 'Montada y lista' : 'Desliza');
+  }
+  function pedir(){ if(!pendiente){ pendiente = true; requestAnimationFrame(pintar); } }
+  textos.forEach(function(t, i){
+    t.addEventListener('mouseenter', function(){ fijada = i; pintar(); });
+    t.addEventListener('mouseleave', function(){ fijada = -1; pintar(); });
+  });
+  window.addEventListener('scroll', pedir, { passive: true });
+  window.addEventListener('resize', pedir);
+  pintar();
+})();
 </script>
 <script src="config.js"></script>
 <script src="comun.js"></script>
