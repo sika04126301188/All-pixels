@@ -2032,7 +2032,7 @@
         <label>
           Entrada
           <output name="entradaVista">3.000 €</output>
-          <input type="range" name="entrada" min="0" max="9000" step="500" value="3000">
+          <input type="range" name="entrada" min="0" max="45000" step="500" value="3000">
         </label>
         <fieldset>
           <legend>Plazo en meses</legend>
@@ -2321,12 +2321,13 @@
 
     function calcularCuota() {
       const { precio, entrada, plazo, precioVista, entradaVista, cuota } = simulador.elements;
-      entrada.max = Math.floor((Number(precio.value) * 0.5) / 500) * 500;
 
-      const capital = Number(precio.value) - Number(entrada.value);
+      /* Cada barra es independiente: mover el precio no cambia la entrada.
+         Solo se financia lo que falta (si la entrada cubre el precio, la cuota es 0 €). */
+      const capital = Math.max(0, Number(precio.value) - Number(entrada.value));
       const interesMensual = TIN / 12;
       const meses = Number(plazo.value);
-      const pago = (capital * interesMensual) / (1 - Math.pow(1 + interesMensual, -meses));
+      const pago = capital > 0 ? (capital * interesMensual) / (1 - Math.pow(1 + interesMensual, -meses)) : 0;
 
       precioVista.value = euros.format(precio.value);
       entradaVista.value = euros.format(entrada.value);
