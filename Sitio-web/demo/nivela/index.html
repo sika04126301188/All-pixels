@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<!--
+  Nivela Asesores · Plantilla de All Pixels — https://allpixels.dev
+  Asesoría fiscal y contable con planes mensuales para autónomos y pymes.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nivela Asesores | Tus impuestos, resueltos cada mes</title>
+<meta name="description" content="Planes mensuales de asesoría fiscal y contable para autónomos y pymes. Un asesor asignado, todo presentado a tiempo y una cuota fija sin sorpresas.">
+<meta name="theme-color" content="#0F172A">
+<link rel="preload" href="fuentes/outfit-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="imagenes/equipo-hero.jpg">
+<script>document.documentElement.setAttribute("data-js", "");</script>
+<style>
+/* ============ 0. TIPOGRAFÍAS LOCALES (SIL Open Font License, ver fuentes/) ============ */
+@font-face { font-family: "Outfit"; font-weight: 100 900; font-display: swap; src: url("fuentes/outfit-variable.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url("fuentes/instrument-serif-italic.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url("fuentes/instrument-serif.woff2") format("woff2"); }
+
+/* ============ 1. PALETA · Midnight Neon ============ */
+:root {
+  --medianoche: #0F172A;  /* principal */
+  --violeta: #7C3AED;     /* secundario */
+  --cian: #22D3EE;        /* acento */
+  --lavanda: #A78BFA;     /* terciario */
+  --niebla: #EDE9FE;      /* fondo */
+  --blanco: #FFFFFF;
+  --papel: #F8F6FF;
+  --noche: #0A1020;
+  --texto-suave: #4B5268;
+  --violeta-texto: #6427D9;
+  --linea: rgba(15, 23, 42, .1);
+  --linea-clara: rgba(237, 233, 254, .14);
+  --brillo: 0 0 0 1px rgba(124, 58, 237, .35), 0 18px 40px -16px rgba(124, 58, 237, .65);
+  --sombra: 0 30px 60px -32px rgba(15, 23, 42, .45);
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --curva: cubic-bezier(.2, .7, .2, 1);
+  --ancho: 1240px;
+}
+
+/* ============ 2. BASE ============ */
+a {
+  text-decoration: none;
+  color: var(--violeta-texto);
+  transition: color .3s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+a:hover { color: var(--medianoche); }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--medianoche);
+  background: var(--niebla);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+ul, ol, menu { list-style: none; }
+figure { position: relative; overflow: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3 { font-weight: 500; line-height: 1.05; letter-spacing: -.03em; }
+h1 em, h2 em, h3 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+h2 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); }
+h2 em { color: var(--violeta); }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 0; background: none; }
+:focus-visible { outline: 2px solid var(--violeta); outline-offset: 3px; }
+::selection { color: var(--blanco); background: var(--violeta); }
+
+/* Etiqueta pequeña de sección */
+main > section > header > p:first-child,
+main > section > article > header > p:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 1rem;
+  padding: .4rem .9rem .4rem .5rem;
+  border: 1px solid var(--linea);
+  border-radius: 99px;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  background: var(--blanco);
+}
+main > section > header > p:first-child::before,
+main > section > article > header > p:first-child::before {
+  content: "";
+  width: .7rem;
+  height: .7rem;
+  border-radius: 3px;
+  background: linear-gradient(135deg, var(--violeta), var(--cian));
+}
+
+/* Botón principal (píldora con flecha) */
+main > section:first-of-type > article:first-of-type > p a,
+main > section:nth-of-type(4) form button {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .45rem .5rem .45rem 1.4rem;
+  border-radius: 99px;
+  font-weight: 500;
+  color: var(--blanco);
+  background: var(--violeta);
+  box-shadow: 0 14px 30px -14px rgba(124, 58, 237, .9);
+}
+main > section:first-of-type > article:first-of-type > p a::after,
+main > section:nth-of-type(4) form button::after {
+  content: "";
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background: var(--blanco) url("iconos/flecha.svg") center / .9rem no-repeat;
+  rotate: -45deg;
+  transition: rotate .4s var(--curva);
+}
+main > section:first-of-type > article:first-of-type > p a:hover,
+main > section:nth-of-type(4) form button:hover { color: var(--blanco); background: var(--medianoche); transform: translateY(-2px); }
+main > section:first-of-type > article:first-of-type > p a:hover::after,
+main > section:nth-of-type(4) form button:hover::after { rotate: 0deg; }
+
+/* ============ 3. CABECERA ============ */
+body > header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  width: min(100% - 2rem, var(--ancho));
+  margin: 1rem auto 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 2rem;
+  padding: .9rem 1.2rem .9rem 1.6rem;
+  border: 1px solid var(--linea);
+  border-bottom: 0;
+  border-radius: 28px 28px 0 0;
+  background: var(--papel);
+  transition: border-radius .4s ease, box-shadow .4s ease, background .4s ease, top .4s ease;
+}
+body > header[data-scroll] {
+  top: .7rem;
+  border-bottom: 1px solid var(--linea);
+  border-radius: 99px;
+  background: rgba(248, 246, 255, .86);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 40px -24px rgba(15, 23, 42, .45);
+}
+
+/* Logotipo: un nivel (dos barras) + nombre */
+body > header > a:first-of-type,
+body > footer > section:first-of-type > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  color: var(--medianoche);
+}
+body > header > a:first-of-type::before,
+body > footer > section:first-of-type > a::before {
+  content: "";
+  width: 1.9rem;
+  height: 1.9rem;
+  margin-right: .6rem;
+  border-radius: 9px;
+  background:
+    linear-gradient(var(--blanco), var(--blanco)) center 38% / 58% 3px no-repeat,
+    linear-gradient(var(--cian), var(--cian)) center 64% / 34% 3px no-repeat,
+    linear-gradient(135deg, var(--violeta), #4F46E5);
+}
+body > header > a:first-of-type em,
+body > footer > section:first-of-type > a em { font-family: var(--serif); font-weight: 400; font-size: 1.15em; color: var(--violeta); }
+
+body > header nav ul { display: flex; justify-content: center; gap: 2rem; }
+body > header nav a {
+  position: relative;
+  padding-block: .3rem;
+  font-size: .95rem;
+  color: var(--texto-suave);
+}
+body > header nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--violeta);
+  scale: 0 1;
+  transition: scale .35s var(--curva);
+}
+body > header nav a:hover,
+body > header nav a[aria-current] { color: var(--violeta-texto); }
+body > header nav a:hover::after,
+body > header nav a[aria-current]::after { scale: 1 1; }
+
+body > header > a:last-of-type {
+  padding: .65rem 1.3rem;
+  border: 1px solid var(--violeta);
+  border-radius: 99px;
+  font-size: .92rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--violeta-texto);
+}
+body > header > a:last-of-type:hover { color: var(--blanco); background: var(--violeta); }
+
+/* Botón de tres rayas (solo móvil) */
+body > header > button {
+  display: none;
+  place-content: center;
+  gap: 5px;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: var(--medianoche);
+}
+body > header > button span {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--blanco);
+  transition: transform .3s var(--curva), opacity .3s ease;
+}
+body > header > button[aria-expanded="true"] span:first-of-type { transform: translateY(7px) rotate(45deg); }
+body > header > button[aria-expanded="true"] span:nth-of-type(2) { opacity: 0; }
+body > header > button[aria-expanded="true"] span:last-of-type { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============ 4. HERO (sección 1) · rejilla de líneas como la referencia ============ */
+main > section:first-of-type {
+  width: min(100% - 2rem, var(--ancho));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr .95fr 1fr;
+  grid-template-rows: auto auto;
+  border: 1px solid var(--linea);
+  border-radius: 0 0 28px 28px;
+  background:
+    radial-gradient(60% 50% at 50% 30%, rgba(167, 139, 250, .22), transparent 70%),
+    var(--papel);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+main > section:first-of-type > :is(article, aside) { padding: clamp(1.6rem, 3vw, 2.6rem); }
+main > section:first-of-type > article:first-of-type { grid-column: 1; grid-row: 1; border-bottom: 1px solid var(--linea); border-right: 1px solid var(--linea); }
+main > section:first-of-type > article:nth-of-type(2) { grid-column: 1; grid-row: 2; border-right: 1px solid var(--linea); align-self: end; }
+main > section:first-of-type > aside:first-of-type { grid-column: 3; grid-row: 1; border-bottom: 1px solid var(--linea); border-left: 1px solid var(--linea); }
+main > section:first-of-type > aside:nth-of-type(2) { grid-column: 3; grid-row: 2; border-left: 1px solid var(--linea); }
+
+main > section:first-of-type h1 {
+  font-size: clamp(2.7rem, 5vw, 4.4rem);
+  font-weight: 500;
+  line-height: .98;
+  animation: subir 1s var(--curva) .1s both;
+}
+main > section:first-of-type h1 em {
+  display: block;
+  font-size: 1.12em;
+  background: linear-gradient(90deg, var(--violeta), #4F46E5 55%, #0EA5C6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+main > section:first-of-type > article:first-of-type > p:first-of-type {
+  margin-top: 1.1rem;
+  max-width: 30ch;
+  color: var(--texto-suave);
+  animation: subir 1s var(--curva) .2s both;
+}
+main > section:first-of-type > article:first-of-type > p:last-of-type { margin-top: 1.8rem; animation: subir 1s var(--curva) .3s both; }
+
+/* Foto en cápsula, en el centro y ocupando las dos filas */
+main > section:first-of-type > figure {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 360px);
+  aspect-ratio: 5 / 9;
+  margin-block: 2rem;
+  border-radius: 999px;
+  box-shadow: 0 40px 70px -30px rgba(15, 23, 42, .6), 0 0 0 10px rgba(255, 255, 255, .6);
+  animation: aparecer 1.2s var(--curva) both;
+}
+main > section:first-of-type > figure img { object-position: 46% 30%; animation: acercar 2.4s var(--curva) both; }
+/* Etiqueta de estado sobre la foto */
+main > section:first-of-type > figure figcaption {
+  position: absolute;
+  left: 50%;
+  top: 9%;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem .9rem;
+  border-radius: 99px;
+  font-size: .82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--blanco);
+  background: rgba(15, 23, 42, .7);
+  backdrop-filter: blur(10px);
+}
+main > section:first-of-type > figure figcaption::before {
+  content: "";
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--cian);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, .25);
+  animation: latido 2s ease-in-out infinite;
+}
+
+/* Documentos flotando sobre la cápsula: dan profundidad al hero */
+main > section:first-of-type > ul {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: center;
+  position: relative;
+  width: min(100%, 360px);
+  aspect-ratio: 5 / 9;
+  pointer-events: none;
+  z-index: 2;
+}
+main > section:first-of-type > ul li {
+  position: absolute;
+  display: grid;
+  gap: .2rem;
+  width: 11.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+  background: var(--blanco);
+  box-shadow: 0 24px 40px -22px rgba(15, 23, 42, .45);
+}
+main > section:first-of-type > ul li strong { font-size: .95rem; font-weight: 600; }
+main > section:first-of-type > ul li small { font-size: .74rem; color: var(--texto-suave); }
+main > section:first-of-type > ul li span {
+  justify-self: start;
+  margin-top: .4rem;
+  padding: .15rem .55rem;
+  border-radius: 99px;
+  font-size: .68rem;
+  font-weight: 600;
+  color: #15803D;
+  background: #DCFCE7;
+}
+main > section:first-of-type > ul li::before {
+  content: "";
+  height: 4px;
+  margin-bottom: .5rem;
+  border-radius: 4px;
+  background: repeating-linear-gradient(90deg, var(--niebla) 0 22px, transparent 22px 28px);
+}
+main > section:first-of-type > ul li:nth-of-type(1) { left: -16%; top: auto; bottom: 10%; rotate: -8deg; animation: flotar 7s ease-in-out infinite; }
+main > section:first-of-type > ul li:nth-of-type(2) { right: -20%; top: 22%; rotate: 7deg; animation: flotar 8s ease-in-out -2s infinite; }
+main > section:first-of-type > ul li:nth-of-type(2) span { color: var(--violeta-texto); background: var(--niebla); }
+main > section:first-of-type > figure { z-index: 1; }
+@keyframes flotar { 50% { translate: 0 -10px; } }
+
+/* Botón redondo que flota sobre la cápsula */
+main > section:first-of-type > a {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  margin: 0 calc(50% - min(100%, 360px) / 2 - 2.2rem) 5.5rem 0;
+  border-radius: 50%;
+  background: var(--violeta);
+  box-shadow: 0 0 0 8px var(--papel), 0 20px 40px -12px rgba(124, 58, 237, .9);
+}
+main > section:first-of-type > a::before {
+  content: "";
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url("iconos/flecha-blanca.svg") center / contain no-repeat;
+  rotate: -45deg;
+  transition: rotate .4s var(--curva);
+}
+main > section:first-of-type > a:hover { background: var(--medianoche); transform: scale(1.06); }
+main > section:first-of-type > a:hover::before { rotate: 0deg; }
+
+/* Opinión + cifras (arriba a la derecha) */
+main > section:first-of-type > aside:first-of-type { display: grid; gap: 1.6rem; align-content: space-between; animation: subir 1s var(--curva) .35s both; }
+main > section:first-of-type > aside:first-of-type blockquote { display: grid; grid-template-columns: 1fr auto; gap: .4rem 1rem; text-align: right; }
+main > section:first-of-type > aside:first-of-type blockquote > p:first-of-type {
+  grid-column: 1;
+  font-size: 1rem;
+  letter-spacing: .15em;
+  color: #E9A21E;
+}
+main > section:first-of-type > aside:first-of-type blockquote figure {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--blanco), 0 0 0 4px var(--lavanda);
+}
+main > section:first-of-type > aside:first-of-type blockquote footer { grid-column: 1; grid-row: 2; font-size: .9rem; }
+main > section:first-of-type > aside:first-of-type blockquote cite { font-style: normal; font-weight: 600; }
+main > section:first-of-type > aside:first-of-type blockquote > p:last-of-type {
+  grid-column: 1 / -1;
+  margin-top: .4rem;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--texto-suave);
+}
+main > section:first-of-type dl { display: grid; align-content: start; grid-template-columns: 1fr 1fr; justify-items: end; text-align: right; gap: .2rem 1.5rem; }
+main > section:first-of-type dt { grid-row: 1; font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 500; letter-spacing: -.03em; line-height: 1; }
+main > section:first-of-type dt span { color: var(--violeta); }
+main > section:first-of-type dd { grid-row: 2; font-size: .85rem; color: var(--texto-suave); }
+
+/* Descripción + asesores (abajo a la izquierda) */
+main > section:first-of-type > article:nth-of-type(2) > p { max-width: 32ch; color: var(--texto-suave); }
+main > section:first-of-type > article:nth-of-type(2) ul { display: flex; margin-top: 1.4rem; }
+main > section:first-of-type > article:nth-of-type(2) li { margin-left: -.7rem; }
+main > section:first-of-type > article:nth-of-type(2) li:first-of-type { margin-left: 0; }
+main > section:first-of-type > article:nth-of-type(2) li figure {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--papel);
+  transition: transform .35s var(--curva);
+}
+main > section:first-of-type > article:nth-of-type(2) li:hover figure { transform: translateY(-5px); }
+main > section:first-of-type > article:nth-of-type(2) li:last-of-type {
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 50%;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--blanco);
+  background: var(--medianoche);
+  box-shadow: 0 0 0 3px var(--papel);
+}
+main > section:first-of-type > article:nth-of-type(2) ul + p { margin-top: .7rem; font-size: .85rem; }
+
+/* Próximo vencimiento (abajo a la derecha) */
+main > section:first-of-type > aside:nth-of-type(2) { display: grid; gap: 1rem; align-content: end; }
+main > section:first-of-type > aside:nth-of-type(2) > article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .3rem 1rem;
+  align-items: center;
+  padding: 1.2rem 1.3rem;
+  border-radius: 22px;
+  color: var(--niebla);
+  background:
+    radial-gradient(80% 120% at 100% 0%, rgba(124, 58, 237, .55), transparent 60%),
+    var(--medianoche);
+}
+main > section:first-of-type > aside:nth-of-type(2) h2 {
+  grid-column: 1 / -1;
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--cian);
+}
+main > section:first-of-type > aside:nth-of-type(2) time {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 16px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: .9;
+  text-align: center;
+  color: var(--medianoche);
+  background: var(--niebla);
+}
+main > section:first-of-type > aside:nth-of-type(2) time small { display: block; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--violeta); }
+main > section:first-of-type > aside:nth-of-type(2) article > p:first-of-type { font-size: 1.05rem; font-weight: 500; }
+main > section:first-of-type > aside:nth-of-type(2) article > p:last-of-type { font-size: .82rem; color: rgba(237, 233, 254, .72); }
+main > section:first-of-type > aside:nth-of-type(2) > a {
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid var(--linea);
+  border-radius: 50%;
+  animation: bajar-flecha 2.2s ease-in-out infinite;
+}
+main > section:first-of-type > aside:nth-of-type(2) > a::before { content: ""; width: .9rem; height: .9rem; background: url("iconos/abajo.svg") center / contain no-repeat; }
+
+/* ============ 5. SERVICIOS (sección 2) · bento ============ */
+main > section:nth-of-type(2) {
+  width: min(100% - 2rem, var(--ancho));
+  margin: 0 auto;
+  padding-block: clamp(5rem, 9vw, 8rem) clamp(4rem, 7vw, 6rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(15rem, auto);
+  gap: 1rem;
+}
+main > section:nth-of-type(2) > header {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: end;
+  gap: 1rem 3rem;
+  margin-bottom: 1.8rem;
+}
+main > section:nth-of-type(2) > header > p:first-child { grid-column: 1 / -1; justify-self: start; margin-bottom: 0; }
+main > section:nth-of-type(2) > header > p:last-child { color: var(--texto-suave); font-size: 1.05rem; }
+
+main > section:nth-of-type(2) > article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  padding: 1.6rem;
+  border: 1px solid var(--linea);
+  border-radius: 26px;
+  background: var(--blanco);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform .5s var(--curva), box-shadow .5s ease;
+}
+main > section:nth-of-type(2) > article:hover { transform: translateY(-5px); box-shadow: var(--sombra); }
+main > section:nth-of-type(2) > article h3 { font-size: 1.45rem; }
+main > section:nth-of-type(2) > article:nth-of-type(2) { grid-column: 3; grid-row: 2 / span 2; }
+main > section:nth-of-type(2) > article:nth-of-type(3) { grid-column: 4; grid-row: 2; }
+main > section:nth-of-type(2) > article:nth-of-type(4) { grid-column: 4; grid-row: 3; }
+main > section:nth-of-type(2) > article:nth-of-type(5) { grid-column: 1 / 3; grid-row: 4; min-height: 15rem; }
+main > section:nth-of-type(2) > article p { color: var(--texto-suave); font-size: .95rem; }
+main > section:nth-of-type(2) > article:is(:nth-of-type(2), :nth-of-type(3), :nth-of-type(4)) > figure:first-of-type {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: auto;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--niebla);
+}
+main > section:nth-of-type(2) > article:is(:nth-of-type(2), :nth-of-type(3), :nth-of-type(4)) > figure:first-of-type img { width: 1.35rem; height: 1.35rem; object-fit: contain; }
+
+/* Tarjeta grande con foto */
+main > section:nth-of-type(2) > article:first-of-type {
+  grid-column: 1 / 3;
+  grid-row: 2 / span 2;
+  justify-content: flex-end;
+  min-height: 32rem;
+  padding: 2rem;
+  border: 0;
+  color: var(--blanco);
+}
+main > section:nth-of-type(2) > article:first-of-type > figure { position: absolute; inset: 0; z-index: -1; }
+main > section:nth-of-type(2) > article:first-of-type > figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(15, 23, 42, .92));
+}
+main > section:nth-of-type(2) > article:first-of-type img { object-position: 50% 40%; transition: scale 1.2s var(--curva); }
+main > section:nth-of-type(2) > article:first-of-type:hover img { scale: 1.05; }
+main > section:nth-of-type(2) > article:first-of-type h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+main > section:nth-of-type(2) > article:first-of-type h3 em { color: var(--cian); }
+main > section:nth-of-type(2) > article:first-of-type p { color: rgba(237, 233, 254, .82); max-width: 44ch; }
+main > section:nth-of-type(2) > article:first-of-type ul { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+main > section:nth-of-type(2) > article:first-of-type li {
+  padding: .35rem .8rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 99px;
+  font-size: .82rem;
+  background: rgba(255, 255, 255, .08);
+  backdrop-filter: blur(8px);
+}
+main > section:nth-of-type(2) > article:first-of-type > p:first-of-type {
+  position: absolute;
+  top: 1.4rem;
+  left: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .9rem;
+  border-radius: 99px;
+  font-size: .85rem;
+  color: var(--medianoche);
+  background: var(--blanco);
+}
+main > section:nth-of-type(2) > article:first-of-type > p:first-of-type::before {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  border-radius: 50%;
+  background: #16A34A;
+  box-shadow: 0 0 0 4px rgba(22, 163, 74, .2);
+}
+
+/* Tarjeta de contabilidad con foto lateral */
+main > section:nth-of-type(2) > article:nth-of-type(3) { padding-right: 46%; }
+main > section:nth-of-type(2) > article:nth-of-type(3) > figure:last-of-type {
+  position: absolute;
+  inset: .7rem .7rem .7rem auto;
+  width: 40%;
+  border-radius: 18px;
+}
+main > section:nth-of-type(2) > article:nth-of-type(3) > figure:last-of-type img { object-position: 50% 35%; }
+
+/* Tarjeta laboral oscura */
+main > section:nth-of-type(2) > article:nth-of-type(4) {
+  color: var(--niebla);
+  border-color: transparent;
+  background:
+    radial-gradient(90% 80% at 100% 0%, rgba(34, 211, 238, .28), transparent 60%),
+    var(--medianoche);
+}
+main > section:nth-of-type(2) > article:nth-of-type(4) p { color: rgba(237, 233, 254, .75); }
+main > section:nth-of-type(2) > article:nth-of-type(4) > figure:first-of-type { background: rgba(34, 211, 238, .14); }
+main > section:nth-of-type(2) > article:nth-of-type(4) strong { font-size: 2.6rem; font-weight: 500; line-height: 1; color: var(--cian); }
+
+/* Tarjeta de facturación con foto de fondo */
+main > section:nth-of-type(2) > article:nth-of-type(5) { justify-content: flex-end; color: var(--blanco); border: 0; }
+/* Asesor dedicado: ficha con foto y estado en línea */
+main > section:nth-of-type(2) > article:nth-of-type(6) {
+  grid-column: 3 / 5;
+  grid-row: 4;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: .4rem 1.4rem;
+  background:
+    radial-gradient(80% 140% at 100% 100%, rgba(34, 211, 238, .18), transparent 60%),
+    var(--blanco);
+}
+main > section:nth-of-type(2) > article:nth-of-type(6) > figure {
+  grid-row: span 3;
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px var(--niebla), 0 0 0 6px var(--lavanda);
+}
+main > section:nth-of-type(2) > article:nth-of-type(6) > p:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .8rem;
+  font-weight: 500;
+  color: #15803D;
+}
+main > section:nth-of-type(2) > article:nth-of-type(6) > p:first-of-type::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: #16A34A; box-shadow: 0 0 0 4px rgba(22, 163, 74, .18); animation: latido-verde 2s ease-in-out infinite; }
+main > section:nth-of-type(2) > article:nth-of-type(6) blockquote { font-family: var(--serif); font-style: italic; font-size: 1.3rem; line-height: 1.3; color: var(--medianoche); }
+main > section:nth-of-type(2) > article:nth-of-type(6) blockquote + p { font-size: .88rem; }
+@keyframes latido-verde { 50% { box-shadow: 0 0 0 7px rgba(22, 163, 74, .08); } }
+main > section:nth-of-type(2) > article:nth-of-type(5) > figure:only-of-type { position: absolute; inset: 0; z-index: -1; }
+main > section:nth-of-type(2) > article:nth-of-type(5) > figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(124, 58, 237, .2), rgba(15, 23, 42, .9)); }
+main > section:nth-of-type(2) > article:nth-of-type(5) p { color: rgba(237, 233, 254, .82); }
+
+/* Tu año fiscal, mes a mes */
+main > section:nth-of-type(2) > aside {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 2.2fr);
+  gap: 2rem 3rem;
+  padding: 2rem;
+  border: 1px solid var(--linea);
+  border-radius: 28px;
+  background:
+    radial-gradient(60% 120% at 0% 0%, rgba(167, 139, 250, .18), transparent 60%),
+    var(--papel);
+}
+main > section:nth-of-type(2) > aside > header h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+main > section:nth-of-type(2) > aside > header h3 em { color: var(--violeta); }
+main > section:nth-of-type(2) > aside > header p { margin-top: .7rem; color: var(--texto-suave); font-size: .95rem; }
+main > section:nth-of-type(2) > aside > header p:last-child {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.2rem;
+  font-size: .82rem;
+}
+main > section:nth-of-type(2) > aside > header p:last-child::before {
+  content: "";
+  width: .6rem;
+  height: .6rem;
+  border-radius: 50%;
+  background: var(--violeta);
+}
+main > section:nth-of-type(2) > aside ol {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: .35rem;
+  padding-bottom: 11rem;
+}
+/* Línea del año que une los meses */
+main > section:nth-of-type(2) > aside ol::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 1.45rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--lavanda), var(--violeta), var(--cian));
+  opacity: .35;
+}
+main > section:nth-of-type(2) > aside ol button {
+  position: relative;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: .35rem;
+  padding: .55rem 0 .5rem;
+  border-radius: 14px;
+  font-size: .8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: var(--texto-suave);
+  transition: background .3s ease, color .3s ease, box-shadow .3s ease;
+}
+main > section:nth-of-type(2) > aside ol button::before {
+  content: "";
+  width: .8rem;
+  height: .8rem;
+  border-radius: 50%;
+  border: 2px solid var(--lavanda);
+  background: var(--blanco);
+  transition: background .3s ease, border-color .3s ease, transform .3s var(--curva);
+}
+main > section:nth-of-type(2) > aside li[data-trimestral] button::before { border-color: var(--violeta); background: var(--violeta); }
+main > section:nth-of-type(2) > aside ol button:hover { color: var(--medianoche); background: var(--blanco); }
+main > section:nth-of-type(2) > aside li[data-activo] button { color: var(--blanco); background: var(--medianoche); box-shadow: 0 14px 30px -14px rgba(15, 23, 42, .8); }
+main > section:nth-of-type(2) > aside li[data-activo] button::before { border-color: var(--cian); background: var(--cian); transform: scale(1.25); }
+main > section:nth-of-type(2) > aside li[data-hoy] button::after {
+  content: "Hoy";
+  position: absolute;
+  top: -1.1rem;
+  left: 50%;
+  translate: -50% 0;
+  padding: .05rem .45rem;
+  border-radius: 99px;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--medianoche);
+  background: var(--cian);
+}
+/* Detalle del mes elegido: ocupa el panel de abajo */
+main > section:nth-of-type(2) > aside ol section {
+  position: absolute;
+  inset: auto 0 0;
+  height: 9.8rem;
+  display: none;
+  grid-template-columns: auto 1fr;
+  gap: .4rem 1.6rem;
+  align-content: center;
+  padding: 1.3rem 1.6rem;
+  border-radius: 20px;
+  color: var(--niebla);
+  background:
+    radial-gradient(70% 140% at 100% 0%, rgba(124, 58, 237, .5), transparent 60%),
+    var(--medianoche);
+}
+main > section:nth-of-type(2) > aside li[data-activo] section { display: grid; animation: subir .5s var(--curva) both; }
+html:not([data-js]) main > section:nth-of-type(2) > aside ol > li:first-child section { display: grid; }
+main > section:nth-of-type(2) > aside ol h4 {
+  grid-row: span 2;
+  align-self: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--cian);
+}
+main > section:nth-of-type(2) > aside ol section ul { display: grid; gap: .45rem; }
+main > section:nth-of-type(2) > aside ol section li { display: flex; gap: .6rem; font-size: .95rem; }
+main > section:nth-of-type(2) > aside ol section li::before {
+  content: "";
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: .2rem;
+  border-radius: 50%;
+  background: rgba(34, 211, 238, .16) url("iconos/check-cian.svg") center / .6rem no-repeat;
+}
+
+/* Revisión a fondo: barras de puntos de control */
+main > section:nth-of-type(2) > article:nth-of-type(2) ul { display: grid; gap: .55rem; margin-top: .4rem; }
+main > section:nth-of-type(2) > article:nth-of-type(2) li { display: grid; grid-template-columns: 1fr auto; gap: .25rem .6rem; font-size: .84rem; }
+main > section:nth-of-type(2) > article:nth-of-type(2) li b { font-weight: 600; color: var(--violeta-texto); }
+main > section:nth-of-type(2) > article:nth-of-type(2) li::after {
+  content: "";
+  grid-column: 1 / -1;
+  height: 5px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--violeta), var(--cian)) left / 0% 100% no-repeat, var(--niebla);
+  transition: background-size 1.2s var(--curva);
+}
+main > section:nth-of-type(2) > article:nth-of-type(2)[data-revelar="visto"] li:nth-of-type(1)::after { background-size: 100% 100%, auto; transition-delay: .2s; }
+main > section:nth-of-type(2) > article:nth-of-type(2)[data-revelar="visto"] li:nth-of-type(2)::after { background-size: 75% 100%, auto; transition-delay: .35s; }
+main > section:nth-of-type(2) > article:nth-of-type(2)[data-revelar="visto"] li:nth-of-type(3)::after { background-size: 67% 100%, auto; transition-delay: .5s; }
+main > section:nth-of-type(2) > article:nth-of-type(2)[data-revelar="visto"] li:nth-of-type(4)::after { background-size: 58% 100%, auto; transition-delay: .65s; }
+html:not([data-js]) main > section:nth-of-type(2) > article:nth-of-type(2) li::after { background-size: 80% 100%, auto; }
+main > section:nth-of-type(2) > article:nth-of-type(2) > p:last-of-type {
+  margin-top: auto;
+  padding-top: .6rem;
+  border-top: 1px dashed var(--linea);
+  font-size: .82rem;
+}
+main > section:nth-of-type(2) > article:nth-of-type(2) > p:last-of-type strong { color: var(--medianoche); }
+
+/* ============ 6. PLANES (sección 3) · Midnight Neon ============ */
+main > section:nth-of-type(3) {
+  position: relative;
+  width: min(100% - 2rem, 1320px);
+  margin: 0 auto;
+  padding: clamp(4.5rem, 8vw, 7rem) clamp(1.2rem, 5vw, 5rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  border-radius: 36px;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--niebla);
+  background: var(--medianoche);
+}
+main > section:nth-of-type(3)::before {
+  content: "";
+  position: absolute;
+  inset: -30% -10% auto;
+  height: 70%;
+  z-index: -1;
+  background:
+    radial-gradient(40% 60% at 25% 50%, rgba(124, 58, 237, .45), transparent 70%),
+    radial-gradient(35% 55% at 80% 40%, rgba(34, 211, 238, .25), transparent 70%);
+  filter: blur(20px);
+}
+main > section:nth-of-type(3)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    repeating-linear-gradient(90deg, rgba(237, 233, 254, .045) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(0deg, rgba(237, 233, 254, .045) 0 1px, transparent 1px 80px);
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, #000, transparent);
+  mask-image: radial-gradient(70% 60% at 50% 30%, #000, transparent);
+}
+main > section:nth-of-type(3) > header { grid-column: 1 / -1; display: grid; justify-items: center; text-align: center; margin-bottom: 2.2rem; }
+main > section:nth-of-type(3) > header > p:first-child { color: var(--niebla); border-color: var(--linea-clara); background: rgba(255, 255, 255, .06); }
+main > section:nth-of-type(3) h2 em { color: var(--cian); }
+main > section:nth-of-type(3) > header > p:nth-of-type(2) { max-width: 40rem; margin-top: 1rem; color: rgba(237, 233, 254, .75); font-size: 1.05rem; }
+
+/* Interruptor mensual / anual */
+main > section:nth-of-type(3) > header > p:last-of-type {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  margin-top: 1.8rem;
+  padding: .3rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .05);
+}
+main > section:nth-of-type(3) > header button {
+  padding: .6rem 1.3rem;
+  border-radius: 99px;
+  font-weight: 500;
+  font-size: .92rem;
+  color: rgba(237, 233, 254, .8);
+  transition: background .3s ease, color .3s ease;
+}
+main > section:nth-of-type(3) > header button[aria-pressed="true"] { color: var(--medianoche); background: var(--niebla); }
+main > section:nth-of-type(3) > header button mark {
+  margin-left: .35rem;
+  padding: .1rem .45rem;
+  border-radius: 99px;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--medianoche);
+  background: var(--cian);
+}
+
+main > section:nth-of-type(3) > article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 2rem 1.8rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .04);
+  backdrop-filter: blur(10px);
+  transition: transform .5s var(--curva), border-color .4s ease;
+}
+main > section:nth-of-type(3) > article:hover { transform: translateY(-6px); border-color: rgba(167, 139, 250, .5); }
+main > section:nth-of-type(3) > article h3 { font-size: 1.5rem; }
+main > section:nth-of-type(3) > article h3 + p { color: rgba(237, 233, 254, .7); font-size: .95rem; }
+main > section:nth-of-type(3) > article > p:nth-of-type(2) { display: flex; align-items: baseline; gap: .35rem; padding-block: 1.1rem; border-block: 1px solid var(--linea-clara); }
+main > section:nth-of-type(3) data { font-size: 3.4rem; font-weight: 500; letter-spacing: -.04em; line-height: 1; color: var(--blanco); }
+main > section:nth-of-type(3) > article > p:nth-of-type(2) small { font-size: .88rem; color: rgba(237, 233, 254, .65); }
+main > section:nth-of-type(3) > article ul { display: grid; gap: .65rem; margin-bottom: .6rem; }
+main > section:nth-of-type(3) > article li { display: flex; gap: .65rem; font-size: .95rem; color: rgba(237, 233, 254, .88); }
+main > section:nth-of-type(3) > article li::before {
+  content: "";
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: .15rem;
+  border-radius: 50%;
+  background: rgba(34, 211, 238, .14) url("iconos/check-cian.svg") center / .65rem no-repeat;
+}
+main > section:nth-of-type(3) > article > a {
+  margin-top: auto;
+  padding: .95rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 99px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--niebla);
+}
+main > section:nth-of-type(3) > article > a:hover { color: var(--medianoche); background: var(--niebla); }
+
+/* Plan destacado con borde de neón */
+main > section:nth-of-type(3) > article:nth-of-type(2) {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--medianoche), var(--medianoche)) padding-box,
+    linear-gradient(160deg, var(--violeta), var(--cian)) border-box;
+  border: 1.5px solid transparent;
+  box-shadow: 0 30px 80px -30px rgba(124, 58, 237, .8);
+  transform: translateY(-.8rem);
+}
+main > section:nth-of-type(3) > article:nth-of-type(2):hover { transform: translateY(-1.3rem); }
+main > section:nth-of-type(3) > article:nth-of-type(2) > strong {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  padding: .3rem .75rem;
+  border-radius: 99px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--medianoche);
+  background: var(--cian);
+}
+main > section:nth-of-type(3) > article:nth-of-type(2) > a { border-color: var(--violeta); color: var(--blanco); background: var(--violeta); }
+main > section:nth-of-type(3) > article:nth-of-type(2) > a:hover { color: var(--medianoche); background: var(--cian); border-color: var(--cian); }
+
+/* Tarjeta a medida con foto */
+main > section:nth-of-type(3) > aside {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  align-items: center;
+  gap: 1.5rem 2.2rem;
+  margin-top: 1rem;
+  padding: 1rem 1.6rem 1rem 1rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, .05);
+}
+main > section:nth-of-type(3) > aside figure { height: 9rem; border-radius: 18px; }
+main > section:nth-of-type(3) > aside figure img { object-position: 50% 45%; }
+main > section:nth-of-type(3) > aside h3 { font-size: 1.4rem; }
+main > section:nth-of-type(3) > aside p { margin-top: .35rem; color: rgba(237, 233, 254, .72); }
+main > section:nth-of-type(3) > aside > a {
+  padding: .85rem 1.4rem;
+  border-radius: 99px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--medianoche);
+  background: var(--cian);
+}
+main > section:nth-of-type(3) > aside > a:hover { color: var(--blanco); background: var(--violeta); }
+main > section:nth-of-type(3) > p:last-of-type { grid-column: 1 / -1; text-align: center; font-size: .82rem; color: rgba(237, 233, 254, .6); }
+
+/* ============ 7. CONTACTO (sección 4) ============ */
+main > section:nth-of-type(4) {
+  width: min(100% - 2rem, var(--ancho));
+  margin: 0 auto;
+  padding-block: clamp(5rem, 9vw, 8rem);
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+main > section:nth-of-type(4) > figure { min-height: 38rem; border-radius: 32px; }
+main > section:nth-of-type(4) > figure img { object-position: 50% 40%; }
+main > section:nth-of-type(4) > figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(15, 23, 42, .85)); }
+main > section:nth-of-type(4) > figure figcaption {
+  position: absolute;
+  inset: auto 1.2rem 1.2rem;
+  z-index: 1;
+  padding: 1.4rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 22px;
+  color: var(--niebla);
+  background: rgba(15, 23, 42, .55);
+  backdrop-filter: blur(14px);
+}
+main > section:nth-of-type(4) > figure figcaption strong { display: block; margin-bottom: .9rem; font-size: 1.15rem; font-weight: 500; }
+main > section:nth-of-type(4) > figure ol { display: grid; gap: .75rem; counter-reset: paso; }
+main > section:nth-of-type(4) > figure li { counter-increment: paso; display: grid; grid-template-columns: 2rem 1fr; align-items: center; gap: .8rem; font-size: .95rem; }
+main > section:nth-of-type(4) > figure li::before {
+  content: counter(paso);
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: .85rem;
+  color: var(--medianoche);
+  background: var(--cian);
+}
+
+main > section:nth-of-type(4) > article {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.8rem, 4vw, 3rem);
+  border: 1px solid var(--linea);
+  border-radius: 32px;
+  background: var(--papel);
+}
+main > section:nth-of-type(4) > article > header > p:first-child { margin-bottom: 1rem; }
+main > section:nth-of-type(4) > article > header > p:last-child { margin-top: .9rem; color: var(--texto-suave); }
+main > section:nth-of-type(4) form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+main > section:nth-of-type(4) label { display: grid; gap: .4rem; font-size: .88rem; font-weight: 500; }
+main > section:nth-of-type(4) label:nth-of-type(n + 5) { grid-column: 1 / -1; }
+main > section:nth-of-type(4) :is(input, select, textarea) {
+  width: 100%;
+  padding: .85rem 1rem;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 400;
+  background: var(--blanco);
+  outline: 0;
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+main > section:nth-of-type(4) :is(input, select, textarea):focus { border-color: var(--violeta); box-shadow: 0 0 0 4px rgba(124, 58, 237, .14); }
+main > section:nth-of-type(4) textarea { min-height: 7rem; resize: vertical; }
+main > section:nth-of-type(4) label:last-of-type { display: flex; align-items: flex-start; gap: .6rem; font-weight: 400; color: var(--texto-suave); }
+main > section:nth-of-type(4) label:last-of-type input { width: 1.1rem; height: 1.1rem; margin-top: .2rem; accent-color: var(--violeta); flex: none; }
+main > section:nth-of-type(4) form button { grid-column: 1 / -1; justify-self: start; padding-block: .5rem; font-size: 1rem; }
+main > section:nth-of-type(4) form p { grid-column: 1 / -1; padding: .9rem 1rem; border-radius: 14px; font-weight: 500; color: var(--violeta-texto); background: var(--niebla); }
+
+/* ============ 8. PIE ============ */
+body > footer {
+  width: min(100% - 2rem, 1320px);
+  margin: 0 auto 1rem;
+  padding: clamp(3.5rem, 6vw, 5rem) clamp(1.4rem, 5vw, 4rem) 1.6rem;
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 2.5rem;
+  border-radius: 36px;
+  color: rgba(237, 233, 254, .72);
+  background: var(--noche);
+  overflow: hidden;
+}
+body > footer a { color: rgba(237, 233, 254, .85); }
+body > footer a:hover { color: var(--cian); }
+body > footer > section:first-of-type > a { color: var(--blanco); font-size: 1.8rem; }
+body > footer > section:first-of-type > a:hover { color: var(--blanco); }
+body > footer > section:first-of-type > a em { color: var(--lavanda); }
+body > footer > section:first-of-type > p { max-width: 32ch; margin-top: 1rem; }
+body > footer > section:first-of-type ul { display: flex; gap: .6rem; margin-top: 1.6rem; }
+body > footer > section:first-of-type ul a {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--linea-clara);
+  border-radius: 50%;
+}
+body > footer > section:first-of-type ul a:hover { background: var(--violeta); border-color: var(--violeta); }
+body > footer > section:first-of-type ul figure { width: 1.05rem; height: 1.05rem; }
+body > footer > section:first-of-type ul img { object-fit: contain; }
+body > footer h3 { margin-bottom: 1.1rem; font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--cian); }
+body > footer nav ul { display: grid; gap: .55rem; }
+body > footer address { font-style: normal; }
+body > footer address ul { display: grid; gap: .7rem; }
+body > footer address li,
+body > footer address a { display: flex; align-items: center; gap: .6rem; }
+body > footer address figure { flex: none; width: 1rem; height: 1rem; }
+body > footer address img { object-fit: contain; }
+body > footer > p {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .6rem 1rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--linea-clara);
+  font-size: .85rem;
+}
+body > footer > p a { font-weight: 600; color: var(--lavanda); }
+/* Marca gigante al pie */
+body > footer::after {
+  content: "Nivela";
+  grid-column: 1 / -1;
+  margin: .5rem 0 -4.2vw;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(5rem, 22vw, 19rem);
+  line-height: .8;
+  text-align: center;
+  color: transparent;
+  background: linear-gradient(180deg, rgba(167, 139, 250, .35), rgba(167, 139, 250, 0));
+  -webkit-background-clip: text;
+  background-clip: text;
+  pointer-events: none;
+}
+
+/* ============ 9. ANIMACIONES ============ */
+@keyframes subir { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+@keyframes aparecer { from { opacity: 0; scale: .92; } to { opacity: 1; scale: 1; } }
+@keyframes acercar { from { scale: 1.12; } to { scale: 1; } }
+@keyframes latido { 50% { box-shadow: 0 0 0 7px rgba(34, 211, 238, .12); } }
+@keyframes bajar-flecha { 50% { translate: 0 6px; } }
+
+html[data-js] [data-revelar] { opacity: 0; translate: 0 34px; transition: opacity .9s ease, translate .9s var(--curva); }
+html[data-js] [data-revelar="visto"] { opacity: 1; translate: 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html[data-js] [data-revelar] { opacity: 1; translate: 0 0; }
+}
+
+/* ============ 10. RESPONSIVE ============ */
+@media (max-width: 1080px) {
+  body > header { grid-template-columns: auto 1fr auto; }
+  body > header nav { position: absolute; inset: calc(100% + .5rem) 0 auto; }
+  body > header nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: .6rem;
+    border: 1px solid var(--linea);
+    border-radius: 22px;
+    background: var(--papel);
+    box-shadow: var(--sombra);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -8px;
+    transition: opacity .3s ease, translate .3s var(--curva), visibility .3s;
+  }
+  body > header:has(> button[aria-expanded="true"]) nav ul { opacity: 1; visibility: visible; translate: 0 0; }
+  body > header nav a { display: block; padding: .85rem 1rem; font-size: 1.05rem; }
+  body > header nav a::after { display: none; }
+  body > header > a:last-of-type { justify-self: end; }
+  body > header > button { display: grid; }
+
+  main > section:nth-of-type(2) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  main > section:nth-of-type(2) > aside { grid-template-columns: minmax(0, 1fr); }
+  main > section:nth-of-type(2) > article:first-of-type,
+  main > section:nth-of-type(2) > article:nth-of-type(5),
+  main > section:nth-of-type(2) > article:nth-of-type(6) { grid-column: 1 / -1; grid-row: auto; }
+  main > section:nth-of-type(2) > article:nth-of-type(2) { grid-column: 1; grid-row: span 2; }
+  main > section:nth-of-type(2) > article:nth-of-type(3),
+  main > section:nth-of-type(2) > article:nth-of-type(4) { grid-column: 2; grid-row: auto; }
+  main > section:first-of-type > ul { display: none; }
+  main > section:nth-of-type(3) { grid-template-columns: 1fr; max-width: 34rem; }
+  main > section:nth-of-type(3) > article:nth-of-type(2),
+  main > section:nth-of-type(3) > article:nth-of-type(2):hover { transform: none; }
+  main > section:nth-of-type(3) > aside { grid-template-columns: 1fr; padding: 1rem; }
+  main > section:nth-of-type(3) > aside > a { justify-self: start; }
+  body > footer { grid-template-columns: 1fr 1fr; }
+  body > footer > section:first-of-type { grid-column: 1 / -1; }
+}
+
+@media (max-width: 860px) {
+  main > section:first-of-type { grid-template-columns: minmax(0, 1fr); }
+  main > section:first-of-type > :is(article, aside, figure, a) { grid-column: 1; grid-row: auto; border-left: 0; border-right: 0; }
+  main > section:first-of-type > article:first-of-type { grid-column: 1; grid-row: 1; border-right: 0; }
+  main > section:first-of-type > figure { grid-column: 1; grid-row: 2; width: min(78%, 320px); margin-block: 2.2rem 1rem; }
+  main > section:first-of-type > a { grid-column: 1; grid-row: 2; align-self: end; justify-self: center; margin: 0 0 1.4rem min(46%, 13rem); width: 4.4rem; height: 4.4rem; }
+  main > section:first-of-type > aside:first-of-type { grid-column: 1; grid-row: 3; border-left: 0; border-top: 1px solid var(--linea); }
+  main > section:first-of-type > article:nth-of-type(2) { grid-column: 1; grid-row: 4; border-right: 0; border-bottom: 1px solid var(--linea); }
+  main > section:first-of-type > aside:nth-of-type(2) { grid-column: 1; grid-row: 5; border-left: 0; }
+  main > section:first-of-type > aside:first-of-type blockquote { text-align: left; }
+  main > section:first-of-type dl { justify-items: start; text-align: left; }
+
+  main > section:nth-of-type(4) { grid-template-columns: 1fr; }
+  main > section:nth-of-type(4) > figure { min-height: 28rem; }
+}
+
+@media (max-width: 600px) {
+  body > header { gap: .7rem; padding: .7rem .7rem .7rem 1rem; }
+  body > header > a:last-of-type { display: none; }
+  body > header { grid-template-columns: 1fr auto; }
+  main > section:nth-of-type(2) { grid-template-columns: 1fr; }
+  main > section:nth-of-type(2) > header { grid-template-columns: 1fr; }
+  main > section:nth-of-type(2) > article:first-of-type { grid-column: 1; min-height: 26rem; }
+  main > section:nth-of-type(2) > article:nth-of-type(3) { padding-right: 1.6rem; padding-bottom: 14rem; }
+  main > section:nth-of-type(2) > article:nth-of-type(3) > figure:last-of-type { inset: auto .7rem .7rem; width: auto; height: 12.5rem; }
+  main > section:nth-of-type(2) > aside { padding: 1.4rem; }
+  main > section:nth-of-type(2) > article:nth-of-type(n) { grid-column: 1; grid-row: auto; }
+  main > section:nth-of-type(2) > article:nth-of-type(6) { grid-template-columns: 1fr; justify-items: start; }
+  main > section:nth-of-type(2) > article:nth-of-type(6) > figure { grid-row: auto; width: 5rem; height: 5rem; }
+  main > section:nth-of-type(2) > aside ol { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 1.3rem; padding-bottom: 14.5rem; }
+  main > section:nth-of-type(2) > aside ol::before { display: none; }
+  main > section:nth-of-type(2) > aside ol section { height: 13.5rem; grid-template-columns: 1fr; align-content: start; padding: 1.2rem; }
+  main > section:nth-of-type(2) > aside ol h4 { grid-row: auto; font-size: 2rem; }
+  main > section:nth-of-type(4) form { grid-template-columns: 1fr; }
+  main > section:nth-of-type(4) label:nth-of-type(n) { grid-column: 1; }
+  body > footer { grid-template-columns: 1fr; }
+  body > footer > p { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#inicio" aria-label="Nivela Asesores, inicio">Nivel<em>a</em></a>
+  <nav aria-label="Principal">
+    <ul id="menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+  <a href="#contacto">Habla con un asesor</a>
+  <button type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+</header>
+
+<main>
+
+  <!-- 1. HERO -->
+  <section id="inicio" aria-labelledby="titulo-inicio">
+    <article>
+      <h1 id="titulo-inicio">Tus impuestos, <em>resueltos</em> cada mes</h1>
+      <p>Asesoría fiscal y contable con cuota fija para autónomos y pymes. Tú facturas; nosotros presentamos todo a tiempo.</p>
+      <p><a href="#planes">Elige tu plan</a></p>
+    </article>
+
+    <ul aria-hidden="true">
+      <li><strong>Modelo 303</strong><small>IVA · 3.er trimestre</small><span>Presentado</span></li>
+      <li><strong>Renta 2025</strong><small>Deducciones revisadas: 14</small><span>En revisión</span></li>
+    </ul>
+    <figure>
+      <img src="imagenes/equipo-hero.jpg" alt="Dos asesores de Nivela revisan gráficos de un cliente en una pantalla" width="1000" height="1778" fetchpriority="high">
+      <figcaption>Modelo 303 presentado</figcaption>
+    </figure>
+    <a href="#servicios" aria-label="Ver los servicios"></a>
+
+    <aside aria-label="Opinión y cifras">
+      <blockquote>
+        <p aria-label="5 de 5 estrellas">★★★★★</p>
+        <figure><img src="imagenes/asesor-4.jpg" alt="Laura Méndez" width="200" height="200"></figure>
+        <footer><cite>Laura Méndez</cite> · diseñadora autónoma</footer>
+        <p>«Desde que estoy con Nivela no he vuelto a pensar en el IVA. Me avisan, lo presentan y yo solo trabajo.»</p>
+      </blockquote>
+      <dl>
+        <dt><data value="1800">1.800</data><span>+</span></dt><dd>autónomos y pymes</dd>
+        <dt><data value="15">15</data><span>+</span></dt><dd>años asesorando</dd>
+      </dl>
+    </aside>
+
+    <article>
+      <p>Un asesor asignado que conoce tu negocio, el calendario fiscal controlado y una cuota fija sin sorpresas.</p>
+      <ul aria-label="Parte del equipo de asesores">
+        <li><figure><img src="imagenes/asesor-1.jpg" alt="Asesor fiscal" width="200" height="200"></figure></li>
+        <li><figure><img src="imagenes/asesor-2.jpg" alt="Asesor contable" width="200" height="200"></figure></li>
+        <li><figure><img src="imagenes/asesor-3.jpg" alt="Asesor laboral" width="200" height="200"></figure></li>
+        <li><figure><img src="imagenes/asesor-5.jpg" alt="Asesor de pymes" width="200" height="200"></figure></li>
+        <li>+8</li>
+      </ul>
+      <p>12 asesores colegiados a tu lado</p>
+    </article>
+
+    <aside aria-label="Próximo vencimiento fiscal">
+      <article>
+        <h2>Próximo vencimiento</h2>
+        <time datetime="2026-10-20">20<small>oct</small></time>
+        <p>Faltan 4 días</p>
+        <p>Modelos 303 · 130 · 111 · 115</p>
+      </article>
+      <a href="#servicios" aria-label="Bajar a los servicios"></a>
+    </aside>
+  </section>
+
+  <!-- 2. SERVICIOS -->
+  <section id="servicios" aria-labelledby="titulo-servicios">
+    <header data-revelar>
+      <p>Servicios</p>
+      <h2 id="titulo-servicios">Todo tu papeleo, <em>en un solo sitio</em></h2>
+      <p>Fiscal, contable y laboral en la misma cuota. Sin llamadas a tres gestorías distintas ni sustos a final de trimestre.</p>
+    </header>
+
+    <article data-revelar>
+      <figure><img src="imagenes/reunion.jpg" alt="Un asesor de Nivela explica el plan fiscal a dos clientes en una mesa de reuniones" width="1600" height="1066" loading="lazy"></figure>
+      <p>Respuesta en menos de 24 h</p>
+      <h3>Asesoría fiscal <em>a tu medida</em></h3>
+      <p>Preparamos y presentamos tus impuestos trimestrales y anuales, y te avisamos antes de cada plazo.</p>
+      <ul aria-label="Modelos que presentamos">
+        <li>IVA · 303</li><li>IRPF · 130</li><li>Retenciones · 111</li><li>Alquileres · 115</li><li>Renta</li><li>Sociedades</li>
+      </ul>
+    </article>
+
+    <article data-revelar>
+      <figure><img src="iconos/fiscal.svg" alt="" width="20" height="20"></figure>
+      <h3>Revisión <em>a fondo</em></h3>
+      <p>Antes de presentar nada, tu asesor repasa tu negocio punto por punto.</p>
+      <ul aria-label="Puntos de control por trimestre">
+        <li>Gastos deducibles <b>12</b></li>
+        <li>IVA soportado y repercutido <b>9</b></li>
+        <li>Retenciones y pagos a cuenta <b>8</b></li>
+        <li>Amortizaciones y bienes <b>7</b></li>
+      </ul>
+      <p><strong>36 puntos de control</strong> cada trimestre, aunque no te toque pagar.</p>
+    </article>
+
+    <article data-revelar>
+      <figure><img src="iconos/contable.svg" alt="" width="20" height="20"></figure>
+      <h3>Contabilidad</h3>
+      <p>Libros, balances y cuentas anuales al día, con un resumen claro cada trimestre.</p>
+      <figure><img src="imagenes/contabilidad.jpg" alt="Una asesora revisa una hoja de cálculo con la calculadora al lado" width="900" height="1600" loading="lazy"></figure>
+    </article>
+
+    <article data-revelar>
+      <figure><img src="iconos/laboral.svg" alt="" width="20" height="20"></figure>
+      <h3>Laboral</h3>
+      <p>Nóminas, contratos, altas y bajas en la Seguridad Social.</p>
+      <strong>0 €</strong>
+      <p>por dar de alta a tu primer trabajador</p>
+    </article>
+
+    <article data-revelar>
+      <figure><img src="imagenes/planificacion.jpg" alt="Dos personas planifican sobre papel junto a un portátil" width="1400" height="933" loading="lazy"></figure>
+      <h3>Facturación y gastos</h3>
+      <p>Subes tus tickets con una foto y nosotros los registramos.</p>
+    </article>
+
+    <article data-revelar>
+      <figure><img src="imagenes/asesor-2.jpg" alt="Tu asesor asignado" width="200" height="200" loading="lazy"></figure>
+      <p>Tu asesor, en línea</p>
+      <blockquote>«Siempre la misma persona, que ya conoce tus números.»</blockquote>
+      <p>Sin centralitas ni tickets: le escribes y te responde él, con tu historial delante.</p>
+    </article>
+
+    <aside aria-labelledby="titulo-calendario" data-revelar>
+      <header>
+        <h3 id="titulo-calendario">Tu año fiscal, <em>mes a mes</em></h3>
+        <p>Esto es lo que tu asesor hace por ti durante el año. Toca un mes para verlo.</p>
+        <p>Meses con impuestos trimestrales</p>
+      </header>
+      <ol>
+        <li data-trimestral><button type="button" aria-pressed="false">ene</button><section><h4>Enero</h4><ul><li>Trimestrales del 4.º trimestre (hasta el 30)</li><li>Resúmenes anuales: 390, 190 y 180</li><li>Cierre contable del año</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">feb</button><section><h4>Febrero</h4><ul><li>Declaración de operaciones con terceros (347)</li><li>Revisión de facturas del año anterior</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">mar</button><section><h4>Marzo</h4><ul><li>Preparamos tu borrador de la renta</li><li>Revisión de gastos del 1.er trimestre</li></ul></section></li>
+        <li data-trimestral><button type="button" aria-pressed="false">abr</button><section><h4>Abril</h4><ul><li>Trimestrales del 1.er trimestre (hasta el 20)</li><li>Pago fraccionado de sociedades (202)</li><li>Empieza la campaña de la renta</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">may</button><section><h4>Mayo</h4><ul><li>Revisión y ajuste de tu declaración de la renta</li><li>Seguimiento de cobros y facturas</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">jun</button><section><h4>Junio</h4><ul><li>Presentación de la renta (hasta el 30)</li><li>Aprobación de cuentas anuales de sociedades</li></ul></section></li>
+        <li data-trimestral><button type="button" aria-pressed="false">jul</button><section><h4>Julio</h4><ul><li>Trimestrales del 2.º trimestre (hasta el 20)</li><li>Impuesto de Sociedades (hasta el 25)</li><li>Depósito de cuentas anuales</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">ago</button><section><h4>Agosto</h4><ul><li>Revisión de cobros pendientes</li><li>Tu asesor sigue disponible todo el mes</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">sep</button><section><h4>Septiembre</h4><ul><li>Previsión del 3.er trimestre</li><li>Reunión de mitad de año (planes Pyme y Sociedad)</li></ul></section></li>
+        <li data-trimestral><button type="button" aria-pressed="false">oct</button><section><h4>Octubre</h4><ul><li>Trimestrales del 3.er trimestre (hasta el 20)</li><li>Pago fraccionado de sociedades (202)</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">nov</button><section><h4>Noviembre</h4><ul><li>Planificación fiscal de fin de año</li><li>Últimas deducciones e inversiones</li></ul></section></li>
+        <li><button type="button" aria-pressed="false">dic</button><section><h4>Diciembre</h4><ul><li>Pago fraccionado de sociedades (202, hasta el 20)</li><li>Cierre del año: amortizaciones e inventario</li></ul></section></li>
+      </ol>
+    </aside>
+  </section>
+
+  <!-- 3. PLANES -->
+  <section id="planes" aria-labelledby="titulo-planes">
+    <header data-revelar>
+      <p>Planes mensuales</p>
+      <h2 id="titulo-planes">Una cuota fija. <em>Cero sustos.</em></h2>
+      <p>Elige el plan según tu forma jurídica. Sin permanencia: puedes cambiar o darte de baja cuando quieras.</p>
+      <p>
+        <button type="button" aria-pressed="true" data-periodo="mensual">Mensual</button>
+        <button type="button" aria-pressed="false" data-periodo="anual">Anual <mark>−15 %</mark></button>
+      </p>
+    </header>
+
+    <article data-revelar>
+      <h3>Autónomo</h3>
+      <p>Para profesionales y autónomos que empiezan o facturan solos.</p>
+      <p><data value="45" data-mensual="45" data-anual="38">45</data> € <small>/ mes + IVA</small></p>
+      <ul>
+        <li>IVA e IRPF trimestrales</li>
+        <li>Declaración de la renta incluida</li>
+        <li>Asesor asignado por correo y teléfono</li>
+        <li>Aviso de cada vencimiento</li>
+      </ul>
+      <a href="#contacto" data-plan="Autónomo">Empezar con Autónomo</a>
+    </article>
+
+    <article data-revelar>
+      <strong>Más elegido</strong>
+      <h3>Pyme</h3>
+      <p>Para negocios con trabajadores, local o varias líneas de ingresos.</p>
+      <p><data value="95" data-mensual="95" data-anual="81">95</data> € <small>/ mes + IVA</small></p>
+      <ul>
+        <li>Todo lo del plan Autónomo</li>
+        <li>Nóminas de hasta 5 trabajadores</li>
+        <li>Contabilidad y libros oficiales</li>
+        <li>Reunión trimestral de resultados</li>
+        <li>Revisión de deducciones</li>
+      </ul>
+      <a href="#contacto" data-plan="Pyme">Empezar con Pyme</a>
+    </article>
+
+    <article data-revelar>
+      <h3>Sociedad</h3>
+      <p>Para S.L. que necesitan cierres, cuentas anuales y apoyo continuo.</p>
+      <p><data value="165" data-mensual="165" data-anual="140">165</data> € <small>/ mes + IVA</small></p>
+      <ul>
+        <li>Todo lo del plan Pyme</li>
+        <li>Impuesto de Sociedades</li>
+        <li>Cuentas anuales y libros en el Registro</li>
+        <li>Nóminas de hasta 15 trabajadores</li>
+        <li>Asesor con línea directa</li>
+      </ul>
+      <a href="#contacto" data-plan="Sociedad">Empezar con Sociedad</a>
+    </article>
+
+    <aside data-revelar>
+      <figure><img src="imagenes/analisis.jpg" alt="Equipo analizando gráficos de resultados sobre una mesa" width="900" height="1350" loading="lazy"></figure>
+      <section>
+        <h3>¿Más de 15 trabajadores o varias sociedades?</h3>
+        <p>Preparamos un plan a medida después de revisar tu caso en una llamada de 20 minutos.</p>
+      </section>
+      <a href="#contacto" data-plan="A medida">Pedir plan a medida</a>
+    </aside>
+
+    <p>Precios orientativos de ejemplo. El primer mes revisamos tu situación sin coste adicional.</p>
+  </section>
+
+  <!-- 4. CONTACTO -->
+  <section id="contacto" aria-labelledby="titulo-contacto">
+    <figure data-revelar>
+      <img src="imagenes/firma.jpg" alt="Un cliente firma la documentación junto a su asesora" width="900" height="1350" loading="lazy">
+      <figcaption>
+        <strong>Así empezamos</strong>
+        <ol>
+          <li>Nos cuentas tu actividad en 5 minutos</li>
+          <li>Te asignamos un asesor y revisa tu situación</li>
+          <li>Te olvidas de los plazos: nosotros presentamos</li>
+        </ol>
+      </figcaption>
+    </figure>
+
+    <article data-revelar>
+      <header>
+        <p>Contacto</p>
+        <h2 id="titulo-contacto">Habla hoy con <em>tu asesor</em></h2>
+        <p>Te respondemos en menos de 24 horas laborables con una propuesta cerrada.</p>
+      </header>
+      <form>
+        <label>Nombre <input name="nombre" type="text" autocomplete="name" required></label>
+        <label>Correo electrónico <input name="correo" type="email" autocomplete="email" required></label>
+        <label>Teléfono <input name="telefono" type="tel" autocomplete="tel"></label>
+        <label>Plan que te interesa
+          <select name="plan">
+            <option>Autónomo</option>
+            <option>Pyme</option>
+            <option>Sociedad</option>
+            <option>A medida</option>
+            <option>Aún no lo sé</option>
+          </select>
+        </label>
+        <label>Cuéntanos tu actividad <textarea name="mensaje" placeholder="Por ejemplo: soy diseñador autónomo, facturo a empresas y tengo un local alquilado."></textarea></label>
+        <label><input name="privacidad" type="checkbox" required> Acepto la política de privacidad y que me contactéis sobre mi consulta.</label>
+        <button type="submit">Quiero mi asesor</button>
+        <p role="status" hidden>¡Gracias! Hemos recibido tu consulta. Tu asesor te escribirá en menos de 24 horas laborables.</p>
+      </form>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <section>
+    <a href="#inicio" aria-label="Nivela Asesores, inicio">Nivel<em>a</em></a>
+    <p>Asesoría fiscal, contable y laboral con planes mensuales para autónomos y pymes.</p>
+    <ul aria-label="Redes sociales">
+      <li><a href="#" aria-label="LinkedIn"><figure><img src="iconos/linkedin.svg" alt="" width="16" height="16"></figure></a></li>
+      <li><a href="#" aria-label="Instagram"><figure><img src="iconos/instagram.svg" alt="" width="16" height="16"></figure></a></li>
+      <li><a href="#" aria-label="WhatsApp"><figure><img src="iconos/whatsapp.svg" alt="" width="16" height="16"></figure></a></li>
+    </ul>
+  </section>
+  <nav aria-label="Servicios">
+    <h3>Servicios</h3>
+    <ul>
+      <li><a href="#servicios">Asesoría fiscal</a></li>
+      <li><a href="#servicios">Contabilidad</a></li>
+      <li><a href="#servicios">Laboral y nóminas</a></li>
+      <li><a href="#servicios">Calendario fiscal</a></li>
+    </ul>
+  </nav>
+  <nav aria-label="Planes">
+    <h3>Planes</h3>
+    <ul>
+      <li><a href="#planes">Autónomo</a></li>
+      <li><a href="#planes">Pyme</a></li>
+      <li><a href="#planes">Sociedad</a></li>
+      <li><a href="#planes">A medida</a></li>
+    </ul>
+  </nav>
+  <section>
+    <h3>Contacto</h3>
+    <address>
+      <ul>
+        <li><a href="tel:+34910000000"><figure><img src="iconos/telefono.svg" alt="" width="16" height="16"></figure>+34 910 000 000</a></li>
+        <li><a href="mailto:hola@nivela.es"><figure><img src="iconos/correo.svg" alt="" width="16" height="16"></figure>hola@nivela.es</a></li>
+        <li><figure><img src="iconos/ubicacion.svg" alt="" width="16" height="16"></figure>Calle Mayor 12, Madrid</li>
+        <li><figure><img src="iconos/reloj.svg" alt="" width="16" height="16"></figure>L–V · 9:00 a 18:00</li>
+      </ul>
+    </address>
+  </section>
+  <p><small>© <time datetime="2026">2026</time> Nivela Asesores · Todos los derechos reservados.</small><small><a href="https://allpixels.dev">Plantilla de All Pixels</a></small></p>
+</footer>
+
+<script>
+  /* 1. Cabecera compacta al bajar */
+  const cabecera = document.querySelector("body > header");
+  addEventListener("scroll", () => cabecera.toggleAttribute("data-scroll", scrollY > 40), { passive: true });
+
+  /* 2. Menú móvil: cerrado por defecto; se cierra al tocar fuera, con Esc, al elegir un enlace o al desplazarse */
+  const botonMenu = cabecera.querySelector("button");
+  let scrollAlAbrir = 0;
+  const cambiarMenu = (abrir) => {
+    botonMenu.setAttribute("aria-expanded", String(abrir));
+    botonMenu.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+    if (abrir) scrollAlAbrir = scrollY;
+  };
+  botonMenu.addEventListener("click", () => cambiarMenu(botonMenu.getAttribute("aria-expanded") !== "true"));
+  document.addEventListener("click", (e) => { if (!e.target.closest("body > header")) cambiarMenu(false); });
+  document.querySelectorAll("#menu a").forEach((a) => a.addEventListener("click", () => cambiarMenu(false)));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") cambiarMenu(false); });
+  addEventListener("scroll", () => {
+    if (botonMenu.getAttribute("aria-expanded") === "true" && Math.abs(scrollY - scrollAlAbrir) > 30) cambiarMenu(false);
+  }, { passive: true });
+  addEventListener("pageshow", () => cambiarMenu(false));
+
+  /* 3. Enlace activo del menú */
+  const enlacesMenu = [...document.querySelectorAll("#menu a")];
+  const vigia = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (!e.isIntersecting) return;
+      enlacesMenu.forEach((a) => a.hash === "#" + e.target.id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  document.querySelectorAll("main > section[id]").forEach((s) => vigia.observe(s));
+
+  /* 4. Próximo vencimiento trimestral (20 abr, 20 jul, 20 oct y 30 ene) */
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const meses = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+  const plazos = [];
+  [hoy.getFullYear(), hoy.getFullYear() + 1].forEach((a) => {
+    plazos.push({ fecha: new Date(a, 0, 30), trimestre: 3, modelos: "303 · 130 · 390 · 190" });
+    plazos.push({ fecha: new Date(a, 3, 20), trimestre: 0, modelos: "303 · 130 · 111 · 115" });
+    plazos.push({ fecha: new Date(a, 6, 20), trimestre: 1, modelos: "303 · 130 · 111 · 115" });
+    plazos.push({ fecha: new Date(a, 9, 20), trimestre: 2, modelos: "303 · 130 · 111 · 115" });
+  });
+  const proximo = plazos.filter((p) => p.fecha >= hoy).sort((a, b) => a.fecha - b.fecha)[0];
+  const tarjetaPlazo = document.querySelector("#inicio aside:nth-of-type(2) article");
+  const dias = Math.round((proximo.fecha - hoy) / 86400000);
+  const fechaPlazo = tarjetaPlazo.querySelector("time");
+  fechaPlazo.dateTime = proximo.fecha.toISOString().slice(0, 10);
+  fechaPlazo.firstChild.textContent = proximo.fecha.getDate();
+  fechaPlazo.querySelector("small").textContent = meses[proximo.fecha.getMonth()];
+  tarjetaPlazo.querySelector("p:first-of-type").textContent = dias === 0 ? "Vence hoy" : dias === 1 ? "Falta 1 día" : "Faltan " + dias + " días";
+  tarjetaPlazo.querySelector("p:last-of-type").textContent = "Modelos " + proximo.modelos;
+  /* 4b. Año fiscal: se abre el mes actual y se puede elegir otro */
+  const mesesAno = [...document.querySelectorAll("#servicios aside ol > li")];
+  const abrirMes = (i) => mesesAno.forEach((li, j) => {
+    li.toggleAttribute("data-activo", i === j);
+    li.querySelector("button").setAttribute("aria-pressed", String(i === j));
+  });
+  mesesAno[hoy.getMonth()].setAttribute("data-hoy", "");
+  mesesAno.forEach((li, i) => li.querySelector("button").addEventListener("click", () => abrirMes(i)));
+  abrirMes(hoy.getMonth());
+
+  /* 5. Cifras que cuentan hasta su valor */
+  const formato = new Intl.NumberFormat("es-ES", { useGrouping: "always" });
+  const contar = (dato) => {
+    const fin = Number(dato.value);
+    const inicio = performance.now();
+    const paso = (t) => {
+      const p = Math.min(1, (t - inicio) / 1400);
+      dato.textContent = formato.format(Math.round(fin * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  };
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.querySelectorAll("#inicio dt data").forEach(contar);
+
+  /* 6. Planes: mensual o anual */
+  const periodos = document.querySelectorAll("#planes header button");
+  periodos.forEach((boton) => boton.addEventListener("click", () => {
+    periodos.forEach((b) => b.setAttribute("aria-pressed", String(b === boton)));
+    document.querySelectorAll("#planes article data").forEach((d) => {
+      d.value = d.dataset[boton.dataset.periodo];
+      d.textContent = d.value;
+    });
+  }));
+
+  /* 7. Los botones de cada plan rellenan el formulario */
+  const selectorPlan = document.querySelector("#contacto select");
+  document.querySelectorAll("#planes [data-plan]").forEach((a) => a.addEventListener("click", () => { selectorPlan.value = a.dataset.plan; }));
+
+  /* 8. Aparición al bajar */
+  const revelar = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => { if (e.isIntersecting) { e.target.dataset.revelar = "visto"; revelar.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll("[data-revelar]").forEach((el) => revelar.observe(el));
+
+  /* 9. Formulario (demostración: no envía datos) */
+  document.querySelector("#contacto form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    e.target.querySelector("p").hidden = false;
+    e.target.reset();
+  });
+
+  /* 10. Año actual en el pie */
+  const anio = document.querySelector("body > footer time");
+  anio.textContent = anio.dateTime = new Date().getFullYear();
+</script>
+</body>
+</html>

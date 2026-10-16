@@ -309,6 +309,7 @@
 
     body > header button {
       display: none;
+      flex: none;
       position: relative;
       width: 2.9rem;
       height: 2.9rem;
@@ -2283,7 +2284,9 @@
         grid-column: 1;
         grid-row: auto;
         margin-top: 1.5rem;
-        font-size: clamp(2.6rem, 14vw, 4rem);
+        /* El día más largo («Miércoles») cabe siempre en el ancho del móvil */
+        font-size: min(4rem, 10.5vw);
+        overflow-wrap: anywhere;
       }
 
       main section:nth-of-type(5) menu {
@@ -2365,8 +2368,22 @@
     }
 
     @media (max-width: 420px) {
+      /* Cabecera compacta: logo, «Reserva» y el botón del menú caben en cualquier móvil */
+      body > header {
+        gap: .5rem;
+        padding-left: 1rem;
+      }
+
+      body > header > a:first-of-type {
+        flex: none;
+        font-size: 1.05rem;
+      }
+
       body > header > a:last-of-type {
-        padding: .8rem 1.1rem;
+        flex: none;
+        padding: .75rem .95rem;
+        font-size: .68rem;
+        letter-spacing: .1em;
       }
 
       main section:first-of-type h1 {

@@ -40,6 +40,24 @@ window.AP_CATEGORIAS = {
 
 window.AP_PLANTILLAS = [
   {
+    id: 'prado', nombre: 'Prado Sereno', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing tranquila y amable para residencias y guarderías caninas, con contador de plazas, rutina del día en directo y retratos tipo polaroid.',
+    descripcion: 'Landing page de una sola página para residencias caninas y cuidadores de mascotas: portada con foto en arco, gatito que saluda, contador de plazas con huellas y cinta de palabras amables; la casa con ventajas y cifras; un día en el prado que marca la actividad de la hora actual; tarifas que cambian según el tamaño del perro y visitas a domicilio para gatos; retratos tipo polaroid con botón de mimos y opiniones; plazas libres por mes y formulario con precio orientativo. Fondos SVG propios, iconos y tipografías incluidos. HTML semántico sin clases.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/prado-1.jpg', 'fotos/prado-2.jpg', 'fotos/prado-3.jpg', 'fotos/prado-movil.jpg'],
+    descarga: 'descargas/servicios/prado.zip', demo: 'demo/prado/', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
+    id: 'nivela', nombre: 'Asesoría Nivela', categoria: 'servicios', tipo: 'gratis', precio: null,
+    resumen: 'Landing para asesorías fiscales y contables con planes mensuales, revisión a fondo punto por punto y calendario fiscal mes a mes.',
+    descripcion: 'Landing page de una sola página para asesorías de autónomos y pymes: portada en rejilla con foto en cápsula, documentos flotantes, opinión, cifras y próximo vencimiento calculado con la fecha de hoy; servicios en mosaico con revisión a fondo (barras de puntos de control), asesor asignado y calendario fiscal interactivo de 12 meses; planes con cambio mensual/anual; pasos y formulario de contacto. Incluye iconos y tipografías. HTML semántico sin clases.',
+    pila: ['HTML', 'CSS', 'JavaScript'],
+    imagenes: ['fotos/nivela-1.jpg', 'fotos/nivela-2.jpg', 'fotos/nivela-3.jpg', 'fotos/nivela-movil.jpg'],
+    descarga: 'descargas/servicios/nivela.zip', demo: 'demo/nivela/', disponible: true,
+    version: '1.0', actualizado: '2026-10'
+  },
+  {
     id: 'nogal', nombre: 'Taller Nogal', categoria: 'servicios', tipo: 'gratis', precio: null,
     resumen: 'Landing cálida para carpinterías y muebles a medida, con portada de palabra gigante tras el sofá, silla en 3D y portafolio en carrusel.',
     descripcion: 'Landing page de una sola página para carpinterías y talleres de muebles: portada con la palabra «Nogal» entre la foto y el sofá recortado, cifras y mini carrusel de proyectos, por qué elegirnos con muestras de madera, pieza de autor con silla que gira en 3D y etiquetas, portafolio en carrusel continuo con pestañas Hogar y Negocios, proceso en 4 pasos, testimonios y formulario con subida de plano. Incluye tipografías. HTML semántico sin clases.',

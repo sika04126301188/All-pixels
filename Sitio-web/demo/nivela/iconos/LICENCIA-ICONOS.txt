@@ -1,0 +1,2 @@
+Iconos: Font Awesome Free 6 (https://fontawesome.com) - licencia CC BY 4.0.
+Los SVG llevan el color aplicado en el atributo fill.

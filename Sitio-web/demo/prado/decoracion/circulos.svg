@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid slice">
+<!-- Círculos: reinterpretación de «circle scatter» (Haikei) — sin fondo, en arena y tierra muy suaves, como huellas de luz -->
+<circle r="153" cx="558" cy="104" fill="#E2CEAE" fill-opacity=".45"/>
+<circle r="67" cx="300" cy="517" fill="#FC5C02" fill-opacity=".14"/>
+<circle r="118" cx="134" cy="12" fill="#7C6B51" fill-opacity=".09"/>
+<circle r="112" cx="743" cy="481" fill="#E2CEAE" fill-opacity=".55"/>
+<circle r="110" cx="17" cy="336" fill="#E2CEAE" fill-opacity=".4"/>
+<circle r="90" cx="897" cy="55" fill="#7C6B51" fill-opacity=".1"/>
+<circle r="153" cx="558" cy="104" fill="none" stroke="#7C6B51" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="2 9" transform="translate(28 22)"/>
+<circle r="112" cx="743" cy="481" fill="none" stroke="#7C6B51" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="2 9" transform="translate(-24 -18)"/>
+</svg>

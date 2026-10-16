@@ -773,7 +773,7 @@
   /* Tipografías reales de cada plantilla (se cargan desde su demo solo al usarse) */
   @font-face{font-family:"Muestra Nogal";font-weight:600;font-display:swap;src:url("demo/nogal/fuentes/fraunces-600-normal.woff2") format("woff2");}
   @font-face{font-family:"Muestra Motorline";font-weight:100 900;font-display:swap;src:url("demo/motorline/fuentes/montserrat-variable.woff2") format("woff2");}
-  @font-face{font-family:"Muestra Solares";font-weight:800;font-display:swap;src:url("demo/solares/fuentes/sora-800.woff2") format("woff2");}
+  @font-face{font-family:"Muestra Ramogallego";font-weight:400;font-display:swap;src:url("demo/ramogallego/fuentes/instrument-serif.woff2") format("woff2");}
 
   section#beneficios{padding-block-end:0;overflow-x:clip;}
   section#beneficios div.encabezado{display:grid;justify-items:center;text-align:center;}
@@ -1134,7 +1134,7 @@
   section#fundador > p.ojo{margin-block-end:2.2rem;}
   section#fundador > figure{
     position:relative;
-    width:clamp(120px, 15vw, 185px);
+    width:clamp(150px, 18vw, 196px);
     aspect-ratio:1;
     margin:0;
     padding:5px;
@@ -1451,7 +1451,7 @@
             <menu aria-label="Elegir plantilla para desmontar">
               <li><button type="button" data-plantilla="nogal" aria-pressed="true">Taller Nogal</button></li>
               <li><button type="button" data-plantilla="motorline" aria-pressed="false">Motorline</button></li>
-              <li><button type="button" data-plantilla="solares" aria-pressed="false">Solares</button></li>
+              <li><button type="button" data-plantilla="ramogallego" aria-pressed="false">Ramogallego</button></li>
             </menu>
             <dl aria-live="polite">
               <div><dt>.zip</dt><dd data-dato="peso"></dd></div>
@@ -1489,7 +1489,7 @@
     <figure>
       <picture>
         <source srcset="fotos/fundador.webp" type="image/webp">
-        <img src="fotos/fundador.jpg" alt="Samir Salama, fundador de All Pixels," width="220" height="220" loading="lazy" decoding="async">
+        <img src="fotos/fundador.jpg" alt="Samir Salama, fundador de All Pixels, sonriendo con gafas y camiseta clara" width="480" height="480" loading="lazy" decoding="async">
       </picture>
     </figure>
     <blockquote>
@@ -1544,7 +1544,7 @@
   <p><span>© <span id="anio">2026</span> All Pixels. Todos los derechos reservados.</span><span>Hecho por el equipo de All Pixels</span></p>
 </footer>
 
-<script src="plantillas.js?v=1.1"></script>
+<script src="plantillas.js?v=1.3"></script>
 <script>
   (function(){
     /* ---------- Modo claro / oscuro ---------- */
@@ -1837,11 +1837,11 @@
       colores: ['#0B132B', '#1C2541', '#00F5D4', '#E0E1DD', '#F4F6F8'],
       variables: [['--azul-noche', '#0B132B'], ['--cian', '#00F5D4'], ['--gris-plata', '#E0E1DD']],
       iconos: ['demo/motorline/iconos/llave.svg', 'demo/motorline/iconos/coche.svg', 'demo/motorline/iconos/diagnosis.svg', 'demo/motorline/iconos/garantia.svg'] },
-    solares: { nombre: 'Solares Energía', foto: 'fotos/solares-1.jpg', demo: 'demo/solares/', peso: '448 KB', archivos: 47,
-      fuente: '"Muestra Solares", sans-serif', fuentes: 'Sora · Plus Jakarta Sans',
-      colores: ['#0A1D27', '#133443', '#E19A34', '#1F7A6C', '#DCEFE9'],
-      variables: [['--noche', '#0A1D27'], ['--ambar', '#E19A34'], ['--verde', '#1F7A6C']],
-      iconos: ['demo/solares/iconos/panel.svg', 'demo/solares/iconos/rayo.svg', 'demo/solares/iconos/check-ambar.svg', 'demo/solares/iconos/casa-ambar.svg'] }
+    ramogallego: { nombre: 'Ramogallego', foto: 'fotos/ramogallego-1.jpg', demo: 'demo/ramogallego/', peso: '1,0 MB', archivos: 20,
+      fuente: '"Muestra Ramogallego", Georgia, serif', fuentes: 'Instrument Serif · Manrope',
+      colores: ['#2E3A2F', '#6B7F5B', '#D9C9B2', '#A9553A', '#F8F6EE'],
+      variables: [['--verde', '#2E3A2F'], ['--oliva', '#6B7F5B'], ['--terracota', '#A9553A']],
+      iconos: ['§', '¶', '✓', '☎'] }
   };
 
   function crear(etiqueta, texto){ var e = document.createElement(etiqueta); if(texto) e.textContent = texto; return e; }

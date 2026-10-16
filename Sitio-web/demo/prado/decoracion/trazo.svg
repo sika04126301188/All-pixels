@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 30" preserveAspectRatio="none">
+<!-- Trazo a mano bajo las palabras destacadas -->
+<path d="M4 20 C 60 8, 120 6, 180 12 S 270 22, 296 10" fill="none" stroke="#FC5C02" stroke-width="5" stroke-linecap="round" stroke-opacity=".75"/>
+<path d="M30 25 C 90 17, 160 16, 240 21" fill="none" stroke="#FC5C02" stroke-width="2.5" stroke-linecap="round" stroke-opacity=".4"/>
+</svg>
